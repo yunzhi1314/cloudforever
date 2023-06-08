@@ -1,6 +1,7 @@
 function test (){
     console.log("test");
 }
-function text2 (){
-    console.log("text")
+
+function text3(){
+    console.log(111)
 }

@@ -1,6 +1,6 @@
 function sayHi(){
     console.log(1111)
-    console.log('aauuuuv')
+    console.log('aauuuusadfdsfv')
     console.log("asdawfa")
 }
 function sayHi2(a){

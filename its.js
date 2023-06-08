@@ -8,3 +8,8 @@ function sayHi2(a){
     console.log('aadefrddsav')
     console.log(a)
 }
+
+function state(){
+    console.log(12)
+    console.log(121)
+}

@@ -5,3 +5,6 @@ function once(){
 function two(){
 console.log(33)
 }
+function three(){
+     console.log("美女");
+}

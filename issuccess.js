@@ -1,4 +1,4 @@
 function sayHi(){
-    console.log('sasaaaa000io')
+    console.log('sashgkj00io')
     pfffpp
 }

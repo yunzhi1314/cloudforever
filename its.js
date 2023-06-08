@@ -8,4 +8,6 @@ function sayHi2(a){
     console.log('aadefrddsav')
     console.log(a)
 }
-
+function she(){
+    console.log(11)
+}

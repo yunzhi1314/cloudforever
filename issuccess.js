@@ -1,3 +1,3 @@
 function sayHi(){
-    console.log('sayrio')
+    console.log('sa0000io')
 }

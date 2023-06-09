@@ -1,19 +1,16 @@
 <template>
-                <h1>centerPage组件</h1>
-               55555
-            </template>
+  <h1>centerPage组件</h1>
+  55555WWWW
+  <router-view></router-view>
+</template>
 
-            <script>
+<script>
+export default {
+  name: "centerPage",
+  setup() {
+    return {};
+  },
+};
+</script>
 
-            export default {
-              name:'centerPage',
-                setup() {
-
-                    return {
-                    }
-                }
-            }
-            </script>
-
-            <style lang="scss" scoped>
-            </style>
+<style lang="scss" scoped></style>

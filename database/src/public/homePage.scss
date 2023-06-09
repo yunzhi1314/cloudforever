@@ -18,15 +18,6 @@
                 font-size: 2rem;
             }
         }
-        
-        .hoverStyle{
-            transition: all 0.25s;
-        }
-        .hoverStyle:hover{
-            box-shadow: 0 0 1px 1px #eee,
-            0 0  2px 2px #eee,
-            0 0  3px 3px #eee;
-        }
         .header-bg{
             margin-left: 1vw;
             width: 65px;
@@ -37,4 +28,21 @@
             align-items: center;
         }
     }
+    main{
+        margin-top: 4vh;
+        .expMedicals{
+            
+            width: 50vw;
+            height: 50vh;
+            padding: 1vw;
+        }
+    }
+}
+.hoverStyle{
+    transition: all 0.25s;
+}
+.hoverStyle:hover{
+    box-shadow: 0 0 1px 1px #eee,
+    0 0  2px 2px #eee,
+    0 0  3px 3px #eee;
 }

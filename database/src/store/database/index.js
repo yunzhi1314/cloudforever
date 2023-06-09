@@ -3,6 +3,7 @@ export default {
     state(){
         return{
             expMedicals:null,
+            basicMedical:null,
         }
     },
     getters: {

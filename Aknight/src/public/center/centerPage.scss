@@ -1,0 +1,126 @@
+.centerPage {
+	display: grid;
+	grid-template-rows: 1fr 8fr 1fr;
+	width: 100vw;
+	height: 100vh;
+	grid-template-areas:
+		"header"
+		"main"
+		"footer";
+    // 头部
+	header {
+		grid-area: header;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-areas: "left center right";
+		padding: 0.5rem;
+		background-color: #fff;
+		box-shadow: 0px 0px 5px #aaa, 0px 0px 7.5px #aaa, 0px 0px 10px #aaa;
+		section,
+		div {
+			display: flex;
+			align-items: center;
+		}
+		.headerLeft {
+		}
+		.logo {
+			justify-content: center;
+			img {
+				width: 7vw;
+			}
+		}
+		.headerRight {
+			justify-content: end;
+			font-size: 14px;
+			img {
+				width: 1.7vw;
+			}
+			section {
+				flex-direction: column;
+			}
+		}
+	}
+    // 主体内容
+	main {
+		grid-area: main;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+        // 登录页面，登录框样式
+		.login {
+			width: 20rem;
+			// 不用设高度，由内容撑高
+			// height: 10vh;
+			background-color: rgba(255, 255, 255, 0.7);
+			border-radius: 1.3rem;
+			box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
+			padding: 1.8rem;
+			h2 {
+				text-align: center;
+				margin-bottom: 2rem;
+				color: #158fc5;
+			}
+            // 输入框样式，几乎所有输入框样式都相同，可以考虑放外面
+			input {
+				width: 100%;
+				height: 2rem;
+				border: none;
+				background-color: rgba(255, 255, 255, 0);
+				padding-left: 4px;
+				outline: none;
+				border-bottom: 1px solid #ccc;
+			}
+            // 按钮区样式
+			.btns {
+				color: #158fc5;
+				font-size: 12px;
+				text-align: center;
+				margin-top: 2px;
+			}
+            // 设置短信登录或密码登录文字居左
+			.btns > section:nth-child(1) {
+				text-align: left;
+			}
+			// button样式写在login里面，所有按钮都能吃到，如有不一样的单独添加样式
+			button {
+				background-color: #158fc5;
+				border: none;
+				color: #fff;
+				width: 100%;
+				height: 1.8rem;
+				border-radius: 1rem;
+				font-size: 0.9rem;
+				font-weight: bold;
+				margin: 1.5rem 0;
+				cursor: pointer;
+			}
+		}
+	}
+    // 脚部内容
+	footer {
+		grid-area: footer;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		background-color: #fff;
+		section {
+			display: flex;
+			justify-content: center;
+			font-size: 12px;
+			img {
+				width: 1vw;
+			}
+		}
+	}
+}
+
+// 背景图片
+.bgImg {
+	background-size: cover;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+	position: fixed;
+	background-position-y: -15vh;
+}

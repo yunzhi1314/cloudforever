@@ -1,19 +1,24 @@
 <template>
 	<div class="login">
 		<!-- 标题 -->
-		<h2>登录</h2>
+		<h2>{{ controlObj.isChange ? "注册" : "登录" }}</h2>
 		<div v-for="(item, index) in loginArr" :key="index">
 			<!-- 输入框区 -->
 			<section>
-				<input v-model="item.value" :type="item.type" :placeholder="item.placeHolder"
+				<input
+					v-model="item.value"
+					:type="item.type"
+					:placeholder="item.placeHolder"
 					:style="{ backgroundColor: item.isShow ? '#FFDCDB' : '' }" />
 			</section>
 			<!-- 错误提示区 -->
-			<section class="errMsg" :style="{
-				visibility: item.isShow ? 'visible' : 'hidden',
-				fontSize: '12px',
-				color: '#f00'
-			}">
+			<section
+				class="errMsg"
+				:style="{
+					visibility: item.isShow ? 'visible' : 'hidden',
+					fontSize: '12px',
+					color: '#f00'
+				}">
 				{{ item.value == "" ? item.tip01 : item.tip02 }}
 			</section>
 		</div>
@@ -21,95 +26,113 @@
 		<div class="btns" @click="loginMethod(loginArr, addArr)">
 			<section>
 				<span v-if="controlObj.isChange">
-					<input type="checkbox">
+					<input type="checkbox" style="width: 12px; vertical-align: middle" />
 				</span>
 				<!-- 切换登录方式 -->
-				<span style="{
+				<span
+					style="{
 					color:controlObj.isChange? '#000':'#158fc5' 
-				}">{{ controlObj.isChange ? '已阅读并同意' : controlObj.isCode ? '使用密码登录' : '使用短信验证码登录' }}</span>
+				}"
+					>{{
+						controlObj.isChange
+							? "已阅读并同意"
+							: controlObj.isCode
+							? "使用密码登录"
+							: "使用短信验证码登录"
+					}}</span
+				>
 				<span v-if="controlObj.isChange">《鹰角网络用户注册协议》</span>
-				<span v-if="controlObj.isChange" style="color:#000;">及</span>
+				<span v-if="controlObj.isChange" style="color: #000">及</span>
 				<span v-if="controlObj.isChange">《鹰角网络游戏个人信息保护政策》</span>
 			</section>
 			<section>
-				<button>{{ controlObj.isChange ? '注册' : '登录' }}</button>
+				<button :style="{marginBottom:controlObj.isChange ?'0':''}">{{ controlObj.isChange ? "注册" : "登录" }}</button>
 			</section>
 			<section v-if="!controlObj.isChange">使用bilibili登录</section>
 		</div>
 	</div>
 	<!-- 切换登录注册框 -->
 	<div class="change-box">
-		<span :class="controlObj.isChange ? '' : 'checked'">登录</span>
+		<span
+			:class="controlObj.isChange ? '' : 'checked'"
+			@click="changeBoard(loginArr, controlObj, false, loginArr.length > 3)"
+			>登录</span
+		>
 		<span>·</span>
-		<span :class="controlObj.isChange ? 'checked' : ''">注册</span>
+		<span
+			:class="controlObj.isChange ? 'checked' : ''"
+			@click="changeBoard(loginArr, controlObj, true, loginArr.length < 3, addArr)"
+			>注册</span
+		>
 	</div>
 </template>
 
 <script>
-import { reactive } from "vue";
-import controlObj from "@/hooks/personalCenter/controlObj";
-import { observer } from "@/hooks/personalCenter/watcher";
-import { loginMethod } from '@/hooks/personalCenter/loginMethod'
-export default {
-	name: "loginPage",
-	setup() {
-		//初始输入框数组
-		let loginArr = reactive([
-			{
-				value: "",
-				isShow: false,
-				type: "tel",
-				placeHolder: "请输入手机号",
-				tip01: "*手机号码不能为空",
-				tip02: "*手机号码格式不正确",
-				zz: /^1{1}[3-9]{1}\d{9}$/
-			},
-			{
-				value: "",
-				isShow: false,
-				type: "password",
-				placeHolder: "请输入密码",
-				tip01: "*密码不能为空",
-				tip02: "*密码格式不正确",
-				zz: /^\w{8,16}$/
-			}
-		]);
-		//用于添加和修改的数组
-		let addArr = reactive([
-			{
-				value: "",
-				isShow: false,
-				type: "password",
-				placeHolder: "请输入密码",
-				tip01: "*密码不能为空",
-				tip02: "*密码格式不正确",
-				zz: /^\w{8,16}$/
-			},
-			{
-				value: "",
-				isShow: false,
-				type: "password",
-				placeHolder: "确认密码",
-				tip01: "*请确认密码",
-				tip02: "*两次输入的密码不一致",
-				use: "确认密码"
-			},
-			{
-				value: "",
-				isShow: false,
-				type: "text",
-				placeHolder: "输入验证码",
-				tip01: "*验证码不能为空",
-				tip02: "*验证码格式不正确",
-				zz: /^\d{4}$/,
-				isRender: true,
-				use: "验证码"
-			}
-		])
-		observer(loginArr)
-		return { loginArr, addArr, controlObj, loginMethod };
-	}
-};
+	import { reactive } from "vue";
+	import controlObj from "@/hooks/personalCenter/controlObj";
+	import { observer } from "@/hooks/personalCenter/watcher";
+	import { loginMethod } from "@/hooks/personalCenter/loginMethod";
+	import { changeBoard } from "@/hooks/personalCenter/changeBoard";
+	export default {
+		name: "loginPage",
+		setup() {
+			//初始输入框数组
+			let loginArr = reactive([
+				{
+					value: "",
+					isShow: false,
+					type: "tel",
+					placeHolder: "请输入手机号",
+					tip01: "*手机号码不能为空",
+					tip02: "*手机号码格式不正确",
+					zz: /^1{1}[3-9]{1}\d{9}$/
+				},
+				{
+					value: "",
+					isShow: false,
+					type: "password",
+					placeHolder: "请输入密码",
+					tip01: "*密码不能为空",
+					tip02: "*密码格式不正确",
+					zz: /^\w{8,16}$/
+				}
+			]);
+			//用于添加和修改的数组
+			let addArr = reactive([
+				{
+					value: "",
+					isShow: false,
+					type: "password",
+					placeHolder: "请输入密码",
+					tip01: "*密码不能为空",
+					tip02: "*密码格式不正确",
+					zz: /^\w{8,16}$/
+				},
+				{
+					value: "",
+					isShow: false,
+					type: "password",
+					placeHolder: "确认密码",
+					tip01: "*请确认密码",
+					tip02: "*两次输入的密码不一致",
+					use: "确认密码"
+				},
+				{
+					value: "",
+					isShow: false,
+					type: "text",
+					placeHolder: "输入验证码",
+					tip01: "*验证码不能为空",
+					tip02: "*验证码格式不正确",
+					zz: /^\d{4}$/,
+					isRender: true,
+					use: "验证码"
+				}
+			]);
+			observer(loginArr);
+			return { loginArr, addArr, controlObj, loginMethod, changeBoard };
+		}
+	};
 </script>
 
 <style lang="scss" scoped></style>

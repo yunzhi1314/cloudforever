@@ -123,6 +123,20 @@
 			align-items: center;
 			color: #000;
 			cursor: pointer;
+
+			span {
+				margin: 0.2rem;
+				font-weight: bold;
+			}
+
+			.checked {
+				transform: scale(1.2);
+				color: #158fc5;
+			}
+		}
+
+		.change-box>span:nth-child(2) {
+			font-weight: normal;
 		}
 	}
 

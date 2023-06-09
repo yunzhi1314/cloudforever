@@ -94,7 +94,7 @@
 			.btns>section:nth-child(1) {
 				text-align: left;
 			}
-
+			// 前往注册框动画
 			@keyframes toRegister {
 				0%{
 					transform: rotateY(0deg);
@@ -107,6 +107,7 @@
 					transform: rotateY(0deg);
 				}
 			}
+			// 前往登录框动画
 			@keyframes toLogin {
 				0%{
 					transform: rotateY(0deg);

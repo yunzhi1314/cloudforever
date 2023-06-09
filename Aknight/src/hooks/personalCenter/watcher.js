@@ -9,6 +9,7 @@ export function observer(arr, index) {
 			// 直接监听输入框的值，要写成函数的形式
 			() => item.value,
 			(newValue) => {
+				console.log(newValue);
 				if (newValue == "") {
 					//输入框值为空，显示错误
 					item.isShow = true;

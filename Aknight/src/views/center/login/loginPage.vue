@@ -5,7 +5,8 @@
 		<div v-for="(item, index) in loginArr" :key="index">
 			<!-- 输入框区 -->
 			<section>
-				<input v-model="item.value" :type="item.type" :placeholder="item.placeHolder" />
+				<input v-model="item.value" :type="item.type" :placeholder="item.placeHolder"
+					:style="{ backgroundColor: item.isShow ? '#FFDCDB' : '' }" />
 			</section>
 			<!-- 错误提示区 -->
 			<section class="errMsg" :style="{
@@ -36,6 +37,7 @@
 <script>
 import controlObj from "@/hooks/personalCenter/controlObj";
 import { reactive } from "vue";
+import { observer } from "@/hooks/personalCenter/watcher";
 export default {
 	name: "loginPage",
 	setup() {
@@ -59,7 +61,7 @@ export default {
 				zz: /^\w{8,16}$/
 			}
 		]);
-
+		observer(loginArr)
 		return { loginArr, controlObj };
 	}
 };

@@ -33,7 +33,7 @@ export function delMenu(url, data, key = "datas", name = "datas") {
 		[name]: [],
 	});
 
-	Request.deleteData(url, data).then((res) => {
+	Request.deleteData(url, {params:{id:data}}).then((res) => {
 		dataList[name] = toRefs(reactive({ ...res.data[key] }));
 	});
 

@@ -1,7 +1,10 @@
 <template>
-  <h1>centerPage组件</h1>
-  55555WWWW
-  <router-view></router-view>
+    <div>
+        <header></header>
+        <main>
+          <router-view></router-view>
+        </main>
+    </div>
 </template>
 
 <script>

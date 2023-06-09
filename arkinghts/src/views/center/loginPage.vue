@@ -6,7 +6,7 @@
      <!-- 账密区 -->
      <div>
       <p v-for="(item,index) in loginArr" :key="index">
-        <input :text="tel" :placeholder="item.placeholder">
+        <input :text="item.text" :placeholder="item.placeholder">
         <span>{{ item.tip }}</span>
       </p>
     </div>

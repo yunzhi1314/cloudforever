@@ -7,7 +7,8 @@
 		"header"
 		"main"
 		"footer";
-    // 头部
+
+	// 头部
 	header {
 		grid-area: header;
 		display: grid;
@@ -16,38 +17,45 @@
 		padding: 0.5rem;
 		background-color: #fff;
 		box-shadow: 0px 0px 5px #aaa, 0px 0px 7.5px #aaa, 0px 0px 10px #aaa;
+
 		section,
 		div {
 			display: flex;
 			align-items: center;
 		}
-		.headerLeft {
-		}
+
+		.headerLeft {}
+
 		.logo {
 			justify-content: center;
+
 			img {
 				width: 7vw;
 			}
 		}
+
 		.headerRight {
 			justify-content: end;
 			font-size: 14px;
+
 			img {
 				width: 1.7vw;
 			}
+
 			section {
 				flex-direction: column;
 			}
 		}
 	}
-    // 主体内容
+
+	// 主体内容
 	main {
 		grid-area: main;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 
-        // 登录页面，登录框样式
+		// 登录页面，登录框样式
 		.login {
 			width: 20rem;
 			// 不用设高度，由内容撑高
@@ -56,12 +64,14 @@
 			border-radius: 1.3rem;
 			box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
 			padding: 1.8rem;
+
 			h2 {
 				text-align: center;
 				margin-bottom: 2rem;
 				color: #158fc5;
 			}
-            // 输入框样式，几乎所有输入框样式都相同，可以考虑放外面
+
+			// 输入框样式，几乎所有输入框样式都相同，可以考虑放外面
 			input {
 				width: 100%;
 				height: 2rem;
@@ -71,17 +81,20 @@
 				outline: none;
 				border-bottom: 1px solid #ccc;
 			}
-            // 按钮区样式
+
+			// 按钮区样式
 			.btns {
 				color: #158fc5;
 				font-size: 12px;
 				text-align: center;
 				margin-top: 2px;
 			}
-            // 设置短信登录或密码登录文字居左
-			.btns > section:nth-child(1) {
+
+			// 设置短信登录或密码登录文字居左
+			.btns>section:nth-child(1) {
 				text-align: left;
 			}
+
 			// button样式写在login里面，所有按钮都能吃到，如有不一样的单独添加样式
 			button {
 				background-color: #158fc5;
@@ -96,18 +109,36 @@
 				cursor: pointer;
 			}
 		}
+
+		//切换登录注册
+		.change-box {
+			position: absolute;
+			bottom: 8rem;
+			background-color: white;
+			height: 2rem;
+			width: 7rem;
+			border-radius: 1rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: #000;
+			cursor: pointer;
+		}
 	}
-    // 脚部内容
+
+	// 脚部内容
 	footer {
 		grid-area: footer;
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
 		background-color: #fff;
+
 		section {
 			display: flex;
 			justify-content: center;
 			font-size: 12px;
+
 			img {
 				width: 1vw;
 			}

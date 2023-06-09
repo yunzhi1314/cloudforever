@@ -14,7 +14,7 @@
 			<section class="userInput">
 				<input v-model="item.value" :type="item.type" :placeholder="item.placeHolder"
 					:style="{ backgroundColor: item.isShow ? '#FFDCDB' : '' }" />
-				<button v-if="item.isRender">获取验证码</button>
+				<button v-if="item.isRender" @click="getMathCode('isLoginIn')">获取验证码</button>
 			</section>
 			<!-- 错误提示区 -->
 			<section class="errMsg" :style="{
@@ -34,13 +34,7 @@
 				<!-- 切换登录方式 -->
 				<span :style="{
 					color: controlObj.isChange ? '#000' : '#158fc5'
-				}">{{
-	controlObj.isChange
-	? "已阅读并同意"
-	: controlObj.isCode
-		? "使用密码登录"
-		: "使用短信验证码登录"
-}}</span>
+				}">{{ controlObj.isChange ? "已阅读并同意" : controlObj.isCode ? "使用密码登录" : "使用短信验证码登录" }}</span>
 				<span v-if="controlObj.isChange">《鹰角网络用户注册协议》</span>
 				<span v-if="controlObj.isChange" style="color: #000">及</span>
 				<span v-if="controlObj.isChange">《鹰角网络游戏个人信息保护政策》</span>
@@ -64,16 +58,31 @@
 	<messagePage v-show="controlObj.isTusi"></messagePage>
 	<!-- 遮罩层 -->
 	<dialogPage>
-		<div></div>
+		<div class="mathcode" @click.stop>
+			<div>
+				<section>
+					<input type="text" placeholder="请输入结果" v-model="getCode.mathCode">
+					<span v-html="svg.codes" @click="changeSvg"></span>
+				</section>
+				<section>
+					<button @click="confirm(controlObj.isChange ? 'isRegister' : 'isLogin')">确认</button>
+					<button @click="cancel('isLoginIn')">取消</button>
+				</section>
+			</div>
+
+		</div>
 	</dialogPage>
 </template>
 
 <script>
-import { reactive } from "vue";
+import { provide, reactive } from "vue";
 import controlObj from "@/hooks/personalCenter/controlObj";
 import { observer } from "@/hooks/personalCenter/watcher";
 import { loginMethod } from "@/hooks/personalCenter/loginMethod";
 import { changeBoard } from "@/hooks/personalCenter/changeBoard";
+import { getMathCode, setCountDown, changeSvg, cancel } from '@/hooks/personalCenter/code'
+import dialogCss from '@/public/dialog/dialogPage.scss'
+import svg from '@/hooks/personalCenter/code'
 export default {
 	name: "loginPage",
 	setup() {
@@ -131,7 +140,9 @@ export default {
 			}
 		]);
 		observer(loginArr);
-		return { loginArr, addArr, controlObj, loginMethod, changeBoard };
+		provide("controlDialog", "isLoginIn")
+		let { getCode, countDown, confirm } = setCountDown("isLoginIn")
+		return { dialogCss, loginArr, addArr, controlObj, svg, loginMethod, changeBoard, getMathCode, changeSvg, cancel, getCode, countDown, confirm };
 	},
 };
 </script>

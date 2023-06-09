@@ -70,13 +70,15 @@
 				margin-bottom: 2rem;
 				color: #158fc5;
 			}
-			
-			.userInput{
+
+			.userInput {
 				display: flex;
-				input{
+
+				input {
 					flex-grow: 1;
 				}
-				button{
+
+				button {
 					margin: 0;
 				}
 			}
@@ -96,27 +98,32 @@
 			}
 			// 前往注册框动画
 			@keyframes toRegister {
-				0%{
+				0% {
 					transform: rotateY(0deg);
 				}
-				98%{
+
+				98% {
 					transform: rotateY(180deg);
 
 				}
-				100%{
+
+				100% {
 					transform: rotateY(0deg);
 				}
 			}
+
 			// 前往登录框动画
 			@keyframes toLogin {
-				0%{
+				0% {
 					transform: rotateY(0deg);
 				}
-				98%{
+
+				98% {
 					transform: rotateY(180deg);
 
 				}
-				100%{
+
+				100% {
 					transform: rotateY(0deg);
 				}
 			}

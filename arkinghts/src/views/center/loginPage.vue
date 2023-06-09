@@ -62,14 +62,6 @@ export default {
   }
 };
 </script>
-<script>
-export default {
-  name: "loginPage",
-  setup() {
-    return {};
-  },
-};
-</script>
 
 <style lang="scss" scoped></style>
-<style lang="scss" scoped></style>
+

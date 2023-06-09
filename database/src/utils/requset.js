@@ -21,7 +21,6 @@ req.interceptors.request.use(
 		if (token) {
 			config.headers["Authorization"] = token.token;
 		}
-		console.log(config);
 		return config;
 	},
 	(err) => Promise.reject(err)

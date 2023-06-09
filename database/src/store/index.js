@@ -1,23 +1,24 @@
 import { createStore } from 'vuex'
 import database from './database'
-// import createPersistedState from 'vuex-persistedstate'
-// import { isStore } from '@/hooks/use-store'
+import createPersistedState from 'vuex-persistedstate'
+import { isStore } from '@/hooks/use-store'
 export default createStore({
   plugins:[
-    // createPersistedState({
-    //   storage:localStorage,
-    //   reducer(state){
-    //     let obj = {
-    //     }
-    //     isStore(state,key,name,obj,storage)
-    //   },
-    //   key:key
-    // }),
+    createPersistedState({
+      storage:sessionStorage,
+      reducer(state){
+        let obj = {
+          expMedicals:state.database.expMedicals
+        }
+        return isStore(state,'expMedicals','isExpMedicals',obj,sessionStorage)
+      },
+      key:'expMedicals'
+    }),
 
   ],
   state: {
     control:{
-
+isExpMedicals:false
     }
   },
   getters: {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 登录 -->
-    <div class="login" :style="{height:controlsObj.isChange? '55vh':'50vh'}">
+    <div class="login" :style="{height:controlsObj.isChange? '55vh':'45vh'}">
       <section>{{ controlsObj.isChange ? '注册':'登录' }}</section>
       <!-- 账密区 -->
       <div class="info">
@@ -33,7 +33,7 @@
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
-import controlsObj from "@/hooks/persoalCenter/controls";
+import controlsObj from "@/hooks/personalCenter/controls";
 
 export default {
   name: "loginPage",

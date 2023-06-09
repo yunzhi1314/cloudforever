@@ -71,16 +71,7 @@
 				color: #158fc5;
 			}
 
-			// 输入框样式，几乎所有输入框样式都相同，可以考虑放外面
-			input {
-				width: 100%;
-				height: 2rem;
-				border: none;
-				background-color: rgba(255, 255, 255, 0);
-				padding-left: 4px;
-				outline: none;
-				border-bottom: 1px solid #ccc;
-			}
+
 
 			// 按钮区样式
 			.btns {
@@ -95,19 +86,7 @@
 				text-align: left;
 			}
 
-			// button样式写在login里面，所有按钮都能吃到，如有不一样的单独添加样式
-			button {
-				background-color: #158fc5;
-				border: none;
-				color: #fff;
-				width: 100%;
-				height: 1.8rem;
-				border-radius: 1rem;
-				font-size: 0.9rem;
-				font-weight: bold;
-				margin: 1.5rem 0;
-				cursor: pointer;
-			}
+
 		}
 
 		//切换登录注册
@@ -168,4 +147,29 @@
 	z-index: -1;
 	position: fixed;
 	background-position-y: -15vh;
+}
+
+// 输入框样式，几乎所有输入框样式都相同，可以考虑放外面
+input {
+	width: 100%;
+	height: 2rem;
+	border: none;
+	background-color: rgba(255, 255, 255, 0);
+	padding-left: 4px;
+	outline: none;
+	border-bottom: 1px solid #ccc;
+}
+
+// button样式写在login里面，所有按钮都能吃到，如有不一样的单独添加样式
+button {
+	background-color: #158fc5;
+	border: none;
+	color: #fff;
+	width: 100%;
+	height: 1.8rem;
+	border-radius: 1rem;
+	font-size: 0.9rem;
+	font-weight: bold;
+	margin: 1.5rem 0;
+	cursor: pointer;
 }

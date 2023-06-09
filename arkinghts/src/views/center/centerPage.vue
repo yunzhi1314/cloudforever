@@ -1,5 +1,6 @@
 <template>
                 <h1>centerPage组件</h1>
+                asyugashyushdgyuwhudwyghdeygbu
             </template>
 
             <script>

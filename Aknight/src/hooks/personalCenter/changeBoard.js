@@ -7,7 +7,7 @@ export function changeBoard(arr, controlObj, bool, condition, target) {
     // 判断条件，数组的长度为多少
     if(condition){
         if(target){//存在target,为注册
-            arr.splice(2,2,...target)
+            arr.splice(1,1,...target)
         }else{//为登录
             arr.splice(2,2)
         }

@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- 登录 -->
-    <div class="login" :style="{height:controlsObj.isChange? '55vh':'45vh'}">
-      <section>{{ controlsObj.isChange ? '注册':'登录' }}</section>
+    <div class="login" :style="{height:controlObj.isChange? '55vh':'45vh'}">
+      <section>{{ controlObj.isChange ? '注册':'登录' }}</section>
       <!-- 账密区 -->
       <div class="info">
         <section v-for="(item,index) in loginArr" :key="index">
@@ -33,7 +33,7 @@
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
-import controlsObj from "@/hooks/personalCenter/controls";
+import controlObj from "@/hooks/personalCenter/control";
 
 export default {
   name: "loginPage",
@@ -82,14 +82,14 @@ export default {
 
     // 点击去注册页面
     function changeRegister() {
-      controlsObj.isChange = true;
+      controlObj.isChange = true;
       if (loginArr.length < 4) {
         loginArr.push(...newArr);
       }
     }
     // 点击去登录页面
     function changeLogin() {
-      controlsObj.isChange = false;
+      controlObj.isChange = false;
       loginArr.splice(2, 2);
     }
     return {
@@ -102,7 +102,7 @@ export default {
       // 点击去往登录框
       changeLogin,
       // 全局开关对象
-      controlsObj
+      controlObj
     };
   }
 };

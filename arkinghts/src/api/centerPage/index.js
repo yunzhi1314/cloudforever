@@ -6,11 +6,11 @@ import { onBeforeMount, reactive } from 'vue'
     let dataList = reactive({
         img: []
     })
+    // 主体页面的请求数据
     onBeforeMount(()=>{
         Request.getData(url.centerPage.centerImg)
         .then(res=>{
             dataList.img = {...res.data.personal}
-            console.log(dataList.img);
         })
     })
     return dataList

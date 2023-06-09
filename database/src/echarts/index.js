@@ -169,14 +169,26 @@ export async function basicMedical(dom){
 
 export async function naweiCompany(dom){
 	let datas = (await Request.getData(url.database.home.naweiCompany)).data;
-	let source = datas.datas
     store.commit('database/SAVE_DATA',{datas:datas.datas,key:'naweiCompany'})
     store.commit('CHANGE_STORE','isNaweiCompany')
+	let source = datas.datas.map(item=>({
+		profit:item.Profit_from_operations,
+		growth_rate01:item.growth_rate01
+	}))
 	console.log(source);
-
 	let echart = echarts.init(dom)
 	let option = {
 		title:{text:'各公司药物药物种类数量占比',top:15,left:10},
+		xAxis:{
+			type:'category',
+			data:['2019年6月','2019年12月','2020年6月','2020年12月','2021年6月','2021年6月','2022年6月','2022年12月']
+		},
+		yAxis:[
+			{
+			type:'value',
+			
+		}
+	]
 	}
 	echart.setOption(option)
 }

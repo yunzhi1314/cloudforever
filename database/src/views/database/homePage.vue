@@ -15,12 +15,12 @@
             </div>
         </header>
         <main>
-            <div class="expMedicals hoverStyle"></div>
-            <div class="basicMedical hoverStyle"></div>
+            <div class="expMedicals hoverStyle" id="expMedicals"></div>
+            <div class="basicMedical hoverStyle" id="basicMedical"></div>
         </main>
         <footer>
-            <div class="navTools hoverStyle"></div>
-            <div class="naweiCompany hoverStyle"></div>
+            <div class="navTools hoverStyle" ></div>
+            <div class="naweiCompany hoverStyle" id="naweiCompany"></div>
         </footer>
     </div>
     
@@ -30,13 +30,14 @@
 import homeSCSS from '@/public/homePage.scss'
 import { onMounted } from 'vue';
 import url from '@/api/url';
-import { getPage,getPagebeforeMount } from '@/api/getPage';
+import { getPagebeforeMount } from '@/api/getPage';
+import {expMedicals} from '@/echarts'
 import { toRefs } from 'vue';
 export default {
     name:'homePage',
     setup () {
         onMounted(()=>{
-            getPage(url.database.home.expMedicals)
+            expMedicals(document.getElementById('expMedicals'))
             // getPage(url.database.home.basicMedical)
             // getPage(url.database.home.naweiCompany)
         })

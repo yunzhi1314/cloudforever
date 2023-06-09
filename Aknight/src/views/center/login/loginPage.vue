@@ -1,5 +1,12 @@
 <template>
-	<div class="login">
+	<div class="login" :style="{
+			// 判断是否播放
+			animation: !controlObj.isPlay
+				? ''
+				: controlObj.isChange // 播放的是哪一个框(注册框/登录框)的动画
+				? 'toRegister 0.5s 0.05s 1 ease-in forwards'
+				: 'toLogin 0.5s 0.05s 1 ease-in forwards'
+	}">
 		<!-- 标题 -->
 		<h2>{{ controlObj.isChange ? "注册" : "登录" }}</h2>
 		<div v-for="(item, index) in loginArr" :key="index">
@@ -26,11 +33,11 @@
 		<div class="btns" @click="loginMethod(loginArr, addArr)">
 			<section>
 				<span v-if="controlObj.isChange">
-					<input type="checkbox" style="width: 12px; vertical-align: middle" />
+					<input type="checkbox" style="width: 12px; vertical-align: middle;margin-right:5px" />
 				</span>
 				<!-- 切换登录方式 -->
 				<span
-					style="{
+					:style="{
 					color:controlObj.isChange? '#000':'#158fc5' 
 				}"
 					>{{

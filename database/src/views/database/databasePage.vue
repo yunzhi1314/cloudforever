@@ -2,7 +2,7 @@
   <div class="common-layout">
     <el-container>
       <el-aside
-        :width="!isCollapse ? '12vw' : '4vw'"
+        :width="!isCollapse ? '15vw' : '4vw'"
         :style="{
           transition: 'all 0.15s 0s linear',
           backgroundColor: '#545C64',
@@ -107,7 +107,7 @@
           </div>
         </el-header>
         <!-- 内容 -->
-        <el-main >
+        <el-main style="background-color:rgb(248,248,248);">
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -117,17 +117,24 @@
 
 <script>
 // import { onBeforeMount } from 'vue';
-import { ref } from "vue";
+import { layoutMenu } from "@/api/database/layout";
+import { ref} from "vue";
 import { useRoute,useRouter } from "vue-router";
 export default {
   name: "databasePage",
   setup() {
-    let isCollapse = ref(true);
+    let isCollapse = ref(false);
     let tabs=ref(['标签1','标签2','标签3','标签4'])
     const router =useRouter()
     const route =useRoute()
     let metaName=ref("")
     let title=ref(route.meta.title)
+
+    
+ 
+       layoutMenu()
+   
+   
 
     const removeTab=(targetName)=>{
       console.log(targetName);

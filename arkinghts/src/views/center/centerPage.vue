@@ -1,6 +1,6 @@
 <template>
                 <h1>centerPage组件</h1>
-                asyugashyushdgyuwhudwyghdeygbu
+               55555
             </template>
 
             <script>

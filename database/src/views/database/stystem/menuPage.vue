@@ -177,7 +177,7 @@ export default {
 
         // 删除按钮事件
         function deleList(item) {
-            console.log(item);
+            // console.log(item);
         }
 
 

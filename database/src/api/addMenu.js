@@ -8,6 +8,6 @@ export function addMenu(){
     let dataList=reactive({
         list:[]
     })
-    
+    Request.postData()
     
 }

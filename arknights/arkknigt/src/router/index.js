@@ -3,8 +3,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/database',
-    name: 'database',
-    component: () => import('../views/dataBase.vue')
+    name: 'databasePage',
+    component: () => import('../views/databasePage.vue')
   },
 
 ]

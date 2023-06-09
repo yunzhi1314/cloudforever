@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'dataBase',
+    name:'menuPage',
     setup () {
         
 

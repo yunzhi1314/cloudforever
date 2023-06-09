@@ -35,6 +35,7 @@
 
 <script>
 	import { reactive } from "vue";
+	import { observer } from "@/hooks/personalCenter/watcher";
 	export default {
 		name: "loginPage",
 		setup() {
@@ -58,7 +59,7 @@
 					zz: /^\w{8,16}$/
 				}
 			]);
-
+			observer(loginArr)
 			return { loginArr };
 		}
 	};

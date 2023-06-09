@@ -215,3 +215,14 @@ button {
 	margin: 1.5rem 0;
 	cursor: pointer;
 }
+button:hover{
+	background-color: #1174A0;
+}
+
+// 按钮禁用样式
+.disabled{
+	background-color: #797979;
+}
+.disabled:hover{
+	background-color: #626262;
+}

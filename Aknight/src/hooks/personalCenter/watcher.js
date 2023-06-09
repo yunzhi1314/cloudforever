@@ -1,5 +1,6 @@
 // 导入监听函数
 import { watch } from "vue";
+import controlObj from "./controlObj";
 
 // 封装监听函数
 //            arr为要监听是数组，   index 为密码的下标
@@ -18,9 +19,17 @@ export function observer(arr, index) {
 					if (item.zz.test(newValue)) {
 						//符合正则，隐藏错误提示
 						item.isShow = false;
+						// 判断是否为手机号，手机号符合正则，获取验证码按钮才可用
+						if (item.type == "tel") {
+							controlObj.isDisabled = true;
+						}
 					} else {
 						//不符合正则，显示错误提示
 						item.isShow = true;
+						// 判断是否为手机号，手机号不符合正则，获取验证码按钮不可用
+						if (item.type == "tel") {
+							controlObj.isDisabled = false;
+						}
 					}
 				} else {
 					// 没有正则就是确认密码的输入框

@@ -11,7 +11,8 @@ let controlObj = reactive({
 	},
 	isRegister: true, // 是否能够注册
 	isLogin: true, // 是否能够登录
-	isTusi: false // 展示吐丝弹窗的状态
+	isTusi: false, // 展示吐丝弹窗的状态
+	isDisabled:false,//获取验证码按钮是否可用
 });
 
 export default controlObj;

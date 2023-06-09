@@ -18,7 +18,7 @@ export default createStore({
 		changeStore(state, name) {
 			// 将条件设置为true
 			Reflect.set(state.control, name, true);
-      // 500秒后设置为false，否者刷新后还是会丢失，
+			// 500秒后设置为false，否者刷新后还是会丢失，
 			setTimeout(() => {
 				Reflect.set(state.control, name, false);
 			}, 500);

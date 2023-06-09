@@ -1,7 +1,7 @@
 import axios from "axios";
 import qs from "qs";
-import dev from "../config/dev.env";
-import prod from "../config/prod.env";
+import dev from "../config/dev.env.js";
+import prod from "../config/pro.env.js";
 // 环境的切换
 const env = process.env.NODE_ENV === "development" ? dev : prod;
 // 创建axios实例
@@ -31,3 +31,5 @@ instance.interceptors.response.use(response => {
         return Promise.reject(response);
     }
 })
+//导出instance
+export default instance;

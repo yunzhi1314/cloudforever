@@ -7,7 +7,7 @@
     border-radius: 2vw;
     display: grid;
     grid-template-columns:1fr;
-    grid-template-rows: 0.75fr 1.75fr 1.25fr ;
+    grid-template-rows: 0.4fr 1.75fr 1.25fr ;
     grid-template-areas: 
     "loginTop"
     "loginCenter"
@@ -33,7 +33,8 @@
     flex-direction: column;
     p{
         display: flex;
-    flex-direction: column;
+        flex-direction: column;
+        justify-content: space-around;
     }
     p>input{
         width: 100%;
@@ -98,7 +99,7 @@
 
 // 登录注册切换 
 .change{
-    background-color: aqua;
+    background-color: #fff;
     border-radius: 2vw;
     position: absolute;
     bottom: 17vh;
@@ -109,6 +110,7 @@
     justify-content: space-around;
     align-items: center;
     font-weight: bold;
+    cursor: pointer;
 }
 .change>span:nth-child(1){
     color: #158FC5;

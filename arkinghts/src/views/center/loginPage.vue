@@ -7,10 +7,16 @@
       <div class="info">
         <section v-for="(item,index) in loginArr" :key="index">
           <p>
-            <input :type="item.text" :placeholder="item.placeholder" />
+            <input 
+            :type="item.text" :placeholder="item.placeholder"  
+            v-model="item.value"
+            :style="{
+            backgroundColor:  item.isShow ? '#FFDCDB' : ''
+            }"
+            />
             <button v-if="item.isCode" class="btn">获取验证码</button>
           </p>
-          <p>{{ item.tip }}</p>
+          <p  v-show="item.isShow">{{ !item.value == '' ? item.tip : item.tip1 }}</p>
         </section>
       </div>
       <!-- 按钮区 -->
@@ -23,9 +29,15 @@
 
     <!-- 登录注册替换 -->
     <section class="change">
-      <span>登录</span>
+      <span @click="changeLogin" :style="{
+        color:controlObj.isChange ? '#000' :  '',
+        fontSize:controlObj.isChange ? '1rem' : ''
+        }">登录</span>
       <span>·</span>
-      <span @click="changeRegister">注册</span>
+      <span @click="changeRegister" :style="{
+        color:controlObj.isChange ? '#158FC5' :  '',
+        fontSize:controlObj.isChange ? '1.3rem' : ''
+        }">注册</span>
     </section>
   </div>
 </template>
@@ -34,7 +46,7 @@
 import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
 import controlObj from "@/hooks/personalCenter/control";
-
+import { watcher } from "@/hooks/personalCenter/watcher";
 export default {
   name: "loginPage",
   setup() {
@@ -54,8 +66,8 @@ export default {
         tip: "*密码格式不正确",
         tip1: "*密码不能为空",
         type: "password",
-        placeholder: "请输入密码",
-        zz: /^\w{6,18}$/
+        placeholder: "8-16位数字、字母、常用字符",
+        zz: /^\w{8,16}$/
       }
     ]);
     // 注册页面增加数组
@@ -66,7 +78,7 @@ export default {
         tip: "*请确认密码",
         tip1: "*两次输入的密码不一致",
         type: "password",
-        placeholder: "请密码"
+        placeholder: "请确认密码"
       },
       {
         value: "",
@@ -92,6 +104,9 @@ export default {
       controlObj.isChange = false;
       loginArr.splice(2, 2);
     }
+
+    
+    watcher(loginArr)//调用监视函数监视账密框
     return {
       loginCSS,
       loginArr,

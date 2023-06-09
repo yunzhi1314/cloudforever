@@ -8,7 +8,7 @@ import { onBeforeMount, reactive } from 'vue'
     })
     // 主体页面的请求数据
     onBeforeMount(()=>{
-        Request.getData(url.centerPage.centerImg)
+        Request.getData(url.personalCenter.centerImg)
         .then(res=>{
             dataList.img = {...res.data.personal}
         })

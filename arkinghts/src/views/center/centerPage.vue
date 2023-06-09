@@ -18,7 +18,6 @@
             </div>
         </header>
         <main>
-          <div></div>
           <router-view></router-view>
         </main>
         <footer>

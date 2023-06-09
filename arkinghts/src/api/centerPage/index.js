@@ -7,7 +7,7 @@ import { onBeforeMount, reactive } from 'vue'
         img: []
     })
     onBeforeMount(()=>{
-        Request.getData(url.centerImg)
+        Request.getData(url.centerPage.centerImg)
         .then(res=>{
             dataList.img = {...res.data.personal}
             console.log(dataList.img);

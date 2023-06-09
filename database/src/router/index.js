@@ -11,6 +11,11 @@ const routes = [
 				name: "homePage",
 				component: () => import("@/views/database/homePage"),
 			},
+			{
+				path:"menu",
+				name:"menuPage",
+				component:()=>import("@/views/database/stystem/menuPage.vue")
+			}
 		]
 	},
 

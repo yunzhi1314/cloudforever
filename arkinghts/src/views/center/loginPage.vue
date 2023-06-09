@@ -45,8 +45,6 @@
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
-import controlObj from "@/hooks/personalCenter/control";
-import { watcher } from "@/hooks/personalCenter/watcher";
 export default {
   name: "loginPage",
   setup() {
@@ -112,14 +110,7 @@ export default {
       loginCSS,
       // 登录数组渲染
       loginArr,
-      // 注册增加数组
-      newArr,
-      // 点击去往注册框
-      changeRegister,
-      // 点击去往登录框
-      changeLogin,
-      // 全局开关对象
-      controlObj
+      changeRegister
     };
   }
 };
@@ -127,4 +118,3 @@ export default {
 
 <style lang="scss" scoped>
 </style>
-

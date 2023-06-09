@@ -14,6 +14,16 @@ export default createStore({
       },
       key:'expMedicals'
     }),
+    createPersistedState({
+      storage:sessionStorage,
+      reducer(state){
+        let obj = {
+          basicMedical:state.database.basicMedical
+        }
+        return isStore(state,'basicMedical','isBasicMedical',obj,sessionStorage)
+      },
+      key:'basicMedical'
+    }),
 
   ],
   state: {

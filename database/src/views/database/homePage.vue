@@ -31,14 +31,14 @@ import homeSCSS from '@/public/homePage.scss'
 import { onMounted } from 'vue';
 import url from '@/api/url';
 import { getPagebeforeMount } from '@/api/getPage';
-import {expMedicals} from '@/echarts'
+import {expMedicals,basicMedical} from '@/echarts'
 import { toRefs } from 'vue';
 export default {
     name:'homePage',
     setup () {
         onMounted(()=>{
             expMedicals(document.getElementById('expMedicals'))
-            // getPage(url.database.home.basicMedical)
+            basicMedical(document.getElementById('basicMedical'))
             // getPage(url.database.home.naweiCompany)
         })
         

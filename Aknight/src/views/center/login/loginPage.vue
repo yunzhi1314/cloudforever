@@ -11,12 +11,13 @@
 		<h2>{{ controlObj.isChange ? "注册" : "登录" }}</h2>
 		<div v-for="(item, index) in loginArr" :key="index">
 			<!-- 输入框区 -->
-			<section>
+			<section class="userInput">
 				<input
 					v-model="item.value"
 					:type="item.type"
 					:placeholder="item.placeHolder"
 					:style="{ backgroundColor: item.isShow ? '#FFDCDB' : '' }" />
+					<button v-if="item.isRender">获取验证码</button>
 			</section>
 			<!-- 错误提示区 -->
 			<section

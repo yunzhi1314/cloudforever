@@ -6,8 +6,8 @@ let controlObj = reactive({
 	isCode: false, // 切换短信密码登录
 	isChecked: false, // 是否同意协议的状态
 	isDialog: {// 遮罩层状态
-		isLogin: false,//登录遮罩层状态
-		isRegister: false,//注册遮罩层状态
+		isLogin: false,//登录注册的倒计时遮罩层
+		isLoginOUt: false,//登出状态的遮罩层
 	},
 	isRegister: true, // 是否能够注册
 	isLogin: true, // 是否能够登录

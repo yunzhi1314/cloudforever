@@ -1,26 +1,28 @@
 <template>
     <Teleport to="body">
-        <div class="masked" v-show="controlObj.isDialog" @click="ceale">
+        <div class="masked" v-show="controlObj.isDialog[controlDialog]" @click="ceale">
             <slot></slot>
         </div>
     </Teleport>
 </template>
 
 <script>
+import controlObj from '@/hooks/personalCenter/controlObj';
 import { inject } from 'vue';
 export default {
     name: "dialogPage",
     setup() {
-        //接收外部传入的按钮
-        let controlObj = inject("controlObj")
+        //接收外部传入的对应遮罩层按钮按钮
+        let controlDialog = inject("controlDialog")
         //点击页面取消遮罩层
         function ceale() {
-            controlObj.isDialog = false
+            Reflect.set(controlObj.isDialog, controlDialog, false)
         }
 
         return {
             ceale,
             controlObj,
+            controlDialog
         }
     }
 }
@@ -34,7 +36,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 9;

@@ -8,11 +8,12 @@ import { reactive } from 'vue'
         code: []
     })
 
-    Request.getData(url.centerPage.mathCode)
+    // 获取图形验证码
+    Request.getData(url.personalCenter.mathCode)
     .then(res=>{
         dataList.code = res.data
-        console.log(dataList.code);
     })
 
     return dataList
  } 
+

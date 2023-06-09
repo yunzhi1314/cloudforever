@@ -7,25 +7,36 @@ export async function expMedicals(dom) {
 	let datas = (await Request.getData(url.database.home.expMedicals)).data;
     store.commit('database/SAVE_DATA',{datas:datas.datas,key:'expMedicals'})
     store.commit('CHANGE_STORE','isExpMedicals')
+	function paramsStr(str){
+		return str.includes('%') ?  str.slice(0,str.indexOf('%')): str
+	}
 	let sources = datas.datas.map((item) => ({
 		medical_name: item.medical_name,
 		鳞癌ORR: item.medical_indications == '鳞癌'? 
-		(item.medical_ORR=='/'?'':
-		item.medical_ORR.includes('%') ? item.medical_ORR.slice(0,item.medical_ORR.indexOf('%')):item.medical_ORR ):'',
-		鳞癌OS: item.medical_indications == '鳞癌'? (item.medical_OS=='/'?'':item.medical_OS):'',
-		非鳞癌ORR: item.medical_indications == '非鳞癌'? (item.medical_ORR=='/'?'':
-		item.medical_ORR.includes('%') ? item.medical_ORR.slice(0,item.medical_ORR.indexOf('%')):item.medical_ORR ):'',
-		非鳞癌OS: item.medical_indications == '非鳞癌'? (item.medical_OS=='/'?'':item.medical_OS):'',
+		(item.medical_ORR=='/'? '': paramsStr(item.medical_ORR)) : '',
+		鳞癌OS: item.medical_indications == '鳞癌'? 
+		(item.medical_OS=='/'? '': paramsStr(item.medical_OS)) : '',
+		非鳞癌ORR: item.medical_indications == '非鳞癌'? (item.medical_ORR=='/'? '': paramsStr(item.medical_ORR)) : '',
+		非鳞癌OS: item.medical_indications == '非鳞癌'? (item.medical_OS=='/'? '': paramsStr(item.medical_OS)) : '',
 		company: item.company,
-		medical_TREE: item.medical_TREE,
+		medical_TREE: item.medical_TREE=='/'? '' : item.medical_TREE,
 		id: item.id,
 	}));
 	console.log(sources);
 	let expMap = echarts.init(dom);
-
 	let option = {
 		title: { text: "各公司鳞癌非鳞癌使用情况" },
-		tooltip:{},
+		tooltip:{
+			formatter:function(params){
+				console.log(params);
+				return `
+				<div class="label">
+            <section><span>公司:</span> ${params.data.company}</section>
+		<section><span>TREE:</span> ${params.data.medical_TREE}</section>
+		<section><span>${params.seriesName}:</span> ${params.data[params.seriesName]}%</section>
+        </div>`
+			}
+		},
 		legend:{right:10,},
 		// grid:{left:30},
 		dataset: {

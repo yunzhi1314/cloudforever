@@ -31,9 +31,8 @@
     main{
         margin-top: 4vh;
         .expMedicals{
-            
-            width: 50vw;
-            height: 50vh;
+            width: 56vw;
+            height: 60vh;
             padding: 1vw;
         }
     }
@@ -45,4 +44,14 @@
     box-shadow: 0 0 1px 1px #eee,
     0 0  2px 2px #eee,
     0 0  3px 3px #eee;
+}
+.label{
+    section{
+        color: #ff00ff;
+        span{
+            color: #000;
+            width: 5vw;
+            font-weight: bold;
+        }
+    }
 }

@@ -1,8 +1,19 @@
 <template>
- 
-  <router-view/>
+  <div>
+    <router-view/>
+  </div>
 </template>
 
-<style lang="scss">
+<script>
+export default {
+  setup () {
+    
+
+    return {}
+  }
+}
+</script>
+
+<style lang="scss" scoped>
 
 </style>

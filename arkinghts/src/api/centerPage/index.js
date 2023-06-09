@@ -1,4 +1,4 @@
-import { Request } from "@/hooks/persoalCenter/request";
+import { Request } from "@/hooks/personalCenter/request";
 import url from "@/api/url"
 import { onBeforeMount, reactive } from 'vue'
 
@@ -7,7 +7,7 @@ import { onBeforeMount, reactive } from 'vue'
         img: []
     })
     onBeforeMount(()=>{
-        Request.getData(url.centerImg)
+        Request.getData(url.centerPage.centerImg)
         .then(res=>{
             dataList.img = {...res.data.personal}
             console.log(dataList.img);

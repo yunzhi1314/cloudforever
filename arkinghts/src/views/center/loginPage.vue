@@ -30,6 +30,8 @@
 <script>
 import loginCSS from "@/public/login.scss"
 import { reactive } from "vue";
+import { getMathcode } from "@/hooks/personalCenter/code"
+
 export default {
   name: "loginPage",
   setup() {
@@ -57,14 +59,12 @@ export default {
     return {
       loginCSS,
       loginArr,
-      changeRegister
+      changeRegister,
+      getMathcode,
     };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
-
 </style>
-

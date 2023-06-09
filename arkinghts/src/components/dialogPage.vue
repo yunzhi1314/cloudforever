@@ -2,16 +2,30 @@
   <teleport to="body">
     <div
       class="dialog"
-      v-show="controlObj.isDialog[controlDialog]"
+      v-show="controlsObj.isDialog[controlDialog]"
       @click="cancel"
     ></div>
   </teleport>
 </template>
 
 <script>
+import controlsObj from '@/hooks/persoalCenter/controls'
+import { inject } from 'vue';
 export default {
   setup() {
-    return {};
+
+    // 接收controlDialog参数，控制遮罩层的开启与关闭
+    let controlDialog = inject('controlDialog')
+
+    // 点击父遮罩层取消遮罩层
+    function cancel(){
+         Reflect.set(controlsObj.isDialog,controlDialog,false)
+    }
+    return {
+        controlsObj,//按钮集合
+        cancel,//遮罩层取消
+        controlDialog//总的遮罩层的判断开关
+    };
   },
 };
 </script>

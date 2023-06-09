@@ -4,7 +4,6 @@ import url from "@/api/url";
 import store from '@/store';
 export async function expMedicals(dom) {
 	let datas = (await Request.getData(url.database.home.expMedicals)).data;
-	console.log(datas.datas);
     store.commit('database/SAVE_DATA',{datas:datas.datas,key:'expMedicals'})
     store.commit('CHANGE_STORE','isExpMedicals')
 	let sources = datas.datas.map((item) => ({

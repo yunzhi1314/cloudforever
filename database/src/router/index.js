@@ -2,10 +2,19 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
 	{
-		path: "/",
-		name: "homePage",
-		component: () => import("@/views/database/homePage"),
+		path:'/',
+		name:'database',
+		component:()=>import('@/views/database/databasePage.vue'),
+		children:[
+			{
+				path: "home",
+				name: "homePage",
+				component: () => import("@/views/database/homePage"),
+			},
+		]
 	},
+
+	
 ];
 
 const router = createRouter({

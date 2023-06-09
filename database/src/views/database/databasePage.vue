@@ -107,7 +107,9 @@
           </div>
         </el-header>
         <!-- 内容 -->
-        <el-main style="background-color: rgb(51, 0, 255)">Main</el-main>
+        <el-main >
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -137,6 +139,12 @@ export default {
       console.log('totap');
       console.log(targetName);
     }
+
+    setTimeout(() => {//延时跳转到echart页面，缓冲
+      router.push({
+        name: "homePage",
+      });
+    }, 1000);
 
     return {
       isCollapse,

@@ -134,7 +134,7 @@ export default {
 
     setTimeout(() => {//延时跳转到echart页面，缓冲
       router.push({
-        name: "menuPage",
+        name: "homePage",
       });
     }, 1000);
 

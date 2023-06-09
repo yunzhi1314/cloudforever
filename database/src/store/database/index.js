@@ -4,6 +4,7 @@ export default {
         return{
             expMedicals:null,
             basicMedical:null,
+            naweiCompany:null,
         }
     },
     getters: {

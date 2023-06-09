@@ -24,11 +24,23 @@ export default createStore({
       },
       key:'basicMedical'
     }),
+    createPersistedState({
+      storage:sessionStorage,
+      reducer(state){
+        let obj = {
+          naweiCompany:state.database.naweiCompany
+        }
+        return isStore(state,'naweiCompany','isNaweiCompany',obj,sessionStorage)
+      },
+      key:'naweiCompany'
+    }),
 
   ],
   state: {
     control:{
-isExpMedicals:false
+      isExpMedicals:false,
+      isBasicMedical:false,
+      isNaweiCompany:false,
     }
   },
   getters: {

@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import messagePage from '@/components/messagePage'
+import messagePage from '@/components/messagePage.vue'
+import dialogPage from '@/components/dialogPage.vue'
 
-createApp(App).use(store).component("messagePage",messagePage).use(router).mount('#app')
+createApp(App).component("messagePage", messagePage).component("dialogPage", dialogPage).use(store).use(router).mount('#app')

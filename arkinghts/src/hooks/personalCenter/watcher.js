@@ -12,6 +12,8 @@ export function watcher(arr){
                 }else if(!item.zz.test(newValue.value)){
                     item.isShow = true
                 }
+            }else{
+                item.isShow = false
             }
         })
      });

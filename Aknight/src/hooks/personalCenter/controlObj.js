@@ -2,7 +2,6 @@ import { reactive } from "vue";
 // 控制条件的对象
 let controlObj = reactive({
 	isChange: false, // 切换注册登录
-	isChangePhone: false, // 控制修改绑定手机两个验证码的分离
 	isPlay: false, // 是否播放旋转动画
 	isCode: false, // 切换短信密码登录
 	isChecked: false, // 是否同意协议的状态

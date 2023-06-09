@@ -70,6 +70,16 @@
 				margin-bottom: 2rem;
 				color: #158fc5;
 			}
+			
+			.userInput{
+				display: flex;
+				input{
+					flex-grow: 1;
+				}
+				button{
+					margin: 0;
+				}
+			}
 
 			// 按钮区样式
 			.btns {
@@ -83,6 +93,31 @@
 			// 设置短信登录或密码登录文字居左
 			.btns>section:nth-child(1) {
 				text-align: left;
+			}
+
+			@keyframes toRegister {
+				0%{
+					transform: rotateY(0deg);
+				}
+				98%{
+					transform: rotateY(180deg);
+
+				}
+				100%{
+					transform: rotateY(0deg);
+				}
+			}
+			@keyframes toLogin {
+				0%{
+					transform: rotateY(0deg);
+				}
+				98%{
+					transform: rotateY(180deg);
+
+				}
+				100%{
+					transform: rotateY(0deg);
+				}
 			}
 
 

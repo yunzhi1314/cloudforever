@@ -1,24 +1,15 @@
 <template>
   <div>
     <!-- 登录 -->
-    <div class="login" :style="{height:controlObj.isChange? '55vh':'45vh'}">
-      <section>{{ controlObj.isChange ? '注册':'登录' }}</section>
-      <!-- 账密区 -->
-      <div class="info">
-        <section v-for="(item,index) in loginArr" :key="index">
-          <p>
-            <input 
-            :type="item.text" :placeholder="item.placeholder"  
-            v-model="item.value"
-            :style="{
-            backgroundColor:  item.isShow ? '#FFDCDB' : ''
-            }"
-            />
-            <button v-if="item.isCode" class="btn">获取验证码</button>
-          </p>
-          <p  v-show="item.isShow">{{ !item.value == '' ? item.tip : item.tip1 }}</p>
-        </section>
-      </div>
+    <div class="login">
+     <section>登录</section>
+     <!-- 账密区 -->
+     <div>
+      <p v-for="(item,index) in loginArr" :key="index">
+        <input :text="tel" :placeholder="item.placeholder">
+        <span>{{ item.tip }}</span>
+      </p>
+    </div>
       <!-- 按钮区 -->
       <div>
         <section>使用短信验证码登录</section>
@@ -45,8 +36,6 @@
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
-import controlObj from "@/hooks/personalCenter/control";
-import { watcher } from "@/hooks/personalCenter/watcher";
 export default {
   name: "loginPage",
   setup() {
@@ -110,14 +99,7 @@ export default {
     return {
       loginCSS,
       loginArr,
-      // 注册增加数组
-      newArr,
-      // 点击去往注册框
-      changeRegister,
-      // 点击去往登录框
-      changeLogin,
-      // 全局开关对象
-      controlObj
+      changeRegister
     };
   }
 };
@@ -125,4 +107,3 @@ export default {
 
 <style lang="scss" scoped>
 </style>
-

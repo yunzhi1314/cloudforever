@@ -1,4 +1,5 @@
 import { Request } from "@/hooks/personalCenter/request";
+import { Request } from "@/hooks/personalCenter/request";
 import url from "@/api/url"
 import { onBeforeMount, reactive } from 'vue'
 
@@ -8,7 +9,7 @@ import { onBeforeMount, reactive } from 'vue'
     })
     // 主体页面的请求数据
     onBeforeMount(()=>{
-        Request.getData(url.personalCenter.centerImg)
+        Request.getData(url.centerPage.centerImg)
         .then(res=>{
             dataList.img = {...res.data.personal}
         })

@@ -141,6 +141,7 @@ export default {
 
         // 新增一项数据的事件
         function addList() {
+            console.log(11111);
             controlObj.isDialog.isAddMenu = true
             Reflect.ownKeys(msgObj).forEach(item => {
                 Reflect.set(msgObj, item, '')
@@ -176,7 +177,7 @@ export default {
 
         // 删除按钮事件
         function deleList(item) {
-           console.log(item);
+            console.log(item);
         }
 
 
@@ -203,8 +204,9 @@ export default {
 <style lang="scss" scoped>
 .dialogMenu {
     width: 50vw;
-    height: 40vh;
+    height: 48vh;
     padding: 2vw;
     background-color: white;
+    border-radius: 2vw;
 }
 </style>

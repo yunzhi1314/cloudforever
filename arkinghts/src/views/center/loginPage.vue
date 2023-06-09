@@ -6,8 +6,8 @@
      <!-- 账密区 -->
      <div>
       <p v-for="(item,index) in loginArr" :key="index">
-        <input :text="item.text" :placeholder="item.placeholder">
-        <span>{{ item.tip }}</span>
+        <input :text="item.text" :placeholder="item.placeholder" >
+        <span v-show="!item.isShow">{{ item.tip }}</span>
       </p>
     </div>
       <!-- 按钮区 -->
@@ -30,6 +30,7 @@
 <script>
 import loginCSS from "@/public/login.scss"
 import { reactive } from "vue";
+import controlsObj from "@/hooks/personalCenter/controls"
 export default {
   name: "loginPage",
   setup() {
@@ -39,20 +40,48 @@ export default {
       tip:"账号格式不正确",
       text:"tel",
       placeholder:"请输入手机号",
-      // zz:/^{1}1[3-9]1\d{9}$/
+      zz:/^1{1}[3-9]{1}\d{9}$/,
+      isShow:false
     },
     {
       value:"",
       tip:"密码格式不正确",
       text:"password",
       placeholder:"请输入密码",
-      // zz:/^\w{6,18}$/
+      zz:/^\w{6,18}$/,
+      isShow:false
     },
   ])
 
   // 点击去注册页面
   function changeRegister(){
-      
+    controlsObj.isChange= true 
+    if(loginArr.length <= 2){
+      loginArr.push(
+        {
+      value:"",
+      tip:"账号格式不正确",
+      tip1:"账号不能为空",
+      text:"tel",
+      placeholder:"请输入手机号",
+      zz:/^1{1}[3-9]{1}\d{9}$/
+    },
+    {
+      value:"",
+      tip:"*密码格式不正确",
+      tip1:"密码不能为空",
+      text:"password",
+      placeholder:"请输入密码",
+      zz:/^\w{6,18}$/
+    },
+    )
+    }
+  }
+
+
+  // 点击去登录页面
+  function changeLogin(){
+    controlsObj.isChange= false
   }
     return {
       loginCSS,

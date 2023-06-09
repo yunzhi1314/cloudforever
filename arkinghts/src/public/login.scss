@@ -2,7 +2,7 @@
 .login{
     background-color: rgba(255,255,255,0.8);
     width: 22vw;
-    height: 45vh;
+    height: 50vh;
     margin-bottom: 15vh;
     border-radius: 2vw;
     display: grid;
@@ -26,19 +26,48 @@
     padding-bottom: 2vh;
 }
 // 登录中间
-.login>div:nth-child(2){
+.info{
     grid-area:loginCenter;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    p{
+        display: flex;
+    flex-direction: column;
+    }
     p>input{
-        height: 4vh;
-        width: 18vw;
+        width: 100%;
         border-radius:0.4vw;
         border: none;
         padding: 0.5vw;
     }
-    p>span{
+    p:nth-child(even){
+        width: 100%;
         font-size: 12px;
         color: #930E0E;
     }
+}
+// 切换注册页面过后出现验证码按钮
+// .info>section:nth-child(4){
+//     display: flex;
+// }
+.info>section:nth-child(4)>p:nth-child(1){
+    display: flex;
+    flex-direction: initial;
+}
+.info>section:nth-child(4)>p:nth-child(1)>input{
+    flex: 3;
+}
+.btn{
+        color:#fff;
+        background-color:  #158FC5;
+        height: 5vh;
+        border-radius: 2vw;
+        border: none;
+        font-weight: bold;
+        margin-left: 1vw;
+        flex: 4;
+        font-size: 1.1rem
 }
 
 // 登录底部

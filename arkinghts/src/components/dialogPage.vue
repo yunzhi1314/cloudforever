@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import controlsObj from '@/hooks/persoalCenter/controls'
+import controlsObj from '@/hooks/personalCenter/controls'
 import { inject } from 'vue';
 export default {
   setup() {

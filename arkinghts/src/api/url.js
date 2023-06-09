@@ -1,7 +1,7 @@
 
 // 导出请求路劲
 export default{
-      centerPage:{
+      personalCenter:{
         centerImg:"api/personalCenter",//整体内容（centerPage页面）的请求路劲
         mathCode:'api/user/getCode',//获取验证码按钮的请求路劲
         telCode:'api/user/telCode',//短信验证码的请求路劲

@@ -8,7 +8,8 @@
 				<input
 					v-model="item.value"
 					:type="item.type"
-					:placeholder="item.placeHolder" />
+					:placeholder="item.placeHolder"
+					:style="{backgroundColor:item.isShow ? '#FFDCDB' : ''}" />
 			</section>
 			<!-- 错误提示区 -->
 			<section

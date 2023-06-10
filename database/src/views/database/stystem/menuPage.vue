@@ -95,6 +95,8 @@
 import { ref, reactive, provide } from "vue";
 import { dealMenu } from "@/hooks/dealMenu";
 import controlObj from "@/hooks/control";
+// import {addMenu,setMenu,deleMenu} from "@/api/addMenu"；
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
     name: "menuPage",
     setup() {
@@ -177,7 +179,28 @@ export default {
 
         // 删除按钮事件
         function deleList(item) {
-            // console.log(item);
+            console.log(item);
+            ElMessageBox.confirm(
+                '请问确定要删除该信息吗？',
+                {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                }
+            )
+                .then(() => {
+                    ElMessage({
+                        type: 'success',
+                        message: '删除成功',
+                    })
+                })
+                .catch(() => {
+                    ElMessage({
+                        type: 'info',
+                        message: '取消删除',
+                    })
+                })
+
         }
 
 

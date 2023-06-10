@@ -4,7 +4,8 @@ const routes = [
   {
     path: '/database',
     name: 'databasePage',
-    component: () => import('../views/databasePage.vue'),
+    component: () => import('../views/databasePage.vue')
+
   },
   {
     path:"/",

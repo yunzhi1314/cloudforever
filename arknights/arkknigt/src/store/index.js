@@ -3,6 +3,7 @@ import createPersistedState from 'vuex-persistedstate'
 import dataStore from './module/dataStore'
 import { isStore } from '@/hook/store'
 export default createStore({
+  // 持久化路由
   plugins: [createPersistedState({
     storage: window.sessionStorage,
     reducer(state) {
@@ -14,6 +15,7 @@ export default createStore({
     },
     key: 'saveRoutes'
   }),
+  // 添加保存expMedical数据
   createPersistedState({
     storage: window.sessionStorage,
     reducer(state) {
@@ -24,12 +26,24 @@ export default createStore({
     },
     key: 'expMedical'
   }),
+  // 添加保存basicMedical数据
+  createPersistedState({
+    storage:window.sessionStorage,
+    reducer(state){
+      let basicMedicalData = {
+        basicMedical:state.dataStore.basicMedical
+      }
+      return isStore(state,"basicMedical","isBasicMedical",basicMedicalData,sessionStorage)
+    },
+    key:'basicMedical'
+  })
 
   ],
   state: {
     control: {
       isDataBase: false,
       isExpMedical:false,
+      isBasicMedical:false
     }
   },
   getters: {

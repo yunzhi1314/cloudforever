@@ -63,6 +63,7 @@
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
+import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
 import controlsObj from "@/hooks/personalCenter/controls";
 import { getMathcode } from "@/hooks/personalCenter/code"
 

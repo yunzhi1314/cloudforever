@@ -128,10 +128,10 @@ export default {
     let metaName=ref("")
     let title=ref(route.meta.title)
     let isPlay=ref(false)
-    let pages=reactive(JSON.parse(sessionStorage.getItem('menuList'))).menuList
     let userId="672023,90507AM"
     
-       layoutMenu()
+    layoutMenu()
+    let pages=reactive(JSON.parse(sessionStorage.getItem('menuList'))).menuList
 
     const removeTab=(targetName)=>{
       console.log(targetName);

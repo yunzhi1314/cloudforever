@@ -43,7 +43,7 @@
                         <el-menu-item index="1">
                             <el-breadcrumb separator-class="/">
                                 <el-breadcrumb-item :to="{ name: 'homePage' }">首页</el-breadcrumb-item>
-                                <el-breadcrumb-item>A</el-breadcrumb-item>
+                                <el-breadcrumb-item>{{route.meta.name }}</el-breadcrumb-item>
                                 <el-breadcrumb-item>B</el-breadcrumb-item>
                             </el-breadcrumb>
                         </el-menu-item>
@@ -68,7 +68,7 @@
                             <el-icon>
                                 <FullScreen />
                             </el-icon>
-                        </el-menu-item>、
+                        </el-menu-item>
                         <!-- 用户名 -->
                         <el-sub-menu index="3">
                             <!-- 用户名 -->
@@ -82,8 +82,13 @@
                             <el-menu-item index="3-3">退出</el-menu-item>
                         </el-sub-menu>
                     </el-menu>
+                    <el-tabs v-model="activeKey">
+                      <el-tab-pane key="1" tab=""></el-tab-pane>
+                    </el-tabs>
                 </el-header>
-                <el-main>Main</el-main>
+                <el-main>
+                    <router-view></router-view>
+                </el-main>
             </el-container>
         </el-container>
     </div>
@@ -96,12 +101,11 @@ import { layoutRoutes } from '@/api/database/layoutRoute/getRoutes'
 export default {
     name: 'databasePage',
     setup() {
-        const isScollape = ref(false)
-        const router = useRouter()
+        const isScollape = ref(false) // 是否折叠
+        const router = useRouter() // 路由
         const route = useRoute() // 当前路由
-        console.log(route,'1')
-        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu)
-        // let isHide = ref(false)
+        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu) //获取存入vuex的路由
+        // let tabs = ref([]) // 保存tab
         //点击菜单跳转路由
         function toPage(i,j){
             // 如果是子菜单
@@ -123,11 +127,13 @@ export default {
         }
         // function toTab(i){
 
+            console.log(route)
         // }
         return {
             isScollape,
             toPage,
-            ...toRefs(layoutRoutes())
+            ...toRefs(layoutRoutes()),
+            route
         }
     }
 }

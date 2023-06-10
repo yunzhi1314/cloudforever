@@ -22,10 +22,16 @@
 				<button
 					v-if="item.isRender"
 					@click="getMathCode('isLoginIn')"
-					:class="controlObj.isDisabled ? '' : 'disabled'"
-					:disabled="!controlObj.isDisabled"
+					:class="controlObj.isChange 
+					?countDown.nameArr.includes( 'isRegister') ? 'disabled' : ''
+					:countDown.nameArr.includes( 'isLogin') ? 'disabled' : ''"
+					:disabled="controlObj.isChange?countDown.nameArr.includes( 'isRegister') : countDown.nameArr.includes( 'isLogin')"
 				>
-					获取验证码
+					{{
+						controlObj.isChange 
+						? countDown.nameArr.includes( 'isRegister')?countDown.numberRegister + "S 后重试": "获取验证码"
+						: countDown.nameArr.includes( 'isLogin')?countDown.numberLogin + "S 后重试": "获取验证码"
+					}}
 				</button>
 			</section>
 			<!-- 错误提示区 -->
@@ -45,7 +51,9 @@
 				<span v-if="controlObj.isChange">
 					<input
 						type="checkbox"
-						style="width: 12px; vertical-align: middle; margin-right: 5px" />
+						style="width: 12px; vertical-align: middle; margin-right: 5px" 
+						v-model="controlObj.isChecked"
+						/>
 				</span>
 				<!-- 切换登录方式 -->
 				<span

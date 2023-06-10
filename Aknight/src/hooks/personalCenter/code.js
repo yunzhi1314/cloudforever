@@ -2,6 +2,7 @@ import { mathCode } from "@/api/arknight/centerPage/code"
 import { reactive, ref } from "vue"
 import controlObj from "@/hooks/personalCenter/controlObj";
 import { toest } from "../toset";
+import store from "@/store";
 //获取验证码图片
 let svg = ref("")
 export const getMathCode = (name) => {
@@ -28,8 +29,8 @@ export function setCountDown(name) {
     })
     let countDown = reactive({
         //倒计时数字
-        numberLogin: "",
-        numberRegister: "",
+        numberLogin: store.state.countDown,
+        numberRegister: store.state.countDown,
         //倒计时开关
         isOpen: false,
         //倒计时定时器集合

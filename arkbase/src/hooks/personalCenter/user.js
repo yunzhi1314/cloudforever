@@ -4,6 +4,7 @@ import { Request } from "../request";
 import store from "@/store/index.js";
 import { Toest } from "../Toest";
 import router from "../../router";
+import controlObj from "../controls";
 
 // 点击注册 || 登录
 // 注册输入的信息
@@ -18,18 +19,24 @@ let loginObj = reactive({
   telephone: "",
   password: "",
   userId: "",
+  code:""
 });
 
-export function userPass(loginArr, controlObj, baseUrl, method, fn) {
+export function userPass(loginArr,  baseUrl, method, fn) {
   let target;
   let isPass;
   let isStore;
 
+  // 判断是否为注册框
   if (controlObj.isChange) {
     target = registerObj;
     isPass = controlObj.isRegister;
     isStore = "isRegister";
   } else {
+    // 判断是否为短信登录
+    controlObj.isCode ?
+    Reflect.set(loginObj,"code",loginArr[1].value):
+    ""
     target = loginObj;
     isPass = controlObj.isLogin;
     isStore = "isLogin";
@@ -92,9 +99,11 @@ export function userPass(loginArr, controlObj, baseUrl, method, fn) {
       let changeUserMsg = fn([method])[method];
       changeUserMsg.bind({ $store: store })(dataList.datas);
 
+      // 将请求到的数据存到仓库，以备后需
       store.commit("changeStore", isStore);
       store.commit("changeMsg", dataList.datas);
 
+      // 显示登录成功的吐丝
       Toest(controlObj);
 
       // 判断是否是登录按钮

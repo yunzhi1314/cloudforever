@@ -188,7 +188,6 @@ export default {
 
         // 监视登录与注册框的转换，令登录注册框的验证码与密码转换分离
         watch(controlObj,newValue=>{
-            console.log(newValue)
             if(newValue.isChange){
                 newValue.isCode ? console.log("code") : 
                 loginArr.splice(1,1,pswObj)
@@ -206,9 +205,9 @@ export default {
         function registerOrLogin() {
 
             const { mapMutations } = createNamespacedHelpers("personalCenter");
-
-            controlObj.isChange ? userPass(loginArr, controlObj, "register", "changeUserMsg", mapMutations) :
-                userPass(loginArr, controlObj, "login", "changeToken", mapMutations)
+            controlObj.isChange ? userPass(loginArr , "register", "changeUserMsg", mapMutations) :
+            controlObj.isCode ?    userPass(loginArr , "codeLogin", "changeToken", mapMutations) :
+            userPass(loginArr , "login", "changeToken", mapMutations)
         }
 
 

@@ -90,8 +90,6 @@ header {
 
 }
 
-
-
 // 主体
 main {
     grid-area: main;
@@ -107,7 +105,7 @@ main>div:nth-child(1) {
     align-items: center;
     flex-wrap: wrap;
     position: absolute;
-    top:13.5vh;
+    top:12.25vh;
     section {
         background-color: #158FC5;
         width: 14vw;

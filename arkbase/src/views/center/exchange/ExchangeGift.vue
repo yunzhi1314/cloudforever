@@ -1,8 +1,13 @@
 <template>
 <div class="baseMsg">
     <div style="height:8%"></div>
-    <div class="mainItem">
-      <div v-for="(item,index) in userinfo.items" :key="index">
+    <div class="mainItem" style="position: relative;top: 5vh;">
+      <div v-for="(item,index) in userinfo.items" :key="index"
+      :style='{
+        height:index == 0 ? "25vh" : "auto",
+        position:index == 1 ? "relative" : "static",
+        bottom: index == 1 ?"8vh" : "0vh"
+      }'>
             <section>
                   <img :src="item.titleImg" alt="">
                   <span>{{ item.title }}</span>

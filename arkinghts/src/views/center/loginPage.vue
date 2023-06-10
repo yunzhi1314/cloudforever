@@ -34,7 +34,7 @@
       <!-- 按钮区 -->
       <div>
         <section>使用短信验证码登录</section>
-        <button>登录</button>
+        <button @click="loginOrRigerst">{{ controlObj.isChange ? '注册' : '登录' }}</button>
         <section>使用bilibili账号</section>
       </div>
     </div>
@@ -73,7 +73,6 @@
           <button @click="cancel">取消</button>
         </section>
     </div>
-        
   </dialogPage>
 </template>
 
@@ -145,6 +144,8 @@ export default {
     watcher(loginArr); //调用监视函数监视账密框
 
     provide("controlDialog", "isMathCode");
+
+
     return {
       loginCSS,
       loginArr,

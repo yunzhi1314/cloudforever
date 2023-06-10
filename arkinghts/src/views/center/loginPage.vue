@@ -29,6 +29,10 @@
               "
               class="btn"
               @click="getMathCode('isMathCode')"
+              :style='{
+                backgroundColor: controlObj.isDisable ? "#158FC5": "#797979"
+              }'
+              :disabled='controlObj.isDisable ? "":"" '
             >
               获取验证码
             </button>
@@ -104,9 +108,7 @@
       </section>
     </div>
   </dialogPage>
-  <!-- 吐丝提示 -->
-  <messagePage v-if="controlObj.isMsgTusi"></messagePage>
-
+ 
 </template>
 
 <script>
@@ -114,19 +116,12 @@ import loginCSS from "@/public/login.scss";
 import { reactive, provide } from "vue";
 import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
 import controlObj from "@/hooks/personalCenter/control";
-import {
-  getMathCode,
-  againGetMathCode,
-  cancel,
-} from "@/hooks/personalCenter/code";
+import { getMathCode,againGetMathCode,cancel,} from "@/hooks/personalCenter/code";
 import svg from "@/hooks/personalCenter/code";
 import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
-import messagePage from "@/components/messagePage.vue";
 import { Request } from "@/hooks/personalCenter/request";
 import url from '@/api/url'
 import store from "@/store";
-import Toest from "@/hooks/personalCenter/Toest"
-
 
 export default {
   name: "loginPage",
@@ -227,10 +222,9 @@ export default {
       let obj = loginArr.find((item) => item.use == "手机号");
       useInfo.telephone = obj.value;
       telCode(useInfo);
-      Toest(controlObj)
     }
     let registerData = reactive({
-      telephone: "",
+      telephone: "", 
       password: "",
       confirmPassword: "",
       code: "",
@@ -241,17 +235,11 @@ export default {
       password: "",
     });
 
- 
     function loginOrRegister() {
       let dataList = reactive({data:[]});
       if (controlObj.isChange) {
-        console.log(11)
         loginArr.forEach((item, index) => {
-          Reflect.set(
-            registerData,
-            Reflect.ownKeys(registerData)[index],
-            item.value
-          );
+          Reflect.set(registerData,Reflect.ownKeys(registerData)[index],item.value);
         });
         Request.postData(url.personalCenter.register,registerData)
         .then(res=>{
@@ -262,31 +250,20 @@ export default {
         })
         setTimeout(()=>{
           store.commit('personalCenter/changeUse',dataList.data) 
-        store.commit('changeStore','isRegister')
+          store.commit('changeStore','isRegister')
         },1000)
-       
-         
-        Toest(controlObj)
-      }else{
+      }
+      else{
         loginArr.forEach((item,index)=>{
-          Reflect.set(
-            loginData,
-            Reflect.ownKeys(loginData)[index],
-            item.value
-          );
+          Reflect.set(loginData,Reflect.ownKeys(loginData)[index],item.value);
         })
         Request.postData(url.personalCenter.login, loginData).then(
           (res) => {
             console.log(res);
           }
         ); 
-        Toest(controlObj)
       }
     }
-
-    let userId = JSON.parse( localStorage.getItem('user')).userId
-
-    console.log(userId)
 
     return {
       loginCSS,
@@ -306,10 +283,8 @@ export default {
       useInfo,
       loginOrRegister, //点击注册或登录按钮
       codeLogin, // 点击切换密码或短信验证码登录
-      Toest
     };
   },
-  components: { messagePage },
 };
 </script>
 

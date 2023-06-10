@@ -8,7 +8,9 @@ let  controlObj = reactive({
     isDialog:{
        isMathCode:false,//点击获取验证码控制遮罩层的显示
     },
-    isCode:false
+    isCode:false,
+    // 吐丝
+    isMsgTusi:false
 })
 
 export default controlObj

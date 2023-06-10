@@ -16,13 +16,18 @@
 
     </el-col>
   </el-row>
-  <el-table :data="tableData" style="width: 100%">
-    <el-table-column prop="date" label="Date" width="180" />
-    <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address">
-    <el-button type="text" size="mini">新增</el-button>
-    <el-button type="text">修改</el-button>
-    <el-button type="text">删除</el-button>
+  <el-table 
+  :data="tableData" style="margin-top: 3vh" height="70vh" row-key="id">
+    <el-table-column prop="date" label="药物名称" width="180" />
+    <el-table-column prop="name" label="所属公司" width="180" />
+    <el-table-column prop="name" label="靶向" width="180" />
+    <el-table-column prop="name" label="线数" width="180" />
+    <el-table-column prop="name" label="治疗方式" width="180" />
+    <el-table-column prop="name" label="区域" width="180" />
+    <el-table-column prop="address" label="操纵">
+    <el-button type="text" style="font-size:12px">新增</el-button>
+    <el-button type="text" style="font-size:12px">修改</el-button>
+    <el-button type="text" style="font-size:12px">删除</el-button>
 </el-table-column>
 
   </el-table>

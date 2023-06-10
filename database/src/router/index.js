@@ -14,7 +14,7 @@ const routes = [
 			{
 				path:"menu",
 				name:"menuPage",
-				component:()=>import("@/views/database/stystem/menuPage.vue")
+				component:()=>import("@/views/database/system/menu/menuPage.vue")
 			}
 		]
 	},

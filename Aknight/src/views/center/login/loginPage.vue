@@ -14,17 +14,23 @@
 			<section class="userInput">
 				<input v-model="item.value" :type="item.type" :placeholder="item.placeHolder"
 					:style="{ backgroundColor: item.isShow ? '#FFDCDB' : '' }" />
-				<button v-if="item.isRender" @click="getMathCode('isLoginIn')"
-					:class="controlObj.isDisabled ? '' : 'disabled'" :disabled="!controlObj.isDisabled">
-					获取验证码
+				<button v-if="item.isRender" @click="getMathCode('isLoginIn')" :class="controlObj.isChange
+					? countDown.nameArr.includes('isRegister') ? 'disabled' : ''
+					: countDown.nameArr.includes('isLogin') ? 'disabled' : ''"
+					:disabled="controlObj.isChange ? countDown.nameArr.includes('isRegister') : countDown.nameArr.includes('isLogin')">
+					{{
+						controlObj.isChange
+						? countDown.nameArr.includes('isRegister') ? countDown.numberRegister + "S 后重试" : "获取验证码"
+						: countDown.nameArr.includes('isLogin') ? countDown.numberLogin + "S 后重试" : "获取验证码"
+					}}
 				</button>
 			</section>
 			<!-- 错误提示区 -->
 			<section class="errMsg" :style="{
-				visibility: item.isShow ? 'visible' : 'hidden',
-				fontSize: '12px',
-				color: '#f00'
-			}">
+						visibility: item.isShow ? 'visible' : 'hidden',
+						fontSize: '12px',
+						color: '#f00'
+					}">
 				{{ item.value == "" ? item.tip01 : item.tip02 }}
 			</section>
 		</div>
@@ -32,7 +38,8 @@
 		<div class="btns">
 			<section @click="loginMethod(loginArr, addArr)">
 				<span v-if="controlObj.isChange">
-					<input type="checkbox" style="width: 12px; vertical-align: middle; margin-right: 5px" />
+					<input type="checkbox" style="width: 12px; vertical-align: middle; margin-right: 5px"
+						v-model="controlObj.isChecked" @click="controlObj.isChecked = !controlObj.isChecked" />
 				</span>
 				<!-- 切换登录方式 -->
 				<span :style="{

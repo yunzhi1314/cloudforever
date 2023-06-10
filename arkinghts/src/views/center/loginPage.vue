@@ -19,7 +19,7 @@
               }"
             />
             <button
-              v-if="item.isCode"
+              v-if=" controlObj.isChange ? index == 3  :  controlObj.isCode && index ==1  "
               class="btn"
               @click="getMathCode('isMathCode')"
             >
@@ -143,7 +143,6 @@ export default {
         type: "text",
         placeholder: "输入验证码",
         zz: /^\d{4}$/,
-        isCode: true,
         use: "验证码",
       },
     ]);
@@ -160,30 +159,22 @@ export default {
       loginArr.splice(2, 2);
     }
 
-    let obj = {
-      value: "",
-      isShow: false,
-      tip: "*验证码格式不正确",
-      tip1: "*验证码不能为空",
-      type: "text",
-      placeholder: "输入验证码",
-      zz: /^\d{4}$/,
-      isCode: true,
-    };
-    let obj1 = {
-      value: "",
-      isShow: false,
-      tip: "*请确认密码",
-      tip1: "*两次输入的密码不一致",
-      type: "password",
-      placeholder: "请确认密码",
-      use: "确认密码",
-    };
+    
+    let obj =  {
+        value: "",
+        isShow: false,
+        tip: "*密码格式不正确",
+        tip1: "*密码不能为空",
+        type: "password",
+        placeholder: "8-16位数字、字母、常用字符",
+        zz: /^\w{8,16}$/,
+        use: "密码",
+      }
     // 点击切换密码或短信验证码登录
     function codeLogin() {
       controlObj.isCode = !controlObj.isCode;
       if (!controlObj.isChange) {
-        controlObj.isCode ? loginArr.splice(1,1,obj1) : loginArr.splice(1,1,obj)
+        controlObj.isCode ? loginArr.splice(1,1,newArr[1]) : loginArr.splice(1,1,obj)
       }
     }
     watcher(loginArr); //调用监视函数监视账密框

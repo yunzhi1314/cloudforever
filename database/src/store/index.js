@@ -8,6 +8,17 @@ export default createStore({
       storage:sessionStorage,
       reducer(state){
         let obj = {
+          menuList:state.database.menuList,
+          delRoutes:state.database.delRoutes
+        }
+        return isStore(state,'menuList','isMenuList',obj,sessionStorage)
+      },
+      key:'menuList'
+    }),
+    createPersistedState({
+      storage:sessionStorage,
+      reducer(state){
+        let obj = {
           expMedicals:state.database.expMedicals
         }
         return isStore(state,'expMedicals','isExpMedicals',obj,sessionStorage)
@@ -24,11 +35,25 @@ export default createStore({
       },
       key:'basicMedical'
     }),
+    createPersistedState({
+      storage:sessionStorage,
+      reducer(state){
+        let obj = {
+          naweiCompany:state.database.naweiCompany
+        }
+        return isStore(state,'naweiCompany','isNaweiCompany',obj,sessionStorage)
+      },
+      key:'naweiCompany'
+    }),
 
   ],
   state: {
     control:{
-isExpMedicals:false
+      isExpMedicals:false,
+      isBasicMedical:false,
+      isNaweiCompany:false,
+//存储路由
+isMenuList:false
     }
   },
   getters: {

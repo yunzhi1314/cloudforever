@@ -9,7 +9,7 @@ const routes = [
 			{
 				path: "home",
 				name: "homePage",
-				component: () => import("@/views/database/homePage"),
+				component: () => import("@/views/database/home/homePage"),
 			},
 			{
 				path:"menu",
@@ -19,7 +19,6 @@ const routes = [
 		]
 	},
 
-	
 ];
 
 const router = createRouter({

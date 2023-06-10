@@ -29,16 +29,66 @@
         }
     }
     main{
-        margin-top: 4vh;
+        margin-top: 3vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
         .expMedicals{
-            width: 56vw;
+            width: 52vw;
             height: 60vh;
             padding: 1vw;
+        }
+        .basicMedical{
+            height: 60vh;
+            flex: 1;
+            margin-left: 2vw;
+            
+        }
+    }
+    footer{
+        margin-top: 3vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .navTools{
+            height: 65vh;
+            width: 30vw;
+            padding: 1vw;
+            div{
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                section{
+                    background-color: #F5F5FF;
+                    height: 18vh;
+                    margin-top: 1.5vh;
+                    width: 21%;
+                    font-size: 14px;
+                    border-radius: 5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    span:first-child{
+                        font-size: 13px;
+                    }
+                    svg,span{
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+        .naweiCompany{
+            height: 65vh;
+            margin-left: 2vw;
+            flex: 1;
         }
     }
 }
 .hoverStyle{
     transition: all 0.25s;
+    border-radius: 5px;
 }
 .hoverStyle:hover{
     box-shadow: 0 0 1px 1px #eee,

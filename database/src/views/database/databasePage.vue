@@ -1,47 +1,52 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside :width="!isCollapse ? '12vw' : '4vw'" :style="{
-        transition: 'all 0.15s 0s linear',
-        backgroundColor: '#545C64',
-      }">
-        <el-menu default-active="2" background-color="#545C64" text-color="#fff" style="border: none"
-          class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
-          <el-sub-menu index="1">
-            <template #title>
-              <el-icon>
-                <location />
-              </el-icon>
-              <span>Navigator One</span>
-            </template>
-            <el-menu-item-group>
-              <el-menu-item index="1-1">item one</el-menu-item>
-              <el-menu-item index="1-2">item two</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="Group Two">
-              <el-menu-item index="1-3">item three</el-menu-item>
-            </el-menu-item-group>
-            <el-sub-menu index="1-4">
-              <template #title><span>item four</span></template>
-              <el-menu-item index="1-4-1">item one</el-menu-item>
-            </el-sub-menu>
-          </el-sub-menu>
-          <el-menu-item index="2">
-            <el-icon><icon-menu /></el-icon>
-            <template #title>Navigator Two</template>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <el-icon>
-              <document />
-            </el-icon>
-            <template #title>Navigator Three</template>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <el-icon>
-              <setting />
-            </el-icon>
-            <template #title>Navigator Four</template>
-          </el-menu-item>
+      <el-aside
+        :width="!isCollapse ? '15vw' : '4vw'"
+        :style="{
+          transition: 'all 0.15s 0s linear',
+          backgroundColor: '#545C64',
+        }"
+      >
+        <el-menu
+          default-active="0"
+          background-color="#545C64"
+          text-color="#fff"
+          style="border: none"
+          class="el-menu-vertical-demo"
+          :collapse="isCollapse"
+          @open="handleOpen"
+          @close="handleClose"
+        >
+        <el-menu-item
+                    v-for="(item,index) in menuList" 
+                    :key="index"
+                    @click="toPage(index)"
+                    v-show="!item.meta.isIframe"
+                    :index="index.toString()"
+                    >
+                    {{ item.meta.title }}
+                </el-menu-item>
+                <el-sub-menu 
+                v-for="(item, index) in menuList" 
+                :key="index"
+                :index="index.toString()"
+                v-show="item.meta.isIframe"
+                >
+                <template #title>
+                    <el-icon><Setting /></el-icon>
+              <span> {{ item.meta.title }}</span>
+                </template>
+                <el-menu-item 
+                v-for="(item2, index2) in item.children" 
+                :key="index +'' + index2"
+                :index="index.toString() + '-' + index2.toString()"
+                v-show='!item2.meta.isIframe'
+                @click="toPage(index, index2)"
+                 >
+                {{ item2.meta.title }}
+                </el-menu-item>
+                </el-sub-menu>      
         </el-menu>
       </el-aside>
       <el-container>
@@ -99,7 +104,7 @@
           </div>
         </el-header>
         <!-- 内容 -->
-        <el-main>
+        <el-main style="background-color:rgb(248,248,248);">
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -109,19 +114,22 @@
 
 <script>
 // import { onBeforeMount } from 'vue';
-import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { layoutMenu } from "@/api/database/layout";
+import { ref,toRefs} from "vue";
+import { useRoute,useRouter } from "vue-router";
 export default {
   name: "databasePage",
   setup() {
-    let isCollapse = ref(true);
-    let tabs = ref(['标签1', '标签2', '标签3', '标签4'])
-    const router = useRouter()
-    const route = useRoute()
-    let metaName = ref("")
-    let title = ref(route.meta.title)
+    let isCollapse = ref(false);
+    let tabs=ref(['标签1','标签2','标签3','标签4'])
+    const router =useRouter()
+    const route =useRoute()
+    let metaName=ref("")
+    let title=ref(route.meta.title)
+    
+       layoutMenu()
 
-    const removeTab = (targetName) => {
+    const removeTab=(targetName)=>{
       console.log(targetName);
       console.log(route);
 
@@ -132,19 +140,28 @@ export default {
       console.log(targetName);
     }
 
+    function toPage(){
+
+    }
+
     setTimeout(() => {//延时跳转到echart页面，缓冲
       router.push({
-        name: "menuPage",
+        name: "homePage",
+        params:{
+          userId:"672023,90507AM"
+        }
       });
     }, 1000);
 
     return {
       isCollapse,
+      ...toRefs(JSON.parse(sessionStorage.getItem("menuList"))),
       tabs,
       removeTab,
       route,
       router,
-      toTab, metaName, title
+      toTab,metaName,title, 
+      toPage,
     };
   },
 };

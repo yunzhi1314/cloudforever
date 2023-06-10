@@ -37,7 +37,7 @@
         font-size: 14px;
         text-align: center;">
             <span>上一页</span>
-            <span style="margin-left:1vw;margin-right: 0.5vw;">1</span>
+            <span style="margin-left:1vw;margin-right: 0.5vw;color:#409ecd">1</span>
             <span style="margin-left:0.5vw;margin-right: 1vw;">2</span>
             <span>下一页</span>
         </section>

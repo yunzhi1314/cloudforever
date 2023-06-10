@@ -35,6 +35,14 @@ export function centerMenu() {
             })
 
             console.log(router.getRoutes());
+            setTimeout(()=>{
+                router.push({
+                    name:"BaseMessage",
+                    params:{
+                        userId:JSON.parse(localStorage.getItem("userMsg")).userId
+                    }
+                })
+            }, 2000)
 
         }
     })

@@ -12,7 +12,8 @@ let  controlObj = reactive({
     isRegister:false, //是否是注册
     isLogin:false, //是否是登录,
     // 吐丝
-    isMsgTusi:false
+    isMsgTusi:false,
+    isCheck:false
 })
 
 export default controlObj

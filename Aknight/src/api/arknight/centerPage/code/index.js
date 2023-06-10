@@ -2,6 +2,7 @@ import url from "@/api/url";
 import { Request } from "@/hooks/request";
 import { reactive, toRef } from "vue";
 import store from "@/store";
+import router from "@/router";
 //获取图形验证码
 export function mathCode() {
     let dataList = reactive({
@@ -37,6 +38,14 @@ export function user(url, data, fn, isStore) {
             store.commit("changeMsg", dataList.datas)
             //存手机号
             store.commit("changeTel", dataList.datas.telephone);
+            if(isStore == "isLogin"){
+                // 有token，登录成功，页面跳转
+                if(store.state.personalCenter.token){
+                    router.push({
+                        name:"bufferPage"
+                    })
+                }
+            }
         } else {
             //发送短信
             //调用吐丝

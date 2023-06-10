@@ -53,6 +53,7 @@
 						type="checkbox"
 						style="width: 12px; vertical-align: middle; margin-right: 5px" 
 						v-model="controlObj.isChecked"
+						@click="controlObj.isChecked = !controlObj.isChecked"
 						/>
 				</span>
 				<!-- 切换登录方式 -->

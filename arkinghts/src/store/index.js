@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import createPersistedState from "vuex-persistedstate"
 import personalCenter from "./module/personalCenter"
-import { isStore } from '@/hooks/store'
+import { isStore } from '@/hooks/personalCenter/store'
 
 export default createStore({
   plugins: [

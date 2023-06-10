@@ -96,10 +96,17 @@ import loginCSS from "@/public/login.scss";
 import { reactive,provide } from "vue";
 import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
 import controlObj from "@/hooks/personalCenter/control";
-import { getMathCode, againGetMathCode,cancel } from "@/hooks/personalCenter/code"
-import svg from '@/hooks/personalCenter/code'
-import { telCode } from "@/api/telCode"// 获取短信验证码请求的API
-import MessagePage from "@/components/messagePage.vue";
+import {
+  getMathCode,
+  againGetMathCode,
+  cancel,
+} from "@/hooks/personalCenter/code";
+import svg from "@/hooks/personalCenter/code";
+import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
+import messagePage from "@/components/messagePage.vue";
+import { Request } from "@/hooks/personalCenter/request";
+import url from '@/api/url'
+import store from "@/store";
 
 export default {
   name: "loginPage",
@@ -208,8 +215,9 @@ export default {
       confirmPassword: "",
       code: "",
     });
-
+ 
     function loginOrRegister() {
+      let dataList = reactive({data:[]});
       if (controlObj.isChange) {
         console.log(11)
         loginArr.forEach((item, index) => {
@@ -219,41 +227,48 @@ export default {
             item.value
           );
         });
+     
         Request.postData(url.personalCenter.register,registerData)
         .then(res=>{
-           console.log(res)
+          dataList.data =  res.data
+          console.log(res.data)
+        }).catch(err =>{
+          console.log(err)
         })
- 
-        function loginOrRegister(){
-           if(controlObj.isChange){
-              loginArr.forEach((item,index)=>{
-                  Reflect.set(registerData,Reflect.ownKeys(registerData)[index],item.value)
-              })
-              console.log(registerData)
-           }
-        }
 
-        return {
-            loginCSS,
-            // 登录数组渲染
-            loginArr,
-            changeRegister,
-            changeLogin,
-            controlObj,
-            getMathCode,
-            svg,
-            againGetMathCode,
-            // 取消遮罩层
-            cancel,
-            // 遮罩层的确认按钮
-            confirm,
-            // 发送短信传送的数据
-            useInfo,
-            loginOrRegister,//点击注册或登录按钮
-            codeLogin,// 点击切换密码或短信验证码登录
-        };
-    },
-    components: { MessagePage }
+        setTimeout(()=>{
+          store.commit('personalCenter/changeUse',dataList.data) 
+        store.commit('changeStore','isRegister')
+        },1000)
+       
+       
+      }
+    }
+
+    let userId = JSON.parse( localStorage.getItem('user')).userId
+
+    console.log(userId)
+    return {
+      loginCSS,
+      // 登录数组渲染
+      loginArr,
+      changeRegister,
+      changeLogin,
+      controlObj,
+      getMathCode,
+      svg,
+      againGetMathCode,
+      // 取消遮罩层
+      cancel,
+      // 遮罩层的确认按钮
+      confirm,
+      // 发送短信传送的数据
+      useInfo,
+      loginOrRegister, //点击注册或登录按钮
+      codeLogin, // 点击切换密码或短信验证码登录
+    };
+  },
+  components: { messagePage },
 };
 </script>
 

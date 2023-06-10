@@ -8,14 +8,14 @@ export default createStore({
     createPersistedState({
       storage: window.localStorage,
       reducer(state) {
-        let user = {
+        let registerObj = {
           ID: state.personalCenter.ID,
           UID: state.personalCenter.UID,
           email: state.personalCenter.email,
           fullName: state.personalCenter.fullName,
           userId:state.personalCenter.userId
         }
-        return isStore(state,"user","isRegister",user,localStorage)
+        return isStore(state,"user","isRegister",registerObj,localStorage)
       },
       key: "user"
     }),

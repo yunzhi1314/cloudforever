@@ -74,18 +74,15 @@
         </section>
     </div>
   </dialogPage>
-
-  <messagePage></messagePage>
 </template>
 
 <script>
 import loginCSS from "@/public/login.scss";
-import { reactive, provide } from "vue";
-import controlObj from "@/hooks/personalCenter/control"; //全局状态按钮开关函数
-import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
-import { getMathCode,againGetMathCode } from "@/hooks/personalCenter/code";
-import svg from '@/hooks/personalCenter/code'
-import MessagePage from "@/components/messagePage.vue";
+import { reactive } from "vue";
+<<<<<<<<< Temporary merge branch 1
+import controlsObj from "@/hooks/personalCenter/controls";
+import { getMathcode } from "@/hooks/personalCenter/code"
+
 export default {
     name: "loginPage",
     setup() {

@@ -11,6 +11,7 @@ let  controlObj = reactive({
     isCode:false,
     isRegister:false, //是否是注册
     isLogin:false, //是否是登录
+    isPlay:false,//是否动画播放
 })
 
 export default controlObj

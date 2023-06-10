@@ -13,6 +13,62 @@
     "loginCenter"
     "loginBottom";
     padding:0 2vw;
+
+    // 注册框转换的动画效果
+    @keyframes register {
+        0%{
+            height: 45Vh;
+            transform: rotateY(0deg);
+        }
+        20%{
+            height: 47Vh;
+            transform: rotateY(20deg);
+        }
+        45%{
+            height: 50vh;
+            transform: rotateY(100deg);
+        }
+        60%{
+            height: 53vh;
+            transform: rotateY(120deg); 
+        }
+        98%{
+            height: 55vh;
+            transform: rotateY(180deg);
+        }
+        100%{
+            height: 55vh;
+            transform: rotateY(0deg);
+ 
+        }
+    }
+    // 登录框转换的动画效果
+    @keyframes login {
+        0%{
+            height: 55vh;
+            transform: rotateY(0deg);
+        }
+        20%{
+            height: 51Vh;
+            transform: rotateY(90deg);
+        }
+        45%{
+            height: 48vh;
+            transform: rotateY(140deg);
+        }
+        60%{
+            height: 46vh;
+            transform: rotateY(160deg); 
+        }
+        98%{
+            height: 45Vh;
+            transform: rotateY(180deg);
+        }
+        100%{
+            height: 45Vh;
+            transform: rotateY(0deg);
+        }
+    }
 }
 // 登录顶部
 .login>section:nth-child(1){
@@ -121,9 +177,7 @@
 .change>span:nth-child(1){
     color: #158FC5;
     font-size: 1.3rem;
-    
 }
-
 // 这罩层样式
 .dialog{
     width: 26vw;
@@ -158,3 +212,4 @@
         }
     }
 }
+

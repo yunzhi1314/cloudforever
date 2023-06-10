@@ -51,7 +51,7 @@
                         <el-form-item :label="item.label" :prop="item.prop" style="width:100%" v-if="item.label!= '公司名称'">
                             <el-input v-model="msgObj[item.prop]"></el-input>
                         </el-form-item>
-                        <el-form-item label="id" style="flex: 3;" v-if="item.label == '公司名称'">
+                        <el-form-item label="药物编号" style="flex: 3;" v-if="item.label == '公司名称'">
                             <el-input v-model="msgObj.id" disabled="true"></el-input>
                         </el-form-item>
                     </section>

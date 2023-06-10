@@ -1,6 +1,6 @@
 <template>
     <div class="common-layout">
-        <router-link :to="{ name: '',params}"></router-link>
+        <router-link :to="{ name: '', params }"></router-link>
         <el-container>
             <el-aside :width="!isScollape ? '12vw' : '4vw'" :style="{ transition: 'all 0.25s 0s linear', }">
                 <el-menu background-color="#545C64" text-color="#fff" active-text-color="#409EFF"
@@ -44,7 +44,7 @@
                             <el-breadcrumb separator-class="/">
                                 <el-breadcrumb-item :to="{ name: 'homePage', params: { userId } }">首页</el-breadcrumb-item>
                                 <el-breadcrumb-item v-show="route.meta.isHide"></el-breadcrumb-item>
-                                <el-breadcrumb-item v-show="route.meta.isHide">{{route.meta.title }}</el-breadcrumb-item>
+                                <el-breadcrumb-item v-show="route.meta.isHide">{{ route.meta.title }}</el-breadcrumb-item>
                             </el-breadcrumb>
                         </el-menu-item>
                         <!-- 间隙 -->
@@ -84,7 +84,7 @@
                         </el-sub-menu>
                     </el-menu>
                     <el-tabs class="demo-tabs" type="card">
-                      <el-tab-pane key="1" tab=""></el-tab-pane>
+                        <el-tab-pane key="1" tab=""></el-tab-pane>
                     </el-tabs>
                 </el-header>
                 <el-main>
@@ -96,7 +96,7 @@
 </template>
   
 <script>
-import { reactive, ref, toRefs,onUpdated } from "vue";
+import { reactive, ref, toRefs, onUpdated } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { layoutRoutes } from '@/api/database/layoutRoute/getRoutes'
 export default {
@@ -109,44 +109,51 @@ export default {
         let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu) //获取存入vuex的路由
         // let tabs = ref([]) // 保存tab
 
-        onUpdated(()=> {
+        onUpdated(() => {
             let newStr = route.fullPath
-            let new2str = newStr.slice(0,route.fullPath.indexOf('/'))
+            let new2str = newStr.slice(0, route.fullPath.indexOf('/'))
             console.log(new2str)
         })
 
 
-
         //点击菜单跳转路由
-        function toPage(i,j){
+        function toPage(i, j) {
             route.meta.isHide = false // 面包屑的显示与隐藏
             // 如果是子菜单
-            if(j == undefined){
+            if (j == undefined) {
                 router.push({
-                    name:pages[i].name,
-                    params:{
-                        userId:'11111'
+                    name: pages[i].name,
+                    params: {
+                        userId: '11111'
                     }
                 })
-            }else{
+            } else {
                 router.push({
-                    name:pages[i].children[j].name,
-                    params:{
-                        userId:'11111'
+                    name: pages[i].children[j].name,
+                    params: {
+                        userId: '11111'
                     }
                 })
             }
         }
         //面包屑的显示与隐藏
-        function toTab(i){
+        function toTab(i) {
             route.meta.isHide = true;
             router.span({
-                name:pages[i].name,
-                params:{
-                    userId:'11111'
+                name: pages[i].name,
+                params: {
+                    userId: '11111'
                 }
             })
         }
+        setTimeout(() => {
+            router.push({
+                name: "homePage",
+                params: {
+                    userId:'2233'
+                }
+            });
+        }, 1000);
         return {
             isScollape,
             toPage,

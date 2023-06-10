@@ -1,9 +1,14 @@
 import { createStore } from "vuex";
-
+import personalCenter from "./modules/personalCenter";
+import plugins from "@/hooks/persistedstate";
 export default createStore({
+	plugins: [
+		plugins(window.localStorage, "token", "isLogin", personalCenter.state.token)
+	],
 	state: {
 		msg: null, // 保存吐丝信息
-		countDown: 120, //验证码倒计时数字
+		countDown: 120, //验证码倒计时数字,
+		telephone: null,
 		control: {
 			// vuex,控制条件集合
 			isRegister: false, //注册条件，
@@ -22,8 +27,15 @@ export default createStore({
 			setTimeout(() => {
 				Reflect.set(state.control, name, false);
 			}, 500);
+		},
+		changeTel(state, data) {
+			state.telephone = data
 		}
 	},
 	actions: {},
-	modules: {}
+	namespaced: true,
+	modules: {
+		//个人中心子仓库
+		personalCenter,
+	}
 });

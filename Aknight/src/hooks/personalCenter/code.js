@@ -2,7 +2,9 @@ import { mathCode } from "@/api/arknight/centerPage/code"
 import { reactive, ref } from "vue"
 import controlObj from "@/hooks/personalCenter/controlObj";
 import { toest } from "../toset";
-import store from "@/store";
+import store from "@/store/index";
+import { user } from "@/api/arknight/centerPage/code";
+import url from "@/api/url";
 //获取验证码图片
 let svg = ref("")
 export const getMathCode = (name) => {
@@ -21,7 +23,7 @@ export const cancel = (name) => {
 
 //定时器以及短信发送的封装函数
 //name:遮罩层按钮名
-export function setCountDown(name) {
+export function setCountDown(name, arr) {
     //发短信请求所需要传的参数
     let getCode = reactive({
         telephone: "",
@@ -38,8 +40,12 @@ export function setCountDown(name) {
     })
     //确认发送短信并开启定时器
     const confirm = (timeName) => {
-        //请求发送短信
+        //发送短信所需要的手机号
+        getCode.telephone = arr.find(item => item.use == "手机号").value
 
+
+        //请求发送短信
+        user(url.centerPage.telCode, getCode, "changeMsg")
         // 开启定时器
         countDown.isOpen = true
         timerSeparate(timeName)

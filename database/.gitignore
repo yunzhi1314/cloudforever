@@ -1,2 +1,3 @@
 #添加了gitignore忽略node配置文件
 node_modules/
+yarn.lock/

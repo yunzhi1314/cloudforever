@@ -5,13 +5,13 @@ import prod from "../config/pro.env.js";
 // 环境的切换
 const env = process.env.NODE_ENV === "development" ? dev : prod;
 // 创建axios实例
-const instance = axios.create({
+const service = axios.create({
     baseURL: env.BASE_URL, // api的base_url
     timeout: 10000, // 请求超时时间
 })
 
 // 设置请求拦截器
-instance.interceptors.request.use(config => {
+service.interceptors.request.use(config => {
     // 在发送请求之前做些什么
     config.data = qs.parse(config.data); // 数据转换
     config.headers = { // 设置请求头
@@ -23,7 +23,7 @@ instance.interceptors.request.use(config => {
     return Promise.reject(err);
 })
 // 设置响应拦截器
-instance.interceptors.response.use(response => {
+service.interceptors.response.use(response => {
     // 对响应数据做点什么
     if (response.status === 200) {
         return Promise.resolve(response);
@@ -31,5 +31,5 @@ instance.interceptors.response.use(response => {
         return Promise.reject(response);
     }
 })
-//导出instance
-export default instance;
+//导出service
+export default service;

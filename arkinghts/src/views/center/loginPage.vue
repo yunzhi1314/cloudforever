@@ -23,13 +23,15 @@
               获取验证码
             </button>
           </p>
-          <p>{{ item.tip }}</p>
+          <p :style="{visibility: item.isShow ? 'visible':'hidden'}">
+            {{ !item.value == "" ? item.tip : item.tip1 }}
+          </p>
         </section>
       </div>
       <!-- 按钮区 -->
       <div>
         <section>使用短信验证码登录</section>
-        <button @click="loginOrRegister">{{ controlObj.isChange ? '注册' : '登录' }}</button>
+        <button>登录</button>
         <section>使用bilibili账号</section>
       </div>
     </div>
@@ -69,8 +71,6 @@
         </section>
     </div>
   </dialogPage>
-
-  <messagePage></messagePage>
 </template>
 
 <script>
@@ -127,7 +127,7 @@ export default {
         tip: "*验证码格式不正确",
         tip1: "*验证码不能为空",
         type: "text",
-        placeholder: "请输入验证码",
+        placeholder: "输入验证码",
         zz: /^\d{4}$/,
         isCode: true,
         use:"验证码"
@@ -146,6 +146,25 @@ export default {
       controlsObj.isChange = false;
       loginArr.splice(2, 2);
     }
+
+    // 点击验证码登录
+   function codeLogin(){
+    controlObj.isChange = false;
+    if(loginArr.length == 2){
+      loginArr.splice(1, 1,
+      {
+        value: "",
+        isShow: false,
+        tip: "*验证码格式不正确",
+        tip1: "*验证码不能为空",
+        type: "text",
+        placeholder: "输入验证码",
+        zz: /^\d{4}$/,
+        isCode: true,
+      },
+      );
+    }
+   }
 
     watcher(loginArr); //调用监视函数监视账密框
 
@@ -188,12 +207,6 @@ export default {
       getMathCode, //获取图形验证码函数
       svg,//图形验证码svg工具
       againGetMathCode,//点击svg图片再次发起请求，更新图形验证码
-       // 取消遮罩层
-       cancel,
-      // 遮罩层的确认按钮
-      confirm,
-      // 发送短信传送的数据
-      useInfo
     };
   }
 };

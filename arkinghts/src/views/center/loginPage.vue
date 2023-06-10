@@ -11,7 +11,7 @@
         <section v-for="(item, index) in loginArr" :key="index">
           <p>
             <input
-              :type="item.text"
+              :type="item.type"
               :placeholder="item.placeholder"
               v-model="item.value"
               :style="{
@@ -101,7 +101,9 @@
       </section>
     </div>
   </dialogPage>
-  <messagePage></messagePage>
+  <!-- 吐丝提示 -->
+  <messagePage v-if="controlObj.isMsgTusi"></messagePage>
+
 </template>
 
 <script>
@@ -120,6 +122,8 @@ import messagePage from "@/components/messagePage.vue";
 import { Request } from "@/hooks/personalCenter/request";
 import url from '@/api/url'
 import store from "@/store";
+import Toest from "@/hooks/personalCenter/Toest"
+
 
 export default {
   name: "loginPage",
@@ -220,13 +224,18 @@ export default {
       let obj = loginArr.find((item) => item.use == "手机号");
       useInfo.telephone = obj.value;
       telCode(useInfo);
+      Toest(controlObj)
     }
-
     let registerData = reactive({
       telephone: "",
       password: "",
       confirmPassword: "",
       code: "",
+    });
+      // 登录需要的数据
+      let loginData = reactive({
+      telephone: "",
+      password: "",
     });
 
  
@@ -241,7 +250,6 @@ export default {
             item.value
           );
         });
-     
         Request.postData(url.personalCenter.register,registerData)
         .then(res=>{
           dataList.data =  res.data
@@ -255,7 +263,22 @@ export default {
         store.commit('changeStore','isRegister')
         },1000)
        
-       
+         
+        Toest(controlObj)
+      }else{
+        loginArr.forEach((item,index)=>{
+          Reflect.set(
+            loginData,
+            Reflect.ownKeys(loginData)[index],
+            item.value
+          );
+        })
+        Request.postData(url.personalCenter.login, loginData).then(
+          (res) => {
+            console.log(res);
+          }
+        ); 
+        Toest(controlObj)
       }
     }
 
@@ -280,6 +303,7 @@ export default {
       useInfo,
       loginOrRegister, //点击注册或登录按钮
       codeLogin, // 点击切换密码或短信验证码登录
+      Toest
     };
   },
   components: { messagePage },

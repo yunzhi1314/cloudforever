@@ -1,17 +1,19 @@
 <template>
     <div class="tosi">
-       <slot></slot>
+    <!-- :style="{backgroundColor: status ==1 ?'#ff0000':'#0CB751' }"> -->
+       <!-- {{status ==1 ? msg:message}} -->
     </div>
 </template>
 
 <script>
+import { reactive } from 'vue';
+
 export default {
     setup () {
-        
+        let {msg} = reactive(JSON.parse(localStorage.getItem(msg)))
 
         return {
-
-
+            ...msg
         }
     }
 }

@@ -168,6 +168,8 @@ export default {
     }
    }
 
+   console.log(codeLogin)
+
     watcher(loginArr); //调用监视函数监视账密框
 
     provide("controlDialog", "isMathCode");
@@ -198,6 +200,12 @@ export default {
       getMathCode, //获取图形验证码函数
       svg,//图形验证码svg工具
       againGetMathCode,//点击svg图片再次发起请求，更新图形验证码
+      // 取消遮罩层
+      cancel,
+      // 遮罩层的确认按钮
+      confirm,
+      // 发送短信传送的数据
+      useInfo
     };
   },
 };

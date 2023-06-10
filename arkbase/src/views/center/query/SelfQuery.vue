@@ -39,7 +39,7 @@ export default {
   setup() {
     const router = useRouter();
     let result = getselfInquiries();
-
+    
     let routes = JSON.parse(
       sessionStorage.getItem("selfQuery")
     ).selfQueryRoutes;

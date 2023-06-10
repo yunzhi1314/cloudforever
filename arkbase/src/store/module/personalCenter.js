@@ -106,19 +106,17 @@ export default {
       ];
 
       data.items.forEach((item, index) => {
-        Reflect.set(routes[index], "meta", item.children);
+        Reflect.set(routes[index], "meta", item);
       });
 
       state.selfQuery = data;
       state.selfQueryRoutes = routes;
       
       routes = dealRoutes(routes, routes.length-1);
-      console.log(routes);
 
       routes.forEach((item) => {
         router.addRoute("centerPage",item);
       });
-      console.log(router.getRoutes())
 
     },
   },

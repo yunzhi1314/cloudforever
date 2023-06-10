@@ -1,0 +1,24 @@
+@keyframes flyIn{
+    from{
+        transform: translateX(25px);
+        background-color: pink;
+        filter:opacity(0)
+    }
+    to{
+        transform: translateX(0px);
+        filter: opacity(1);
+        background-color: red;
+    }
+}
+
+.el-tabs {
+    height: 33px;
+  }
+  .flex-grow {
+    flex-grow: 1;
+  }
+  .el-menu-vertical-demo {
+    background-color: #545c64;
+    color: #fff;
+    height: 100vh;
+  }

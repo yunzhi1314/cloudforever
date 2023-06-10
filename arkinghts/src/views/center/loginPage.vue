@@ -26,6 +26,10 @@
               "
               class="btn"
               @click="getMathCode('isMathCode')"
+              :style='{
+                backgroundColor: controlObj.isDisable ? "#158FC5": "#797979"
+              }'
+              :disabled='controlObj.isDisable ? "":"" '
             >
               获取验证码
             </button>
@@ -94,6 +98,7 @@
   </dialogPage>
   <!-- 吐丝提示 -->
   <messagePage v-if="controlObj.isMsgTusi"></messagePage>
+
 </template>
 
 <script>
@@ -101,19 +106,14 @@ import loginCSS from "@/public/login.scss";
 import { reactive,provide } from "vue";
 import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
 import controlObj from "@/hooks/personalCenter/control";
-import {
-  getMathCode,
-  againGetMathCode,
-  cancel,
-} from "@/hooks/personalCenter/code";
+import { getMathCode,againGetMathCode,cancel,} from "@/hooks/personalCenter/code";
 import svg from "@/hooks/personalCenter/code";
 import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
-import messagePage from "@/components/messagePage.vue";
 import { Request } from "@/hooks/personalCenter/request";
 import url from "@/api/url";
 import store from "@/store";
-import { useRouter } from "vue-router";
-// import {Toest} from "@/hooks/personalCenter/Toest" //吐丝的函数
+import Toest from "@/hooks/personalCenter/Toest"
+
 
 export default {
   name: "loginPage",
@@ -218,46 +218,89 @@ export default {
       let obj = loginArr.find((item) => item.use == "手机号");
       useInfo.telephone = obj.value;
       telCode(useInfo);
-      // Toest(controlObj) //调用吐丝的函数
+      Toest(controlObj)
+    }
+    let registerData = reactive({
+      telephone: "",
+      password: "",
+      confirmPassword: "",
+      code: "",
+    });
+      // 登录需要的数据
+      let loginData = reactive({
+      telephone: "",
+      password: "",
+    });
+
+ 
+    function loginOrRegister() {
+      let dataList = reactive({data:[]});
+      if (controlObj.isChange) {
+        console.log(11)
+        loginArr.forEach((item, index) => {
+          Reflect.set(
+            registerData,
+            Reflect.ownKeys(registerData)[index],
+            item.value
+          );
+        });
+        Request.postData(url.personalCenter.register,registerData)
+        .then(res=>{
+          dataList.data =  res.data
+          console.log(res.data)
+        }).catch(err =>{
+          console.log(err)
+        })
+        setTimeout(()=>{
+          store.commit('personalCenter/changeUse',dataList.data) 
+        store.commit('changeStore','isRegister')
+        },1000)
+       
+         
+        Toest(controlObj)
+      }else{
+        loginArr.forEach((item,index)=>{
+          Reflect.set(
+            loginData,
+            Reflect.ownKeys(loginData)[index],
+            item.value
+          );
+        })
+        Request.postData(url.personalCenter.login, loginData).then(
+          (res) => {
+            console.log(res);
+          }
+        ); 
+        Toest(controlObj)
+      }
     }
 
-        let  registerData = reactive({
-           telephone:'',
-           password:'',
-           confirmPassword:'',
-           code:''
-        })
- 
-        function loginOrRegister(){
-           if(controlObj.isChange){
-              loginArr.forEach((item,index)=>{
-                  Reflect.set(registerData,Reflect.ownKeys(registerData)[index],item.value)
-              })
-              console.log(registerData)
-           }
-        }
+    let userId = JSON.parse( localStorage.getItem('user')).userId
 
-        return {
-            loginCSS,
-            // 登录数组渲染
-            loginArr,
-            changeRegister,
-            changeLogin,
-            controlObj,
-            getMathCode,
-            svg,
-            againGetMathCode,
-            // 取消遮罩层
-            cancel,
-            // 遮罩层的确认按钮
-            confirm,
-            // 发送短信传送的数据
-            useInfo,
-            loginOrRegister,//点击注册或登录按钮
-            codeLogin,// 点击切换密码或短信验证码登录
-        };
-    },
-    components: { MessagePage }
+    console.log(userId)
+
+    return {
+      loginCSS,
+      // 登录数组渲染
+      loginArr,
+      changeRegister,
+      changeLogin,
+      controlObj,
+      getMathCode,
+      svg,
+      againGetMathCode,
+      // 取消遮罩层
+      cancel,
+      // 遮罩层的确认按钮
+      confirm,
+      // 发送短信传送的数据
+      useInfo,
+      loginOrRegister, //点击注册或登录按钮
+      codeLogin, // 点击切换密码或短信验证码登录
+      Toest
+    };
+  },
+  components: { messagePage },
 };
 </script>
 

@@ -83,5 +83,8 @@ export function userPass(arr, urlName, methodName, fn) {
 		let method = fn([methodName])[methodName]
 
 		user(url.centerPage[urlName], target, method, isstore);
+		// 调用吐丝
+		toest(controlObj);
+
 	}
 }

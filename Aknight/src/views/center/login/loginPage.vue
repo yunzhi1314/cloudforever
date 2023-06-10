@@ -101,6 +101,9 @@
 			</div>
 		</div>
 	</dialogPage>
+	<!-- 路由视图，显示子路由 -->
+	<router-view></router-view>
+
 </template>
 
 <script>

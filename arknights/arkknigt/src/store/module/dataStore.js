@@ -4,7 +4,8 @@ export default{
         return{
             menuList:null,
             menuRoutes:null,
-            ExpMedical:null
+            ExpMedical:null,
+            basicMedical:null
         }
     },
     getters:{},
@@ -15,6 +16,9 @@ export default{
         },
         SAVE_EXP_MEDICAL(state,data){
             state.ExpMedical = data
+        },
+        SAVE_BASIC_MEDICAL(state,data){
+            state.basicMedical = data
         }
     },
     actions:{}

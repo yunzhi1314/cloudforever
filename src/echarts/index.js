@@ -136,7 +136,7 @@ export async function basicMedical(dom){
 			name: '药物数量占比',
 			data:sources,
 			type:'pie',
-			radius:['65%','55%'],
+			radius:['55%','45%'],
 			left:-100,
 			bottom:-50,
 			avoidLabelOverlap:true,
@@ -176,6 +176,7 @@ export async function naweiCompany(dom){
 		growth_rate01:item.growth_rate01
 	}))
 	console.log(source);
+
 	let echart = echarts.init(dom)
 	let option = {
 		title:{text:'各公司药物药物种类数量占比',top:15,left:10},

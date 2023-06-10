@@ -57,6 +57,6 @@ function dealChildrenPaths(routes, newArr, name, index2 = 0) {
             return dealChildrenPaths(routes, newArr, name, index2 + 1);
         }
     } else {
-        return [...new Set(newArr)];
+        return [...new Set(newArr) ];
     }
 }

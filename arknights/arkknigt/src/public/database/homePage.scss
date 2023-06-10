@@ -1,11 +1,20 @@
-
-.plans{
-    height: 85vh;
-    width: 83vw;
+.plans {
+    width: 23vw;
+    height: 15vh;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     background-color: #fff;
-    box-shadow: 1px 1px 0 #aaa;
-    padding: 1vw;
-    .search{
-        width: 50vw;
-    }
-   }
+}
+
+#homePage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.common_place {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

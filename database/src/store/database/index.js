@@ -6,7 +6,8 @@ export default {
             expMedicals:null,
             basicMedical:null,
             naweiCompany:null,
-            delRoutes:null
+            delRoutes:null,
+            systemUser:null,
         }
     },
     getters: {
@@ -19,6 +20,9 @@ export default {
         SAVE_MenuList(state,data){
             state.delRoutes=data.delRoutes
             state.menuList=data.menuList
+        },
+        changeSystemUser(state,data){
+            state.systemUser=data
         }
     },
     actions: {

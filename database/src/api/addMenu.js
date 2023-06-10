@@ -32,7 +32,7 @@ export function deleMenu(url,data){
     })
     Request.deleteData(url,{
         params:{
-            id:data.id
+            id:data
         }
     }).then(res=>{
         dataList= {...res.data}

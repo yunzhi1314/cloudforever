@@ -34,7 +34,7 @@
       <!-- 按钮区 -->
       <div>
         <section>使用短信验证码登录</section>
-        <button @click="loginOrRigerst">{{ controlObj.isChange ? '注册' : '登录' }}</button>
+        <button @click="loginOrRegister">{{ controlObj.isChange ? '注册' : '登录' }}</button>
         <section>使用bilibili账号</section>
       </div>
     </div>
@@ -74,6 +74,8 @@
         </section>
     </div>
   </dialogPage>
+
+  <messagePage></messagePage>
 </template>
 
 <script>
@@ -83,82 +85,92 @@ import controlObj from "@/hooks/personalCenter/control"; //全局状态按钮开
 import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
 import { getMathCode,againGetMathCode } from "@/hooks/personalCenter/code";
 import svg from '@/hooks/personalCenter/code'
+import MessagePage from "@/components/messagePage.vue";
 export default {
-  name: "loginPage",
-  setup() {
-    // 登录数组
-    let loginArr = reactive([
-      {
-        value: "",
-        isShow: false,
-        tip: "*账号格式不正确",
-        tip1: "*账号不能为空",
-        type: "tel",
-        placeholder: "请输入手机号",
-        zz: /^1{1}[3-9]{1}\d{9}$/,
-      },
-      {
-        value: "",
-        isShow: false,
-        tip: "*密码格式不正确",
-        tip1: "*密码不能为空",
-        type: "password",
-        placeholder: "8-16位数字、字母、常用字符",
-        zz: /^\w{8,16}$/,
-      },
-    ]);
-    // 注册页面增加数组
-    let newArr = reactive([
-      {
-        value: "",
-        isShow: false,
-        tip: "*请确认密码",
-        tip1: "*两次输入的密码不一致",
-        type: "password",
-        placeholder: "请确认密码",
-      },
-      {
-        value: "",
-        isShow: false,
-        tip: "*验证码格式不正确",
-        tip1: "*验证码不能为空",
-        type: "text",
-        placeholder: "请输入验证码",
-        zz: /^\d{4}$/,
-        isCode: true,
-      },
-    ]);
-
-    // 点击去注册页面
-    function changeRegister() {
-      controlObj.isChange = true;
-      if (loginArr.length < 4) {
-        loginArr.push(...newArr);
-      }
-    }
-    // 点击去登录页面
-    function changeLogin() {
-      controlObj.isChange = false;
-      loginArr.splice(2, 2);
-    }
-
-    watcher(loginArr); //调用监视函数监视账密框
-
-    provide("controlDialog", "isMathCode");
-
-
-    return {
-      loginCSS,
-      // 登录数组渲染
-      loginArr,
-      changeRegister, //点击去注册页面的按钮
-      changeLogin, //点击去登录页面的按钮
-      controlObj, //页面控制状态的按钮
-      getMathCode, //获取图形验证码函数
-      svg,//图形验证码svg工具
-      againGetMathCode,//点击svg图片再次发起请求，更新图形验证码
-    };
-  },
+    name: "loginPage",
+    setup() {
+        // 登录数组
+        let loginArr = reactive([
+            {
+                value: "",
+                isShow: false,
+                tip: "*账号格式不正确",
+                tip1: "*账号不能为空",
+                type: "tel",
+                placeholder: "请输入手机号",
+                zz: /^1{1}[3-9]{1}\d{9}$/,
+            },
+            {
+                value: "",
+                isShow: false,
+                tip: "*密码格式不正确",
+                tip1: "*密码不能为空",
+                type: "password",
+                placeholder: "8-16位数字、字母、常用字符",
+                zz: /^\w{8,16}$/,
+            },
+        ]);
+        // 注册页面增加数组
+        let newArr = reactive([
+            {
+                value: "",
+                isShow: false,
+                tip: "*请确认密码",
+                tip1: "*两次输入的密码不一致",
+                type: "password",
+                placeholder: "请确认密码",
+            },
+            {
+                value: "",
+                isShow: false,
+                tip: "*验证码格式不正确",
+                tip1: "*验证码不能为空",
+                type: "text",
+                placeholder: "请输入验证码",
+                zz: /^\d{4}$/,
+                isCode: true,
+            },
+        ]);
+        // 点击去注册页面
+        function changeRegister() {
+            controlObj.isChange = true;
+            if (loginArr.length < 4) {
+                loginArr.push(...newArr);
+            }
+        }
+        // 点击去登录页面
+        function changeLogin() {
+            controlObj.isChange = false;
+            loginArr.splice(2, 2);
+        }
+        watcher(loginArr); //调用监视函数监视账密框
+        provide("controlDialog", "isMathCode");
+        let data = reactive({
+            telephone: "",
+            password: "",
+            confirmPassword: "",
+            code: ""
+        });
+        function loginOrRegister() {
+            loginArr.forEach((item, index) => {
+                Reflect.set(data, Reflect.ownKeys(data)[index], item.value);
+            });
+            console.log(data);
+        }
+        return {
+            loginCSS,
+            // 登录数组渲染
+            loginArr,
+            changeRegister,
+            changeLogin,
+            controlObj,
+            getMathCode,
+            svg,
+            againGetMathCode,
+            loginOrRegister, //点击登录或注册按钮
+        };
+    },
+    components: { MessagePage }
 };
 </script>
 

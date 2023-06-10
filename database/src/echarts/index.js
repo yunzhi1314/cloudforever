@@ -41,7 +41,6 @@ export async function expMedicals(dom) {
 		title: { text: "各公司鳞癌非鳞癌使用情况" },
 		tooltip: {
 			formatter: function (params) {
-				console.log(params);
 				return `
 				<div class="label">
             <section><span>公司:</span> ${params.data.company}</section>

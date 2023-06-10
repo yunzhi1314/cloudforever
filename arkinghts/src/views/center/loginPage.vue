@@ -21,9 +21,9 @@
             <button
               v-if=" controlObj.isChange ? index == 3  :  controlObj.isCode && index ==1  "
               class="btn"
-              @click="getMathCode(controlObj, 'isMathCode')"
+              @click="getMathCode('isMathCode')"
             >
-             {{ controlObj.isChange ?  "获取验证码": ""  }}
+             获取验证码
             </button>
           </p>
           <p :style="{ visibility: item.isShow ? 'visible' : 'hidden' }">
@@ -45,7 +45,7 @@
             及</span>
           <span v-if="controlObj.isChange">《鹰角网络游戏个人信息保护政策》</span>
           </section>
-        <button>{{ controlObj.isChange ? "注册" : "登录" }}</button>
+        <button @click="loginOrRegister">{{ controlObj.isChange ? "注册" : "登录" }}</button>
         <section v-if="!controlObj.isChange">使用bilibili账号</section>
       </div>
     </div>
@@ -189,32 +189,21 @@ export default {
             telCode(useInfo);
         }
 
-    // 注册需要的数据
-    let registerData = reactive({
-      telephone: "",
-      password: "",
-      confirmPassword: "",
-      code: "",
-    });
-
-    // 登录或注册按钮函数
-    function loginOrRegister() {
-      if (controlObj.isChange) {
-        loginArr.forEach((item, index) => {
-          Reflect.set(
-            registerData,
-            Reflect.ownKeys(registerData)[index],
-            item.value
-          );
-        });
-     
-        Request.postData(url.personalCenter.register, registerData).then(
-          (res) => {
-            console.log(res);
-          }
-        );
-      }
-    }
+        let  registerData = reactive({
+           telephone:'',
+           password:'',
+           confirmPassword:'',
+           code:''
+        })
+ 
+        function loginOrRegister(){
+           if(controlObj.isChange){
+              loginArr.forEach((item,index)=>{
+                  Reflect.set(registerData,Reflect.ownKeys(registerData)[index],item.value)
+              })
+              console.log(registerData)
+           }
+        }
 
         return {
             loginCSS,

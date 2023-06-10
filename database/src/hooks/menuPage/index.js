@@ -4,16 +4,22 @@ import controlObj from "@/hooks/control";
 import { ref } from "vue";
 
 // 添加msgObj，rules
-export function getMsgObj(dataList,msgObj,rules){
+export function getMsgObj(dataList,msgObj,rules,requireTextArr,tableArr){
     Reflect.ownKeys(dataList).forEach(item=>{
         Reflect.set(msgObj,item,'')
     })
-    Reflect.ownKeys(msgObj).forEach(item => {
-    Reflect.set(rules, item, {
-        required: true,
-        message: `请输入${item}`,
-        trigger: 'blur',
-    })
+    Reflect.ownKeys(msgObj).forEach((item,index) => {
+        if(requireTextArr[index]!=''){
+            tableArr.push({
+                prop:item,
+                label:requireTextArr[index]
+            })
+            Reflect.set(rules, item, {
+                required: true,
+                message: `请输入${requireTextArr[index]}`,
+                trigger: 'blur',
+            })
+        }
 })
 }
 

@@ -24,6 +24,20 @@ export default createStore({
 			},
 			key: "msg",
 		}),
+		createPersistedState({
+			storage: window.localStorage,
+			reducer(state) {
+				let registerObj = {
+					userId: state.personalCenter.userId,
+					UID: state.personalCenter.UID,
+					ID: state.personalCenter.ID,
+					email: state.personalCenter.email,
+					fullName: state.personalCenter.fullName,
+				};
+				return isStore(state, "userMsg", "isRegister", registerObj, localStorage);
+			},
+			key: "userMsg",
+		}),
 
 	],
 	state: {

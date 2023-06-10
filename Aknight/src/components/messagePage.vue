@@ -22,9 +22,10 @@ export default {
             message: ""
         })
         if (msg != null && msg != 0) {
-            message.status = msg.msg.status
-            message.msg = msg.msg.msg
-            message.message = msg.msg.message
+            msg = msg.msg
+            message.status = msg.status
+            message.msg = msg.msg
+            message.message = msg.message
         }
         console.log(message);
         return {

@@ -93,6 +93,7 @@
           </el-menu>
           <div>
 
+            <!-- 标签渲染点击事件 -->
             <el-tabs v-model="title" type="card" class="demo-tabs" closable @tab-remove="removeTab" @tab-click="toTab">
 
               <!-- 这里遍历标签面包屑 -->
@@ -115,7 +116,7 @@
 <script>
 // import { onBeforeMount } from 'vue';
 import { layoutMenu } from "@/api/database/layout";
-import { ref,toRefs} from "vue";
+import { ref,toRefs,reactive,onUpdated} from "vue";
 import { useRoute,useRouter } from "vue-router";
 export default {
   name: "databasePage",
@@ -126,29 +127,72 @@ export default {
     const route =useRoute()
     let metaName=ref("")
     let title=ref(route.meta.title)
+    let isPlay=ref(false)
+    let userId="672023,90507AM"
     
-       layoutMenu()
+    layoutMenu()
+    let pages=reactive(JSON.parse(sessionStorage.getItem('menuList'))).menuList
 
     const removeTab=(targetName)=>{
       console.log(targetName);
       console.log(route);
+        }
 
-    }
+   function toTab(tabName){
+    // 为了控制一级和二级菜单的面包屑是否显示/显示的是哪一个菜单名
+    route.meta.isHide = false;
+   console.log(tabName);
+      // 控制面包屑的动画播放效果
+      isPlay.value = true;
+      tabs.value.forEach(item =>{//点击的是哪一个就跳转到哪一个
+        if(item.title == tabName.paneName){
+            router.push({
+              name:item.routeName,
+              params:{
+                userId
+              }
+            })
+        }
+      })
+   }
 
-    const toTab = (targetName) => {
-      console.log('totap');
-      console.log(targetName);
-    }
 
-    function toPage(){
+    function toPage(index,index2){
+        // 控制一级和二级菜单的面包屑是否显示/显示的是哪一个菜单名
+      route.meta.isHide = false;
+      // 控制面包屑
+      isPlay.value = true;
 
-    }
+        if(index2 == undefined){//点击的不是二级路由
+          console.log(pages[index].name);
+            router.push({
+                name:pages[index].name,
+                params:{
+                  userId:"672023,90507AM"
+                }
+            })
+        }else{
+          //index2存在，说明点击了子菜单，跳转到对应子路由
+            router.push({
+          name: pages[index].children[index2].name,
+          params: {
+            userId:"672023,90507AM"
+          },
+        });
+        }
+   }
+
+   onUpdated(()=>{
+    console.log(title);
+
+   })
+
 
     setTimeout(() => {//延时跳转到echart页面，缓冲
       router.push({
         name: "homePage",
         params:{
-          userId:"672023,90507AM"
+          userId,
         }
       });
     }, 1000);
@@ -162,6 +206,7 @@ export default {
       router,
       toTab,metaName,title, 
       toPage,
+      
     };
   },
 };

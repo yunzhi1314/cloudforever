@@ -33,8 +33,6 @@ export function setCountDown(name, arr) {
         //倒计时数字
         numberLogin: store.state.countDown,
         numberRegister: store.state.countDown,
-        numberLogin: store.state.countDown,
-        numberRegister: store.state.countDown,
         //倒计时开关
         isOpen: false,
         //倒计时定时器集合

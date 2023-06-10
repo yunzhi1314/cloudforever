@@ -7,7 +7,7 @@ let  controlObj = reactive({
     //遮罩層的开关判断函数
     isDialog:{
        isMathCode:false,//点击获取验证码控制遮罩层的显示
-    }
+    },
 })
 
 export default controlObj

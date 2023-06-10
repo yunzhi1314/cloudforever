@@ -1,10 +1,10 @@
 <template>
-    <div> 
+    <div>
         <section class="tusi" :style='{
-        backgroundColor:status == 1? "red" : "green"
-    }'>
+            backgroundColor: status == 1 ? "FE1610" : "#0CB751"
+        }'>
 
-        </section>  
+        </section>
 
     </div>
 </template>
@@ -12,9 +12,8 @@
 <script>
 import controlObj from '@/hooks/personalCenter/controlObj'
 export default {
-    name:"messagePage",
-    setup () {
-        
+    name: "messagePage",
+    setup() {
 
         return {
             controlObj,
@@ -24,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tusi{
+.tusi {
     width: 200px;
     height: 50px;
     background-color: green;
@@ -34,8 +33,7 @@ export default {
     top: 12vh;
     color: #fff;
     text-align: center;
-    line-height: 50px; 
+    line-height: 50px;
 
 }
-
 </style>

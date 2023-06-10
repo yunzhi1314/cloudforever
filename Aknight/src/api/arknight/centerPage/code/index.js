@@ -33,12 +33,14 @@ export function user(url, data, changeFn, fn, isStore) {
             //开启存储开关(登录注册需要)
             store.commit("changeStore", isStore)
             //调用吐丝
+            store.commit("changeStore", "isMsg")
             store.commit(changeFn, dataList.datas)
             //存手机号
             store.commit("changeTel", dataList.datas.telephone);
         } else {
             //发送短信
             //调用吐丝
+            store.commit("changeStore", "isMsg")
             store.commit(changeFn, dataList.datas)
         }
     });

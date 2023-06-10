@@ -15,13 +15,14 @@ import { reactive } from 'vue'
 export default {
     name: "messagePage",
     setup() {
-        let msg = JSON.parse(sessionStorage.getItem("msg")).msg
+        let msg = JSON.parse(sessionStorage.getItem("msg"))
         let message = reactive({
             status: "",
             msg: "",
             message: ""
         })
         if (msg != null && msg != 0) {
+            msg = msg.msg
             message.status = msg.status
             message.msg = msg.msg
             message.message = msg.message

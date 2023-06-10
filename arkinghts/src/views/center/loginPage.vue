@@ -26,16 +26,27 @@
               获取验证码
             </button>
           </p>
-          <p v-show="item.isShow">
+          <p :style="{visibility: item.isShow ? 'visible':'hidden'}">
             {{ !item.value == "" ? item.tip : item.tip1 }}
           </p>
         </section>
       </div>
       <!-- 按钮区 -->
       <div>
-        <section>使用短信验证码登录</section>
-        <button>登录</button>
-        <section>使用bilibili账号</section>
+        <section>
+          <input type="checkbox" v-if="controlObj.isChange" 
+          style="width:1vw;height: 2vh;">
+          <span @click="codeLogin"
+          :style="{color:controlObj.isChange ? '#000':''}"
+          >{{ controlObj.isChange ? "已阅读并同意" : "使用短信验证码登录" }}</span>
+          <span v-if="controlObj.isChange">《鹰角网络用户注册协议》</span>
+          <br>
+          <span v-if="controlObj.isChange" style="color:#000">
+            及</span>
+          <span v-if="controlObj.isChange">《鹰角网络游戏个人信息保护政策》</span>
+          </section>
+        <button>{{ controlObj.isChange ? "注册" : "登录" }}</button>
+        <section v-if="!controlObj.isChange">使用bilibili账号</section>
       </div>
     </div>
 
@@ -73,8 +84,11 @@
           <button @click="cancel">取消</button>
         </section>
     </div>
-        
   </dialogPage>
+  
+
+
+
 </template>
 
 <script>
@@ -124,7 +138,7 @@ export default {
         tip: "*验证码格式不正确",
         tip1: "*验证码不能为空",
         type: "text",
-        placeholder: "请输入验证码",
+        placeholder: "输入验证码",
         zz: /^\d{4}$/,
         isCode: true,
       },
@@ -143,6 +157,25 @@ export default {
       loginArr.splice(2, 2);
     }
 
+    // 点击验证码登录
+   function codeLogin(){
+    controlObj.isChange = false;
+    if(loginArr.length == 2){
+      loginArr.splice(1, 1,
+      {
+        value: "",
+        isShow: false,
+        tip: "*验证码格式不正确",
+        tip1: "*验证码不能为空",
+        type: "text",
+        placeholder: "输入验证码",
+        zz: /^\d{4}$/,
+        isCode: true,
+      },
+      );
+    }
+   }
+
     watcher(loginArr); //调用监视函数监视账密框
 
     provide("controlDialog", "isMathCode");
@@ -156,6 +189,7 @@ export default {
       getMathCode, //获取图形验证码函数
       svg,//图形验证码svg工具
       againGetMathCode,//点击svg图片再次发起请求，更新图形验证码
+      codeLogin
     };
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <teleport to="body">
     <div
-      class="dialog"
+      class="dialogs"
       v-show="controlObj.isDialog[controlDialog]"
       @click="cancel"
     >
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dialog {
+.dialogs {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);

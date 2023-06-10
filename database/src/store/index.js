@@ -49,11 +49,15 @@ export default createStore({
   ],
   state: {
     control:{
+      // 存储ExpMedicals表格
       isExpMedicals:false,
+      // 存储BasicMedical表格
       isBasicMedical:false,
+      // 存储NaweiCompany表格
       isNaweiCompany:false,
-//存储路由
-isMenuList:false
+      // 存储纳威公司利润表格
+      //存储路由
+      isMenuList:false
     }
   },
   getters: {

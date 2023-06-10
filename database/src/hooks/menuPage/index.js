@@ -5,10 +5,11 @@ import { ref } from "vue";
 
 // 添加msgObj，rules
 export function getMsgObj(dataList,msgObj,rules,requireTextArr,tableArr){
+    console.log(Reflect.ownKeys(dataList));
     Reflect.ownKeys(dataList).forEach(item=>{
         Reflect.set(msgObj,item,'')
     })
-    Reflect.ownKeys(msgObj).forEach((item,index) => {
+    Reflect.ownKeys(dataList).forEach((item,index) => {
         if(requireTextArr[index]!=''){
             tableArr.push({
                 prop:item,

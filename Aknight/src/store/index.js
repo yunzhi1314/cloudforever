@@ -5,24 +5,24 @@ import { isStore } from '@/hooks/store';
 export default createStore({
 	plugins: [
 		createPersistedState({
-			Storage: window.localStorage,
+			storage: window.localStorage,
 			reducer(state) {
 				let loginObj = {
-					token: state.personalCenter.token
-				}
-				return isStore(state, "token", "isLogin", loginObj, localStorage)
+					token: state.personalCenter.token,
+				};
+				return isStore(state, "token", "isLogin", loginObj, localStorage);
 			},
-			key: 'token'
+			key: "token",
 		}),
 		createPersistedState({
-			Storage: window.sessionStorage,
+			storage: window.sessionStorage,
 			reducer(state) {
 				let msgObj = {
-					msg: state.msg
-				}
-				return isStore(state, "msg", "isMsg", msgObj, sessionStorage)
+					msg: state.msg,
+				};
+				return isStore(state, "msg", "isMsg", msgObj, sessionStorage);
 			},
-			key: 'msg'
+			key: "msg",
 		}),
 
 	],

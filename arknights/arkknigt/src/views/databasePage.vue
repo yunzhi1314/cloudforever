@@ -6,11 +6,10 @@
                 <el-menu background-color="#545C64" text-color="#fff" active-text-color="#409EFF"
                     class="el-menu-vertical-demo" default-active="0" :collapse="isScollape" style="height: 100vh">
                     <el-menu-item v-for="(item, index) in menus" :key="index" :index="index.toString()"
-                        v-show="!item.meta.isIframe">
+                        v-show="!item.meta.isIframe" @click="toPage(index)">
                         {{ item.meta.title }}
                     </el-menu-item>
-                    <!-- 子菜单 -->
-                    <el-sub-menu v-for="(item, index) in databaseMenu" :key="index" :index="index.toString()"
+                    <el-sub-menu v-for="(item, index) in menus" :key="index" :index="index.toString()"
                         v-show="item.meta.isIframe">
                         <template #title>
                             <el-icon>
@@ -44,7 +43,7 @@
                         <el-menu-item index="1">
                             <el-breadcrumb separator-class="/">
                                 <el-breadcrumb-item :to="{ name: 'homePage' }">首页</el-breadcrumb-item>
-                                <el-breadcrumb-item>A</el-breadcrumb-item>
+                                <el-breadcrumb-item>{{ metaName }}</el-breadcrumb-item>
                                 <el-breadcrumb-item>B</el-breadcrumb-item>
                             </el-breadcrumb>
                         </el-menu-item>
@@ -90,7 +89,7 @@
 </template>
   
 <script>
-import { ref, toRefs } from "vue";
+import { reactive, ref, toRefs } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { layoutRoutes } from '@/api/database/layoutRoute/getRoutes'
 export default {
@@ -99,10 +98,25 @@ export default {
         const isScollape = ref(false)
         const router = useRouter()
         const route = useRoute() // 当前路由
-        console.log(route,router,'1')
-        
+        console.log(route,'1')
+        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu)
+        // let isHide = ref(false)
+        //点击菜单跳转路由
+        function toPage(i,j){
+            // 如果是子菜单
+            if(j == undefined){
+                router.push({
+                    name:pages[i].name,
+                })
+            }else{
+                router.push({
+                    name:pages[i].children[j].name,
+                })
+            }
+        }
         return {
             isScollape,
+            toPage,
             ...toRefs(layoutRoutes())
         }
     }

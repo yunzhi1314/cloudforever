@@ -119,6 +119,7 @@ import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
 import messagePage from "@/components/messagePage.vue";
 import { Request } from "@/hooks/personalCenter/request";
 import url from '@/api/url'
+import store from "@/store";
 
 export default {
   name: "loginPage",
@@ -228,7 +229,9 @@ export default {
       code: "",
     });
 
+ 
     function loginOrRegister() {
+      let dataList = reactive({data:[]});
       if (controlObj.isChange) {
         console.log(11)
         loginArr.forEach((item, index) => {
@@ -238,13 +241,27 @@ export default {
             item.value
           );
         });
+     
         Request.postData(url.personalCenter.register,registerData)
         .then(res=>{
-           console.log(res)
+          dataList.data =  res.data
+          console.log(res.data)
+        }).catch(err =>{
+          console.log(err)
         })
+
+        setTimeout(()=>{
+          store.commit('personalCenter/changeUse',dataList.data) 
+        store.commit('changeStore','isRegister')
+        },1000)
+       
+       
       }
     }
 
+    let userId = JSON.parse( localStorage.getItem('user')).userId
+
+    console.log(userId)
     return {
       loginCSS,
       // 登录数组渲染

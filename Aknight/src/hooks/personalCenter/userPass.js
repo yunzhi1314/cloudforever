@@ -2,7 +2,8 @@ import { reactive } from "vue";
 import controlObj from "./controlObj";
 import store from "@/store";
 import { toest } from "../toset";
-
+import { user } from "@/api/arknight/centerPage/code";
+import url from "@/api/url";
 // 登录要用的数据
 let loignObj = reactive({
 	telephone: "",
@@ -16,28 +17,25 @@ let registerObj = reactive({
 	code: ""
 });
 
-export function userPass(
-	arr
-	// urlname,
-) {
+export function userPass(arr, urlName, fn) {
 	// 登录或注册的数据
 	let target;
 	// 是否可以登录或注册
 	let isPass;
 	// 登录或注册的开关
-	// let isstore;
+	let isstore;
 
 	// 判断是登录还是注册，并赋值
 	if (controlObj.isChange) {
 		// 注册
 		target = registerObj;
 		isPass = controlObj.isRegister;
-		// isstore = "isRegister";
+		isstore = "isRegister";
 	} else {
 		// 登录
 		target = loignObj;
 		isPass = controlObj.isLogin;
-		// isstore = "isLogin";
+		isstore = "isLogin";
 	}
 
 	// 遍历传进来的数据，进行赋值
@@ -71,16 +69,16 @@ export function userPass(
 				msg: "未同意《鹰角网络用户注册协议》",
 				status: 1
 			});
-            toest(controlObj)
+			toest(controlObj);
 		}
 	} else {
 		// 登录,需要token
-        target.userId = JSON.parse(localStorage.getItem("users")).userId
+		target.userId = JSON.parse(localStorage.getItem("users")).userId;
 	}
 
-    // 判断是否可以登录或注册
-    if(isPass){
-        // 可以登录注册
-
-    }
+	// 判断是否可以登录或注册
+	if (isPass) {
+		// 可以登录注册
+		user(url.centerPage[urlName], target, "changeMsg", fn, isstore);
+	}
 }

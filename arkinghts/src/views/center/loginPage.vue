@@ -215,7 +215,13 @@ export default {
       confirmPassword: "",
       code: "",
     });
- 
+    // 登录需要的数据
+    let loginData = reactive({
+      telephone: "",
+      password: "",
+    });
+
+    // 登录或注册按钮函数
     function loginOrRegister() {
       let dataList = reactive({data:[]});
       if (controlObj.isChange) {
@@ -227,21 +233,24 @@ export default {
             item.value
           );
         });
-     
-        Request.postData(url.personalCenter.register,registerData)
-        .then(res=>{
-          dataList.data =  res.data
-          console.log(res.data)
-        }).catch(err =>{
-          console.log(err)
+        Request.postData(url.personalCenter.register, registerData).then(
+          (res) => {
+            console.log(res);
+          }
+        );  
+      }else{
+        loginArr.forEach((item,index)=>{
+          Reflect.set(
+            loginData,
+            Reflect.ownKeys(loginData)[index],
+            item.value
+          );
         })
-
-        setTimeout(()=>{
-          store.commit('personalCenter/changeUse',dataList.data) 
-        store.commit('changeStore','isRegister')
-        },1000)
-       
-       
+        Request.postData(url.personalCenter.login, loginData).then(
+          (res) => {
+            console.log(res);
+          }
+        ); 
       }
     }
 

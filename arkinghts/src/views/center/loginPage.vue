@@ -21,7 +21,7 @@
             <button
               v-if="item.isCode"
               class="btn"
-              @click="getMathCode(controlObj, 'isMathCode')"
+              @click="getMathCode('isMathCode')"
             >
               获取验证码
             </button>

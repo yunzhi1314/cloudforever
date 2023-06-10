@@ -224,6 +224,11 @@ export default {
       confirmPassword: "",
       code: "",
     });
+    // 登录需要的数据
+    let loginData = reactive({
+      telephone: "",
+      password: "",
+    });
 
     // 登录或注册按钮函数
     function loginOrRegister() {
@@ -235,12 +240,24 @@ export default {
             item.value
           );
         });
-     
         Request.postData(url.personalCenter.register, registerData).then(
           (res) => {
             console.log(res);
           }
-        );
+        );  
+      }else{
+        loginArr.forEach((item,index)=>{
+          Reflect.set(
+            loginData,
+            Reflect.ownKeys(loginData)[index],
+            item.value
+          );
+        })
+        Request.postData(url.personalCenter.login, loginData).then(
+          (res) => {
+            console.log(res);
+          }
+        ); 
       }
     }
 

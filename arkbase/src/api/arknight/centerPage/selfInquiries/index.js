@@ -1,6 +1,7 @@
 import url from "@/api/url";
 import { Request } from "@/hooks/request";
-import { onBeforeMount, reactive, toRefs } from "vue";
+import { onBeforeMount, reactive } from "vue";
+import store from "@/store";
 
 export function getselfInquiries() {
   let dataList = reactive({
@@ -9,9 +10,10 @@ export function getselfInquiries() {
 
   onBeforeMount(() => {
     Request.getData(url.centerPage.selfInquiries).then((res) => {
-      dataList.userinfo = toRefs(reactive({ ...res.data}));
-      console.log(dataList.userinfo);
+      dataList.userinfo = reactive({ ...res.data.selfInquiries});
       // store.commit("changeMsg","isBaseMsg")
+      store.commit("changeStore","isSelfQuery")
+      store.commit("personalCenter/changeSelfQuery",res.data.selfInquiries)
     });
   });
 

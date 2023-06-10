@@ -92,3 +92,28 @@
         font-size: 13px;
     }
 }
+
+// 自助查询
+.query_word{
+    font-size: 13px;
+    position: relative;
+    bottom: 2vh;
+    padding: 0;
+}
+.queryImg{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 85%;
+    height: 7.5vh;
+    border-radius: 5vw;
+    line-height: 7.5vh;
+    position: relative;
+    bottom: 1vh;
+    left: 2vw;
+    color:#FFF;
+    font-weight: bold;
+    padding-left: 3vw !important;
+    font-size: 1.15rem;
+    cursor: pointer;
+}

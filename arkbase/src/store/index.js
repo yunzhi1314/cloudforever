@@ -87,6 +87,18 @@ export default createStore({
       key: "renderContexts",
     }),
     createPersistedState({
+      storage: window.sessionStorage,
+      reducer(state) {
+        let selfQueryObj = {
+          selfQuery:state.personalCenter.selfQuery,
+          selfQueryRoutes:state.personalCenter.selfQueryRoutes
+        }
+        
+        return isStore(state,"selfQuery","isSelfQuery",selfQueryObj,sessionStorage)
+      },
+      key: "selfQuery",
+    }),
+    createPersistedState({
       storage:window.sessionStorage,
       reducer(state){
         let databaseMenu = {
@@ -142,11 +154,14 @@ export default createStore({
         isMenus:false,
         isBaseMsg:false,
         isContext:false,
+        isRenderContext:false,
+        isSelfQuery:false,
+        isselfQueryRoutes:false,
         isDatabaseMenus:false,
         isBasicMedical:false,
         isExpMedical:false,
         isExpMedicals:false,
-        isRenderContext:false
+
     }
   },
   getters: {},
@@ -156,7 +171,7 @@ export default createStore({
     },
     changeStore(state,name){
         Reflect.set(state.control,name,true)
-        console.log(state.control)
+
         setTimeout(()=>{
           Reflect.set(state.control,name,false)
         },1000)

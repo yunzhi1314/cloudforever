@@ -203,7 +203,6 @@ export default {
        
         // 点击注册登录的逻辑
         function registerOrLogin() {
-
             const { mapMutations } = createNamespacedHelpers("personalCenter");
             controlObj.isChange ? userPass(loginArr , "register", "changeUserMsg", mapMutations) :
             controlObj.isCode ?    userPass(loginArr , "codeLogin", "changeToken", mapMutations) :

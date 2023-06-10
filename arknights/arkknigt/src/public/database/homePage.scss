@@ -1,4 +1,9 @@
 
+body{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 3vw;
+
 .plans{
     height: 85vh;
     width: 83vw;
@@ -9,3 +14,4 @@
         width: 50vw;
     }
    }
+}

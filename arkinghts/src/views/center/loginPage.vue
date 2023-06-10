@@ -1,5 +1,5 @@
 <template>
-  <div>
+   <div>
     <!-- 登录 -->
     <div class="login" :style="{height:controlsObj.isChange? '55vh':'45vh'}">
       <section>{{ controlsObj.isChange ? '注册':'登录' }}</section>
@@ -18,7 +18,7 @@
             <button
               v-if="item.isCode"
               class="btn"
-              @click="getMathCode('isMathCode')"
+              @click="getMathCode(controlObj, 'isMathCode')"
             >
               获取验证码
             </button>
@@ -30,9 +30,20 @@
       </div>
       <!-- 按钮区 -->
       <div>
-        <section>使用短信验证码登录</section>
-        <button @click="loginOrRegister">登录</button>
-        <section>使用bilibili账号</section>
+        <section>
+          <input type="checkbox" v-if="controlObj.isChange" 
+          style="width:1vw;height: 2vh;">
+          <span @click="codeLogin"
+          :style="{color:controlObj.isChange ? '#000':''}"
+          >{{ controlObj.isChange ? "已阅读并同意" : "使用短信验证码登录" }}</span>
+          <span v-if="controlObj.isChange">《鹰角网络用户注册协议》</span>
+          <br>
+          <span v-if="controlObj.isChange" style="color:#000">
+            及</span>
+          <span v-if="controlObj.isChange">《鹰角网络游戏个人信息保护政策》</span>
+          </section>
+        <button>{{ controlObj.isChange ? "注册" : "登录" }}</button>
+        <section v-if="!controlObj.isChange">使用bilibili账号</section>
       </div>
     </div>
 
@@ -146,7 +157,7 @@ export default {
             controlObj.isChange = false;
             loginArr.splice(2, 2);
         }
-        // 点击验证码登录
+        // 点击切换密码或短信验证码登录
         function codeLogin() {
             controlObj.isChange = false;
             if (loginArr.length == 2) {
@@ -162,7 +173,6 @@ export default {
                 });
             }
         }
-        console.log(codeLogin);
         watcher(loginArr); //调用监视函数监视账密框
         provide("controlDialog", "isMathCode");
         // 短信验证码需传送的数据
@@ -211,6 +221,7 @@ export default {
             // 发送短信传送的数据
             useInfo,
             loginOrRegister,//点击注册或登录按钮
+            codeLogin,// 点击切换密码或短信验证码登录
         };
     },
     components: { MessagePage }

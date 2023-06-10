@@ -18,14 +18,12 @@
         <!--  表格渲染-->
         <el-table :data="isSearch ? searchData : newArr" height="70vh" row-key="id" style="margin-top: 3vh;">
             <el-table-column :prop="item.prop" :label="item.label" v-for="(item,index) in tableArr" :key="index"/>
-
             <el-table-column label="操作">
                 <template #default="scope">
                     <el-button type="text" size="mini" style="font-size: 12px;" @click="addList">添加</el-button>
                     <el-button type="text" size="mini" style="font-size: 12px;" @click="setList(scope.row)">修改</el-button>
                     <el-button type="text" size="mini" style="font-size: 12px;" @click="deleList(scope.row,url.database.menu.delMenu)">删除</el-button>
                 </template>
-
             </el-table-column>
         </el-table>
 
@@ -58,43 +56,14 @@
                         </el-form-item>
                     </section>
                     </div>
-                    <!-- <div style="display: flex; justify-content:space-around;">
-                        <el-form-item label="药品名称" style="flex: 3;"  prop="medical_name">
-                            <el-input v-model="msgObj.medical_name" placeholder=""></el-input>
-                        </el-form-item>
-                        <div style="flex:0.3"></div>
-                        <el-form-item label="线数" style="flex: 3;"  prop="medical_indications">
-                            <el-input v-model="msgObj.medical_indications" placeholder=""></el-input>
-                        </el-form-item>
-                    </div>
-                    <div style="display: flex; justify-content:space-around;">
-                        <el-form-item label="靶向" style="flex: 3;"  prop="medical_target">
-                            <el-input v-model="msgObj.medical_target" placeholder=""></el-input>
-                        </el-form-item>
-                        <div style="flex:0.3"></div>
-                        <el-form-item label="治疗方式" style="flex: 3;"  prop="medical_treatment">
-                            <el-input v-model="msgObj.medical_treatment" placeholder=""></el-input>
-                        </el-form-item>
-                    </div>
-                    <div style="display: flex; justify-content:space-around;">
-                        <el-form-item label="区域" style="flex: 3;"  prop="medical_area">
-                            <el-input v-model="msgObj.medical_area" placeholder=""></el-input>
-                        </el-form-item>
-                        <div style="flex:0.3"></div>
-                        <el-form-item label="药物id" style="flex: 3;">
-                            <el-input v-model="msgObj.id" placeholder="" disabled="true"></el-input>
-                        </el-form-item>
-                    </div> -->
                     <el-form-item style="display: flex;">
                         <div style="flex: 1;"></div>
                         <el-button type="" @click="cancel">取消</el-button>
                         <el-button type="primary" @click="confirm(ruleFormRef,'isAddMenu',isSetMenu,msgObj,url.database.menu.setMenu,url.database.menu.addMenu)">{{ isSetMenu ? "更改" : "添加" }}</el-button>
                     </el-form-item>
                 </el-form>
-
             </div>
         </dialogPage>
-
     </div>
 </template>
 
@@ -110,22 +79,23 @@ export default {
     setup() {
         let search = ref("")
         let { dataList, newArr, compary } = dealMenu()
-        // dataList = ref(dataList)
         let isSearch = ref(false)
         let msgObj = reactive({
         })
         let ruleFormRef = ref('')
-        let rules = reactive({})
         //  校验规则
-        let requireTextArr = ['','区域','公司名称','线数','药品名称','靶向','治疗方式','']
+        let rules = reactive({})
+        // 规则文本
+        let requireTextArr = ['','药品名称','靶向','公司名称','线数','治疗方式','区域','']
+        // 渲染form-item的信息
         let tableArr = []
         
+        // 生成msgObj，rules，tableArr的函数
         getMsgObj(dataList[0],msgObj,rules,requireTextArr,tableArr)
-        console.log(requireTextArr);
-        console.log(tableArr);
+        // console.log(tableArr);
         let searchData = ref('')
-        //  查询按钮事件
 
+        //  查询按钮事件
         function query() {
             isSearch.value = true;
             searchData.value = dataList.filter(item =>
@@ -140,12 +110,10 @@ export default {
 
         // 新增一项数据的事件
         function addList() {
-            // console.log(11111);
             controlObj.isDialog.isAddMenu = true
             Reflect.ownKeys(msgObj).forEach(item => {
                 Reflect.set(msgObj, item, '')
             })
-
             msgObj.id = dataList.length + 1
         }
         let isSetMenu = ref(false)

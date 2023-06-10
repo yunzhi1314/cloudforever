@@ -10,7 +10,7 @@
                    <el-menu-item v-for="(item,index) in menus" :key="index" :index="index.toString()"
                    v-show="!item.isFrame"
                    >
-                    {{item.username}}
+                    {{item.meta.title}}
                    </el-menu-item>
                    <!-- 子菜单 -->
                    <el-sub-menu v-for="(item,index) in menus" :key="index" :index="index.toString()">
@@ -90,13 +90,15 @@
 </template>
   
 <script>
-import { ref, toRefs } from 'vue'
+import { ref, toRefs, reactive, onUpdated } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { layoutRoutes } from '@/api/database/layoutRoute/getRoutes'
 export default {
     name: 'databasePage',
     setup() {
         const isScollape = ref(false)
-
+        const router = useRouter()
+        const route = useRoute() // 当前路由
 
         return {
             isScollape,

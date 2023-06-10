@@ -149,7 +149,7 @@
 	import dialogCss from "@/public/dialog/dialogPage.scss";
 	import svg from "@/hooks/personalCenter/code";
 	import { userPass } from "@/hooks/personalCenter/userPass";
-	// import { createNamespacedHelpers } from "vuex";
+	import { createNamespacedHelpers } from "vuex";
 
 	export default {
 		name: "loginPage",
@@ -216,8 +216,9 @@
 
 			// 登录或注册
 			function registerOrLogin() {
-				// let { mapMutations } = createNamespacedHelpers("personalCenter");
-				controlObj.isChange ? userPass(loginArr, "register") : userPass(loginArr);
+				let { mapMutations } = createNamespacedHelpers("personalCenter");
+
+				controlObj.isChange ? userPass(loginArr, "register", "changeUserMsg", mapMutations) : userPass(loginArr, "login", "changeToken", mapMutations);
 			}
 
 			return {

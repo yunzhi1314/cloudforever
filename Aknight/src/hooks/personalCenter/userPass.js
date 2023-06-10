@@ -17,7 +17,7 @@ let registerObj = reactive({
 	code: ""
 });
 
-export function userPass(arr, urlName, fn) {
+export function userPass(arr, urlName, methodName, fn) {
 	// 登录或注册的数据
 	let target;
 	// 是否可以登录或注册
@@ -65,6 +65,7 @@ export function userPass(arr, urlName, fn) {
 		} else {
 			// 未勾选
 			isPass = false;
+            store.commit("changeStore", "isMsg")
 			store.commit("changeMsg", {
 				msg: "未同意《鹰角网络用户注册协议》",
 				status: 1
@@ -73,12 +74,15 @@ export function userPass(arr, urlName, fn) {
 		}
 	} else {
 		// 登录,需要token
-		target.userId = JSON.parse(localStorage.getItem("users")).userId;
+		target.userId = JSON.parse(localStorage.getItem("userMsg")).userId;
 	}
 
 	// 判断是否可以登录或注册
 	if (isPass) {
 		// 可以登录注册
-		user(url.centerPage[urlName], target, "changeMsg", fn, isstore);
+		let method = fn([methodName])[methodName]
+		console.log(method);
+
+		user(url.centerPage[urlName], target, method, isstore);
 	}
 }

@@ -2,28 +2,28 @@
     <div class="common-layout">
         <router-link :to="{ name: '' }"></router-link>
         <el-container>
-            <el-aside :width="!isScollape ? '12vw' : '4vw'"
-                :style="{ transition: 'all 0.25s 0s linear', }"
-            >
+            <el-aside :width="!isScollape ? '12vw' : '4vw'" :style="{ transition: 'all 0.25s 0s linear', }">
                 <el-menu background-color="#545C64" text-color="#fff" active-text-color="#409EFF"
                     class="el-menu-vertical-demo" default-active="0" :collapse="isScollape" style="height: 100vh">
-                   <el-menu-item v-for="(item,index) in menus" :key="index" :index="index.toString()"
-                   v-show="!item.isFrame"
-                   >
-                    {{item.meta.title}}
-                   </el-menu-item>
-                   <!-- 子菜单 -->
-                   <el-sub-menu v-for="(item,index) in menus" :key="index" :index="index.toString()">
-                    <template #title>
-                        <el-icon>
+                    <el-menu-item v-for="(item, index) in menus" :key="index" :index="index.toString()"
+                        v-show="!item.meta.isIframe">
+                        {{ item.meta.title }}
+                    </el-menu-item>
+                    <!-- 子菜单 -->
+                    <el-sub-menu v-for="(item, index) in databaseMenu" :key="index" :index="index.toString()"
+                        v-show="item.meta.isIframe">
+                        <template #title>
+                            <el-icon>
                                 <Setting />
                             </el-icon>
-                            <span>waiting for text</span>
-                    </template>
-                    <el-menu-item v-for="(item2,index2) in item.profile" :key="index + '' + index2" :index="index.toString() + '-' + index2.toString()" v-show="item2.isHide">
-                        {{ item2.name }}
-                    </el-menu-item>
-                   </el-sub-menu>
+                            <span> {{ item.meta.title }}</span>
+                        </template>
+                        <el-menu-item v-for="(item2, index2) in item.children" :key="index + '' + index2"
+                            :index="index.toString() + '-' + index2.toString()" v-show="!item2.meta.isIframe"
+                            @click="toPage(index, index2)">
+                            {{ item2.meta.title }}
+                        </el-menu-item>
+                    </el-sub-menu>
                 </el-menu>
             </el-aside>
             <el-container>
@@ -33,7 +33,7 @@
                         <el-menu-item index="0">
                             <el-radio-group v-model="isScollape">
                                 <el-radio-button :label="!isScollape">
-                                    <el-icon >
+                                    <el-icon>
                                         <Expand v-show="isScollape" />
                                         <Fold v-show="!isScollape" />
                                     </el-icon>
@@ -90,7 +90,7 @@
 </template>
   
 <script>
-import { ref, toRefs, reactive, onUpdated } from "vue";
+import { ref, toRefs } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { layoutRoutes } from '@/api/database/layoutRoute/getRoutes'
 export default {
@@ -99,7 +99,8 @@ export default {
         const isScollape = ref(false)
         const router = useRouter()
         const route = useRoute() // 当前路由
-
+        console.log(route,router)
+        
         return {
             isScollape,
             ...toRefs(layoutRoutes())

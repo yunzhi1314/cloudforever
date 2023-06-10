@@ -1,15 +1,16 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import dataBase from './module/dataStore'
+import dataStore from './module/dataStore'
 import { isStore } from '@/hook/store'
 export default createStore({
   plugins: [createPersistedState({
     storage: window.sessionStorage,
     reducer(state) {
-      let routes = {
-        routes: state.dataBase.menus,
+      let routesSave = {
+        databaseMenu: state.dataStore.menuList,
+        databaseRoutes: state.dataStore.menuRoutes
       }
-      return isStore(state, "saveRoutes", "isDataBase", routes, sessionStorage)
+      return isStore(state, "saveRoutes", "isDataBase", routesSave, sessionStorage)
     },
     key: 'saveRoutes'
   })],
@@ -33,6 +34,6 @@ export default createStore({
   },
   namespaced: true,
   modules: {
-    dataBase
+    dataStore
   }
 })

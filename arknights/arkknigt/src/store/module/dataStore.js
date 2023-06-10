@@ -2,13 +2,15 @@ export default{
     namespaced: true,
     state(){
         return{
-            routesSaved:null,
+            menuList:null,
+            menuRoutes:null
         }
     },
     getters:{},
     mutations:{
         SAVE_ROUTES(state,data){
-            state.routesSaved = data
+            state.menuList = data.memuList
+            state.menuRoutes = data.a
         }
     },
     actions:{}

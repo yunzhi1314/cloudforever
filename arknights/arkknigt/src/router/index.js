@@ -7,16 +7,16 @@ const routes = [
     component: () => import('../views/databasePage.vue')
 
   },
-  {
-    path: '/homePage',
-    name: 'homePage',
-    component: () => import('../views/database/home/homePage.vue')
-  },
-  {
-    path:"/",
-    name:"menuPage",
-    component:()=> import("@/views/database/system/menu/menuPage.vue")
-  }
+  // {
+  //   path: '/homePage',
+  //   name: 'homePage',
+  //   component: () => import('../views/database/home/homePage.vue')
+  // },
+  // {
+  //   path:"/",
+  //   name:"menuPage",
+  //   component:()=> import("@/views/database/system/menu/menuPage.vue")
+  // }
 ]
 
 const router = createRouter({

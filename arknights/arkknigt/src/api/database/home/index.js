@@ -1,5 +1,4 @@
 import { onBeforeMount,reactive } from "vue";
-
 import { Request } from "@/hook/request";
 
 export function homeData(url){

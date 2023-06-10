@@ -30,6 +30,12 @@
                       <td>礼包</td>
                       <td>使用兑换码</td>
                     </tr>
+                    <tr v-for="(item,index) in datas.item? datas.item:[] "
+                    :key="index">
+                        <td>{{ item.time }}</td>
+                        <td>{{ item.item }}</td>
+                        <td>{{ item.context }}</td>
+                    </tr>
                 </table> 
             </section>
       </div>
@@ -43,23 +49,43 @@
 import centerBaseMsgCSS from "@/public/arknights/centerBaseMsg.scss"
 import giftCSS from "@/public/arknights/gift.scss"
 import {getGifts,getContext} from "@/api/arknight/centerPage/exchangeGift"
-import {toRefs,ref} from "vue"
-
+import {toRefs,ref,reactive,onUpdated} from "vue"
+import { useStore } from "vuex"
 export default {
   name: "ExchangeGift",
   setup() {
+    const store = useStore()
+
     let context = ref("")
-    
+    let datas = reactive({})
+    // 点击获取兑换码后发送的信息，并处理成渲染树渲染
     function getGift(){
        getContext({context:context.value})
+       let items = JSON.parse(localStorage.getItem("contexts")).contexts
+       
+       store.commit("personalCenter/changeRenderContexts",items)
+       store.commit("changeStore","isRenderContext")
+
+       setTimeout(()=>{
+        datas.item = JSON.parse(localStorage.getItem("renderContexts")).renderContexts
+       },50)
+
     }
+
+    onUpdated(()=>{
+      setTimeout(()=>{
+        datas.item = JSON.parse(localStorage.getItem("renderContexts")).renderContexts
+       },50)
+    })
 
     return {
       centerBaseMsgCSS,
       giftCSS,
       ...toRefs(getGifts()),
       getGift,
-      context
+      context,
+      // 每次点击后渲染
+      datas
     }
   }
 }

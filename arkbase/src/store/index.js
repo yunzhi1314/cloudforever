@@ -68,12 +68,23 @@ export default createStore({
       storage: window.localStorage,
       reducer(state) {
         let contextObj = {
-          contexts:state.personalCenter.contexts
+          contexts:state.personalCenter.contexts,
         }
-        
+
         return isStore(state,"contexts","isContext",contextObj,localStorage)
       },
       key: "contexts",
+    }),
+    createPersistedState({
+      storage: window.localStorage,
+      reducer(state) {
+        let renderContextsObj = {
+          renderContexts:state.personalCenter.renderContexts
+        }
+        
+        return isStore(state,"renderContexts","isRenderContext",renderContextsObj,localStorage)
+      },
+      key: "renderContexts",
     }),
     createPersistedState({
       storage:window.sessionStorage,
@@ -134,7 +145,8 @@ export default createStore({
         isDatabaseMenus:false,
         isBasicMedical:false,
         isExpMedical:false,
-        isExpMedicals:false
+        isExpMedicals:false,
+        isRenderContext:false
     }
   },
   getters: {},
@@ -144,7 +156,7 @@ export default createStore({
     },
     changeStore(state,name){
         Reflect.set(state.control,name,true)
-
+        console.log(state.control)
         setTimeout(()=>{
           Reflect.set(state.control,name,false)
         },1000)

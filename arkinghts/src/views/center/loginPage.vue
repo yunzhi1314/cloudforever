@@ -82,9 +82,7 @@ import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
 <<<<<<<<< Temporary merge branch 1
 import controlsObj from "@/hooks/personalCenter/controls";
-=========
 import { getMathcode } from "@/hooks/personalCenter/code"
->>>>>>>>> Temporary merge branch 2
 
 export default {
   name: "loginPage",
@@ -152,7 +150,7 @@ export default {
       loginCSS,
       // 登录数组渲染
       loginArr,
-<<<<<<<<< Temporary merge branch 1
+
       // 注册增加数组
       newArr,
       // 点击去往注册框
@@ -160,20 +158,15 @@ export default {
       // 点击去往登录框
       changeLogin,
       // 全局开关对象
-      controlsObj
-=========
+      controlsObj,
       changeRegister,
       getMathcode,
->>>>>>>>> Temporary merge branch 2
+
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-<<<<<<<<< Temporary merge branch 1
-</style>
 
-=========
 </style>
->>>>>>>>> Temporary merge branch 2

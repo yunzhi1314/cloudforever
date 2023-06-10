@@ -2,6 +2,8 @@
 import url from "@/api/url";
 import { handleRoutes } from "@/hooks/handleRoutes";
 import { Request } from "@/hooks/request";
+import router from "@/router";
+import store from "@/store";
 import { reactive, toRef } from "vue";
 
 export function centerMenu() {
@@ -19,10 +21,21 @@ export function centerMenu() {
                 return msg
             })
             menuMsg = {menuMsg, loginOut,navSvg}
-            console.log(menuMsg);
-            console.log(routes);
-            let route = handleRoutes(routes, routes.length-1)
-            console.log(route);
+
+            // 处理路由之前先存本地
+            store.commit("personalCenter/changeMenuRoutes", routes)
+            store.commit("personalCenter/changeMenus", menuMsg)
+            store.commit("changeStore", "isMenu")
+
+            routes = handleRoutes(routes, routes.length-1)
+
+            // 添加动态路由
+            routes.forEach(item=>{
+                router.addRoute("centerPage", item)
+            })
+
+            console.log(router.getRoutes());
+
         }
     })
 }

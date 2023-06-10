@@ -41,7 +41,9 @@ router.beforeEach((to, from, next) => {
     //当前路径不在白名单内,判断是否有权限
     if (JSON.parse(localStorage.getItem("token"))) {
       let token = JSON.parse(localStorage.getItem("token")).token
-      console.log(token);
+      if(token){
+        next()
+      }
     } else {
       //无权限者(需要登录获取权限)
       next({ path: "/center/login" })

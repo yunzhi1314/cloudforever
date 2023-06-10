@@ -1,8 +1,11 @@
 <template>
   <div>
     <!-- 登录 -->
-    <div class="login" :style="{height:controlsObj.isChange? '55vh':'45vh'}">
-      <section>{{ controlsObj.isChange ? '注册':'登录' }}</section>
+    <div
+      class="login"
+      :style="{ height: controlObj.isChange ? '55vh' : '45vh' }"
+    >
+      <section>{{ controlObj.isChange ? "注册" : "登录" }}</section>
       <!-- 账密区 -->
       <div class="info">
         <section v-for="(item,index) in loginArr" :key="index">
@@ -229,95 +232,43 @@ export default {
       // Toest(controlObj) //调用吐丝的函数
     }
 
-    // 注册需要的数据
-    let registerData = reactive({
-      telephone: "",
-      password: "",
-      confirmPassword: "",
-      code: "",
-    });
+        let  registerData = reactive({
+           telephone:'',
+           password:'',
+           confirmPassword:'',
+           code:''
+        })
+ 
+        function loginOrRegister(){
+           if(controlObj.isChange){
+              loginArr.forEach((item,index)=>{
+                  Reflect.set(registerData,Reflect.ownKeys(registerData)[index],item.value)
+              })
+              console.log(registerData)
+           }
+        }
 
-    // 登录需要的数据
-    let loginData = reactive({
-      telephone: "",
-      password: "",
-      userId: JSON.parse(localStorage.getItem("users")).userId,
-    });
-    //  登录或注册按钮
-    function loginOrRegister() {
-      let dataList = reactive({
-        data: [], //注册数据
-        data1: [], //登录数据
-      });
-      // 注册和登录分离
-      if (controlObj.isChange) {
-        // 将账密框的数据赋予新声明注册需要的数据的对象
-        loginArr.forEach((item, index) => {
-          Reflect.set(
-            registerData,
-            Reflect.ownKeys(registerData)[index],
-            item.value
-          );
-        });
-        Request.postData(url.personalCenter.register, registerData)
-          .then((res) => {
-            dataList.data = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-        setTimeout(() => {
-          store.commit("personalCenter/changeUse", dataList.data);
-          store.commit("changeStore", "isRegister");
-        }, 200);
-
-        // Toest(controlObj)//调用吐丝的函数
-      } else {
-        // 将账密框的数据赋予新声明登录需要的数据的对象
-        loginArr.forEach((item, index) => {
-          Reflect.set(loginData, Reflect.ownKeys(loginData)[index], item.value);
-        });
-        Request.postData(url.personalCenter.login, loginData).then((res) => {
-          dataList.data1 = res.data;
-        });
-        setTimeout(() => {
-          store.commit("personalCenter/changeToken", dataList.data1);
-          store.commit("changeStore", "isLogin");
-          router.push({
-            name: "bufferPage",
-            params: {
-              userId: JSON.parse(localStorage.getItem("users")).userId,
-            },
-          });
-        },1000);
-
-        // Toest(controlObj)//调用吐丝的函数
-      }
-    }
-
-    return {
-      loginCSS,
-      // 登录数组渲染
-      loginArr,
-      changeRegister, //去往注册页面
-      changeLogin, //去往登录页面
-      controlObj, //全局状态控制开关
-      getMathCode, //获取图形验证码
-      svg, //图形装载工具
-      againGetMathCode, //点击图形验证码图片再次发起请求刷新图形验证码
-      // 取消遮罩层
-      cancel,
-      // 遮罩层的确认按钮
-      confirm,
-      // 发送短信传送的数据
-      useInfo,
-      loginOrRegister, //点击注册或登录按钮
-      codeLogin, // 点击切换密码或短信验证码登录
-      // Toest,//吐丝的函数
-    };
-  },
-  components: { messagePage },
+        return {
+            loginCSS,
+            // 登录数组渲染
+            loginArr,
+            changeRegister,
+            changeLogin,
+            controlObj,
+            getMathCode,
+            svg,
+            againGetMathCode,
+            // 取消遮罩层
+            cancel,
+            // 遮罩层的确认按钮
+            confirm,
+            // 发送短信传送的数据
+            useInfo,
+            loginOrRegister,//点击注册或登录按钮
+            codeLogin,// 点击切换密码或短信验证码登录
+        };
+    },
+    components: { MessagePage }
 };
 </script>
 

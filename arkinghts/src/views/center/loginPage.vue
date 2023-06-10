@@ -7,8 +7,21 @@
       <div class="info">
         <section v-for="(item,index) in loginArr" :key="index">
           <p>
-            <input :type="item.text" :placeholder="item.placeholder" />
-            <button v-if="item.isCode" class="btn">获取验证码</button>
+            <input
+              :type="item.text"
+              :placeholder="item.placeholder"
+              v-model="item.value"
+              :style="{
+                backgroundColor: item.isShow ? '#FFDCDB' : '',
+              }"
+            />
+            <button
+              v-if="item.isCode"
+              class="btn"
+              @click="getMathCode('isMathCode')"
+            >
+              获取验证码
+            </button>
           </p>
           <p>{{ item.tip }}</p>
         </section>
@@ -47,12 +60,12 @@
   <dialogPage>
     <div class="dialog" @click.stop>
         <section>
-          <input type="text">
-          <span v-html="svg.code" @click="againGetMathCode()"></span>
+          <input type="text" v-model="useInfo.mathCode">
+          <span v-html="svg.code" @click="againGetMathCode"></span>
         </section>
         <section>
-          <button @click="confirm">确认</button>
-          <button @click="cancel">取消</button>
+          <button @click="confirm('isMathCode')">确认</button>
+          <button  @click="cancel('isMathCode')">取消</button>
         </section>
     </div>
   </dialogPage>
@@ -62,10 +75,12 @@
 
 <script>
 import loginCSS from "@/public/login.scss";
-import { reactive } from "vue";
+import { reactive,provide } from "vue";
 import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
-import controlsObj from "@/hooks/personalCenter/controls";
-import { getMathcode } from "@/hooks/personalCenter/code"
+import controlObj from "@/hooks/personalCenter/control";
+import { getMathCode, againGetMathCode,cancel } from "@/hooks/personalCenter/code"
+import svg from '@/hooks/personalCenter/code'
+import { telCode } from "@/api/telCode"// 获取短信验证码请求的API
 
 export default {
   name: "loginPage",
@@ -79,7 +94,8 @@ export default {
         tip1: "*账号不能为空",
         type: "tel",
         placeholder: "请输入手机号",
-        zz: /^1{1}[3-9]{1}\d{9}$/
+        zz: /^1{1}[3-9]{1}\d{9}$/,
+        use:"手机号"
       },
       {
         value: "",
@@ -87,9 +103,10 @@ export default {
         tip: "*密码格式不正确",
         tip1: "*密码不能为空",
         type: "password",
-        placeholder: "请输入密码",
-        zz: /^\w{6,18}$/
-      }
+        placeholder: "8-16位数字、字母、常用字符",
+        zz: /^\w{8,16}$/,
+        use:"密码"
+      },
     ]);
     // 注册页面增加数组
     let newArr = reactive([
@@ -99,7 +116,8 @@ export default {
         tip: "*请确认密码",
         tip1: "*两次输入的密码不一致",
         type: "password",
-        placeholder: "请密码"
+        placeholder: "请确认密码",
+        use:"确认密码",
       },
       {
         value: "",
@@ -109,8 +127,9 @@ export default {
         type: "text",
         placeholder: "请输入验证码",
         zz: /^\d{4}$/,
-        isCode: true
-      }
+        isCode: true,
+        use:"验证码"
+      },
     ]);
 
     // 点击去注册页面
@@ -125,11 +144,28 @@ export default {
       controlsObj.isChange = false;
       loginArr.splice(2, 2);
     }
+
+    watcher(loginArr); //调用监视函数监视账密框
+
+    provide("controlDialog", "isMathCode");
+
+    // 短信验证码需传送的数据
+    let useInfo = reactive({
+        telephone:"",
+        mathCode:""
+    })
+    // 点击遮罩层确认按钮，请求短信验证码，并且关闭遮罩层
+   function confirm(name){
+    controlObj.isDialog[name] = false
+    let obj = loginArr.find(item => item.use == "手机号")
+    useInfo.telephone = obj.value
+    telCode(useInfo)
+
+}
     return {
       loginCSS,
       // 登录数组渲染
       loginArr,
-
       // 注册增加数组
       newArr,
       // 点击去往注册框
@@ -137,10 +173,19 @@ export default {
       // 点击去往登录框
       changeLogin,
       // 全局开关对象
-      controlsObj,
-      changeRegister,
-      getMathcode,
-
+      controlObj,
+      // 图形验证码
+      getMathCode,
+      // 更新图形验证码
+      againGetMathCode,
+      // 取消遮罩层
+      cancel,
+      // 图形验证码图片
+      svg,
+      // 遮罩层的确认按钮
+      confirm,
+      // 发送短信传送的数据
+      useInfo
     };
   }
 };

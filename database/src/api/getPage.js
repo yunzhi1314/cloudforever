@@ -18,7 +18,6 @@ export function getPagebeforeMount(url,key = 'datas',name = 'datas'){
     })
     onBeforeMount(()=>{
         Request.getData(url).then(res=>{
-            console.log(res.data[key]);
             dataList[name] = toRefs(reactive({ ...res.data[key] }))
         })
     })

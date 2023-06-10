@@ -28,13 +28,10 @@ export function user(url, data, fn, isStore) {
     Request.postData(url, data).then((res) => {
         dataList.datas = toRef({ ...res.data });
         if (fn) {//代表存在调用的是子仓库函数
-            //改变指向
-            fn.bind({ $store: store })(dataList.datas)
-            console.log({ $store: store });
-            console.log(fn.bind({ $store: store }));
-            console.log(isStore);
             //开启存储开关(登录注册需要)
             store.commit("changeStore", isStore)
+            //改变指向
+            fn.bind({ $store: store })(dataList.datas)
             //调用吐丝
             store.commit("changeStore", "isMsg")
             store.commit("changeMsg", dataList.datas)
@@ -46,7 +43,7 @@ export function user(url, data, fn, isStore) {
             store.commit("changeStore", "isMsg")
             store.commit("changeMsg", dataList.datas)
         }
-        // });
+    });
 
-        return dataList;
-    }
+    return dataList;
+}

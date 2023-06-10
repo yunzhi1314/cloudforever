@@ -27,7 +27,6 @@ export default createStore({
 		createPersistedState({
 			storage: window.localStorage,
 			reducer(state) {
-				console.log(999);
 				let registerObj = {
 					userId: state.personalCenter.userId,
 					UID: state.personalCenter.UID,
@@ -58,6 +57,7 @@ export default createStore({
 			state.msg = data;
 		},
 		changeStore(state, name) {
+			console.log(11111);
 			// 将条件设置为true
 			Reflect.set(state.control, name, true);
 			// 500秒后设置为false，否者刷新后还是会丢失，

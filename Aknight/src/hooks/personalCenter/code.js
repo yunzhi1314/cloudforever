@@ -43,9 +43,8 @@ export function setCountDown(name, arr) {
         //发送短信所需要的手机号
         getCode.telephone = arr.find(item => item.use == "手机号").value
 
-
         //请求发送短信
-        user(url.centerPage.telCode, getCode, "changeMsg")
+        user(url.centerPage.telCode, getCode)
         // 开启定时器
         countDown.isOpen = true
         timerSeparate(timeName)

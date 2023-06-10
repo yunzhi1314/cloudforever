@@ -1,14 +1,14 @@
-import { createStore } from "vuex";
-
-export default createStore({
+export default ({
     namespaced: true,
-    state: {
-        token: null,
-        userId: null,
-        UID: null,
-        ID: null,
-        email: null,
-        fullName: null,
+    state() {
+        return {
+            token: null,
+            userId: null,
+            UID: null,
+            ID: null,
+            email: null,
+            fullName: null,
+        }
     },
     mutations: {
         changeToken(state, data) {

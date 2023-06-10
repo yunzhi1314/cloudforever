@@ -53,7 +53,7 @@ export function userPass(arr, urlName, methodName, fn) {
 
 	// 判断登录还是注册
 	if (controlObj.isChange) {
-		// 注册，，需要code的值
+		// 注册，需要code的值
 		// 查找验证码项的下标
 		let index = arr.findIndex((item) => item.use == "验证码");
 		Reflect.set(target, "code", arr[index].value);
@@ -65,7 +65,7 @@ export function userPass(arr, urlName, methodName, fn) {
 		} else {
 			// 未勾选
 			isPass = false;
-            store.commit("changeStore", "isMsg")
+			store.commit("changeStore", "isMsg")
 			store.commit("changeMsg", {
 				msg: "未同意《鹰角网络用户注册协议》",
 				status: 1
@@ -73,7 +73,7 @@ export function userPass(arr, urlName, methodName, fn) {
 			toest(controlObj);
 		}
 	} else {
-		// 登录,需要token
+		// 登录,需要userId
 		target.userId = JSON.parse(localStorage.getItem("userMsg")).userId;
 	}
 
@@ -81,7 +81,6 @@ export function userPass(arr, urlName, methodName, fn) {
 	if (isPass) {
 		// 可以登录注册
 		let method = fn([methodName])[methodName]
-		console.log(method);
 
 		user(url.centerPage[urlName], target, method, isstore);
 	}

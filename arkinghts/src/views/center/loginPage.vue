@@ -33,20 +33,9 @@
       </div>
       <!-- 按钮区 -->
       <div>
-        <section>
-          <input type="checkbox" v-if="controlObj.isChange" 
-          style="width:1vw;height: 2vh;">
-          <span @click="codeLogin"
-          :style="{color:controlObj.isChange ? '#000':''}"
-          >{{ controlObj.isChange ? "已阅读并同意" : "使用短信验证码登录" }}</span>
-          <span v-if="controlObj.isChange">《鹰角网络用户注册协议》</span>
-          <br>
-          <span v-if="controlObj.isChange" style="color:#000">
-            及</span>
-          <span v-if="controlObj.isChange">《鹰角网络游戏个人信息保护政策》</span>
-          </section>
-        <button>{{ controlObj.isChange ? "注册" : "登录" }}</button>
-        <section v-if="!controlObj.isChange">使用bilibili账号</section>
+        <section>使用短信验证码登录</section>
+        <button @click="loginOrRegister">{{ controlObj.isChange ? '注册' : '登录' }}</button>
+        <section>使用bilibili账号</section>
       </div>
     </div>
 
@@ -85,10 +74,8 @@
         </section>
     </div>
   </dialogPage>
-  
 
-
-
+  <messagePage></messagePage>
 </template>
 
 <script>
@@ -210,7 +197,12 @@ export default {
       getMathCode, //获取图形验证码函数
       svg,//图形验证码svg工具
       againGetMathCode,//点击svg图片再次发起请求，更新图形验证码
-      codeLogin
+       // 取消遮罩层
+       cancel,
+      // 遮罩层的确认按钮
+      confirm,
+      // 发送短信传送的数据
+      useInfo
     };
   },
 };

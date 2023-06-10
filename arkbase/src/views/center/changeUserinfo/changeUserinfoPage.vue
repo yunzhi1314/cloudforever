@@ -71,22 +71,34 @@
 import centerBaseMsgCSS from "@/public/arknights/centerBaseMsg.scss"
 import { reactive, provide,toRefs } from "vue"
 import { observer } from "@/hooks/personalCenter/watcher"
-import { useRoute } from "vue-router"
+import { useRoute,useRouter } from "vue-router"
 import dialogCSS from "@/public/dialog.scss"
 import { setCountDown, getMathCode, changeMathCode } from "@/hooks/personalCenter/code"
 import svg from "@/hooks/personalCenter/code"
 import controlObj from "@/hooks/controls"
-
 import {setMsg} from "@/api/arknight/centerPage/baseMsg"
 import url from "@/api/url"
+import { dealRoutes } from "@/hooks/route"
 
 export default {
   name: "changeUserinfoPage",
   setup() {
     const route = useRoute()
+    const router = useRouter()
     let [index1, index2] = route.query.position
-    let baseMsg = JSON.parse(sessionStorage.getItem("baseMsg")).baseMsg
 
+    // 处理该页面刷新后动态路由丢失问题
+    let baseMsg = JSON.parse(sessionStorage.getItem("baseMsg")).baseMsg
+    let routeData = JSON.parse(sessionStorage.getItem("menus"))
+    let routes = Reflect.get(routeData,"routes")
+
+    // 处理component数据，将路由正规化
+    routes = dealRoutes(routes, routes.length - 1);
+    // 添加动态路由
+    routes.forEach((item) => {
+      router.addRoute("centerPage", item);
+    });
+      
     // 数据集合
     let changeArr = reactive([
       {
@@ -145,7 +157,6 @@ export default {
       })
 
       Reflect.set(userData, name, changeArr[2].value)
-      console.log(url.centerPage.baseMsg.getBaseMsg.replace("userBasic",name))
       setMsg(url.centerPage.baseMsg.getBaseMsg.replace("userBasic",name),userData)
     }
 

@@ -73,7 +73,6 @@ router.beforeEach((to, from, next) => {
           route.forEach((item) => {
             router.addRoute(PATH == "center"? "centerPage" : "databasePage", item);
           });
-          console.log(router.getRoutes())
           // 重复导航，直到路由能够找到正确的路径为止
           next({ ...to, replace: true });
         }

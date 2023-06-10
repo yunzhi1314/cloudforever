@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 import { isStore } from '@/hooks/store';
 export default createStore({
 	plugins: [
+		//登录时开启
 		createPersistedState({
 			storage: window.localStorage,
 			reducer(state) {
@@ -14,6 +15,7 @@ export default createStore({
 			},
 			key: "token",
 		}),
+		//调用吐丝时开启
 		createPersistedState({
 			storage: window.sessionStorage,
 			reducer(state) {
@@ -24,6 +26,7 @@ export default createStore({
 			},
 			key: "msg",
 		}),
+		//注册时开启
 		createPersistedState({
 			storage: window.localStorage,
 			reducer(state) {
@@ -38,6 +41,18 @@ export default createStore({
 			},
 			key: "userMsg",
 		}),
+		//buffer页面开启
+		createPersistedState({
+			storage: window.sessionStorage,
+			reducer(state) {
+				let menuObj = {
+					menus: state.personalCenter.menus,
+					menuRoutes: state.personalCenter.menuRoutes
+				};
+				return isStore(state, "menu", "isMenu", menuObj, sessionStorage);
+			},
+			key: "menu",
+		}),
 
 	],
 	state: {
@@ -49,15 +64,16 @@ export default createStore({
 			isRegister: false, //注册条件，
 			isLogin: false,//登录条件
 			isMsg: false,//吐丝
+			isMenu: false,//buffer页面触发
 		}
 	},
 	getters: {},
 	mutations: {
+		//调用吐丝存信息
 		changeMsg(state, data) {
 			state.msg = data;
 		},
 		changeStore(state, name) {
-			console.log(11111);
 			// 将条件设置为true
 			Reflect.set(state.control, name, true);
 			// 500秒后设置为false，否者刷新后还是会丢失，
@@ -65,6 +81,7 @@ export default createStore({
 				Reflect.set(state.control, name, false);
 			}, 500);
 		},
+		//登录存telephone
 		changeTel(state, data) {
 			state.telephone = data
 		}

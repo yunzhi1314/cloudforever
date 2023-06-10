@@ -15,6 +15,7 @@ export default createStore({
             state.token = data.token
         },
         changeUserMsg(state, data) {
+            console.log(data);
             state.userId = data.userId
             state.UID = data.UID
         }

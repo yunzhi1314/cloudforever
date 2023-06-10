@@ -20,7 +20,7 @@ export function mathCode() {
 //fn:用于区分是调用的根仓库还是子仓库的方法
 //如果是子仓库方法就需要用bind改变仓库的this指向,根仓库则不需要 =>根仓库本身指向于设置的store,子仓库指向于vuex全局的store
 //isStore:对应存储开关
-export function user(url, data, changeFn, fn, isStore) {
+export function user(url, data, fn, isStore) {
     let dataList = reactive({
         datas: [],
     });
@@ -28,23 +28,25 @@ export function user(url, data, changeFn, fn, isStore) {
     Request.postData(url, data).then((res) => {
         dataList.datas = toRef({ ...res.data });
         if (fn) {//代表存在调用的是子仓库函数
-            //改变指向并调用对应子仓库函数
+            //改变指向
             fn.bind({ $store: store })(dataList.datas)
-
+            console.log({ $store: store });
+            console.log(fn.bind({ $store: store }));
+            console.log(isStore);
             //开启存储开关(登录注册需要)
             store.commit("changeStore", isStore)
             //调用吐丝
             store.commit("changeStore", "isMsg")
-            store.commit(changeFn, dataList.datas)
+            store.commit("changeMsg", dataList.datas)
             //存手机号
             store.commit("changeTel", dataList.datas.telephone);
         } else {
             //发送短信
             //调用吐丝
             store.commit("changeStore", "isMsg")
-            store.commit(changeFn, dataList.datas)
+            store.commit("changeMsg", dataList.datas)
         }
-    });
+        // });
 
-    return dataList;
-}
+        return dataList;
+    }

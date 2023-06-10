@@ -27,6 +27,7 @@ export default createStore({
 		createPersistedState({
 			storage: window.localStorage,
 			reducer(state) {
+				console.log(999);
 				let registerObj = {
 					userId: state.personalCenter.userId,
 					UID: state.personalCenter.UID,

@@ -8,7 +8,7 @@ export function layoutRoutes() {
     let dataList = reactive({
         menus: []
     })
-    Request.get('http://localhost:3000/api/data').then(res => {
+    Request.get('http://192.168.2.26:3000/api/normalData').then(res => {
         dataList.menus = { ...res.data }
         let a = dealpaths(res.data, 0, "component")
         store.commit('dataStore/SAVE_ROUTES', { a, memuList: dataList.menus }) //保存到仓库

@@ -51,26 +51,26 @@
                                 :label="item"></el-option>
                         </el-select>
                     </el-form-item>
-                    <div style="display: flex; justify-content:space-around;">
-                        <el-form-item label="药品名称" style="flex: 3;" required>
+                    <div :style="str">
+                        <el-form-item label="药品名称" style="flex: 3;" prop="medical_name">
                             <el-input v-model="msgObj.medical_name" placeholder=""></el-input>
                         </el-form-item>
                         <div style="flex:0.3"></div>
-                        <el-form-item label="线数" style="flex: 3;" required>
+                        <el-form-item label="线数" style="flex: 3;" prop="medical_indications">
                             <el-input v-model="msgObj.medical_indications" placeholder=""></el-input>
                         </el-form-item>
                     </div>
-                    <div style="display: flex; justify-content:space-around;">
-                        <el-form-item label="靶向" style="flex: 3;" required>
+                    <div :style="str">
+                        <el-form-item label="靶向" style="flex: 3;" prop="medical_target">
                             <el-input v-model="msgObj.medical_target" placeholder=""></el-input>
                         </el-form-item>
                         <div style="flex:0.3"></div>
-                        <el-form-item label="治疗方式" style="flex: 3;" required>
+                        <el-form-item label="治疗方式" style="flex: 3;" prop="medical_treatment">
                             <el-input v-model="msgObj.medical_treatment" placeholder=""></el-input>
                         </el-form-item>
                     </div>
-                    <div style="display: flex; justify-content:space-around;">
-                        <el-form-item label="区域" style="flex: 3;" required>
+                    <div :style="str">
+                        <el-form-item label="区域" style="flex: 3;" prop="medical_area">
                             <el-input v-model="msgObj.medical_area" placeholder=""></el-input>
                         </el-form-item>
                         <div style="flex:0.3"></div>
@@ -102,6 +102,9 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
     name: "menuPage",
     setup() {
+
+        let str = { display: "flex", justifyContent: "space-around" };
+
         let search = ref("")
 
         let { dataList, newArr, compary } = dealMenu()
@@ -195,7 +198,7 @@ export default {
                 }
             )
                 .then(() => {
-                    deleMenu(url.database.menu.setMenu, item.id)
+                    deleMenu(url.database.menu.delMenu, item.id)
                     ElMessage({
                         type: 'success',
                         message: '删除成功',
@@ -215,7 +218,7 @@ export default {
             if (!formEl) return
             await formEl.validate((valid, fields) => {
                 if (valid) {
-                    controlObj.isDialog.isAddMenu=false
+                    controlObj.isDialog.isAddMenu = false
                     isSetMenu.value ? setMenu(url.database.menu.setMenu, msgObj) : addMenu(url.database.menu.addMenu, msgObj)
                     console.log('提交成功')
                     isSetMenu.value = false
@@ -243,6 +246,7 @@ export default {
             setList,
             deleList,
             confirm,
+            str,
         }
     }
 }

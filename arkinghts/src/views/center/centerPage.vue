@@ -1,7 +1,8 @@
 <template>
     <div :style = '{
       backgroundImage:`url(${img.bgImg})`
-    }' class="bg"></div>
+    }' class="bg">
+    </div>
     <div class="center">
         <header>
             <div></div>

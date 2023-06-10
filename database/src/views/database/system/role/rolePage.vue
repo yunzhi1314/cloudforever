@@ -24,6 +24,7 @@
       <el-table-column prop="medical_OS" label="medical_OS" />
       <el-table-column prop="medical_PFS" label="medical_PFS" />
       <el-table-column prop="medical_TREE" label="medical_TREE" />
+      <el-table-column prop="medical_line" label="线数" />
       <el-table-column prop="medical_enrollees_population" label="数量" />
       <el-table-column prop="medical_name" label="治疗方式" />
       <el-table-column prop="medical_status" label="期数" />
@@ -40,8 +41,7 @@
     <div style="display: flex; justify-content: center; margin-top: 3vh;">
       <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[5, 10, 15]"
         :small="small" layout="total, sizes, prev, pager, next, jumper"
-        :total="isSearch ? searchData.length : dataList.length" @size-change="handleSizeChange"
-        @current-change="handleCurrentChange" />
+        :total="isSearch ? searchData.length : dataList.length" />
     </div>
 
     <!-- 点击添加按钮出现的遮罩层 -->
@@ -50,7 +50,7 @@
       <div class="dialogMenu" @click.stop>
         <section style="display: flex; justify-content: space-between; ">
           <span>{{ isSearch ? "修改菜单" : "添加菜单" }}</span>
-          <el-icon style="cursor: pointer;" @click="controlObj.isDialog.isAddMenu = false">
+          <el-icon style="cursor: pointer;" @click="controlObj.isDialog.isAddRole = false">
             <Close />
           </el-icon>
         </section>
@@ -61,46 +61,50 @@
             </el-select>
           </el-form-item>
           <div style="display: flex; justify-content:space-around;">
-            <el-form-item label="患病名称" style="flex: 3;" required>
+            <el-form-item label="患病名称" style="flex: 3;" prop="medical_indications">
               <el-input v-model="msgObj.medical_indications" placeholder=""></el-input>
             </el-form-item>
             <div style="flex:0.3"></div>
-            <el-form-item label="medical_ORR" style="flex: 3;" required>
+            <el-form-item label="medical_ORR" style="flex: 3;" prop="medical_ORR">
               <el-input v-model="msgObj.medical_ORR" placeholder=""></el-input>
             </el-form-item>
 
           </div>
           <div style="display: flex; justify-content:space-around;">
-            <el-form-item label="medical_OS" style="flex: 3;" required>
+            <el-form-item label="medical_OS" style="flex: 3;" prop="medical_OS">
               <el-input v-model="msgObj.medical_OS" placeholder=""></el-input>
             </el-form-item>
             <div style="flex:0.3"></div>
-            <el-form-item label="medical_PFS" style="flex: 3;" required>
+            <el-form-item label="medical_PFS" style="flex: 3;" prop="medical_PFS">
               <el-input v-model="msgObj.medical_PFS" placeholder=""></el-input>
             </el-form-item>
           </div>
 
           <div style="display: flex; justify-content:space-around;">
-            <el-form-item label="medical_TREE" style="flex: 3;" required>
+            <el-form-item label="medical_TREE" style="flex: 3;" prop="medical_TREE">
               <el-input v-model="msgObj.medical_TREE" placeholder=""></el-input>
             </el-form-item>
             <div style="flex:0.3"></div>
-            <el-form-item label="数量" style="flex: 3;" required>
+            <el-form-item label="数量" style="flex: 3;" prop="medical_enrollees_population">
               <el-input v-model="msgObj.medical_enrollees_population" placeholder=""></el-input>
             </el-form-item>
           </div>
 
           <div style="display: flex; justify-content:space-around;">
-            <el-form-item label="治疗方式" style="flex: 3;" required>
+            <el-form-item label="治疗方式" style="flex: 3;" prop="medical_name">
               <el-input v-model="msgObj.medical_name" placeholder=""></el-input>
             </el-form-item>
             <div style="flex:0.3"></div>
-            <el-form-item label="期数" style="flex: 3;" required>
+            <el-form-item label="期数" style="flex: 3;" prop="medical_status">
               <el-input v-model="msgObj.medical_status" placeholder=""></el-input>
             </el-form-item>
           </div>
 
           <div style="display: flex; justify-content:space-around;">
+            <el-form-item label="线数" style="flex: 3;" prop="medical_line">
+              <el-input v-model="msgObj.medical_line" placeholder=""></el-input>
+            </el-form-item>
+            <div style="flex:0.3"></div>
             <el-form-item label="id" style="flex: 3;">
               <el-input v-model="msgObj.id" placeholder="" disabled="true"></el-input>
             </el-form-item>
@@ -129,7 +133,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { watch } from "vue";
 
 export default {
-  name: "menuPage",
+  name: "rolePage",
   setup() {
     let search = ref("")
 
@@ -175,13 +179,13 @@ export default {
       // console.log('searchData', searchData);
     }
 
-    provide("name", "isAddMenu")
+    provide("name", "isAddRole")
 
     // 新增一项数据的事件
     function addList() {
       // console.log(11111);
 
-      controlObj.isDialog.isAddMenu = true
+      controlObj.isDialog.isAddRole = true
       Reflect.ownKeys(msgObj).forEach(item => {
         Reflect.set(msgObj, item, '')
       })
@@ -205,14 +209,14 @@ export default {
     // console.log('rules', rules);
     // 遮罩层取消按钮事件
     function cancel() {
-      controlObj.isDialog.isAddMenu = false;
+      controlObj.isDialog.isAddRole = false;
       isSetMenu.value = false
     }
 
     // 修改按钮事件
     function setList(item) {
       isSetMenu.value = true
-      controlObj.isDialog.isAddMenu = true;
+      controlObj.isDialog.isAddRole = true;
       Reflect.ownKeys(msgObj).forEach(key => {
         Reflect.set(msgObj, key, item[key])
       })
@@ -230,7 +234,7 @@ export default {
         }
       )
         .then(() => {
-          deleMenu(url.database.role.setMenu, item.id)
+          deleMenu(url.database.role.delMenu, item.id)
           ElMessage({
             type: 'success',
             message: '删除成功',
@@ -250,7 +254,7 @@ export default {
       if (!formEl) return
       await formEl.validate((valid, fields) => {
         if (valid) {
-          controlObj.isDialog.isAddMenu = false
+          controlObj.isDialog.isAddRole = false
           isSetMenu.value ? setMenu(url.database.role.setMenu, msgObj) : addMenu(url.database.role.addMenu, msgObj)
           console.log('提交成功')
           isSetMenu.value = false
@@ -267,20 +271,16 @@ export default {
     let pagArr = ref([]);
 
 
-    watch([currentPage, pageSize, isSearch], (newValue) => {
-      newValue[2] ? pagArr.value.push(...searchData.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1]))
+
+
+
+    watch([currentPage, pageSize, isSearch, searchData], (newValue) => {
+      pagArr.value.splice(0, pagArr.value.length)
+      newValue[2] ? pagArr.value.push(...(searchData.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1])))
         : pagArr.value.push(...dataList.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1]))
-    })
+    }, { immediate: true, deep: true })
 
     console.log('pagArr', pagArr);
-
-    function handleSizeChange() {
-      pagArr.value.splice(0, pagArr.value.length)
-    }
-
-    function handleCurrentChange() {
-      pagArr.value.splice(0, pagArr.value.length)
-    }
 
     return {
       search,
@@ -303,8 +303,7 @@ export default {
       setList,
       deleList,
       confirm,
-      handleSizeChange,
-      handleCurrentChange,
+
     }
   }
 }

@@ -11,7 +11,7 @@ export function centerMenu() {
 
     Request.getData(url.centerPage.centerRoutes).then(res=>{
         dataList.menu = toRef({...res.data})
-
+        console.log(dataList);
         if(res.data.status){
             let {loginOut,navSvg,nav} = dataList.menu.datas
             let routes = []
@@ -26,7 +26,7 @@ export function centerMenu() {
             store.commit("personalCenter/changeMenuRoutes", routes)
             store.commit("personalCenter/changeMenus", menuMsg)
             store.commit("changeStore", "isMenu")
-
+            console.log(routes);
             routes = handleRoutes(routes, routes.length-1)
 
             // 添加动态路由
@@ -34,7 +34,6 @@ export function centerMenu() {
                 router.addRoute("centerPage", item)
             })
 
-            console.log(router.getRoutes());
             setTimeout(()=>{
                 router.push({
                     name:"BaseMessage",

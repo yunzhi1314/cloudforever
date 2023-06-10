@@ -27,7 +27,6 @@ export default {
             message.msg = msg.msg
             message.message = msg.message
         }
-        console.log(message);
         return {
             controlObj,
             ...message

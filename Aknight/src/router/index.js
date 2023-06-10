@@ -1,3 +1,4 @@
+import { handleRoutes } from "@/hooks/handleRoutes";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
@@ -32,7 +33,6 @@ const whiteRoute = ["/center", "/center/login"]
 
 //路由前置守卫设置路由鉴权
 router.beforeEach((to, from, next) => {
-  console.log(from, to);
   //当前路径是否在白名单内,在就放行
   if (whiteRoute.includes(to.path)) {
     next()
@@ -42,7 +42,21 @@ router.beforeEach((to, from, next) => {
     if (JSON.parse(localStorage.getItem("token"))) {
       let token = JSON.parse(localStorage.getItem("token")).token
       if(token){
-        next()
+        if(to.matched[0]){
+          next()
+        }else{
+
+          let routeData = JSON.parse(sessionStorage.getItem("menu")).menuRoutes
+          routeData = handleRoutes(routeData, routeData.length-1)
+
+          routeData.forEach(item=>{
+            router.addRoute("centerPage",item)
+          })
+          next({
+            ...to,
+            replace:true
+          })
+        }
       }
     } else {
       //无权限者(需要登录获取权限)

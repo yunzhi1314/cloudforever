@@ -3,7 +3,10 @@
     <!-- 登录 -->
     <div
       class="login"
-      :style="{ height: controlObj.isChange ? '55vh' : '45vh' }"
+      :style="{ 
+        Animation:controlObj.isPlay ? '' :
+          controlObj.isChange ? 'register 0.35s 0s 1 ease-in forwards' : 'login 0.35s 0s 1 ease-in forwards'
+    }"
     >
       <section>{{ controlObj.isChange ? "注册" : "登录" }}</section>
       <!-- 账密区 -->
@@ -206,7 +209,7 @@ export default {
               console.log(registerData)
            }
         }
-
+        
         return {
             loginCSS,
             // 登录数组渲染

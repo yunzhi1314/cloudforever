@@ -1,34 +1,36 @@
 import  {Request} from "@/hooks/Requset";
-import url from "./url";
 import { reactive } from "vue";
 
 
 // 新增菜单请求
-export function addMenu(data){
+export function addMenu(url,data){
     let dataList=reactive({
         list:[]
     })
-    Request.postData(url.database.menu.addMenu,data).then(res=>{
+    Request.postData(url,data).then(res=>{
         dataList= {...res.data}
     })
     return dataList
 }
 
-export function setMenu(data){
+// 修改表单的请求
+export function setMenu(url,data){
     let dataList=reactive({
         list:[]
     })
-    Request.putData(url.database.menu.setMenu,data).then(res=>{
+    Request.putData(url,data).then(res=>{
         dataList= {...res.data}
     })
     return dataList
 }
 
-export function deleMenu(data){
+
+// 删除表单的请求
+export function deleMenu(url,data){
     let dataList=reactive({
         list:[]
     })
-    Request.deleteData(url.database.menu.setMenu,{
+    Request.deleteData(url,{
         params:{
             id:data.id
         }

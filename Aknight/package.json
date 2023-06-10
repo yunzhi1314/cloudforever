@@ -5,9 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "new:comp": "node ./scripts/generateComponent.mjs",
+    "new:view": "node ./scripts/generateView.mjs"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
     "chalk": "^5.2.0",
     "core-js": "^3.8.3",

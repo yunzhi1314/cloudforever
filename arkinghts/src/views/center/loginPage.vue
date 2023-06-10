@@ -11,7 +11,7 @@
         <section v-for="(item, index) in loginArr" :key="index">
           <p>
             <input
-              :type="item.text"
+              :type="item.type"
               :placeholder="item.placeholder"
               v-model="item.value"
               :style="{
@@ -89,6 +89,9 @@
       </section>
     </div>
   </dialogPage>
+  <!-- 吐丝提示 -->
+  <messagePage v-if="controlObj.isMsgTusi"></messagePage>
+
 </template>
 
 <script>
@@ -105,8 +108,9 @@ import svg from "@/hooks/personalCenter/code";
 import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
 import messagePage from "@/components/messagePage.vue";
 import { Request } from "@/hooks/personalCenter/request";
-import url from '@/api/url'
-import store from "@/store";
+import url from "@/api/url";
+import Toest from "@/hooks/personalCenter/Toest"
+
 
 export default {
   name: "loginPage",
@@ -207,8 +211,10 @@ export default {
       let obj = loginArr.find((item) => item.use == "手机号");
       useInfo.telephone = obj.value;
       telCode(useInfo);
+      Toest(controlObj)
     }
 
+    // 注册需要的数据
     let registerData = reactive({
       telephone: "",
       password: "",
@@ -238,6 +244,7 @@ export default {
             console.log(res);
           }
         );  
+        Toest(controlObj)
       }else{
         loginArr.forEach((item,index)=>{
           Reflect.set(
@@ -251,6 +258,7 @@ export default {
             console.log(res);
           }
         ); 
+        Toest(controlObj)
       }
     }
 
@@ -275,6 +283,7 @@ export default {
       useInfo,
       loginOrRegister, //点击注册或登录按钮
       codeLogin, // 点击切换密码或短信验证码登录
+      Toest
     };
   },
   components: { messagePage },

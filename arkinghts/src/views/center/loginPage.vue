@@ -1,5 +1,5 @@
 <template>
-  <div>
+   <div>
     <!-- 登录 -->
     <div
       class="login"
@@ -21,7 +21,7 @@
             <button
               v-if="item.isCode"
               class="btn"
-              @click="getMathCode('isMathCode')"
+              @click="getMathCode(controlObj, 'isMathCode')"
             >
               获取验证码
             </button>
@@ -34,7 +34,7 @@
       <!-- 按钮区 -->
       <div>
         <section>使用短信验证码登录</section>
-        <button @click="loginOrRegister">{{ controlObj.isChange ? '注册' : '登录' }}</button>
+        <button @click="loginOrRegister">登录</button>
         <section>使用bilibili账号</section>
       </div>
     </div>
@@ -147,7 +147,7 @@ export default {
             controlObj.isChange = false;
             loginArr.splice(2, 2);
         }
-        // 点击验证码登录
+        // 点击切换密码或短信验证码登录
         function codeLogin() {
             controlObj.isChange = false;
             if (loginArr.length == 2) {
@@ -163,7 +163,6 @@ export default {
                 });
             }
         }
-        console.log(codeLogin);
         watcher(loginArr); //调用监视函数监视账密框
         provide("controlDialog", "isMathCode");
         // 短信验证码需传送的数据
@@ -195,24 +194,26 @@ export default {
            }
         }
 
-    return {
-      loginCSS,
-      // 登录数组渲染
-      loginArr,
-      changeRegister, //点击去注册页面的按钮
-      changeLogin, //点击去登录页面的按钮
-      controlObj, //页面控制状态的按钮
-      getMathCode, //获取图形验证码函数
-      svg,//图形验证码svg工具
-      againGetMathCode,//点击svg图片再次发起请求，更新图形验证码
-      // 取消遮罩层
-      cancel,
-      // 遮罩层的确认按钮
-      confirm,
-      // 发送短信传送的数据
-      useInfo
-    };
-  },
+        return {
+            loginCSS,
+            // 登录数组渲染
+            loginArr,
+            changeRegister,
+            changeLogin,
+            controlObj,
+            getMathCode,
+            svg,
+            againGetMathCode,
+            // 取消遮罩层
+            cancel,
+            // 遮罩层的确认按钮
+            confirm,
+            // 发送短信传送的数据
+            useInfo,
+            loginOrRegister,//点击注册或登录按钮
+        };
+    },
+    components: { MessagePage }
 };
 </script>
 

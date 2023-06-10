@@ -39,14 +39,13 @@ export default {
 <style lang="scss" scoped>
 .tusi {
     width: 200px;
-    height: 50px;
     border-radius: 1vw;
     position: absolute;
     left: 43vw;
     top: 12vh;
     color: #fff;
     text-align: center;
-    line-height: 50px;
+    padding: 0.5vw;
 
 }
 </style>

@@ -6,7 +6,7 @@ export async function ExpMedical(dom) {
     let sources = await Request.get('http://192.168.2.26:3000/api/expMedicals') //获取图表数据
     store.commit('dataStore/SAVE_EXP_MEDICAL', sources.data)  //保存到仓库
     store.commit("CHANGE_STORE", "isExpMedical")
-
+   
     sources = sources.data.map(item => ({
         medical_name: item.medical_name,
         鳞癌ORR: item.id > 9 ? '' : item.medical_ORR.slice(0, item.medical_ORR.indexOf('%')),
@@ -17,6 +17,7 @@ export async function ExpMedical(dom) {
         medical_TREE: item.medical_TREE,
         id: item.id
     }))
+    console.log(sources)
     let echat = echarts.init(dom) //初始化echarts
     // 设置配置项
     let option = {
@@ -24,7 +25,6 @@ export async function ExpMedical(dom) {
         title: {
             text: "医疗公司的靶向药(鳞癌和非鳞癌)实验数据",
         },
-        //
         legend: {
             orient: 'horizontal',
             right: 10,
@@ -61,6 +61,35 @@ export async function ExpMedical(dom) {
                 max: 100,
             }
         ],
+        // 提示框
+        tooltip: {
+            trigger: 'axis',
+            formatter: (params) => {
+                const { dimensionNames, data } = params[0];
+                let tooltipContent = '';
+                const items = [
+                    { index: 6, key: 'company' },
+                    { index: 7, key: 'medical_Tree' },
+                    { index: 2, key: '鳞癌ORR', suffix: '%' },
+                    { index: 3, key: '鳞癌OS', suffix: '%' },
+                    { index: 4, key: '非鳞癌ORR', suffix: '%' },
+                    { index: 5, key: '非鳞癌OS', suffix: '%' },
+                ];
+
+                items.forEach((item) => {
+                    tooltipContent += `
+                  <section>
+                    <div class="ball"></div>
+                    <span>${dimensionNames[item.index]}:</span>
+                    <span style="margin-left:2vw;font-weight:bold">${data[item.key]}${item.suffix || ''}</span>
+                  </section>
+                `;
+                });
+
+                return tooltipContent;
+            },
+        },
+
         //系列列表
         series: [
             '鳞癌ORR',
@@ -78,3 +107,4 @@ export async function ExpMedical(dom) {
     }
     echat.setOption(option) //设置配置项
 }
+

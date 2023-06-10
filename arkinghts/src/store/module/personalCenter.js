@@ -13,6 +13,7 @@ export default ({
     },
     mutations: {
         changeUse(state,data){
+            console.log('savedData',data)
             state.UID = data.UID
             state.userId = data.userId
         }

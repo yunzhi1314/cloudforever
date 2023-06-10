@@ -1,20 +1,20 @@
-import axios, { Axios } from "axios"
+import axios from "axios"
 import qs from "qs"
 // 引入项目对应的后台接口
 import dev from "@/config/dev.env.js" 
 import pro from "@/config/pro.env.js"
 
 // 引入路由
-import {userRouter} from "vue-router"
+// import {userRouter} from "vue-router"
 
-const router = userRouter()
+// const router = userRouter()
 
 // 设置请求头
 const service = axios.create({
     // 为了调节后天API，根据项目环境调节（开发/生产环境）
     baseURL:process.env.NODE_ENV == "development" ? dev.API_ROOT : pro.API_ROOT,
     timeout:5000 // 设置响应时间为5秒
-})
+}) 
 
 // 拦截器 
 service.interceptors.request.use(config=>{
@@ -57,15 +57,15 @@ error => {
                 break;
               case 401:
                 console.error("token:登录失效==>" + error.response.status + ":");
-                router.replace({
-                  path: "/login",
-                });
+                // router.replace({
+                //   path: "/login",
+                // });
                 break;
               case 403:
                 console.error("登录信息已过期==>" + error.response.status);
-                router.replace({
-                  path: "/login",
-                });
+                // router.replace({
+                //   path: "/login",
+                // });
                 break;
                 case 404:
                   console.error("网络请求不存在==>" + error.response.status)

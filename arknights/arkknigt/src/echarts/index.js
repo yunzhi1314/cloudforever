@@ -14,24 +14,24 @@ export async function exMpedicals(dom){
       dataset:{   // dataset数据集
          dimensions:["medical_name","鳞癌ORR","鳞癌OS","非鳞癌ORR","非鳞癌OS","company","medical_Tree"],  //维度
          source:[  
-            // {
-            //    medical_name:"谁打我",
-            //    鳞癌ORR:"12",
-            //    鳞癌OS:"13",
-            //    非鳞癌ORR:"13",
-            //    非鳞癌OS:"14",
-            //    company:"康放生物",
-            //    medical_Tree:"26"
-            // },
-            // {
-            //    medical_name:"大大",
-            //    鳞癌ORR:"24",
-            //    鳞癌OS:"36",
-            //    非鳞癌ORR:"12",
-            //    非鳞癌OS:"50",
-            //    company:"康放生物",
-            //    medical_Tree:"13"
-            // },
+            {
+               medical_name:"谁打我",
+               鳞癌ORR:"12",
+               鳞癌OS:"13",
+               非鳞癌ORR:"13",
+               非鳞癌OS:"14",
+               company:"康放生物",
+               medical_Tree:"26"
+            },
+            {
+               medical_name:"大大",
+               鳞癌ORR:"24",
+               鳞癌OS:"36",
+               非鳞癌ORR:"12",
+               非鳞癌OS:"50",
+               company:"康放生物",
+               medical_Tree:"13"
+            },
          ], 
       },
       xAxis:{   // x轴
@@ -128,16 +128,7 @@ export async function exMpedicals(dom){
 }
 
 // export async function basicMedicals(dom){
-//    let option = {
-//       series:[
-//          {
-//             type:"pie",
-//             data:[
-//                value:
-//             ],
-//          }
-//       ]
-//    }
+//    let sources = await Request.getData(url.database.home.basicMedicals)
 // }
 
 // export function exMpedicals(dom){

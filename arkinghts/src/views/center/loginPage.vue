@@ -61,7 +61,9 @@
             >《鹰角网络游戏个人信息保护政策》</span
           >
         </section>
-        <button @click="loginOrRegister">{{ controlObj.isChange ? "注册" : "登录" }}</button>
+        <button @click="loginOrRegister">
+          {{ controlObj.isChange ? "注册" : "登录" }}
+        </button>
         <section v-if="!controlObj.isChange">使用bilibili账号</section>
       </div>
     </div>
@@ -103,7 +105,6 @@
   </dialogPage>
   <!-- 吐丝提示 -->
   <messagePage v-if="controlObj.isMsgTusi"></messagePage>
-
 </template>
 
 <script>
@@ -120,14 +121,16 @@ import svg from "@/hooks/personalCenter/code";
 import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
 import messagePage from "@/components/messagePage.vue";
 import { Request } from "@/hooks/personalCenter/request";
-import url from '@/api/url'
+import url from "@/api/url";
 import store from "@/store";
-import Toest from "@/hooks/personalCenter/Toest"
-
+import { useRouter } from "vue-router";
+// import {Toest} from "@/hooks/personalCenter/Toest" //吐丝的函数
 
 export default {
   name: "loginPage",
   setup() {
+    // 路由
+    const router = useRouter();
     // 登录数组
     let loginArr = reactive([
       {
@@ -161,6 +164,7 @@ export default {
         type: "password",
         placeholder: "请确认密码",
         use: "确认密码",
+        zz: /^\w{8,16}$/,
       },
       {
         value: "",
@@ -170,7 +174,6 @@ export default {
         type: "text",
         placeholder: "输入验证码",
         zz: /^\d{4}$/,
-        isCode: true,
         use: "验证码",
       },
     ]);
@@ -198,18 +201,20 @@ export default {
     };
     let obj1 = {
       value: "",
-        isShow: false,
-        tip: "*密码格式不正确",
-        tip1: "*密码不能为空",
-        type: "password",
-        placeholder: "8-16位数字、字母、常用字符",
-        zz: /^\w{8,16}$/,
-        use: "密码",
+      isShow: false,
+      tip: "*密码格式不正确",
+      tip1: "*密码不能为空",
+      type: "password",
+      placeholder: "8-16位数字、字母、常用字符",
+      zz: /^\w{8,16}$/,
+      use: "密码",
     };
     // 点击切换密码或短信验证码登录
     function codeLogin() {
-      controlObj.isCode = !controlObj.isCode
-      controlObj.isChange ? loginArr.splice(1,1,obj) : loginArr.splice(1,1,obj1)
+      controlObj.isCode = !controlObj.isCode;
+      controlObj.isChange
+        ? loginArr.splice(1, 1, obj)
+        : loginArr.splice(1, 1, obj1);
     }
     watcher(loginArr); //调用监视函数监视账密框
     provide("controlDialog", "isMathCode");
@@ -224,7 +229,7 @@ export default {
       let obj = loginArr.find((item) => item.use == "手机号");
       useInfo.telephone = obj.value;
       telCode(useInfo);
-      Toest(controlObj)
+      // Toest(controlObj) //调用吐丝的函数
     }
     let registerData = reactive({
       telephone: "",
@@ -232,17 +237,21 @@ export default {
       confirmPassword: "",
       code: "",
     });
-      // 登录需要的数据
-      let loginData = reactive({
+    // 登录需要的数据
+    let loginData = reactive({
       telephone: "",
       password: "",
+      userId: JSON.parse(localStorage.getItem("user")).userId,
     });
-
- 
+    //  登录或注册按钮
     function loginOrRegister() {
-      let dataList = reactive({data:[]});
+      let dataList = reactive({
+        data: [], //注册数据
+        data1: [], //登录数据
+      });
+      // 注册和登录分离
       if (controlObj.isChange) {
-        console.log(11)
+        // 将账密框的数据赋予新声明注册需要的数据的对象
         loginArr.forEach((item, index) => {
           Reflect.set(
             registerData,
@@ -250,51 +259,52 @@ export default {
             item.value
           );
         });
-        Request.postData(url.personalCenter.register,registerData)
-        .then(res=>{
-          dataList.data =  res.data
-          console.log(res.data)
-        }).catch(err =>{
-          console.log(err)
-        })
+        Request.postData(url.personalCenter.register, registerData)
+          .then((res) => {
+            dataList.data = res.data;
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
-        setTimeout(()=>{
-          store.commit('personalCenter/changeUse',dataList.data) 
-        store.commit('changeStore','isRegister')
-        },1000)
-       
-         
-        Toest(controlObj)
-      }else{
-        loginArr.forEach((item,index)=>{
-          Reflect.set(
-            loginData,
-            Reflect.ownKeys(loginData)[index],
-            item.value
-          );
-        })
-        Request.postData(url.personalCenter.login, loginData).then(
-          (res) => {
-            console.log(res);
-          }
-        ); 
-        Toest(controlObj)
+        setTimeout(() => {
+          store.commit("personalCenter/changeUse", dataList.data);
+          store.commit("changeStore", "isRegister");
+        }, 200);
+
+        // Toest(controlObj)//调用吐丝的函数
+      } else {
+        // 将账密框的数据赋予新声明登录需要的数据的对象
+        loginArr.forEach((item, index) => {
+          Reflect.set(loginData, Reflect.ownKeys(loginData)[index], item.value);
+        });
+        Request.postData(url.personalCenter.login, loginData).then((res) => {
+          dataList.data1 = res.data;
+          store.commit("personalCenter/changeToken", dataList.data1);
+          store.commit("changeStore", "isLogin");
+        });
+        router.push({
+          name: "bufferPage",
+          params: {
+            userId: JSON.parse(localStorage.getItem("user")).userId,
+          },
+        });
+
+        // Toest(controlObj)//调用吐丝的函数
       }
     }
 
-    let userId = JSON.parse( localStorage.getItem('user')).userId
-
-    console.log(userId)
     return {
       loginCSS,
       // 登录数组渲染
       loginArr,
-      changeRegister,
-      changeLogin,
-      controlObj,
-      getMathCode,
-      svg,
-      againGetMathCode,
+      changeRegister, //去往注册页面
+      changeLogin, //去往登录页面
+      controlObj, //全局状态控制开关
+      getMathCode, //获取图形验证码
+      svg, //图形装载工具
+      againGetMathCode, //点击图形验证码图片再次发起请求刷新图形验证码
       // 取消遮罩层
       cancel,
       // 遮罩层的确认按钮
@@ -303,7 +313,7 @@ export default {
       useInfo,
       loginOrRegister, //点击注册或登录按钮
       codeLogin, // 点击切换密码或短信验证码登录
-      Toest
+      // Toest,//吐丝的函数
     };
   },
   components: { messagePage },

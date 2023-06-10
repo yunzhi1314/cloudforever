@@ -19,12 +19,23 @@ export default createStore({
       },
       key: "user"
     }),
+    createPersistedState({
+      storage: window.sessionStorage,
+      reducer(state) {
+        let tokenData = {
+          token: state.personalCenter.token,
+        }
+        return isStore(state,"token","isLogin",tokenData,sessionStorage)
+      },
+      key: "token"
+    }),
   ],
   state: {
     countDown:120,
     // 控制状态开关集合
     control:{
-      isRegister:false
+      isRegister:false,
+      isLogin:false
     }
   },
   getters: {

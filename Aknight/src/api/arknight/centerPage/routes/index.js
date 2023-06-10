@@ -1,5 +1,6 @@
 // 登录成功请求路由，并处理动态路由
 import url from "@/api/url";
+import { handleRoutes } from "@/hooks/handleRoutes";
 import { Request } from "@/hooks/request";
 import { reactive, toRef } from "vue";
 
@@ -20,6 +21,8 @@ export function centerMenu() {
             menuMsg = {menuMsg, loginOut,navSvg}
             console.log(menuMsg);
             console.log(routes);
+            let route = handleRoutes(routes, routes.length-1)
+            console.log(route);
         }
     })
 }

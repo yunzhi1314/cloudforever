@@ -1,6 +1,6 @@
 <template>
     <div class="common-layout">
-        <router-link :to="{ name: '' }"></router-link>
+        <router-link :to="{ name: '',params}"></router-link>
         <el-container>
             <el-aside :width="!isScollape ? '12vw' : '4vw'" :style="{ transition: 'all 0.25s 0s linear', }">
                 <el-menu background-color="#545C64" text-color="#fff" active-text-color="#409EFF"
@@ -71,14 +71,15 @@
                         </el-menu-item>、
                         <!-- 用户名 -->
                         <el-sub-menu index="3">
+                            <!-- 用户名 -->
                             <!-- <template>
                                 <span>
                                     yuyukosama
                                 </span>
                             </template> -->
-                            <el-menu-item index="3-1">item one</el-menu-item>
-                            <el-menu-item index="3-2">item two</el-menu-item>
-                            <el-menu-item index="3-3">item three</el-menu-item>
+                            <el-menu-item index="3-1">鬼人正邪</el-menu-item>
+                            <el-menu-item index="3-2">安全中心</el-menu-item>
+                            <el-menu-item index="3-3">退出</el-menu-item>
                         </el-sub-menu>
                     </el-menu>
                 </el-header>
@@ -107,13 +108,22 @@ export default {
             if(j == undefined){
                 router.push({
                     name:pages[i].name,
+                    params:{
+                        userId:'11111'
+                    }
                 })
             }else{
                 router.push({
                     name:pages[i].children[j].name,
+                    params:{
+                        userId:'11111'
+                    }
                 })
             }
         }
+        // function toTab(i){
+
+        // }
         return {
             isScollape,
             toPage,

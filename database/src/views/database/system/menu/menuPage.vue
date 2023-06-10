@@ -28,7 +28,7 @@
                 <template #default="scope">
                     <el-button type="text" size="mini" style="font-size: 12px;" @click="addList">添加</el-button>
                     <el-button type="text" size="mini" style="font-size: 12px;" @click="setList(scope.row)">修改</el-button>
-                    <el-button type="text" size="mini" style="font-size: 12px;" @click="deleList(scope.row)">删除</el-button>
+                    <el-button type="text" size="mini" style="font-size: 12px;" @click="deleList(scope.row,url.database.menu.delMenu)">删除</el-button>
                 </template>
 
             </el-table-column>
@@ -81,7 +81,7 @@
                     <el-form-item style="display: flex;">
                         <div style="flex: 1;"></div>
                         <el-button type="" @click="cancel">取消</el-button>
-                        <el-button type="primary" @click="confirm(ruleFormRef)">{{ isSetMenu ? "更改" : "添加" }}</el-button>
+                        <el-button type="primary" @click="confirm(ruleFormRef,'isAddMenu',isSetMenu,msgObj,url.database.menu.setMenu,url.database.menu.addMenu)">{{ isSetMenu ? "更改" : "添加" }}</el-button>
                     </el-form-item>
                 </el-form>
 
@@ -96,8 +96,7 @@ import { ref, reactive, provide } from "vue";
 import { dealMenu } from "@/hooks/dealMenu";
 import controlObj from "@/hooks/control";
 import url from "@/api/url";
-import { addMenu, setMenu, deleMenu } from "@/api/addMenu";
-import { ElMessage, ElMessageBox } from 'element-plus'
+import {deleList,confirm,getMsgObj} from '@/hooks/menuPage'
 
 export default {
     name: "menuPage",
@@ -107,38 +106,26 @@ export default {
         let { dataList, newArr, compary } = dealMenu()
         // dataList = ref(dataList)
         let isSearch = ref(false)
-
-        // console.log("newArr", newArr);
-        // console.log("compary", compary);
-
+        
         let msgObj = reactive({
-            medical_name: '',
-            medical_company: '',
-            medical_indications: '',
-            medical_treatment: '',
-            medical_target: '',
-            medical_area: '',
-            id: ''
         })
-
-        // console.log(msgObj);
+        let ruleFormRef = ref('')
+        let rules = reactive({})
+        //  校验规则
+        
+        getMsgObj(dataList[0],msgObj,rules)
 
         let searchData = ref('')
         //  查询按钮事件
 
         function query() {
             isSearch.value = true;
-
             searchData.value = dataList.filter(item =>
                 Object.values(item).includes(search.value)
-
             )
-
             if (search.value == '') {
                 isSearch.value = false
             }
-
-            // console.log('searchData', searchData);
         }
 
         provide("name", "isAddMenu")
@@ -146,7 +133,6 @@ export default {
         // 新增一项数据的事件
         function addList() {
             // console.log(11111);
-
             controlObj.isDialog.isAddMenu = true
             Reflect.ownKeys(msgObj).forEach(item => {
                 Reflect.set(msgObj, item, '')
@@ -154,20 +140,9 @@ export default {
 
             msgObj.id = dataList.length + 1
         }
-        let ruleFormRef = ref('')
-        let rules = reactive({})
-        //  校验规则
-        Reflect.ownKeys(msgObj).forEach(item => {
-            Reflect.set(rules, item, {
-                required: true,
-                message: `请输入${item}`,
-                trigger: 'blur',
-            })
-        })
-
         let isSetMenu = ref(false)
 
-        // console.log('rules', rules);
+        
         // 遮罩层取消按钮事件
         function cancel() {
             controlObj.isDialog.isAddMenu = false;
@@ -180,48 +155,6 @@ export default {
             controlObj.isDialog.isAddMenu = true;
             Reflect.ownKeys(msgObj).forEach(key => {
                 Reflect.set(msgObj, key, item[key])
-            })
-        }
-
-        // 删除按钮事件
-        function deleList(item) {
-            // console.log(item);
-            ElMessageBox.confirm(
-                '请问确定要删除该信息吗？',
-                {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning',
-                }
-            )
-                .then(() => {
-                    deleMenu(url.database.menu.setMenu, item.id)
-                    ElMessage({
-                        type: 'success',
-                        message: '删除成功',
-                    })
-                })
-                .catch(() => {
-                    ElMessage({
-                        type: 'info',
-                        message: '取消删除',
-                    })
-                })
-        }
-
-
-        // 遮罩层提交按钮事件
-        const confirm = async (formEl) => {
-            if (!formEl) return
-            await formEl.validate((valid, fields) => {
-                if (valid) {
-                    controlObj.isDialog.isAddMenu=false
-                    isSetMenu.value ? setMenu(url.database.menu.setMenu, msgObj) : addMenu(url.database.menu.addMenu, msgObj)
-                    console.log('提交成功')
-                    isSetMenu.value = false
-                } else {
-                    console.log('提交失败', fields)
-                }
             })
         }
 
@@ -243,6 +176,7 @@ export default {
             setList,
             deleList,
             confirm,
+            url,
         }
     }
 }

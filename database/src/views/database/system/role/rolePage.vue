@@ -230,7 +230,7 @@ export default {
         }
       )
         .then(() => {
-          deleMenu(url.database.role.setMenu, item.id)
+          deleMenu(url.database.role.delMenu, item.id)
           ElMessage({
             type: 'success',
             message: '删除成功',
@@ -243,7 +243,6 @@ export default {
           })
         })
     }
-
 
     // 遮罩层提交按钮事件
     const confirm = async (formEl) => {

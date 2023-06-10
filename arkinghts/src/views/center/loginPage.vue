@@ -1,16 +1,34 @@
 <template>
   <div>
     <!-- 登录 -->
-    <div class="login" :style="{height:controlsObj.isChange? '55vh':'45vh'}">
-      <section>{{ controlsObj.isChange ? '注册':'登录' }}</section>
+    <div
+      class="login"
+      :style="{ height: controlObj.isChange ? '55vh' : '45vh' }"
+    >
+      <section>{{ controlObj.isChange ? "注册" : "登录" }}</section>
       <!-- 账密区 -->
       <div class="info">
-        <section v-for="(item,index) in loginArr" :key="index">
+        <section v-for="(item, index) in loginArr" :key="index">
           <p>
-            <input :type="item.text" :placeholder="item.placeholder" />
-            <button v-if="item.isCode" class="btn">获取验证码</button>
+            <input
+              :type="item.text"
+              :placeholder="item.placeholder"
+              v-model="item.value"
+              :style="{
+                backgroundColor: item.isShow ? '#FFDCDB' : '',
+              }"
+            />
+            <button
+              v-if="item.isCode"
+              class="btn"
+              @click="getMathCode(controlObj, 'isMathCode')"
+            >
+              获取验证码
+            </button>
           </p>
-          <p>{{ item.tip }}</p>
+          <p v-show="item.isShow">
+            {{ !item.value == "" ? item.tip : item.tip1 }}
+          </p>
         </section>
       </div>
       <!-- 按钮区 -->
@@ -23,17 +41,50 @@
 
     <!-- 登录注册替换 -->
     <section class="change">
-      <span @click="changeLogin">登录</span>
+      <span
+        @click="changeLogin"
+        :style="{
+          color: controlObj.isChange ? '#000' : '',
+          fontSize: controlObj.isChange ? '1rem' : '',
+        }"
+        >登录</span
+      >
       <span>·</span>
-      <span @click="changeRegister">注册</span>
+      <span
+        @click="changeRegister"
+        :style="{
+          color: controlObj.isChange ? '#158FC5' : '',
+          fontSize: controlObj.isChange ? '1.3rem' : '',
+        }"
+        >注册</span
+      >
     </section>
   </div>
+
+  <!-- 遮罩层 -->
+  <dialogPage>
+    <div class="dialog" @click.stop>
+        <section>
+          <input type="text">
+          <span v-html="svg.code" @click="againGetMathCode()"></span>
+        </section>
+        <section>
+          <button @click="confirm">确认</button>
+          <button @click="cancel">取消</button>
+        </section>
+    </div>
+        
+  </dialogPage>
 </template>
 
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
+<<<<<<<<< Temporary merge branch 1
 import controlsObj from "@/hooks/personalCenter/controls";
+=========
+import { getMathcode } from "@/hooks/personalCenter/code"
+>>>>>>>>> Temporary merge branch 2
 
 export default {
   name: "loginPage",
@@ -47,7 +98,7 @@ export default {
         tip1: "*账号不能为空",
         type: "tel",
         placeholder: "请输入手机号",
-        zz: /^1{1}[3-9]{1}\d{9}$/
+        zz: /^1{1}[3-9]{1}\d{9}$/,
       },
       {
         value: "",
@@ -55,9 +106,9 @@ export default {
         tip: "*密码格式不正确",
         tip1: "*密码不能为空",
         type: "password",
-        placeholder: "请输入密码",
-        zz: /^\w{6,18}$/
-      }
+        placeholder: "8-16位数字、字母、常用字符",
+        zz: /^\w{8,16}$/,
+      },
     ]);
     // 注册页面增加数组
     let newArr = reactive([
@@ -67,7 +118,7 @@ export default {
         tip: "*请确认密码",
         tip1: "*两次输入的密码不一致",
         type: "password",
-        placeholder: "请密码"
+        placeholder: "请确认密码",
       },
       {
         value: "",
@@ -77,26 +128,31 @@ export default {
         type: "text",
         placeholder: "请输入验证码",
         zz: /^\d{4}$/,
-        isCode: true
-      }
+        isCode: true,
+      },
     ]);
 
     // 点击去注册页面
     function changeRegister() {
-      controlsObj.isChange = true;
+      controlObj.isChange = true;
       if (loginArr.length < 4) {
         loginArr.push(...newArr);
       }
     }
     // 点击去登录页面
     function changeLogin() {
-      controlsObj.isChange = false;
+      controlObj.isChange = false;
       loginArr.splice(2, 2);
     }
+
+    watcher(loginArr); //调用监视函数监视账密框
+
+    provide("controlDialog", "isMathCode");
     return {
       loginCSS,
       // 登录数组渲染
       loginArr,
+<<<<<<<<< Temporary merge branch 1
       // 注册增加数组
       newArr,
       // 点击去往注册框
@@ -105,11 +161,19 @@ export default {
       changeLogin,
       // 全局开关对象
       controlsObj
+=========
+      changeRegister,
+      getMathcode,
+>>>>>>>>> Temporary merge branch 2
     };
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+<<<<<<<<< Temporary merge branch 1
 </style>
 
+=========
+</style>
+>>>>>>>>> Temporary merge branch 2

@@ -64,6 +64,7 @@
 import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
 import controlsObj from "@/hooks/personalCenter/controls";
+import { getMathcode } from "@/hooks/personalCenter/code"
 
 export default {
   name: "loginPage",
@@ -127,6 +128,7 @@ export default {
       loginCSS,
       // 登录数组渲染
       loginArr,
+
       // 注册增加数组
       newArr,
       // 点击去往注册框
@@ -134,12 +136,15 @@ export default {
       // 点击去往登录框
       changeLogin,
       // 全局开关对象
-      controlsObj
+      controlsObj,
+      changeRegister,
+      getMathcode,
+
     };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-</style>
 
+</style>

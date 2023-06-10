@@ -42,11 +42,12 @@
                         <!-- 面包屑 -->
                         <el-menu-item index="1">
                             <el-breadcrumb separator-class="/">
-                                <el-breadcrumb-item :to="{ name: 'homePage' }">首页</el-breadcrumb-item>
-                                <el-breadcrumb-item>{{route.meta.name }}</el-breadcrumb-item>
-                                <el-breadcrumb-item>B</el-breadcrumb-item>
+                                <el-breadcrumb-item :to="{ name: 'homePage', params: { userId } }">首页</el-breadcrumb-item>
+                                <el-breadcrumb-item v-show="route.meta.isHide"></el-breadcrumb-item>
+                                <el-breadcrumb-item v-show="route.meta.isHide">{{route.meta.title }}</el-breadcrumb-item>
                             </el-breadcrumb>
                         </el-menu-item>
+                        <!-- 间隙 -->
                         <div style="flex-grow: 1;"></div>
                         <!-- 用户名左边图标 -->
                         <el-menu-item index="2">
@@ -72,17 +73,17 @@
                         <!-- 用户名 -->
                         <el-sub-menu index="3">
                             <!-- 用户名 -->
-                            <!-- <template>
+                            <template>
                                 <span>
                                     yuyukosama
                                 </span>
-                            </template> -->
+                            </template>
                             <el-menu-item index="3-1">鬼人正邪</el-menu-item>
                             <el-menu-item index="3-2">安全中心</el-menu-item>
                             <el-menu-item index="3-3">退出</el-menu-item>
                         </el-sub-menu>
                     </el-menu>
-                    <el-tabs v-model="activeKey">
+                    <el-tabs class="demo-tabs" type="card">
                       <el-tab-pane key="1" tab=""></el-tab-pane>
                     </el-tabs>
                 </el-header>
@@ -95,7 +96,7 @@
 </template>
   
 <script>
-import { reactive, ref, toRefs } from "vue";
+import { reactive, ref, toRefs,onUpdated } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { layoutRoutes } from '@/api/database/layoutRoute/getRoutes'
 export default {
@@ -104,10 +105,21 @@ export default {
         const isScollape = ref(false) // 是否折叠
         const router = useRouter() // 路由
         const route = useRoute() // 当前路由
+
         let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu) //获取存入vuex的路由
         // let tabs = ref([]) // 保存tab
+
+        onUpdated(()=> {
+            let newStr = route.fullPath
+            let new2str = newStr.slice(0,route.fullPath.indexOf('/'))
+            console.log(new2str)
+        })
+
+
+
         //点击菜单跳转路由
         function toPage(i,j){
+            route.meta.isHide = false // 面包屑的显示与隐藏
             // 如果是子菜单
             if(j == undefined){
                 router.push({
@@ -125,15 +137,22 @@ export default {
                 })
             }
         }
-        // function toTab(i){
-
-            console.log(route)
-        // }
+        //面包屑的显示与隐藏
+        function toTab(i){
+            route.meta.isHide = true;
+            router.span({
+                name:pages[i].name,
+                params:{
+                    userId:'11111'
+                }
+            })
+        }
         return {
             isScollape,
             toPage,
             ...toRefs(layoutRoutes()),
-            route
+            route,
+            toTab
         }
     }
 }

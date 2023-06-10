@@ -22,9 +22,8 @@
               v-if="item.isCode"
               class="btn"
               @click="getMathCode('isMathCode')"
-              :disabled='controlObj.isChange ? "true" : "false"'
             >
-             {{ controlObj.isChange ?  "获取验证码": ""  }}
+             获取验证码
             </button>
           </p>
           <p :style="{visibility: item.isShow ? 'visible':'hidden'}">
@@ -46,7 +45,7 @@
             及</span>
           <span v-if="controlObj.isChange">《鹰角网络游戏个人信息保护政策》</span>
           </section>
-        <button>{{ controlObj.isChange ? "注册" : "登录" }}</button>
+        <button @click="loginOrRegister">{{ controlObj.isChange ? "注册" : "登录" }}</button>
         <section v-if="!controlObj.isChange">使用bilibili账号</section>
       </div>
     </div>
@@ -198,7 +197,7 @@ export default {
            confirmPassword:'',
            code:''
         })
-        Reflect
+ 
         function loginOrRegister(){
            if(controlObj.isChange){
               loginArr.forEach((item,index)=>{

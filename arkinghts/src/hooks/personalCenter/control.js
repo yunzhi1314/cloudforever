@@ -8,6 +8,8 @@ let  controlObj = reactive({
     isDialog:{
        isMathCode:false,//点击获取验证码控制遮罩层的显示
     },
+    isRegister:false, //是否是注册
+    isLogin:false, //是否是登录
 })
 
 export default controlObj

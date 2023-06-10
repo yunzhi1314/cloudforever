@@ -21,9 +21,10 @@
             <button
               v-if="item.isCode"
               class="btn"
-              @click="getMathCode(controlObj, 'isMathCode')"
+              @click="getMathCode('isMathCode')"
+              :disabled='controlObj.isChange ? "true" : "false"'
             >
-              获取验证码
+             {{ controlObj.isChange ?  "获取验证码": ""  }}
             </button>
           </p>
           <p :style="{visibility: item.isShow ? 'visible':'hidden'}">
@@ -97,7 +98,6 @@ import { getMathCode, againGetMathCode,cancel } from "@/hooks/personalCenter/cod
 import svg from '@/hooks/personalCenter/code'
 import { telCode } from "@/api/telCode"// 获取短信验证码请求的API
 import MessagePage from "@/components/messagePage.vue";
-
 
 export default {
     name: "loginPage",
@@ -189,6 +189,7 @@ export default {
             let obj = loginArr.find(item => item.use == "手机号");
             useInfo.telephone = obj.value;
             telCode(useInfo);
+          
         }
 
         let  registerData = reactive({

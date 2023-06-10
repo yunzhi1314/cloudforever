@@ -4,14 +4,13 @@ import { Request } from "@/hook/request";
 
 export function homeData(url){
     let dataList = reactive({
-        data:[],
+        homedata:[],
     })
 
     onBeforeMount(() => {
-        Request.getData(url)
+        Request.get(url)
         .then((res) =>{
-            dataList.data = {...res.data};
-            console.log(res.data);
+            dataList.homedata = {...res.data};
         })
     })
 

@@ -99,7 +99,7 @@ export default {
         const isScollape = ref(false)
         const router = useRouter()
         const route = useRoute() // 当前路由
-        console.log(route,router)
+        console.log(route,router,'1')
         
         return {
             isScollape,

@@ -43,7 +43,7 @@
                         <el-menu-item index="1">
                             <el-breadcrumb separator-class="/">
                                 <el-breadcrumb-item :to="{ name: 'homePage' }">首页</el-breadcrumb-item>
-                                <el-breadcrumb-item>{{ metaName }}</el-breadcrumb-item>
+                                <el-breadcrumb-item>A</el-breadcrumb-item>
                                 <el-breadcrumb-item>B</el-breadcrumb-item>
                             </el-breadcrumb>
                         </el-menu-item>
@@ -71,11 +71,12 @@
                         </el-menu-item>、
                         <!-- 用户名 -->
                         <el-sub-menu index="3">
-                            <template>
+                           
+                            <!-- <template>
                                 <span>
                                     yuyukosama
                                 </span>
-                            </template>
+                            </template> -->
                             <el-menu-item index="3-1">item one</el-menu-item>
                             <el-menu-item index="3-2">item two</el-menu-item>
                             <el-menu-item index="3-3">item three</el-menu-item>

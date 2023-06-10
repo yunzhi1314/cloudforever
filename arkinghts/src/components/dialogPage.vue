@@ -24,6 +24,8 @@ export default {
     function cancel(){
          Reflect.set(controlObj.isDialog,controlDialog,false)
     }
+
+
     return {
         controlObj,//按钮集合
         cancel,//遮罩层取消
@@ -31,6 +33,10 @@ export default {
     };
   },
 };
+
+
+
+
 </script>
 
 <style lang="scss" scoped>

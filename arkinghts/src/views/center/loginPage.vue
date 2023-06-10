@@ -1,15 +1,18 @@
 <template>
   <div>
     <!-- 登录 -->
-    <div class="login">
-     <section>登录</section>
-     <!-- 账密区 -->
-     <div>
-      <p v-for="(item,index) in loginArr" :key="index">
-        <input :text="tel" :placeholder="item.placeholder">
-        <span>{{ item.tip }}</span>
-      </p>
-    </div>
+    <div class="login" :style="{height:controlsObj.isChange? '55vh':'45vh'}">
+      <section>{{ controlsObj.isChange ? '注册':'登录' }}</section>
+      <!-- 账密区 -->
+      <div class="info">
+        <section v-for="(item,index) in loginArr" :key="index">
+          <p>
+            <input :type="item.text" :placeholder="item.placeholder" />
+            <button v-if="item.isCode" class="btn">获取验证码</button>
+          </p>
+          <p>{{ item.tip }}</p>
+        </section>
+      </div>
       <!-- 按钮区 -->
       <div>
         <section>使用短信验证码登录</section>
@@ -30,6 +33,8 @@
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive } from "vue";
+import controlsObj from "@/hooks/personalCenter/controls";
+
 export default {
   name: "loginPage",
   setup() {
@@ -92,7 +97,14 @@ export default {
       loginCSS,
       // 登录数组渲染
       loginArr,
-      changeRegister
+      // 注册增加数组
+      newArr,
+      // 点击去往注册框
+      changeRegister,
+      // 点击去往登录框
+      changeLogin,
+      // 全局开关对象
+      controlsObj
     };
   }
 };
@@ -100,3 +112,4 @@ export default {
 
 <style lang="scss" scoped>
 </style>
+

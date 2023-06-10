@@ -34,7 +34,12 @@
                 v-show="item.meta.isIframe"
                 >
                 <template #title>
-                    <el-icon><Setting /></el-icon>
+                    <el-icon v-if="index==0"><HomeFilled /></el-icon>
+                    <el-icon v-if="index==1"><Setting /></el-icon>
+                    <el-icon v-if="index==2"><Key /></el-icon>
+                    <el-icon v-if="index==3"><Menu /></el-icon>
+                    <el-icon v-if="index==4"><Setting /></el-icon>
+                    <el-icon v-if="index==5"><HomeFilled /></el-icon>
               <span> {{ item.meta.title }}</span>
                 </template>
                 <el-menu-item 
@@ -51,7 +56,7 @@
       </el-aside>
       <el-container>
         <!-- 头部 -->
-        <el-header>
+        <el-header style="padding-top: 1vh; height: 9vh;" >
           <el-menu mode="horizontal" :ellipsis="false">
             <el-menu-item index="0">
               <el-icon @click="isCollapse = !isCollapse">
@@ -62,45 +67,33 @@
 
             <el-menu-item index="1">
               <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-                <el-breadcrumb-item><a href="/">promotion management</a></el-breadcrumb-item>
-                <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-                <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
-              </el-breadcrumb>
+                 <el-breadcrumb-item :to="{name:'homePage',params:{userId}}"> 首页</el-breadcrumb-item>
+                  <el-breadcrumb-item v-show="route.meta.isHide"> {{ metaName }}</el-breadcrumb-item>
+                  <el-breadcrumb-item  v-show="route.meta.isHide" 
+                  :style="{
+                    animation: isPlay ? 'flyIn 0.25s 0s 1 linear forwards' : '',
+                  }"
+                  > {{ route.meta.title }} </el-breadcrumb-item>
+                </el-breadcrumb>
             </el-menu-item>
+            <!-- 该项让图标向右 -->
             <div class="flex-grow" />
             <!-- 右边表情栏 -->
             <el-menu-item index="2">
-              <el-icon>
-                <CirclePlus />
-              </el-icon>
-              <el-icon>
-                <Mic />
-              </el-icon>
-              <el-icon>
-                <Search />
-              </el-icon>
-              <el-icon>
-                <Bicycle />
-              </el-icon>
-              <el-icon>
-                <Sunset />
-              </el-icon>
-              <el-icon>
-                <FullScreen />
-              </el-icon>
+              <el-icon> <CirclePlus /> </el-icon>
+              <el-icon> <Mic />        </el-icon>
+              <el-icon> <Search />     </el-icon>
+              <el-icon> <Bicycle />    </el-icon>
+              <el-icon> <Sunset />     </el-icon>
+              <el-icon> <FullScreen /> </el-icon>
             </el-menu-item>
           </el-menu>
           <div>
-
-            <!-- 标签渲染点击事件 -->
-            <el-tabs v-model="title" type="card" class="demo-tabs" closable @tab-remove="removeTab" @tab-click="toTab">
-
-              <!-- 这里遍历标签面包屑 -->
-              <el-tab-pane v-for="item in tabs" :key="item" :label="item" :name="item">
-
+            <!-- 标签渲染及点击事件 -->
+            <el-tabs v-model="title" type="card" class="demo-tabs" closable @tab-remove="removeTab" @tab-click="toTab" >
+              <!-- 这里遍历标签页眉 -->
+              <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.title" :name="item.name">
               </el-tab-pane>
-
             </el-tabs>
           </div>
         </el-header>
@@ -117,32 +110,35 @@
 // import { onBeforeMount } from 'vue';
 import { layoutMenu } from "@/api/database/layout";
 import { ref,toRefs,reactive,onUpdated} from "vue";
-import { useRoute,useRouter } from "vue-router";
+import { useRoute } from "vue-router";
+import router from "@/router";
+import layoutCSS from '@/public/layout.scss'
 export default {
   name: "databasePage",
   setup() {
-    let isCollapse = ref(false);
-    let tabs=ref(['标签1','标签2','标签3','标签4'])
-    const router =useRouter()
+    layoutMenu()
     const route =useRoute()
-    let metaName=ref("")
+    let isCollapse = ref(false);
+    let tabs=ref([])
+    let metaName = ref("")
     let title=ref(route.meta.title)
     let isPlay=ref(false)
     let userId="672023,90507AM"
-    
-    layoutMenu()
     let pages=reactive(JSON.parse(sessionStorage.getItem('menuList'))).menuList
 
-    const removeTab=(targetName)=>{
-      console.log(targetName);
-      console.log(route);
-        }
-
+    setTimeout(() => {
+        router.push({
+          name: "homePage",
+          params: {
+            userId: JSON.parse(localStorage.getItem("users")).userId,
+          },
+        });
+      }, 500);
+    
+    // 点击页眉跳转页面
    function toTab(tabName){
-    // 为了控制一级和二级菜单的面包屑是否显示/显示的是哪一个菜单名
     route.meta.isHide = false;
-   console.log(tabName);
-      // 控制面包屑的动画播放效果
+      // 控制面包屑的动画播放
       isPlay.value = true;
       tabs.value.forEach(item =>{//点击的是哪一个就跳转到哪一个
         if(item.title == tabName.paneName){
@@ -155,16 +151,39 @@ export default {
         }
       })
    }
+   const removeTab=(targetName)=>{//点击删除的时候，删除数组里面的标签
+        const newTabs = tabs.value;
+        let activeName = title.value;
+        if(activeName===targetName){
+            newTabs.forEach((item,index)=>{
+                if(item.name===targetName){
+                    const nextTab = newTabs[index + 1] || newTabs[index - 1]
+                    if (nextTab) {
+              activeName = nextTab.name;
+              toTab({paneName:activeName})
+            }
+                }
+            })
+        }
+      title.value = activeName;
+      tabs.value = newTabs.filter((item) => item.name !== targetName);
+      tabs.value = reactive(tabs.value);
 
-
+      //如果页眉删除完了，就跳回home，防止页面空白
+      if(tabs.value.length=='0'){
+        router.push({
+          name: "homePage",
+          params: {
+            userId: JSON.parse(localStorage.getItem("users")).userId,
+          },
+        });
+      }
+    }
+        
     function toPage(index,index2){
-        // 控制一级和二级菜单的面包屑是否显示/显示的是哪一个菜单名
-      route.meta.isHide = false;
-      // 控制面包屑
+      // 控制一级和二级菜单的面包屑是否显示/显示的是哪一个菜单名
       isPlay.value = true;
-
         if(index2 == undefined){//点击的不是二级路由
-          console.log(pages[index].name);
             router.push({
                 name:pages[index].name,
                 params:{
@@ -182,40 +201,78 @@ export default {
         }
    }
 
-   onUpdated(()=>{
-    console.log(title);
+   onUpdated(()=>{ 
+    setTimeout(() => {
+        isPlay.value = false;
+      }, 250);
+        //路径是’/‘所以截取一位
+    let newStr = route.fullPath.slice(1);
+    //截取路径/前面的名称，赋予面包屑名称
+    let newStr2 = newStr.slice(0, newStr.indexOf("/"));  
+        switch(newStr2){
+            case "system":
+            metaName.value = "系统管理";
+          break;
+          case "fun":
+          metaName.value = "功能";
+          break;
+        case "pages":
+          metaName.value = "页面";
+          break;
+        }
 
+        let newTabs = tabs.value.map((item) => item.title);
+        // 判断该数组中有无相同的标题，有就不添加
+        if (!newTabs.includes(route.meta.title)) {
+          tabs.value.push({
+            title: route.meta.title,
+            name: route.meta.title,
+            routeName: route.name,
+          });
+          title.value = route.meta.title;
+        }
    })
 
 
-    setTimeout(() => {//延时跳转到echart页面，缓冲
-      router.push({
-        name: "menuPage",
-        params:{
-          userId,
-        }
-      });
-    }, 1000);
-
     return {
+      layoutCSS,
+      isPlay,
+      //折叠
       isCollapse,
+      //获取处理过的路由信息
       ...toRefs(JSON.parse(sessionStorage.getItem("menuList"))),
+      //页眉数组
       tabs,
+      // 页眉删除事件
       removeTab,
       route,
       router,
-      toTab,metaName,title, 
+      //跳转
+      toTab,
+      metaName,
+      title, 
+      // 点击菜单事件
       toPage,
-      
+      userId,
     };
   },
+  beforeRouteEnter(to,from,next){
+    if (from.name == "") {
+      setTimeout(() => {
+        router.push({
+          name: "homePage",
+          params: {
+            userId: JSON.parse(localStorage.getItem("users")).userId,
+          },
+        });
+      }, 1000);
+    }
+    next();
+  }
 };
 </script>
 
 <style scoped>
-.el-menu-vertical-demo {
-  background-color: #545c64;
-  color: #fff;
-  height: 100vh;
-}
+
+
 </style>

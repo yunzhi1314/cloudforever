@@ -11,7 +11,8 @@ export default ({
             menus: null,
             menuRoutes: null,
             baseMsg: null,
-            contexts: null
+            contexts: null,
+            selfQuery: null,
         }
     },
     mutations: {
@@ -39,6 +40,10 @@ export default ({
         //exChangeGift页面获取和兑换
         changeContexts(state, data) {
             console.log(state, data);
+        },
+        //selfQuery页面获取
+        changeSelfQuery(state, data) {
+            state.selfQuery = data
         }
     }
 })

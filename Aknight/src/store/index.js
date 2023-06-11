@@ -76,7 +76,17 @@ export default createStore({
 			},
 			key: "context",
 		}),
-
+		//selfQuery页面开启
+		createPersistedState({
+			storage: window.sessionStorage,
+			reducer(state) {
+				let selfQueryObj = {
+					selfQuery: state.personalCenter.selfQuery
+				};
+				return isStore(state, "selfQuery", "isSelfQuery", selfQueryObj, sessionStorage);
+			},
+			key: "selfQuery",
+		}),
 	],
 	state: {
 		msg: null, // 保存吐丝信息
@@ -89,7 +99,8 @@ export default createStore({
 			isMsg: false,//吐丝
 			isMenu: false,//buffer页面触发
 			isBaseMsg: false,//baseMsg页面触发
-			isContext: false,
+			isContext: false,//exChangeGift页面触发
+			isSelfQuery: false,//selfQuery页面触发
 		}
 	},
 	getters: {},

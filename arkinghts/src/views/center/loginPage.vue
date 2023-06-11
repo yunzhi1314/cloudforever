@@ -3,7 +3,10 @@
     <!-- 登录 -->
     <div
       class="login"
-      :style="{ height: controlObj.isChange ? '55vh' : '45vh' }"
+      :style="{ 
+        Animation:controlObj.isPlay ? '' :
+          controlObj.isChange ? 'register 0.35s 0s 1 ease-in forwards' : 'login 0.35s 0s 1 ease-in forwards'
+    }"
     >
       <section>{{ controlObj.isChange ? "注册" : "登录" }}</section>
       <!-- 账密区 -->
@@ -26,6 +29,10 @@
               "
               class="btn"
               @click="getMathCode('isMathCode')"
+              :style='{
+                backgroundColor: controlObj.isDisable ? "#158FC5": "#797979"
+              }'
+              :disabled='controlObj.isDisable ? "":"" '
             >
               获取验证码
             </button>
@@ -112,14 +119,9 @@ import loginCSS from "@/public/login.scss";
 import { reactive, provide } from "vue";
 import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
 import controlObj from "@/hooks/personalCenter/control";
-import {
-  getMathCode,
-  againGetMathCode,
-  cancel,
-} from "@/hooks/personalCenter/code";
+import { getMathCode,againGetMathCode,cancel,} from "@/hooks/personalCenter/code";
 import svg from "@/hooks/personalCenter/code";
 import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
-import messagePage from "@/components/messagePage.vue";
 import { Request } from "@/hooks/personalCenter/request";
 import url from "@/api/url";
 import store from "@/store";
@@ -231,8 +233,9 @@ export default {
       telCode(useInfo);
       // Toest(controlObj) //调用吐丝的函数
     }
+    // 注册需要的数据
     let registerData = reactive({
-      telephone: "",
+      telephone: "", 
       password: "",
       confirmPassword: "",
       code: "",
@@ -244,7 +247,8 @@ export default {
       password: "",
       userId: JSON.parse(localStorage.getItem("users")).userId,
     });
-    //  登录或注册按钮
+
+ 
     function loginOrRegister() {
       let dataList = reactive({
         data: [], //注册数据
@@ -254,11 +258,7 @@ export default {
       if (controlObj.isChange) {
         // 将账密框的数据赋予新声明注册需要的数据的对象
         loginArr.forEach((item, index) => {
-          Reflect.set(
-            registerData,
-            Reflect.ownKeys(registerData)[index],
-            item.value
-          );
+          Reflect.set(registerData,Reflect.ownKeys(registerData)[index],item.value);
         });
         Request.postData(url.personalCenter.register, registerData)
           .then((res) => {
@@ -318,7 +318,6 @@ export default {
       // Toest,//吐丝的函数
     };
   },
-  components: { messagePage },
 };
 </script>
 

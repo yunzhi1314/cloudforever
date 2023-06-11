@@ -56,7 +56,7 @@ export default {
   name: "diamondPage",
   setup() {
     const route = useRoute()
-    console.log(route.meta)
+    
     return {
       centerBaseMsgCSS,
       diamondPageCSS,

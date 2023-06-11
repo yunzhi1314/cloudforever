@@ -1,3 +1,6 @@
+import router from "@/router";
+
+// 处理动态路由函数
 export function dealRoutes(routes, index) {
   if (index < 0) {
     return routes;
@@ -22,6 +25,7 @@ export function dealRoutes(routes, index) {
   }
 }
 
+// 赋予动态路由懒加载。判断是否需要"/"
 function asyncComponent(path) {
   if(path[0] == "/"){
     path = path.slice(1)
@@ -58,4 +62,17 @@ function dealChildrenPaths(routes, newArr,name, index2 = 0) {
   } else {
     return [...new Set(newArr)];
   }
+}
+
+// 处理各子页面动态路由丢失问题
+export function dealActiveRoutes(){
+  let routeData = JSON.parse(sessionStorage.getItem("menus"));
+  let routes = Reflect.get(routeData, "routes");
+
+  // 处理component数据，将路由正规化
+  routes = dealRoutes(routes, routes.length - 1);
+  // 添加动态路由
+  routes.forEach((item) => {
+    router.addRoute("centerPage", item);
+  });
 }

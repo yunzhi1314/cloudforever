@@ -27,14 +27,35 @@ const routes = [
         path:"/center/changeUserinfo/:userId",
         name:"changeUserinfoPage",
         component:()=> import("@/views/center/changeUserinfo/changeUserinfoPage")
-      }
+      },
+      {
+        path:"/center/personalList/infoBasic/:userId",
+        name:"infoBasicPage",
+        component:()=> import("@/views/center/list/infoBasic/infoBasicPage")
+      },
+      {
+        path:"/center/personalList/infoRealname/:userId",
+        name:"infoRealnamePage",
+        component:()=> import("@/views/center/list/infoRealname/infoRealnamePage")
+      },
+      {
+        path:"/center/personalList/infoBehavior/:userId",
+        name:"infoBehaviorPage",
+        component:()=> import("@/views/center/list/infoBehavior/infoBehaviorPage")
+      },
+      {
+        path:"/center/personalList/infoDevice/:userId",
+        name:"infoDevicePage",
+        component:()=> import("@/views/center/list/infoDevice/infoDevicePage")
+      },
     ],
   },
   {
     path:"/database",
     name:"databasePage",
     component:()=>import("@/views/database/databasePage")
-  }
+  },
+
 ];
 
 const router = createRouter({
@@ -87,7 +108,6 @@ router.beforeEach((to, from, next) => {
             router.addRoute("centerPage",item);
           })
 
-          console.log(router.getRoutes())
           // 重复导航，直到路由能够找到正确的路径为止
           next({ ...to, replace: true });
         }

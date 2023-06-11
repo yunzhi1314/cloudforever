@@ -42,7 +42,6 @@ export default {
   name: "orderPage",
   setup() {
     const route = useRoute()
-    console.log(route.meta)
     return {
       centerBaseMsgCSS,
       diamondPageCSS,

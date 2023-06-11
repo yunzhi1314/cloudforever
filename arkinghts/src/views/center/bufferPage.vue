@@ -1,17 +1,18 @@
 <template>
-                <h1>buffer组件</h1>
-            </template>
+  <h1>bufferPage.vue组件</h1>
+</template>
 
-            <script>
+<script>
+import { centerMenu } from '@/api/routes';
+export default {
+    name:'bufferPage',
+  setup() {
+   centerMenu()
+    return {
 
-            export default {
-              name:'bufferPage',
-                setup() {
-                    return {
-                    }
-                }
-            }
-            </script>
+    };
+  },
+};
+</script>
 
-            <style lang="scss" scoped>
-            </style>
+<style lang="scss" scoped></style>

@@ -20,7 +20,6 @@ export function isStore(state,key,name,obj,storageType){
         return obj
        
     }else if(data != null && data != 0){
-        console.log(2222)
         data = JSON.parse(data)
         return data
     }else{

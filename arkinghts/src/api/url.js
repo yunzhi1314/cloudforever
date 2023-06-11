@@ -8,5 +8,6 @@ export default{
         register:'api/user/register',//注册按钮的请求路劲
         login:'api/user/login',//登录按钮的请求路劲
         codeLogin:'api/user/codeLogin',//验证码登录的等登录按钮的请求路劲
+        centerRoutes:'person/home'
    }
 }

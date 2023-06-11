@@ -22,6 +22,7 @@ export default {
 
     // 组件内路由守卫 -- 离开当前导航路由后触发
     onBeforeRouteLeave(() => {
+      sessionStorage.setItem("dataReload","0")
       layoutMenu()
     })
 

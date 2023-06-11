@@ -73,10 +73,22 @@ import homePageCSS from "@/public/database/homePage.scss";
 import { expMedicals, basicMedicals,naweiCompany } from "@/echarts";
 import { onMounted } from "vue";
 import { expMedical } from "@/api/database/user";
+import { useRouter } from "vue-router";
 
 export default {
   name: "homePage",
   setup() {
+
+    // 进入页面后刷新页面，并令异步数据成功加载
+    const router = useRouter()
+
+    if(sessionStorage.getItem("dataReload")==0){
+      let count = sessionStorage.getItem("dataReload")
+      router.go(0)
+      count++
+      sessionStorage.setItem("dataReload",count)
+    } 
+
     onMounted(() => {
       // 靶向药实验数据的复合折线统计图
       expMedicals(document.querySelector("#expMedicals"));

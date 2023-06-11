@@ -147,6 +147,12 @@ export default {
     // 控制标签页v-model值
     let title = ref(route.meta.title);
 
+    tabs.value.push({
+      title: route.meta.title,
+      name: route.meta.title,
+      routeName: route.name,
+    });
+    
     onUpdated(() => {
       // 异步处理为了能够完整播放动画，避免更新后直接让动画消失
       setTimeout(() => {
@@ -274,7 +280,7 @@ export default {
       toTab,
     };
   },
-  
+
   // 组件内守卫：进入该组件路由之前。目的：知道从哪个页面进来的
   // 页面导航拦截
   beforeRouteEnter(to, from, next) {

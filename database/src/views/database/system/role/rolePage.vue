@@ -272,7 +272,6 @@ export default {
 
 
 
-
     watch([currentPage, pageSize, isSearch, searchData], (newValue) => {
       pagArr.value.splice(0, pagArr.value.length)
       newValue[2] ? pagArr.value.push(...(searchData.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1])))

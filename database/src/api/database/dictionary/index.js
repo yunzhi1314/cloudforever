@@ -6,7 +6,6 @@ import { Request } from '@/hooks/Requset'
 
 export  async function dictionary(){
 let dataList=(await Request.getData(url.database.home.naweiCompany2)).data
-  console.log(dataList.datas);
     store.commit("database/SAVE_DATA", {
 		datas: dataList.datas,
 		key: "naweiDataList2",

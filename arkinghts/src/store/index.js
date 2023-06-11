@@ -21,7 +21,7 @@ export default createStore({
     }),
   ],
   state: {
-    countDown:10,
+    countDown:120,
     // 控制状态开关集合
     control:{
       isRegister:false

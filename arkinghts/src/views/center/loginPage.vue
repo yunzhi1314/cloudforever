@@ -25,16 +25,16 @@
               v-if="
                 controlObj.isChange
                   ? index == 3
-                  : controlObj.isCode && index == 1
-              "
+                  : controlObj.isCode && index == 1"
               class="btn"
               @click="getMathCode('isMathCode')"
-              :style='{
-                backgroundColor: controlObj.isDisable ? "#158FC5": "#797979"
-              }'
-              :disabled='controlObj.isDisable ? "":"" '
-            >
-              获取验证码
+             :disabled='controlObj.isChange? 
+             countDownNames.includes("isRegister") : 
+             countDownNames.includes("isLogin")'>
+              {{ controlObj.isChange? 
+                (countDownNames.includes("isRegister") ? registerCount + "S" : "获取验证码") : 
+                (countDownNames.includes("isLogin")? loginCount + "S" : "获取验证码")
+              }}
             </button>
           </p>
           <p :style="{ visibility: item.isShow ? 'visible' : 'hidden' }">
@@ -103,7 +103,7 @@
         <span v-html="svg.code" @click="againGetMathCode"></span>
       </section>
       <section>
-        <button @click="confirm('isMathCode')">确认</button>
+        <button @click='confirm(controlObj.isChange? "isRegister" : "isLogin")'>确认</button>
         <button @click="cancel('isMathCode')">取消</button>
       </section>
     </div>
@@ -116,12 +116,12 @@ import loginCSS from "@/public/login.scss";
 import { reactive, provide } from "vue";
 import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
 import controlObj from "@/hooks/personalCenter/control";
-import { getMathCode,againGetMathCode,cancel,} from "@/hooks/personalCenter/code";
+import { getMathCode,againGetMathCode,cancel,setCode} from "@/hooks/personalCenter/code";
 import svg from "@/hooks/personalCenter/code";
-import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
 import { Request } from "@/hooks/personalCenter/request";
 import url from '@/api/url'
 import store from "@/store";
+import { toRefs } from "vue";
 
 export default {
   name: "loginPage",
@@ -211,18 +211,10 @@ export default {
     }
     watcher(loginArr); //调用监视函数监视账密框
     provide("controlDialog", "isMathCode");
-    // 短信验证码需传送的数据
-    let useInfo = reactive({
-      telephone: "",
-      mathCode: "",
-    });
-    // 点击遮罩层确认按钮，请求短信验证码，并且关闭遮罩层
-    function confirm(name) {
-      controlObj.isDialog[name] = false;
-      let obj = loginArr.find((item) => item.use == "手机号");
-      useInfo.telephone = obj.value;
-      telCode(useInfo);
-    }
+
+    // 引入倒计时函数以及变量和遮罩层开关
+    let { confirm, useInfo,countDown} = setCode(loginArr,"isMathCode")
+
     let registerData = reactive({
       telephone: "", 
       password: "",
@@ -271,18 +263,16 @@ export default {
       loginArr,
       changeRegister,
       changeLogin,
-      controlObj,
-      getMathCode,
+      controlObj,//按钮开关集合
+      getMathCode,//请求图形验证码
       svg,
-      againGetMathCode,
-      // 取消遮罩层
-      cancel,
-      // 遮罩层的确认按钮
-      confirm,
-      // 发送短信传送的数据
-      useInfo,
+      againGetMathCode,//更新图形验证码请求
+      cancel, // 取消遮罩层
+      confirm,// 遮罩层的确认按钮
+      useInfo,// 发送短信传送的数据
       loginOrRegister, //点击注册或登录按钮
       codeLogin, // 点击切换密码或短信验证码登录
+      ...toRefs(countDown)// 将countDown对象扩展开并变成响应式数据
     };
   },
 };

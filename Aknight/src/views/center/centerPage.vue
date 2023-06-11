@@ -44,6 +44,13 @@
 		</header>
 		<!-- 主体内容 -->
 		<main>
+			<div class="user-box" v-if="!bool">
+				<section class="account">
+					<span>当前账号</span>
+					<span>|</span>
+					<span>{{ telephone }}</span>
+				</section>
+			</div>
 			<!-- 路由视图，center的子路由显示区域 -->
 			<router-view />
 		</main>
@@ -87,10 +94,12 @@ export default {
 		let menus
 		let menuRoutes
 		let userId
+		let telephone
 		if (!bool.value) {
 			menus = JSON.parse(sessionStorage.getItem("menu")).menus
 			menuRoutes = JSON.parse(sessionStorage.getItem("menu")).menuRoutes
 			userId = JSON.parse(localStorage.getItem("userMsg")).userId
+			telephone = JSON.parse(localStorage.getItem("token")).telephone
 		}
 		provide("controlDialog", "isLoginOut")
 
@@ -136,7 +145,8 @@ export default {
 			isReverse,
 			menusClick,
 			toPage,
-			...controlObj
+			...controlObj,
+			telephone
 		};
 	}
 };

@@ -51,6 +51,7 @@
 
 <script>
 import baseCss from '@/public/baseMsg/baseMsg.scss'
+// import { getBaseMsg } from '@/api/arknight/centerPage/baseMsg';
 export default {
   name: "BaseMessage",
   setup() {

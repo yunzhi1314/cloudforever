@@ -4,6 +4,8 @@ import {reactive} from "vue"
 
     isDialog: {
         isAddMenu:false,
+        isAddRole:false,
+        isAddUser:false,
     },
  }) 
 

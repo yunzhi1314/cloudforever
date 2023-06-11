@@ -72,7 +72,7 @@ export default createStore({
 				let contextObj = {
 					contexts: state.personalCenter.contexts
 				};
-				return isStore(state, "context", "isContext", contextObj, sessionStorage);
+				return isStore(state, "context", "isContext", contextObj, localStorage);
 			},
 			key: "context",
 		}),

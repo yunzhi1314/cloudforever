@@ -11,6 +11,7 @@ export function getSelfInquiries() {
     Request.getData(url.centerPage.selfQuery.selfInquiries).then(res => {
         datalist.datas = { ...res.data }
         store.commit("personalCenter/changeSelfQuery", datalist.datas)
+        store.commit("changeStore", "isSelfQuery");
     })
     return datalist
 }       

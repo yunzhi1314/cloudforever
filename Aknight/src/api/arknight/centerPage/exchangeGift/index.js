@@ -22,16 +22,15 @@ export function getGift(data) {
 	let dataList = reactive({
 		datas: []
 	});
-	Request.postData(url.centerPage.exchangeGift.getGift, {context:data}).then((res) => {
+	Request.postData(url.centerPage.exchangeGift.getGift, { context: data }).then((res) => {
 		dataList.datas = { ...res.data };
 
-		console.log(res.data.status);
 		// 添加吐丝内容
 		res.data.status == 0
 			? store.commit("changeMsg", { message: "兑换成功", status: res.data.status })
 			: store.commit("changeMsg", res.data);
 
-        // 将兑换内容存入本地
+		// 将兑换内容存入本地
 		store.commit("personalCenter/changeContexts", {
 			items: res.data.items,
 			context: data

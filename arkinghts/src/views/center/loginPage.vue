@@ -260,18 +260,20 @@ export default {
         loginArr.forEach((item, index) => {
           Reflect.set(registerData,Reflect.ownKeys(registerData)[index],item.value);
         });
-        Request.postData(url.personalCenter.register, registerData)
+        Request.postData(url.personalCenter.register,registerData)
           .then((res) => {
             dataList.data = res.data;
+            setTimeout(() => {
+          store.commit("personalCenter/changeUse", dataList.data);
+          store.commit("changeStore", "isRegister");
+        }, 300);
+
           })
           .catch((err) => {
             console.log(err);
           });
-
-        setTimeout(() => {
-          store.commit("personalCenter/changeUse", dataList.data);
-          store.commit("changeStore", "isRegister");
-        }, 200);
+       
+       
 
         // Toest(controlObj)//调用吐丝的函数
       } else {

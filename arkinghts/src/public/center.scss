@@ -27,37 +27,68 @@
 header{
     grid-area: header;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: 1fr;
+    grid-template-areas: 'left middle right';
     background-color: #fff;
     box-shadow: 0px 0px 2px #999797,
     0px 0px 4px #999797,
     0px 0px 6px #999797,
     0px 0px 8px #999797;
+     // 头部左上角的三个斜杆的样式
+    .unfold{
+        grid-area: left;
+        .svg>svg{
+            width: 2vw;
+            position: relative;
+            z-index: 1;
+        }
+        ul{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 20vw;
+            background-color: #22bbff;
+            z-index: 0;
+            li{
+                margin-top: 5vh;
+                width: 100%;
+                height: 4vh;
+                cursor: pointer;
+                font-size: 1.2rem;
+            }
+        }
+    }
    
-    div:nth-child(2){
+    .title{
+        grid-area: middle;
         display: flex;
         justify-content: center;
         align-items: center;
+        img{
+            width: 7.3vw;
+        }
+
     }
-    div:nth-child(3){
+    .Customer{
+        grid-area: right;
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        img{
+            width: 2vw;
+        }
         section{
             margin-right: 1vw;
+            display: flex;
         }
         p{
-            text-align: center;
             font-size: 13px;
         }
     }
-    .title{
-        width: 7.3vw;
-    }
-    .custom{
-        width: 2vw;
-    }
+   
+    
 }
 main{
     grid-area: main;

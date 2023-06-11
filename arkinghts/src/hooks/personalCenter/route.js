@@ -33,35 +33,4 @@ function asyncComponent(path){
     return ()=>import(`@/views/${path}`)
 }
 
-export function dealpaths(routes,index,name,newArr=[]){
-    
-    if(index > routes.length -1){
-        return [...new Set(newArr)]
-    }else{
-        if(Reflect.has(routes[index],name)){
-            newArr.push(routes[index])
-            return dealpaths(routes,index + 1,name,newArr)
-        }else if(routes[index].children && routes[index].children.length>0){
-            newArr.push(...dealChildrenPaths(routes[index].children,newArr,name))
-            return dealpaths(routes,index+1,name,newArr)
-        }
-        return dealpaths(routes,index+1,name,newArr)
-    }
-}
-
-function dealChildrenPaths(routes,newArr,name,index2 = 0){
-    if(routes[index2]){
-        newArr.push(...routes.filter((item)=>Reflect.has(item,name)))
-
-        if(routes[index2].children){
-            routes[index2].hasForeach = true
-            return dealChildrenPaths(routes[index2].children,newArr,name)
-        }else{
-            return dealChildrenPaths(routes,newArr,name,index2 + 1)
-        }
-    }else{
-        return [...new Set(newArr)]
-    }
-}
-
 

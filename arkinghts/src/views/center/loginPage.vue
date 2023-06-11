@@ -4,8 +4,8 @@
     <div
       class="login"
       :style="{ 
-        Animation:controlObj.isPlay ? '' :
-          controlObj.isChange ? 'register 0.35s 0s 1 ease-in forwards' : 'login 0.35s 0s 1 ease-in forwards'
+        Animation: controlObj.isPlay ? 
+          (controlObj.isChange ? 'register 0.35s 0s 1 ease-in forwards' : 'login 0.35s 0s 1 ease-in forwards') : ''
     }"
     >
       <section>{{ controlObj.isChange ? "注册" : "登录" }}</section>
@@ -34,7 +34,7 @@
               {{ controlObj.isChange? 
                 (countDownNames.includes("isRegister") ? registerCount + "S" : "获取验证码") : 
                 (countDownNames.includes("isLogin")? loginCount + "S" : "获取验证码")
-              }}
+                }}
             </button>
           </p>
           <p :style="{ visibility: item.isShow ? 'visible' : 'hidden' }">
@@ -175,6 +175,7 @@ export default {
     // 点击去注册页面
     function changeRegister() {
       controlObj.isChange = true;
+      controlObj.isPlay = true
       if (loginArr.length < 4) {
         loginArr.push(...newArr);
       }
@@ -182,6 +183,7 @@ export default {
     // 点击去登录页面
     function changeLogin() {
       controlObj.isChange = false;
+      controlObj.isPlay = true
       loginArr.splice(2, 2);
     }
 

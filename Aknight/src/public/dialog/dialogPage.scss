@@ -51,3 +51,39 @@
         }
     }
 }
+
+//个人中心登出时的遮罩层样式
+.loginout {
+    width: 20rem;
+    height: 15rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+        width: 100%;
+        text-align: center;
+
+        section {
+            font-size: 1.3rem;
+            margin-top: 4.5vh;
+
+            button {
+                margin-left: 1vw;
+                width: 40%;
+            }
+        }
+
+        section>button:nth-child(2) {
+            background-color: #fff;
+            border: 1px solid #dfdfdf;
+            color: #565656;
+        }
+
+        section>button:nth-child(2):hover {
+            background-color: #dfdfdf;
+        }
+    }
+}

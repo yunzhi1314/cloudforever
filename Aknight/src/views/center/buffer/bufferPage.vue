@@ -6,15 +6,13 @@
 <script>
 import { centerMenu } from '@/api/arknight/centerPage/routes';
 export default {
-    name:"bufferPage",
-    setup () {
-        
+    name: "bufferPage",
+    setup() {
+
         centerMenu()
         return {}
     }
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

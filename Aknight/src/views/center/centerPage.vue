@@ -1,9 +1,7 @@
 <template>
-	<!-- 背景图以及动态样式变化(路由信息中的) -->
+	<!-- 背景图 -->
 	<div class="bgImg" :style="{
-		backgroundImage: `url(${bgImg.bgImg})`,
-		height: route.meta.height,
-		backgroundSize: route.meta.isContain ? 'contain' : 'cover'
+		backgroundImage: `url(${bgImg.bgImg})`
 	}"></div>
 	<div class="centerPage">
 		<!-- 头部内容 -->
@@ -34,7 +32,7 @@
 			</section>
 			<!-- 客服中心以及登陆之后登出按钮显示区 -->
 			<div class="headerRight">
-				<section v-if="!bool" @click="LoginOUT" style="margin-right:1rem;cursor: pointer;">
+				<section v-if="!bool" @click="isDialog.isLoginOut = true" style="margin-right:1rem;cursor: pointer;">
 					<img :src="loginOut" alt="" />
 					<p>登出</p>
 				</section>
@@ -64,7 +62,7 @@
 				<section>确定要登出吗?</section>
 				<section>
 					<button @click="confirm">确认</button>
-					<button @click="cancel">取消</button>
+					<button @click="isDialog.isLoginOut = false">取消</button>
 				</section>
 			</div>
 		</div>
@@ -96,15 +94,7 @@ export default {
 		}
 		provide("controlDialog", "isLoginOut")
 
-		//点击登出
-		const LoginOUT = () => {
-			Reflect.set(controlObj.isDialog, "isLoginOut", true)
-		}
 
-		//点击遮罩层取消按钮
-		const cancel = () => {
-			Reflect.set(controlObj.isDialog, "isLoginOut", false)
-		}
 		//点击遮罩层确认按钮
 		const confirm = () => {
 			Reflect.set(controlObj.isDialog, "isLoginOut", false)
@@ -116,16 +106,14 @@ export default {
 		}
 
 		//点击打开菜单动画
-		let isShowPlay = ref(false)
-		let isReverse = ref(false)
 		const menusClick = () => {
-			isShowPlay.value = true
-			isReverse.value = !isReverse.value
+			Reflect.set(controlObj, "isShowPlay", true)
+			controlObj.isReverse = !controlObj.isReverse
 		}
 
 		//点击去往不同页面
 		const toPage = (index) => {
-			isReverse.value = !isReverse.value
+			controlObj.isReverse = !controlObj.isReverse
 			router.push({
 				name: menuRoutes[index].name,
 				params: {
@@ -140,14 +128,11 @@ export default {
 			...toRefs(centerImg()),
 			...menus,
 			bool,
-			LoginOUT,
 			confirm,
-			cancel,
 			route,
-			isShowPlay,
-			isReverse,
 			menusClick,
-			toPage
+			toPage,
+			...controlObj
 		};
 	}
 };

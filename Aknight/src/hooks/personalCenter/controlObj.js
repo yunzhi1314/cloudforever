@@ -13,6 +13,8 @@ let controlObj = reactive({
 	isLogin: true, // 是否能够登录
 	isTusi: false, // 展示吐丝弹窗的状态
 	isDisabled: false,//获取验证码按钮是否可用
+	isShowPlay: false,//菜单动画开启
+	isReverse: false,//菜单动画反转
 });
 
 export default controlObj;

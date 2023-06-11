@@ -31,7 +31,10 @@ const routes = [
       {
         path:"/center/personalList/infoBasic/:userId",
         name:"infoBasicPage",
-        component:()=> import("@/views/center/list/infoBasic/infoBasicPage")
+        component:()=> import("@/views/center/list/infoBasic/infoBasicPage"),
+        meta:{
+          height:"110vh"
+        }
       },
       {
         path:"/center/personalList/infoRealname/:userId",
@@ -46,7 +49,12 @@ const routes = [
       {
         path:"/center/personalList/infoDevice/:userId",
         name:"infoDevicePage",
-        component:()=> import("@/views/center/list/infoDevice/infoDevicePage")
+        component:()=> import("@/views/center/list/infoDevice/infoDevicePage"),
+        meta:{
+          height:"350vh",
+          isContain:true,
+          gridTemplateRows: "1fr 36fr 1fr"
+        }
       },
     ],
   },

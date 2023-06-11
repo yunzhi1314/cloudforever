@@ -1,13 +1,31 @@
 <template>
-	<!-- 背景图 -->
+	<!-- 背景图以及动态样式变化(路由信息中的) -->
 	<div class="bgImg" :style="{
-		backgroundImage: `url(${bgImg.bgImg})`
+		backgroundImage: `url(${bgImg.bgImg})`,
+		height: route.meta.height,
+		backgroundSize: route.meta.isContain ? 'contain' : 'cover'
 	}"></div>
 	<div class="centerPage">
 		<!-- 头部内容 -->
 		<header>
-			<!-- 登录之后显示的导航栏 -->
-			<section class="headerLeft"></section>
+			<!-- 登录之后显示的按钮及其菜单列表 -->
+			<section class="headerLeft">
+				<nav v-if="!bool" style="display:flex;align-items:center;">
+					<section :style="{
+						animation: isShowPlay ? (isReverse ? 'showOut 0.2s 0s 1 ease-in forwards' : 'showIn 0.2s 0s 1 ease-in forwards reverse') : ''
+					}">
+						<span v-show="!isReverse" @click="menusClick" v-html="navSvg"
+							style="width:2rem;position:absolute;left:1rem;top:1rem;"></span>
+						<span v-show="isReverse" class="reverseBtn" @click="menusClick"></span>
+						<ul v-show="isReverse" class="menuMsg">
+							<li v-for="(item, index) in menuMsg" :key="index">
+								<img :src="item.icon" alt="">
+								<span>{{ item.name }}</span>
+							</li>
+						</ul>
+					</section>
+				</nav>
+			</section>
 			<!-- logo -->
 			<section class="logo">
 				<img :src="bgImg.titleImg" alt="" />
@@ -89,7 +107,15 @@ export default {
 			router.push({
 				path: "/center/login"
 			})
+			router.go(0)
+		}
 
+		//点击打开菜单动画
+		let isShowPlay = ref(false)
+		let isReverse = ref(false)
+		const menusClick = () => {
+			isShowPlay.value = true
+			isReverse.value = !isReverse.value
 		}
 
 		return {
@@ -100,7 +126,11 @@ export default {
 			bool,
 			LoginOUT,
 			confirm,
-			cancel
+			cancel,
+			route,
+			isShowPlay,
+			isReverse,
+			menusClick
 		};
 	}
 };

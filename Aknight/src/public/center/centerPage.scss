@@ -65,6 +65,7 @@
 			box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
 			padding: 1.8rem;
 			margin-bottom: 10vh;
+
 			h2 {
 				text-align: center;
 				margin-bottom: 2rem;
@@ -96,6 +97,7 @@
 			.btns>section:nth-child(1) {
 				text-align: left;
 			}
+
 			// 前往注册框动画
 			@keyframes toRegister {
 				0% {
@@ -215,14 +217,168 @@ button {
 	margin: 1.5rem 0;
 	cursor: pointer;
 }
-button:hover{
+
+button:hover {
 	background-color: #1174A0;
 }
 
 // 按钮禁用样式
-.disabled{
+.disabled {
 	background-color: #797979;
 }
-.disabled:hover{
+
+.disabled:hover {
 	background-color: #626262;
+}
+
+//左上菜单动画(展开与收缩)
+@keyframes showOut {
+	0% {
+		width: 0vw;
+		height: 0vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: 0;
+		top: 0;
+	}
+
+	15% {
+		width: 4vw;
+		height: 4vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: 1px;
+		top: 3px;
+		border-radius: 50%;
+	}
+
+	50% {
+		width: 30vw;
+		height: 25vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 40%;
+	}
+
+	80% {
+		width: 35vw;
+		height: 38vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 20%;
+	}
+
+	100% {
+		width: 35.8vw;
+		height: 100vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 0%;
+	}
+}
+
+@keyframes showIn {
+	0% {
+		width: 0vw;
+		height: 0vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: 0;
+		top: 0;
+	}
+
+	15% {
+		width: 4vw;
+		height: 4vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: 1px;
+		top: 3px;
+		border-radius: 50%;
+	}
+
+	50% {
+		width: 30vw;
+		height: 25vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 40%;
+	}
+
+	80% {
+		width: 35vw;
+		height: 38vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 20%;
+	}
+
+	100% {
+		width: 35.8vw;
+		height: 100vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 0%;
+	}
+}
+
+//反转动画按钮
+.reverseBtn::after,
+.reverseBtn::before {
+	content: "";
+	width: 35px;
+	height: 40px;
+	border-top: 3px solid #fff;
+	transform: rotateZ(45deg);
+	position: fixed;
+	left: 0px;
+	top: 29px;
+	z-index: 2;
+}
+
+.reverseBtn::after {
+	transform: rotateZ(-45deg);
+	left: 28px;
+}
+
+//菜单列表
+.menuMsg {
+	position: fixed;
+	top: 10vh;
+	left: 2vw;
+
+	li {
+		width: 20vw;
+		height: 8vh;
+		color: #fff;
+		border-bottom: 1px solid #1AA3E0;
+		line-height: 8vh;
+		font-weight: 600;
+		font-size: 14px;
+		filter: opacity(0);
+		cursor: pointer;
+
+		img {
+			width: 1.5vw;
+			margin-right: 0.5vw;
+		}
+
+		img,
+		span {
+			vertical-align: middle;
+			font-size: 16px;
+		}
+	}
 }

@@ -53,6 +53,28 @@ export default createStore({
 			},
 			key: "menu",
 		}),
+		//baseMsg页面开启
+		createPersistedState({
+			storage: window.sessionStorage,
+			reducer(state) {
+				let baseMsgObj = {
+					baseMsg: state.personalCenter.baseMsg
+				};
+				return isStore(state, "baseMsg", "isBaseMsg", baseMsgObj, sessionStorage);
+			},
+			key: "baseMsg",
+		}),
+		//exChangeGift页面兑换时开启(要有历史记录,因此使用localStorage)
+		createPersistedState({
+			storage: window.localStorage,
+			reducer(state) {
+				let contextObj = {
+					contexts: state.personalCenter.contexts
+				};
+				return isStore(state, "context", "isContext", contextObj, sessionStorage);
+			},
+			key: "context",
+		}),
 
 	],
 	state: {
@@ -65,6 +87,8 @@ export default createStore({
 			isLogin: false,//登录条件
 			isMsg: false,//吐丝
 			isMenu: false,//buffer页面触发
+			isBaseMsg: false,//baseMsg页面触发
+			isContext: false,
 		}
 	},
 	getters: {},

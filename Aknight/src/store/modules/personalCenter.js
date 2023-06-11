@@ -9,7 +9,9 @@ export default ({
             email: null,
             fullName: null,
             menus: null,
-            menuRoutes: null
+            menuRoutes: null,
+            baseMsg: null,
+            contexts: null
         }
     },
     mutations: {
@@ -29,6 +31,14 @@ export default ({
         //buffer页面存路由
         changeMenuRoutes(state, data) {
             state.menuRoutes = data
+        },
+        //baseMsg页面存请求数据
+        changeBaseMsg(state, data) {
+            state.baseMsg = data
+        },
+        //exChangeGift页面获取和兑换
+        changeContexts(state, data) {
+            console.log(state, data);
         }
     }
 })

@@ -106,14 +106,16 @@ export default {
 		}
 
 		//点击打开菜单动画
+		let isShowPlay = ref(false)
+		let isReverse = ref(false)
 		const menusClick = () => {
-			Reflect.set(controlObj, "isShowPlay", true)
-			controlObj.isReverse = !controlObj.isReverse
+			isShowPlay.value = true
+			isReverse.value = !isReverse.value
 		}
 
 		//点击去往不同页面
 		const toPage = (index) => {
-			controlObj.isReverse = !controlObj.isReverse
+			isReverse.value = !isReverse.value
 			router.push({
 				name: menuRoutes[index].name,
 				params: {
@@ -130,6 +132,8 @@ export default {
 			bool,
 			confirm,
 			route,
+			isShowPlay,
+			isReverse,
 			menusClick,
 			toPage,
 			...controlObj

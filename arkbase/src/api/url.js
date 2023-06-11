@@ -25,6 +25,7 @@ export default {
       infoBehavior: "person/personalList/infoBehavior",
       infoDevice: "person/personalList/infoDevice",
     },
+    shareList:"person/shareList"
   },
   database: {
     layout: {

@@ -30,7 +30,7 @@
 
 <script>
 import { getselfInquiries } from "@/api/arknight/centerPage/selfInquiries";
-import { toRefs } from "vue";
+import { toRefs, reactive } from "vue";
 import centerBaseMsgCSS from "@/public/arknights/centerBaseMsg.scss";
 import { useRouter } from "vue-router";
 
@@ -39,12 +39,13 @@ export default {
   setup() {
     const router = useRouter();
     let result = getselfInquiries();
-    
-    let routes = JSON.parse(
-      sessionStorage.getItem("selfQuery")
-    ).selfQueryRoutes;
 
+    let routes = reactive("");
+    setTimeout(() => {
+      routes = JSON.parse(sessionStorage.getItem("selfQuery")).selfQueryRoutes;
+    }, 100);
     function toPages(index) {
+
       router.push({
         name: routes[index].name,
         params: {

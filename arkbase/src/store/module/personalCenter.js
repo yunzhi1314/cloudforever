@@ -84,6 +84,7 @@ export default {
       state.renderContexts = [...new Set(state.renderContexts)];
     },
     changeSelfQuery(state, data) {
+      // 分两组数据，一组保存元数据，一组对当前页面的动态路由进行处理
       let routes = [
         {
           path: "/center/query/order/:userId",
@@ -104,14 +105,35 @@ export default {
           meta: {},
         },
       ];
+      let routes2 = [ 
+        {
+        path: "/center/query/order/:userId",
+        name: "orderPage",
+        component: "center/query/order/orderPage",
+        meta: {},
+      },
+      {
+        path: "/center/query/gacha/:userId",
+        name: "gachaPage",
+        component: "center/query/gacha/gachaPage",
+        meta: {},
+      },
+      {
+        path: "/center/query/diamond/:userId",
+        name: "diamondPage",
+        component: "center/query/diamond/diamondPage",
+        meta: {},
+      }
+    ]
 
       data.items.forEach((item, index) => {
         Reflect.set(routes[index], "meta", item);
+        Reflect.set(routes2[index], "meta", item);
       });
 
       state.selfQuery = data;
-      state.selfQueryRoutes = routes;
-      
+      state.selfQueryRoutes = routes2;
+
       routes = dealRoutes(routes, routes.length-1);
 
       routes.forEach((item) => {

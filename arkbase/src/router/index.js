@@ -66,13 +66,27 @@ router.beforeEach((to, from, next) => {
 
           let routeData = JSON.parse(sessionStorage.getItem(PATH == "center"? "menus" : "databaseMenus"))
           let route = Reflect.get(routeData,PATH == "center"? "routes" : "databaseRoutes")
-
+          
+          // 处理自己所制造的分页问题
+          let route2 = []
+          if(JSON.parse(sessionStorage.getItem("selfQuery")).selfQueryRoutes){
+            route2 = JSON.parse(sessionStorage.getItem("selfQuery")).selfQueryRoutes
+            route2 = dealRoutes(route2,route2.length-1)
+          }
+          
           // 处理component数据，将路由正规化
           route = dealRoutes(route, route.length - 1);
+
           // 添加动态路由
           route.forEach((item) => {
             router.addRoute(PATH == "center"? "centerPage" : "databasePage", item);
           });
+
+          // 处理分页的分路由问题
+          route2.forEach(item=>{
+            router.addRoute("centerPage",item);
+          })
+
           console.log(router.getRoutes())
           // 重复导航，直到路由能够找到正确的路径为止
           next({ ...to, replace: true });

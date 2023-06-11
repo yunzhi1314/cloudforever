@@ -8,7 +8,7 @@
       <div
         v-for="(item, index) in userinfo"
         :key="index"
-        style="border-radius: 1vw;width:38%"
+        style="border-radius: 1vw;width:38%;height: auto;"
       >
         <section>{{ item.title }}</section>
         <section style="font-size: 13px">
@@ -34,7 +34,7 @@
         <section style="font-size: 13px">
           <span style="color: #aaa; margin-right: 5vw">第三方隐私协议政策
 或官网链接</span>
-          <span>{{ item.URL }}</span>
+          <a :href="item.URL">{{ item.URL }}</a>
         </section>
       </div>
     </div>

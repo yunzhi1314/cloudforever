@@ -360,25 +360,44 @@ button:hover {
 	left: 2vw;
 
 	li {
-		width: 20vw;
-		height: 8vh;
+		width: 20rem;
+		height: 4rem;
 		color: #fff;
 		border-bottom: 1px solid #1AA3E0;
-		line-height: 8vh;
-		font-weight: 600;
-		font-size: 14px;
+		line-height: 4rem;
 		filter: opacity(0);
 		cursor: pointer;
 
 		img {
-			width: 1.5vw;
-			margin-right: 0.5vw;
+			width: 1.5rem;
+			margin-right: 1rem;
 		}
 
 		img,
 		span {
 			vertical-align: middle;
-			font-size: 16px;
+			font-size: 1rem;
 		}
+	}
+}
+
+// 列表文本延迟出现动画
+@keyframes disappear {
+	0% {
+		filter: opacity(1)
+	}
+
+	100% {
+		filter: opacity(0)
+	}
+}
+
+@keyframes exist {
+	0% {
+		filter: opacity(0)
+	}
+
+	100% {
+		filter: opacity(1)
 	}
 }

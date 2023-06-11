@@ -18,7 +18,9 @@
 							style="width:2rem;position:absolute;left:1rem;top:1rem;"></span>
 						<span v-show="isReverse" class="reverseBtn" @click="menusClick"></span>
 						<ul v-show="isReverse" class="menuMsg">
-							<li v-for="(item, index) in menuMsg" :key="index">
+							<li v-for="(item, index) in menuMsg" :key="index" :style="{
+								animation: isReverse ? 'exist 0.3s 0s 1 linear forwards' : 'disappear 0.3s 0s 1 linear forwards'
+							}">
 								<img :src="item.icon" alt="">
 								<span>{{ item.name }}</span>
 							</li>

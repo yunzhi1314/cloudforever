@@ -238,6 +238,7 @@ export default {
       password: "",
     });
 
+
     function loginOrRegister() {
       let dataList = reactive({data:[]});
       if (controlObj.isChange) {
@@ -245,26 +246,41 @@ export default {
           Reflect.set(registerData,Reflect.ownKeys(registerData)[index],item.value);
         });
         Request.postData(url.personalCenter.register,registerData)
-        .then(res=>{
-          dataList.data =  res.data
-          console.log(res.data)
-        }).catch(err =>{
-          console.log(err)
-        })
-        setTimeout(()=>{
-          store.commit('personalCenter/changeUse',dataList.data) 
-          store.commit('changeStore','isRegister')
-        },1000)
-      }
-      else{
-        loginArr.forEach((item,index)=>{
-          Reflect.set(loginData,Reflect.ownKeys(loginData)[index],item.value);
-        })
-        Request.postData(url.personalCenter.login, loginData).then(
-          (res) => {
-            console.log(res);
-          }
-        ); 
+          .then((res) => {
+            dataList.data = res.data;
+            setTimeout(() => {
+          store.commit("personalCenter/changeUse", dataList.data);
+          store.commit("changeStore", "isRegister");
+        }, 300);
+
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+       
+       
+
+        // Toest(controlObj)//调用吐丝的函数
+      } else {
+        // 将账密框的数据赋予新声明登录需要的数据的对象
+        loginArr.forEach((item, index) => {
+          Reflect.set(loginData, Reflect.ownKeys(loginData)[index], item.value);
+        });
+        Request.postData(url.personalCenter.login, loginData).then((res) => {
+          dataList.data1 = res.data;
+        });
+        setTimeout(() => {
+          store.commit("personalCenter/changeToken", dataList.data1);
+          store.commit("changeStore", "isLogin");
+          router.push({
+            name: "bufferPage",
+            params: {
+              userId: JSON.parse(localStorage.getItem("users")).userId,
+            },
+          });
+        },1000);
+
+        // Toest(controlObj)//调用吐丝的函数
       }
     }
 

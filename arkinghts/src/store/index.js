@@ -33,22 +33,23 @@ export default createStore({
        storage:window.sessionStorage,
        reducer(state){
          let baseMsg = {
+           baseMessage:state.personalCenter.baseMessage,
            baseRoutes:state.personalCenter.baseRoutes
          }
-         return isStore(state,'baseRoutes','isBaseRoutes',baseMsg,sessionStorage)
+         return isStore(state,'baseRoutes','isBaseMessage',baseMsg,sessionStorage)
        },
-       key:'baseRoutes'
+       key:'baseMsg'
     }),
-    createPersistedState({
-      storage:window.sessionStorage,
-      reducer(state){
-        let baseMsgs = {
-          baseMessage:state.personalCenter.baseMessage
-        }
-        return isStore(state,'baseMessage','isBaseMessage',baseMsgs,sessionStorage)
-      },
-      key:'baseMessage'
-   })
+  //   createPersistedState({
+  //     storage:window.sessionStorage,
+  //     reducer(state){
+  //       let baseMsgs = {
+  //         baseMessage:state.personalCenter.baseMessage
+  //       }
+  //       return isStore(state,'baseMessage','isBaseMessage',baseMsgs,sessionStorage)
+  //     },
+  //     key:'baseMessage'
+  //  })
   ],
   state: {
     countDown:10,
@@ -56,7 +57,7 @@ export default createStore({
     control:{
       isRegister:false,//存储注册信息开关
       isLogin:false,//存储登录信息开关
-      isBaseRoutes:false,//存储路由开关
+      // isBaseRoutes:false,//存储路由开关
       isBaseMessage:false,//存储个人信息开关
     }
   },

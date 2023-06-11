@@ -15,9 +15,9 @@ export default createStore({
           fullName: state.personalCenter.fullName,
           userId:state.personalCenter.userId
         }
-        return isStore(state,"user","isRegister",registerObj,localStorage)
+        return isStore(state,"users","isRegister",registerObj,localStorage)
       },
-      key: "user"
+      key: "users"
     }),
     createPersistedState({
       storage: window.sessionStorage,

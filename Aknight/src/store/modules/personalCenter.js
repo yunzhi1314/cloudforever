@@ -1,3 +1,5 @@
+import moment from "moment/moment"
+
 export default ({
     namespaced: true,
     state() {
@@ -38,7 +40,34 @@ export default ({
         },
         //exChangeGift页面获取和兑换
         changeContexts(state, data) {
-            console.log(state, data);
+            // 第一次设置空数组
+            if(state.contexts == null){
+                JSON.parse(localStorage.getItem("context")) != 0 &&JSON.parse(localStorage.getItem("context")) != null ?
+                state.contexts = JSON.parse(localStorage.getItem("context")).contexts:
+                state.contexts = []
+            }
+            // 判断是对象还是数组，通过length属性判断，数组有，对象没有
+            if(Reflect.has(data, "length")){
+                // 数组,判断长度是否大于0，大于0添加，不大于0不操作
+                data.length>0?data.forEach(item=>{
+                    // 设置空对象，存放context(兑换码)
+                    let obj = {};
+                    Reflect.set(obj, "context", item)
+                    state.contexts.push(obj)
+                }):""
+            }else{
+                // 对象
+                // 获取当前时间
+                let time = moment().format("YYYY-MM-DD/ hh:mm:ss a")
+                // 遍历contexts数组
+                state.contexts.forEach(item=>{
+                    // 判断请求到的兑换码与正在兑换的兑换码是否相等
+                    if(item.context == data.context){
+                        item.time = time
+                        item.items = data.items
+                    }
+                })
+            }
         }
     }
 })

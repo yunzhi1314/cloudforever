@@ -20,7 +20,7 @@
 						<ul v-show="isReverse" class="menuMsg">
 							<li v-for="(item, index) in menuMsg" :key="index" :style="{
 								animation: isReverse ? 'exist 0.3s 0s 1 linear forwards' : 'disappear 0.3s 0s 1 linear forwards'
-							}">
+							}" @click="toPage(index)">
 								<img :src="item.icon" alt="">
 								<span>{{ item.name }}</span>
 							</li>
@@ -87,9 +87,12 @@ export default {
 		let bool = ref(routeAdmin.includes(route.fullPath))
 
 		let menus
+		let menuRoutes
+		let userId
 		if (!bool.value) {
 			menus = JSON.parse(sessionStorage.getItem("menu")).menus
-			console.log(menus);
+			menuRoutes = JSON.parse(sessionStorage.getItem("menu")).menuRoutes
+			userId = JSON.parse(localStorage.getItem("userMsg")).userId
 		}
 		provide("controlDialog", "isLoginOut")
 
@@ -120,6 +123,17 @@ export default {
 			isReverse.value = !isReverse.value
 		}
 
+		//点击去往不同页面
+		const toPage = (index) => {
+			isReverse.value = !isReverse.value
+			router.push({
+				name: menuRoutes[index].name,
+				params: {
+					userId
+				}
+			})
+		}
+
 		return {
 			centerPagescss,
 			dialogCss,
@@ -132,7 +146,8 @@ export default {
 			route,
 			isShowPlay,
 			isReverse,
-			menusClick
+			menusClick,
+			toPage
 		};
 	}
 };

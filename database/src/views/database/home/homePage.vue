@@ -48,6 +48,7 @@ import url from '@/api/url';
 import { getPagebeforeMount } from '@/api/getPage';
 import {expMedicals,basicMedical,naweiCompany} from '@/echarts'
 import { toRefs } from 'vue';
+import { dictionary } from '@/api/database/dictionary';
 export default {
     name:'homePage',
     setup () {
@@ -55,6 +56,7 @@ export default {
             expMedicals(document.getElementById('expMedicals'))
             basicMedical(document.getElementById('basicMedical'))
             naweiCompany(document.getElementById('naweiCompany'))
+            dictionary()
         })
         
         return {

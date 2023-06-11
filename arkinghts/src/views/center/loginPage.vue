@@ -237,11 +237,12 @@ export default {
       confirmPassword: "",
       code: "",
     });
+
     // 登录需要的数据
     let loginData = reactive({
       telephone: "",
       password: "",
-      userId: JSON.parse(localStorage.getItem("user")).userId,
+      userId: JSON.parse(localStorage.getItem("users")).userId,
     });
     //  登录或注册按钮
     function loginOrRegister() {
@@ -262,7 +263,6 @@ export default {
         Request.postData(url.personalCenter.register, registerData)
           .then((res) => {
             dataList.data = res.data;
-            console.log(res.data);
           })
           .catch((err) => {
             console.log(err);
@@ -281,15 +281,17 @@ export default {
         });
         Request.postData(url.personalCenter.login, loginData).then((res) => {
           dataList.data1 = res.data;
+        });
+        setTimeout(() => {
           store.commit("personalCenter/changeToken", dataList.data1);
           store.commit("changeStore", "isLogin");
-        });
-        router.push({
-          name: "bufferPage",
-          params: {
-            userId: JSON.parse(localStorage.getItem("user")).userId,
-          },
-        });
+          router.push({
+            name: "bufferPage",
+            params: {
+              userId: JSON.parse(localStorage.getItem("users")).userId,
+            },
+          });
+        },1000);
 
         // Toest(controlObj)//调用吐丝的函数
       }

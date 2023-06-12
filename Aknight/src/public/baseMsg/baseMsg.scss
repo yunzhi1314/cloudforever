@@ -1,87 +1,70 @@
+.inof {
+  width: 30rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr 1.5fr 1fr;
+  grid-template-areas:
+    "personal"
+    "account"
+    "information";
 
-.inof{
-    width: 30rem;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 3fr 1.5fr 1fr;
-    grid-template-areas:
-     "personal"
-     "account"
-     "information";
-     div{
-      margin-bottom: 1.5rem;
-      border-radius: 1rem;
-     }
-     div:nth-child(1){
-      margin-top: 4rem;
-     }
-     p{
-      color:#158fc5;
-      margin: -5px 0;
-     }
-  }    
-  // 账号信息框
-  .personal{
-    grid-area: personal;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: rgba(255,255,255,0.8);
-    section{
-      margin: 0.5rem 2rem;
-      width: 100%;
-      button{
-        margin: 0.7rem 0;
-      }
-    }
-    section:nth-child(1){
-      margin: 1rem 2rem;
-    }
-    section:nth-child(2){
-      input{
-        width: 60%;
-      }
-      button{
-        width: 40%;
-        font-size: 0.8rem;
-        
-      }
-    }
-    section:nth-child(3){
-      input{
-        width: 60%;
-      }
-      button{
-        width: 40%;
-      }
-    }
-    p{
-      font-size: 0.3rem;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-  }
-  // 角色信息框
-  .account{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: rgba(255,255,255,0.8);
-    section{
-      width: 100%;
-      margin: 0.5rem 2rem;
-    }
-
-  }
-  // 实名信息框
-  .infor{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: rgba(255,255,255,0.8);
-   section{
-    width: 100%;
-    margin:0.5rem 2rem
-   }
+  div {
+    margin-bottom: 1.5rem;
+    border-radius: 1rem;
   }
 
+  p {
+    color: #158fc5;
+    margin: -5px 0;
+  }
+}
+
+
+.personal {
+  grid-area: personal;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgba(255, 255, 255, 0.8);
+
+  section {
+    margin: 0.5rem 2rem;
+    width: 100%;
+
+    button {
+      margin: 0.7rem 0;
+    }
+  }
+
+  section:nth-child(1) {
+    margin: 1rem 2rem;
+  }
+
+  section:nth-child(2) {
+    input {
+      width: 60%;
+    }
+
+    button {
+      width: 40%;
+      font-size: 0.8rem;
+
+    }
+  }
+
+  section:nth-child(3) {
+    input {
+      width: 60%;
+    }
+
+    button {
+      width: 40%;
+    }
+  }
+
+  p {
+    font-size: 0.3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+}

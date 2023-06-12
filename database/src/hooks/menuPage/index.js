@@ -35,7 +35,7 @@ export function deleList(item,url) {
         }
     )
         .then(() => {
-            deleMenu(url, item)
+            deleMenu(url, item.id)
             ElMessage({
                 type: 'success',
                 message: '删除成功',

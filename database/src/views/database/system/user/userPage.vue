@@ -21,7 +21,7 @@
       <el-table-column prop="medical_name" label="药品名称" />
       <el-table-column label="研发进度">
         <template #default="scope">
-          <el-progress :text-inside="true" :stroke-width="26" :percentage="scope.row.process" />
+          <el-progress :text-inside="true" :stroke-width="26" :percentage="scope.row.process" :status="scope.row.name" />
         </template>
       </el-table-column>
       <el-table-column prop="medical_enrollees_population_china" label="中国入组人数" />
@@ -131,6 +131,22 @@ export default {
     dataList = ref(dataList)
     let search = ref("");
     let isSearch = ref(false);
+
+    // 进度条状态颜色变化 
+
+    dataList.value.forEach(item => {
+      if (item.process < 50) {
+
+        Reflect.set(item, "name", "exception")
+      } else if (item.process < 100 && item.process >= 50) {
+
+        Reflect.set(item, "name", "warning")
+      } else {
+
+        Reflect.set(item, "name", "success")
+      }
+
+    })
 
     let msgObj = reactive({
       FPIchina: '',
@@ -295,7 +311,10 @@ export default {
         : pagArr.value.push(...dataList.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1]))
     }, { immediate: true, deep: true })
 
-    // console.log('pagArr', pagArr);
+    console.log('pagArr', pagArr);
+
+
+
 
     return {
       search,

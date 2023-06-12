@@ -14,22 +14,23 @@
   }">
     <header>
       <div v-if="boolObj.isRouter" class="unfold">
-        <span
-          v-html="menuMsg.navSvg"
-          class="svg"
-          @click="unfold"
-          style="cursor: pointer"
-        ></span>
-        <ul v-show="boolObj.unfold">
-          <li
-            v-for="(item, index) in menuMsg.menuMsg"
-            :key="index"
-            @click="toPage(index)"
-          >
-            <img :src="item.icon" />
-            <span>{{ item.name }}</span>
-          </li>
-        </ul>
+        <span v-html="menuMsg.navSvg" class="svg" @click="unfold" style="cursor: pointer;"
+          v-show="!boolObj.isReverse"></span>
+        <div class="cancel" v-show="boolObj.isReverse" @click="unfold"></div>
+          <section :style='{
+                    animation: boolObj.isPlay ?
+                        (boolObj.isReverse ? "showOut 0.15s 0s 1 ease-in forwards" : "showIn 0.15s 0s 1 ease-in forwards reverse") : ""
+                }'>
+          </section>
+          <ul v-show="boolObj.isReverse" class="nav">
+            <li v-for="(item, index) in menuMsg.menuMsg" :key="index" @click="toPage(index)" 
+            :style='{
+                    animation:boolObj.isReverse ? "exist 0.4s 0s 1 linear forwards" : "disappear  0.4s 0s 1 linear forwards" 
+                 }'>
+              <img :src="item.icon">
+              <span>{{ item.name }}</span>
+            </li>
+          </ul>
       </div>
 
       <div class="title">

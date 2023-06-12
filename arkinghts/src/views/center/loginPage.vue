@@ -232,13 +232,15 @@ export default {
       confirmPassword: "",
       code: "",
     });
-      // 登录需要的数据
-      let loginData = reactive({
+
+    // 登录需要的数据
+   
+    let loginData = reactive({
       telephone: "",
       password: "",
     });
-
-
+  
+ 
     function loginOrRegister() {
       let dataList = reactive({data:[]});
       if (controlObj.isChange) {
@@ -268,6 +270,7 @@ export default {
         });
         Request.postData(url.personalCenter.login, loginData).then((res) => {
           dataList.data1 = res.data;
+          console.log(dataList.data1)
         });
         setTimeout(() => {
           store.commit("personalCenter/changeToken", dataList.data1);

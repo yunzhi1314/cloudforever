@@ -8,6 +8,7 @@ export default ({
             fullName: null,
             userId:null,
             token:null,
+            telephone:null,
             baseRoutes:null,
             baseMessage:null
         }
@@ -21,6 +22,7 @@ export default ({
         },
         changeToken(state,data){
             state.token = data.token
+            state.telephone = data.telephone
         },
         changeBaseRoutes(state,data){//存储路由
             state.baseRoutes = data

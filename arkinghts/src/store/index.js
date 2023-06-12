@@ -24,6 +24,7 @@ export default createStore({
       reducer(state) {
         let tokenData = {
           token: state.personalCenter.token,
+          telephone: state.personalCenter.telephone
         }
         return isStore(state,"token","isLogin",tokenData,sessionStorage)
       },

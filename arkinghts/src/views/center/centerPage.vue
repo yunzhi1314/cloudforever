@@ -8,14 +8,15 @@
   <div class="center">
     <header>
       <div v-if="boolObj.isRouter" class="unfold">
-        <span v-html="menuMsg.navSvg" class="svg" @click="unfold"></span>
+        <span v-html="menuMsg.navSvg" class="svg" @click="unfold" style="cursor: pointer;"></span>
         <ul v-show="boolObj.unfold">
           <li
             v-for="(item, index) in menuMsg.menuMsg"
             :key="index"
             @click="toPage(index)"
           >
-            {{ item.name }}
+          <img :src="item.icon" >
+          <span>{{ item.name }}</span>            
           </li>
         </ul>
       </div>
@@ -31,10 +32,13 @@
               style="width: 2vw; margin-right: 2vw"
             />
           </p>
-          <p>
+          
+            <p>
             <img :src="img.toCustomImg" />
           </p>
           <p>客服中心</p>
+          
+         
         </section>
       </div>
     </header>

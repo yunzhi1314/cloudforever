@@ -176,21 +176,7 @@ export default {
         use: "验证码",
       },
     ]);
-  /*   // 点击去注册页面
-    function changeRegister() {
-      controlObj.isChange = true;
-      controlObj.isPlay = true
-      if (loginArr.length < 4) {
-        loginArr.push(...newArr);
-      }
-    }
-    // 点击去登录页面
-    function changeLogin() {
-      controlObj.isChange = false;
-      controlObj.isPlay = true
-      loginArr.splice(2, 2);
-    } */
-    
+
     watcher(loginArr); //调用监视函数监视账密框
     provide("controlDialog", "isMathCode");
 
@@ -261,7 +247,7 @@ export default {
     function loginOrRegister(){
       const { mapMutations } = createNamespacedHelpers("personalCenter");
       controlObj.isChange ?
-        pass(loginArr,"register", "changeUser", mapMutations):
+        pass(,"register", "changeUser", mapMutations):
         pass(loginArr,"login", "changeToken", mapMutations)
     }
 

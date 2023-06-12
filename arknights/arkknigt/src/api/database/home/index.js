@@ -1,20 +1,18 @@
-// import { reactive } from "vue";
+import { onBeforeMount,reactive } from "vue";
+import { Request } from "@/hook/request";
 
-// import { Request } from "@/hook/request";
+export function homeData(url){
+    let dataList = reactive({
+        homedata:[],
+    })
 
-// export function echartsData(url){
-//     let dataList = reactive({
-//         data:[],
-//     })
+    onBeforeMount(() => {
+        Request.get(url)
+        .then((res) =>{
+            dataList.homedata = {...res.data};
+        })
+    })
 
-//     // onBeforeMount(() => {
-//         return Request.getData(url)
-//         .then((res) =>{
-//             dataList.data = res;
-//             console.log(res);
-//         })
-//     // })
-
-//     // 抛出数据
-//     return dataList
-// }
+    // 抛出数据
+    return dataList
+}

@@ -23,18 +23,7 @@ const routes = [
     path: '/database',
     name: 'databasePage',
     component: () => import('../views/databasePage.vue')
-
   },
-  // {
-  //   path: '/homePage',
-  //   name: 'homePage',
-  //   component: () => import('../views/database/home/homePage.vue')
-  // },
-  // {
-  //   path:"/",
-  //   name:"menuPage",
-  //   component:()=> import("@/views/database/system/menu/menuPage.vue")
-  // }
 ]
 
 const router = createRouter({
@@ -57,17 +46,17 @@ router.beforeEach((to, from, next) => {
         if (to.matched[0]) {
           next();
         } else {
-         
-         
-          let routeData = JSON.parse(sessionStorage.getItem('baseMsg'))
-          let route = Reflect.get(routeData,'baseRoutes')
-         
+          let PPath = to.path.split('/')[1]
+
+          let routeData = JSON.parse(sessionStorage.getItem(PPath == 'center' ? 'baseMsg' : 'saveRoutes'))
+          let route = Reflect.get(routeData, PPath == 'center' ? 'baseRoutes':'databaseRoutes')
+
 
           //  处理component数据，将路由正规化
-          route = dealRoutes(route, route.length -1);
-          
-          route.forEach((item)=>{
-              router.addRoute('centerPage',item);
+          route = dealRoutes(route, route.length - 1);
+
+          route.forEach((item) => {
+            router.addRoute(PPath == 'center'?'centerPage':'databasePage', item);
           })
 
           // 重复导航，直到路由能够找到正确的路径为止

@@ -17,7 +17,6 @@ export async function ExpMedical(dom) {
         medical_TREE: item.medical_TREE,
         id: item.id
     }))
-    console.log(sources)
     let echat = echarts.init(dom) //初始化echarts
     // 设置配置项
     let option = {

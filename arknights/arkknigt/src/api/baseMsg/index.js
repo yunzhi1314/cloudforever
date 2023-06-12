@@ -8,7 +8,6 @@ export function baseMessage() {
     telephone:JSON.parse(sessionStorage.getItem("token")).telephone,
     code:''
   };
-  console.log(data);
   onBeforeMount(() => {
     let dataList = reactive({
       baseMsg: [],

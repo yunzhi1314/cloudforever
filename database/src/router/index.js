@@ -3,7 +3,7 @@ import { dealRoutes } from "@/hooks/route";
 
 const routes = [
 	{
-		path: '/',
+		path: '/database',
 		name: 'database',
 		component: () => import('@/views/database/databasePage.vue'),
 		children: [
@@ -34,26 +34,24 @@ router.beforeEach((to, from, next) => {
 		//放行
 		next()
 	} else {
-		if (JSON.parse(localStorage.getItem('token'))) {
-			let token = JSON.parse(localStorage.getItem("token")).token
+		let token = localStorage.getItem("token")
 			if (token) {
 				// mathch值有的话就放行，防止页面刷新后空白
 				//其他页面刷新返回首页
 				if (to.matched[0]) {
 					next()
-				} else {			
+				} else {		
+					token = JSON.parse(token).token		
 					let routeData = JSON.parse(sessionStorage.getItem("menuList"))
-					let route = Reflect.get(routeData, 'menuList')
-					route = dealRoutes(route, route.length - 1)
-
-					route.forEach(item => {
-						router.addRoute("menuList", item)
-					})
+					let route=Reflect.get(routeData,'delRoutes')
+					console.log(route);
+					let newRoute = dealRoutes(route, route.length - 1)
+					newRoute.forEach(item => {
+					router.addRoute("database", item)
+					})			
 					next({ ...to, replace: true })
 				}
-			}
-
-		} else {
+			} else {
 			//无权限放回指定路径
 			next({ path: "/" })
 		}

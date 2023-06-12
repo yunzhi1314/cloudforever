@@ -6,8 +6,17 @@
 				{{ item.title }}
 			</section>
 			<section>
-				<input v-model="context" type="text" v-if="index == 0" placeholder="-ARKNIGHTS-" />
-				<button v-if="index == 0" @click="exchangeGift" :class="context == '' ? 'disabled' : ''">兑换礼包</button>
+				<input
+					v-model="context"
+					type="text"
+					v-if="index == 0"
+					placeholder="-ARKNIGHTS-" />
+				<button
+					v-if="index == 0"
+					@click="exchangeGift"
+					:class="context == '' ? 'disabled' : ''">
+					兑换礼包
+				</button>
 				<span v-if="index == 1">*仅显示最近10条礼包兑换记录</span>
 				<table v-if="index == 1">
 					<tr>
@@ -20,6 +29,21 @@
 						<td>{{ item.items }}</td>
 						<td>{{ item.context }}</td>
 					</tr>
+					<tr>
+						<th>兑换时间</th>
+						<th>兑换内容</th>
+						<th>兑换码</th>
+					</tr>
+					<tr>
+						<th>兑换时间</th>
+						<th>兑换内容</th>
+						<th>兑换码</th>
+					</tr>
+					<tr>
+						<th>兑换时间</th>
+						<th>兑换内容</th>
+						<th>兑换码</th>
+					</tr>
 				</table>
 			</section>
 		</div>
@@ -29,43 +53,43 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, onUpdated } from "vue";
-import exchangeGiftScss from "@/public/exchange/exchangeGift.scss";
-import { getRedemptionCode, getGift } from "@/api/arknight/centerPage/exchangeGift";
-import { toest } from "@/hooks/toset";
-import controlObj from "@/hooks/personalCenter/controlObj";
-export default {
-	name: "ExchangeGift",
-	setup() {
-		let context = ref("");
-		let gift = reactive({});
-		onUpdated(() => {
-			let datalist = JSON.parse(localStorage.getItem("context"))
-				? JSON.parse(localStorage.getItem("context")).contexts.filter(
-					(item) => item.items)
-				: [];
-			Reflect.set(gift, "context", datalist);
-		});
-		// 兑换礼物函数  
-		function exchangeGift() {
-			let zz = /^\w{13,}$/
-			if (zz.test(context.value)) {
-				getGift(context.value);
-				// 吐丝
-				toest(controlObj);
+	import { ref, reactive, toRefs, onUpdated } from "vue";
+	import exchangeGiftScss from "@/public/exchange/exchangeGift.scss";
+	import { getRedemptionCode, getGift } from "@/api/arknight/centerPage/exchangeGift";
+	import { toest } from "@/hooks/toset";
+	import controlObj from "@/hooks/personalCenter/controlObj";
+	export default {
+		name: "ExchangeGift",
+		setup() {
+			let context = ref("");
+			let gift = reactive({});
+			onUpdated(() => {
+				let datalist = JSON.parse(localStorage.getItem("context"))
+					? JSON.parse(localStorage.getItem("context")).contexts.filter(
+							(item) => item.items)
+					: [];
+				Reflect.set(gift, "context", datalist);
+			});
+			// 兑换礼物函数
+			function exchangeGift() {
+				let zz = /^\w{13,}$/;
+				if (zz.test(context.value)) {
+					getGift(context.value);
+					// 吐丝
+					toest(controlObj);
+				}
+				context.value = "";
 			}
-			context.value = "";
+			return {
+				exchangeGiftScss,
+				controlObj,
+				context,
+				gift,
+				...toRefs(getRedemptionCode()),
+				exchangeGift
+			};
 		}
-		return {
-			exchangeGiftScss,
-			controlObj,
-			context,
-			gift,
-			...toRefs(getRedemptionCode()),
-			exchangeGift
-		};
-	}
-};
+	};
 </script>
 
 <style lang="scss" scoped></style>

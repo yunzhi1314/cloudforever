@@ -68,6 +68,8 @@ body {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			position: absolute;
+			top: 4rem;
 
 			.account {
 				background-color: #158fc5;
@@ -194,17 +196,21 @@ body {
 		}
 
 		.toDatabase {
-			background-color: #fff;
 			width: 20rem;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			padding: 1rem;
-			border-radius: 1rem;
-			section {
+			height: 100%;
+			div {
 				width: 100%;
-				text-align: center;
+				background-color: #fff;
+				padding: 2rem;
+				border-radius: 1rem;
+				section {
+					width: 100%;
+					text-align: center;
+				}
 			}
 		}
 	}

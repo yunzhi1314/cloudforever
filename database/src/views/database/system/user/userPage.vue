@@ -189,8 +189,8 @@ export default {
 
     // 设置CTR的正侧
     watch(() => msgObj.medical_CTR, (newValue) => {
-      let zz1 = /^CTR(2{1}0{1}[0-1]{1}\d{1}\d{4})$/
-      let zz2 = /^CTR(2{1}0{1}2{1}[1-3]{1}\d{4})$/
+      let zz1 = /^CTR(2{1}0{1}[0-1]{1}\d{1})\d{4}$/
+      let zz2 = /^CTR(2{1}0{1}2{1}[0-3]{1})\d{4}$/
       if (zz1.test(newValue)) {
         isCtr.value = true;
       } else if (zz2.test(newValue)) {

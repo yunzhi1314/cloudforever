@@ -8,22 +8,28 @@ const routes = [
     component: () => import("@/views/center/centerPage"),
     children: [
       {
-        path:"/center/login",
-        name:"loginPage",
-        component:()=>import("@/views/center/login/loginPage"),
-        children:[
+        path: "/center/login",
+        name: "loginPage",
+        component: () => import("@/views/center/login/loginPage"),
+        children: [
           {
-            path:"/center/login/buffer",
-            name:"bufferPage",
-            component:()=>import("@/views/center/buffer/bufferPage")
+            path: "/center/login/buffer",
+            name: "bufferPage",
+            component: () => import("@/views/center/buffer/bufferPage")
           }
         ]
+      },
+      {
+        path: "/center/change/:userId",
+        name: "changeInfo",
+        component: () => import("@/views/center/basemsg/change/changeInfo")
       }
     ]
   },
   {
-    path:"/database",
-    name:"databasePage"
+    path: "/database",
+    name: "databasePage",
+    component: () => import("@/views/database/databasePage")
   }
 ];
 
@@ -45,20 +51,20 @@ router.beforeEach((to, from, next) => {
     //当前路径不在白名单内,判断是否有权限
     if (JSON.parse(localStorage.getItem("token"))) {
       let token = JSON.parse(localStorage.getItem("token")).token
-      if(token){
-        if(to.matched[0]){
+      if (token) {
+        if (to.matched[0]) {
           next()
-        }else{
+        } else {
 
           let routeData = JSON.parse(sessionStorage.getItem("menu")).menuRoutes
-          routeData = handleRoutes(routeData, routeData.length-1)
+          routeData = handleRoutes(routeData, routeData.length - 1)
 
-          routeData.forEach(item=>{
-            router.addRoute("centerPage",item)
+          routeData.forEach(item => {
+            router.addRoute("centerPage", item)
           })
           next({
             ...to,
-            replace:true
+            replace: true
           })
         }
       }

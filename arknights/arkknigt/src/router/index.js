@@ -26,7 +26,7 @@ const routes = [
 
   },
   {
-    path:"/",
+    path:"/menuPage",
     name:"menuPage",
     component:()=> import("@/views/database/system/menu/menuPage.vue")
   }

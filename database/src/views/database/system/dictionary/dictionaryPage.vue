@@ -30,7 +30,7 @@
                 </template>
             </el-table-column>
         </el-table>
-
+           <!-- 分页栏 -->
         <div style="display: flex; justify-content: center; margin-top: 3vh;">
       <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[3, 5, 8]"
         :small="small" layout="total, sizes, prev, pager, next, jumper"
@@ -108,7 +108,6 @@
           Profit_from_operations:item.Profit_from_operations
         }))
   
-        console.log(newData);
         let isSearch = ref(false)
         let msgObj = reactive({
         })
@@ -172,7 +171,6 @@
 
     watch([currentPage, pageSize, isSearch, searchData], (newValue) => {
       pagArr.value.splice(0, pagArr.value.length)
-      console.log(database.value);
       newValue[2] 
       ? pagArr.value.push(...(searchData.value.slice((newValue[0] - 1) 
       * newValue[1], newValue[0] * newValue[1])))

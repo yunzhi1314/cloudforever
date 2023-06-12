@@ -15,8 +15,9 @@ body {
 
 	// 头部
 	header {
-		position: sticky;
+		position: fixed;
 		top: 0;
+		width: 100%;
 		grid-area: header;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);

@@ -1,82 +1,67 @@
 <template>
-  <div class="bos">
-    <div class="box">
-      <section>微信支付</section>
-      <section>功能类型<section class="ys">支付</section>
-      </section>
-      <section>第三方主体<section class="ys">财付通支付科技有限公司</section>
-      </section>
-      <section>使用目的<section class="ys">用于支付</section>
-      </section>
-      <section>共享方式<section class="ys">SDK本机采集</section>
-      </section>
-      <section>涉及个人信息类型<section class="ys">设备版本、系统版本、生成ID、手机样式、手机名、iccid、bssid、MAC地址、IMSI、IMEI</section>
-      </section>
-      <section>第三方隐私协议政策或官网链接<section class="ys">https://wwwv3</section>
-      </section>
-    </div>
-
-    <div>432</div>
-    <div>
-      324
-    </div>
-  </div>
+  <div></div>
+	<div class="ThirdShare" v-for="(item, index) in datas" :key="index">
+		<section class="title">{{ item.title }}</section>
+		<div class="content">
+			<section>
+				<span>功能类型</span><span>{{ item.type }}</span>
+			</section>
+			<section>
+				<span>第三方主体</span><span>{{ item.master }}</span>
+			</section>
+			<section>
+				<span>使用目的</span><span>{{ item.target }}</span>
+			</section>
+			<section>
+				<span>共享方式</span><span>{{ item.method }}</span>
+			</section>
+			<section>
+				<span>涉及个人信息类型</span><span>{{ item.messageType }}</span>
+			</section>
+			<section>
+				<span>第三方隐私协议政策或官网链接</span><span>{{ item.URL }}</span>
+			</section>
+		</div>
+	</div>
 </template>
 
 <script>
-export default {
-  name: "ThirdShare",
-  setup() {
-    return {
-    }
-  }
-}
+	import { getShare } from "@/api/arknight/centerPage/thirdShare";
+	import { toRefs } from "vue";
+	export default {
+		name: "ThirdShare",
+		setup() {
+			return {
+				...toRefs(getShare())
+			};
+		}
+	};
 </script>
 
 <style lang="scss" scoped>
-.bos {
-
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-}
-
-.box {
-  padding-left: 30px;
-  padding-right: 30px;
-  width: 30rem;
-  height: 20rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  border-radius: 5%;
-  padding: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  background-color: white;
-  opacity: 0.8;
-  font-size: 0.5rem;
-}
-
-.box>section:first-child {
-  border-bottom: 1px solid;
-  border-color: rgb(226, 226, 226);
-  color: black;
-  font-weight: bold;
-  padding-bottom: 10px;
-}
-
-.box>section {
-  color: rgb(185, 183, 184);
-  text-align: justify;
-  display: grid;
-  grid-template-columns: 1.5fr 2.5fr;
-
-
-}
-
-.ys {
-  display: inline-block;
-  padding-left: 10px;
-
-}</style>
+	.ThirdShare {
+		background-color: #fff;
+		width: 30rem;
+		margin-bottom: 1rem;
+		padding: 1.5rem;
+		border-radius: 1rem;
+		.title {
+			font-size: 1.1rem;
+			font-weight: bold;
+			border-bottom: 1px solid #ddd;
+			padding-bottom: 1rem;
+		}
+    .content>section{
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows:1fr;
+      grid-template-areas: "left right";
+      padding-top: 1rem;
+      gap: 1rem;
+    }
+    .content>section>span{
+      /*单词强制换行*/
+      word-break:break-all;
+    }
+	}
+</style>

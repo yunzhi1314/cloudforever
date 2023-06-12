@@ -29,20 +29,8 @@
 						<td>{{ item.items }}</td>
 						<td>{{ item.context }}</td>
 					</tr>
-					<tr>
-						<th>兑换时间</th>
-						<th>兑换内容</th>
-						<th>兑换码</th>
-					</tr>
-					<tr>
-						<th>兑换时间</th>
-						<th>兑换内容</th>
-						<th>兑换码</th>
-					</tr>
-					<tr>
-						<th>兑换时间</th>
-						<th>兑换内容</th>
-						<th>兑换码</th>
+					<tr v-if="gift.context==0">
+						<td colspan="3">暂无记录</td>
 					</tr>
 				</table>
 			</section>

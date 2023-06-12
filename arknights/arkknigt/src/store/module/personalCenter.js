@@ -9,7 +9,7 @@ export default ({
             userId:null,
             token:null,
             baseRoutes:null,
-            baseMessage:null
+            baseMessage:null,
         }
     },
     getters: {
@@ -27,7 +27,7 @@ export default ({
         },
         changeBaseMessage(state,data){//存储个人信息
             state.baseMessage = data
-        }
+        },
     },
     actions: {
     },

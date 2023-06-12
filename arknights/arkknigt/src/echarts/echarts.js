@@ -1,13 +1,14 @@
 import * as echarts from 'echarts';
 import { Request } from '@/hook/request';
 import store from '@/store';
+import url from '@/api/url';
 
 export async function ExpMedical(dom) {
-    let sources = await Request.get('http://192.168.2.26:3000/api/expMedicals') //获取图表数据
-    store.commit('dataStore/SAVE_EXP_MEDICAL', sources.data)  //保存到仓库
+    let sources = await Request.get(url.database.home.expMedicals) //获取图表数据
+    store.commit('dataStore/SAVE_EXP_MEDICAL', sources.data.datas)  //保存到仓库
     store.commit("CHANGE_STORE", "isExpMedical")
-   
-    sources = sources.data.map(item => ({
+
+    sources = sources.data.datas.map(item => ({
         medical_name: item.medical_name,
         鳞癌ORR: item.id > 9 ? '' : item.medical_ORR.slice(0, item.medical_ORR.indexOf('%')),
         鳞癌OS: item.id > 9 ? '' : item.medical_OS == '/' ? '' : item.medical_OS,
@@ -31,15 +32,7 @@ export async function ExpMedical(dom) {
         },
         //数据集
         dataset: {
-            dimensions: [
-                'medical_name',
-                '鳞癌ORR',
-                '鳞癌OS',
-                '非鳞癌ORR',
-                '非鳞癌OS',
-                'company',
-                'medical_TREE',
-                'id'
+            dimensions: ['medical_name', '鳞癌ORR', '鳞癌OS', '非鳞癌ORR', '非鳞癌OS', 'company', 'medical_TREE', 'id'
             ],
             source: sources
         },

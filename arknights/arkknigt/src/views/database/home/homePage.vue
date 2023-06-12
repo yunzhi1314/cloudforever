@@ -44,6 +44,7 @@ import { ExpMedical } from "@/echarts/echarts";
 import { onMounted, toRefs } from "vue";
 import { homeData } from '@/api/database/home/index.js'
 import homeCss from '@/public/database/homePage.scss'
+import url from "@/api/url";
 export default {
     name: "homePage",
     setup() {
@@ -53,7 +54,7 @@ export default {
 
         })
         return {
-            ...toRefs(homeData('http://192.168.2.26:3000/api/message')),
+            ...toRefs(homeData(url.database.home.messages)),
             homeCss
         }
     }

@@ -48,6 +48,8 @@
           <input
             type="checkbox"
             v-if="controlObj.isChange"
+            :checked="controlObj.isChecked"
+            @click="controlObj.isChecked = !controlObj.isChecked"
             style="width: 1vw; height: 2vh"
           />
           <span
@@ -110,26 +112,26 @@
       </section>
     </div>
   </dialogPage>
- 
+  <!-- 吐丝提示 -->
+  <messagePage v-if="controlObj.isMsgTusi"></messagePage>
+  <router-view></router-view>
 </template>
 
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive, provide } from "vue";
-import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
+import { watcher } from "@/hooks/personalCenter/watcher"; 
 import controlObj from "@/hooks/personalCenter/control";
 import { getMathCode,againGetMathCode,cancel,setCode} from "@/hooks/personalCenter/code";
 import svg from "@/hooks/personalCenter/code";
-import { Request } from "@/hooks/personalCenter/request";
-import url from "@/api/url";
-import store from "@/store";
 import { toRefs } from "vue";
+import { pass } from "@/hooks/personalCenter/RegisterOrLogin"
+import { createNamespacedHelpers } from 'vuex'
 
 export default {
   name: "loginPage",
   setup() {
-    // 路由
-    const router = useRouter();
+
     // 登录数组
     let loginArr = reactive([
       {
@@ -222,8 +224,7 @@ export default {
 
     // 引入倒计时函数以及变量和遮罩层开关
     let { confirm, useInfo,countDown} = setCode(loginArr,"isMathCode")
-
-    let registerData = reactive({
+/* let registerData = reactive({
       telephone: "", 
       password: "",
       confirmPassword: "",
@@ -282,6 +283,14 @@ export default {
 
         // Toest(controlObj)//调用吐丝的函数
       }
+    } */
+   
+    // 判断是注册还是登录
+    function loginOrRegister(){
+      const { mapMutations } = createNamespacedHelpers("personalCenter");
+      controlObj.isChange ?
+        pass(loginArr,"register", "changeUser", mapMutations):
+        pass(loginArr,"login", "changeToken", mapMutations)
     }
 
     return {
@@ -297,9 +306,10 @@ export default {
       cancel, // 取消遮罩层
       confirm,// 遮罩层的确认按钮
       useInfo,// 发送短信传送的数据
-      loginOrRegister, //点击注册或登录按钮
       codeLogin, // 点击切换密码或短信验证码登录
-      ...toRefs(countDown)// 将countDown对象扩展开并变成响应式数据
+      ...toRefs(countDown),// 将countDown对象扩展开并变成响应式数据
+      // Toest,//吐丝的函数
+      loginOrRegister
     };
   },
 };

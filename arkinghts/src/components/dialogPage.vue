@@ -15,6 +15,7 @@
 import controlObj from '@/hooks/personalCenter/control'
 import { inject } from 'vue';
 export default {
+  name:"dialogPage",
   setup() {
 
     // 接收controlDialog参数，控制遮罩层的开启与关闭

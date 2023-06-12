@@ -76,18 +76,14 @@
                         <!-- 用户名 -->
                         <el-sub-menu index="3">
                             <!-- 用户名 -->
-                            <template #title>
-                                <span>
-                                    {{ baseMsg[1].inputs[0].inputItem }} 
-                                </span>
-                            </template>
+                           
                             <el-menu-item index="3-1">鬼人正邪</el-menu-item>
                             <el-menu-item index="3-2">安全中心</el-menu-item>
                             <el-menu-item index="3-3">退出</el-menu-item>
                         </el-sub-menu>
                     </el-menu>
-                    <el-tabs class="demo-tabs" type="card">
-                        <el-tab-pane key="1" tab=""></el-tab-pane>
+                    <el-tabs class="demo-tabs" type="card" v-model="title">
+                        <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.title" :name="item.name"></el-tab-pane>
                     </el-tabs>
                 </el-header>
                 <el-main>

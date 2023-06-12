@@ -16,6 +16,34 @@ const routes = [
         name: "bufferPage",
         component: () => import("@/views/center/bufferPage.vue"),
       },
+      {
+        path:"/center/personalList/infoBasic/:userId",
+        name:"infoBasicPage",
+        component:()=> import("@/views/center/list/infoBasic/infoBasicPage"),
+        meta:{
+          height:"110vh"
+        }
+      },
+      {
+        path:"/center/personalList/infoRealname/:userId",
+        name:"infoRealnamePage",
+        component:()=> import("@/views/center/list/infoRealname/infoRealnamePage")
+      },
+      {
+        path:"/center/personalList/infoBehavior/:userId",
+        name:"infoBehaviorPage",
+        component:()=> import("@/views/center/list/infoBehavior/infoBehaviorPage")
+      },
+      {
+        path:"/center/personalList/infoDevice/:userId",
+        name:"infoDevicePage",
+        component:()=> import("@/views/center/list/infoDevice/infoDevicePage"),
+        meta:{
+          height:"350vh",
+          isContain:true,
+          gridTemplateRows: "1fr 36fr 1fr"
+        }
+      },
     ],
   },
 ];

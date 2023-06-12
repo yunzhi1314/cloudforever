@@ -19,6 +19,7 @@ body {
 		position: fixed;
 		width: 100%;
 		top: 0;
+		width: 100%;
 		grid-area: header;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
@@ -100,7 +101,7 @@ body {
 				}
 			}
 
-			.account>span:nth-child(2) {
+			.account > span:nth-child(2) {
 				color: #000;
 			}
 		}
@@ -146,7 +147,7 @@ body {
 			}
 
 			// 设置短信登录或密码登录文字居左
-			.btns>section:nth-child(1) {
+			.btns > section:nth-child(1) {
 				text-align: left;
 			}
 
@@ -206,11 +207,11 @@ body {
 			}
 		}
 
-		.change-box>span:nth-child(2) {
+		.change-box > span:nth-child(2) {
 			font-weight: normal;
 		}
 
-		//前往数据库
+		// 前往数据库
 		.toDatabase {
 			width: 20rem;
 			display: flex;
@@ -228,6 +229,31 @@ body {
 				section {
 					width: 100%;
 					text-align: center;
+				}
+			}
+		}
+
+		// 自助查询
+		.SelfQuery {
+			width: 30rem;
+			background-color: #fff;
+			padding: 1rem;
+			border-radius: 1rem;
+			img {
+				width: 1.5rem;
+				vertical-align: middle;
+				margin-right: 0.5rem;
+			}
+			.QueryItem{
+				padding: 1rem;
+				button {
+					height: 3.5rem;
+					margin: 1rem 0;
+					border-radius: 2rem;
+					background-size: cover;
+					text-align: left;
+					padding-left: 2rem;
+					font-size: 1.2rem;
 				}
 			}
 		}

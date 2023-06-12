@@ -34,13 +34,14 @@ router.beforeEach((to, from, next) => {
 		//放行
 		next()
 	} else {
-		let token = JSON.parse(localStorage.getItem("token")).token	
+		let token = localStorage.getItem("token")
 			if (token) {
 				// mathch值有的话就放行，防止页面刷新后空白
 				//其他页面刷新返回首页
 				if (to.matched[0]) {
 					next()
-				} else {			
+				} else {		
+					token = JSON.parse(token).token		
 					let routeData = JSON.parse(sessionStorage.getItem("menuList"))
 					let route=Reflect.get(routeData,'delRoutes')
 					console.log(route);

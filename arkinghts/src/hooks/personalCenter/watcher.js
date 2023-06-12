@@ -16,10 +16,8 @@ export function watcher(arr) {
       } else {
         if (newValue.value == arr[1].value) {
           item.isShow = false
-          console.log(item.isShow);
         } else {
           item.isShow = true
-          console.log(item.isShow);
         }
       }
     });

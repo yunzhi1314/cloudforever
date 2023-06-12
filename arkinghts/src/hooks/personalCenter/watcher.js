@@ -4,14 +4,22 @@ import { watch } from "vue";
 export function watcher(arr) {
   arr.forEach((item) => {
     watch(item, (newValue) => {
-      if (item.value == null) {
+      if (item.value == "") {
         item.isShow = true;
-      }else if(item.zz) {
+      } else if (item.zz) {
         //如果有正则的情况下
         if (item.zz.test(newValue.value)) {
           item.isShow = false;
         } else if (!item.zz.test(newValue.value)) {
           item.isShow = true;
+        }
+      } else {
+        if (newValue.value == arr[1].value) {
+          item.isShow = false
+          console.log(item.isShow);
+        } else {
+          item.isShow = true
+          console.log(item.isShow);
         }
       }
     });

@@ -3,6 +3,36 @@ import {  reactive, ref } from "vue"
 import controlObj from "@/hooks/personalCenter/control";// 导入按钮
 import store from "@/store" //引入仓库
 import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
+import { watcher } from "@/hooks/personalCenter/watcher"; 
+
+  // 点击切换密码或短信验证码登录
+    export function codeLogin(loginArr) {
+    let obj = {
+        value: "",
+        isShow: false,
+        tip: "*验证码格式不正确",
+        tip1: "*验证码不能为空",
+        type: "text",
+        placeholder: "输入验证码",
+        zz: /^\d{4}$/,
+      };
+      let obj1 = {
+        value: "",
+        isShow: false,
+        tip: "*密码格式不正确",
+        tip1: "*密码不能为空",
+        type: "password",
+        placeholder: "8-16位数字、字母、常用字符",
+        zz: /^\w{8,16}$/,
+        use: "密码",
+      };
+    controlObj.isCode = !controlObj.isCode;
+    if(!controlObj.isChange){
+      controlObj.isCode ? loginArr.splice(1, 1, obj): loginArr.splice(1, 1, obj1);
+    }
+    watcher(loginArr); //调用监视函数监视账密框
+  }
+
 
 // 获取图形数字验证码
 let svg = ref("")
@@ -59,6 +89,7 @@ export function setCode(obj,name){
                 clearInterval(timer)
             }
         },1000)
+        // console.log(timer);
     }
 
     // 根据不同的开关调用倒计时函数

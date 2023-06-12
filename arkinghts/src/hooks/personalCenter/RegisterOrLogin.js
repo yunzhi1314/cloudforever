@@ -19,11 +19,13 @@ let loginData = reactive({
     password: "",
     userId: "",
 });
+
 // 登录注册封装函数
-export function pass(obj, baseUrl, method, fn) {
+export function pass(obj) {
     let target;// 请求需传送数据的对象
-    let isPass; //判断是注册or登录的开关
+    let isPass; //判断是否可以去请求的开关
     let isStore; //判断仓库存储数据是哪个函数的开关
+
     if (controlObj.isChange) {
         target = registerData;
         isPass = controlObj.isRegister;
@@ -33,18 +35,19 @@ export function pass(obj, baseUrl, method, fn) {
         isPass = controlObj.isLogin;
         isStore = "isLogin"
     }
+    // 对obj进行遍历，利用映射赋值
     obj.forEach((item, index) => {
         if (index < 3) {
             if (item.value != "" && !item.isShow)
-                Reflect.set(registerData, Reflect.ownKeys(registerData)[index], item.value);
+                Reflect.set(target, Reflect.ownKeys(target)[index], item.value);
         }
         if (item.isShow || item.value == "") {
             isPass = false
         } else {
-            console.log(999);
             isPass = true
         }
     });
+    
     // 判断是登录框还是注册框
     if(controlObj.isChange){
         Reflect.set(target,"code",obj[obj.length -1].value)
@@ -62,33 +65,38 @@ export function pass(obj, baseUrl, method, fn) {
     }else{
         target.userId = JSON.parse(localStorage.getItem("users")).userId
     }
+
+    let dataList = reactive({
+        data:[],//注册
+        data1:[] //登录
+    })
+
     // 根据开关来判断请求路径并存储相应的数据
-    if(isPass){
-        console.log(isPass);
-        let dataList = reactive({
-            data:[]
-        })
-        Request.postData(url.personalCenter[baseUrl],target)
+    if(controlObj.isChange){
+        console.log(isPass == controlObj.isRegister);
+        Request.postData(url.personalCenter.register,target)
         .then(res=>{
             dataList.data = toRef({...res.data})
-            let changeUserMsg = fn([method])[method]
-            changeUserMsg.bind({ $store: store })(dataList.data)
-            setTimeout(()=>{
-                store.commit("changeStore", isStore)
-                store.commit("changeMsg", dataList.data)
-            },1000)
+            store.commit("personalCenter/changeUse", dataList.data);
+            store.commit("changeStore", isStore);
             console.log(dataList.data);
         })
+    }else{
+        Request.postData(url.personalCenter.login,target)
+        .then(res=>{
+            dataList.data1 = toRef({...res.data})
+            store.commit("personalCenter/changeToken", dataList.data1);
+            store.commit("changeStore", isStore);
+            store.commit("changeTel",dataList.data1)
+            console.log(dataList.data1);
+        })
         // Toest()
-        // 如果是登录页面
-        if(isStore == "isLogin"){
-            store.commit("changeTel",dataList.data.telephone)
-            // 并且有token权限，登录成功后跳转到bufferPage
-            if(store.state.personalCenter.token){
-                router.push({
-                    name:"bufferPage"
-                })
-            }
+        // 并且有token权限，登录成功后跳转到bufferPage
+        if(store.state.personalCenter.token){
+            router.push({
+                name:"bufferPage"
+            })
         }
+
     }
 }

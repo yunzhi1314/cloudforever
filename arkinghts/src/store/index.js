@@ -86,7 +86,7 @@ export default createStore({
     },
     // 存储电话
     changeTel(state,data){
-      state.telephone = data
+      state.telephone = data.telephone
     }
   },
   actions: {
@@ -95,6 +95,5 @@ export default createStore({
   namespaced: true,
   modules: {
     personalCenter
-
   }
 })

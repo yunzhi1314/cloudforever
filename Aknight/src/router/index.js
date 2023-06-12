@@ -20,6 +20,10 @@ const routes = [
         ]
       }
     ]
+  },
+  {
+    path:"/database",
+    name:"databasePage"
   }
 ];
 

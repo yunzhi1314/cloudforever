@@ -1,16 +1,19 @@
 <template>
     <div>
-        reChargePage
+
     </div>
 </template>
 
 <script>
+// import {useRoute} from "vue-router"
+import {toRefs} from "vue"
 export default {
     name:"reChargePage",
     setup () {
-        
-
-        return {}
+        // let route = useRoute()
+        return {
+            ...toRefs(JSON.parse(sessionStorage.getItem("selfQuery")).selfQuery)
+        }
     }
 }
 </script>

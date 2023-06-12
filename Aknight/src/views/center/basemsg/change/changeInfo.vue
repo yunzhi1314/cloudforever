@@ -47,7 +47,7 @@
     </div>
   </div>
   <!-- 吐丝 -->
-  <messagePage v-show="controlObj.isTusi"></messagePage>
+  <messagePage v-if="controlObj.isTusi"></messagePage>
   <!-- 遮罩层 -->
   <dialogPage>
     <div class="mathcode" @click.stop>

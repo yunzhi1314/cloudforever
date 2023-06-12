@@ -49,7 +49,7 @@ export function user(url, data, fn, isStore) {
         } else {
             //发送短信
             //调用吐丝
-            store.commit("changeStore", "isMsg")
+            // store.commit("changeStore", "isMsg")
             store.commit("changeMsg", dataList.datas)
         }
     });

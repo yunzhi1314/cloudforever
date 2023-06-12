@@ -18,7 +18,6 @@ const routes = [
             component:()=>import("@/views/center/buffer/bufferPage")
           }
         ],
-        component:()=> import("@/views/center/login/loginPage")
       },
       {
         path:"/center/userinfo",

@@ -30,6 +30,11 @@ const routes = [
         component:()=> import("@/views/center/login/passwordsPage.vue")
       }
     ]
+  },
+  {
+    path:"/dataBase",
+    name:"dataBase",
+    component:()=>import("@/views/dataBasePage.vue")
   }
 ];
 

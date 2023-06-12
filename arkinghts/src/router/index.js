@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-
+import { dealRoutes } from "@/hooks/personalCenter/route";
 const routes = [
   {
     path: "/center",
@@ -42,6 +42,19 @@ router.beforeEach((to, from, next) => {
         if (to.matched[0]) {
           next();
         } else {
+         
+         
+          let routeData = JSON.parse(sessionStorage.getItem('baseMsg'))
+          let route = Reflect.get(routeData,'baseRoutes')
+         
+
+          //  处理component数据，将路由正规化
+          route = dealRoutes(route, route.length -1);
+          
+          route.forEach((item)=>{
+              router.addRoute('centerPage',item);
+          })
+
           // 重复导航，直到路由能够找到正确的路径为止
           next({ ...to, replace: true });
         }

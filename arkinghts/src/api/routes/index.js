@@ -34,7 +34,7 @@ export function centerMenu(){
             // 存储路由信息
             let routes = nav.map(item=>item.route)
             store.commit('personalCenter/changeBaseRoutes',routes)
-            store.commit('changeStore','isBaseRoutes')
+            store.commit('changeStore','isBaseMessage')
 
             // 处理component数据，将路由正规化
             routes = dealRoutes(routes,routes.length-1)

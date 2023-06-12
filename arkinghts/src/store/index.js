@@ -41,36 +41,37 @@ export default createStore({
       key: "token"
     }),
     createPersistedState({
-      storage: window.sessionStorage,
-      reducer(state) {
-        let baseMsg = {
-          baseRoutes: state.personalCenter.baseRoutes
-        }
-        return isStore(state, 'baseRoutes', 'isBaseRoutes', baseMsg, sessionStorage)
-      },
-      key: 'baseRoutes'
+       storage:window.sessionStorage,
+       reducer(state){
+         let baseMsg = {
+           baseMessage:state.personalCenter.baseMessage,
+           baseRoutes:state.personalCenter.baseRoutes
+         }
+         return isStore(state,'baseRoutes','isBaseMessage',baseMsg,sessionStorage)
+       },
+       key:'baseMsg'
     }),
-    createPersistedState({
-      storage: window.sessionStorage,
-      reducer(state) {
-        let baseMsgs = {
-          baseMessage: state.personalCenter.baseMessage
-        }
-        return isStore(state, 'baseMessage', 'isBaseMessage', baseMsgs, sessionStorage)
-      },
-      key: 'baseMessage'
-    })
+  //   createPersistedState({
+  //     storage:window.sessionStorage,
+  //     reducer(state){
+  //       let baseMsgs = {
+  //         baseMessage:state.personalCenter.baseMessage
+  //       }
+  //       return isStore(state,'baseMessage','isBaseMessage',baseMsgs,sessionStorage)
+  //     },
+  //     key:'baseMessage'
+  //  })
   ],
   state: {
     countDown: 120,
     msg: null,
     telephone:null,
     // 控制状态开关集合
-    control: {
-      isRegister: false,//存储注册信息开关
-      isLogin: false,//存储登录信息开关
-      isBaseRoutes: false,//存储路由开关
-      isBaseMessage: false,//存储个人信息开关
+    control:{
+      isRegister:false,//存储注册信息开关
+      isLogin:false,//存储登录信息开关
+      // isBaseRoutes:false,//存储路由开关
+      isBaseMessage:false,//存储个人信息开关
     }
   },
   getters: {

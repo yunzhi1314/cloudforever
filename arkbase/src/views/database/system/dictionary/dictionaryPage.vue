@@ -235,7 +235,6 @@ export default {
     let propArr = Reflect.ownKeys(dataList.value[0])
     let item = propArr.pop()
     propArr.unshift(item)
-    console.log(propArr)
     // 表单验证规则
     let rules = reactive({});
     let nameArr =  [
@@ -410,7 +409,6 @@ export default {
       [currentPage, pageSize, isSearch],
       (newValue) => {
         // 是否搜索？
-        console.log(newValue[2])
         newValue[2]? // 如果搜索的话，就分页搜索的结果
             pageArr.value.push(
               ...searchData.value.slice(
@@ -425,7 +423,6 @@ export default {
                 newValue[0] * newValue[1]
               )
             );
-        console.log(pageArr.value);
       },
       { immediate: true }
     );

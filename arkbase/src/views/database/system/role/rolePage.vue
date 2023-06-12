@@ -101,7 +101,7 @@
         <el-icon
           color="#aaa"
           style="cursor: pointer"
-          @click="controlObj.isDialog.isAddMenu = false"
+          @click="controlObj.isDialog.isRoleAddMenu = false"
           ><Close
         /></el-icon>
       </section>
@@ -197,11 +197,13 @@
 </template>
 
 <script>
-import { ref, provide, reactive, h, watch } from "vue";
+import { ref, provide, reactive, h, watch,toRefs } from "vue";
 import homePageCSS from "@/public/database/homePage.scss";
 import controlObj from "@/hooks/controls";
 import { addMenu, setMenu, delMenu } from "@/api/database/role";
 import { ElMessage, ElMessageBox } from "element-plus";
+import { dealTree } from "@/hooks/database/menuPage";
+import router from "@/router";
 
 export default {
   name: "rolePage",
@@ -278,7 +280,6 @@ export default {
       })
     })
 
-    console.log(rules)
     // 新增内容
     function addTable() {
       controlObj.isDialog.isRoleAddMenu = true;
@@ -363,9 +364,10 @@ export default {
     };
 
     // 提交表单
-    const submitForm = async (formEl) => {
+    let index = ref(0)
+    const submitForm =  (formEl) => {
       if (!formEl) return;
-      await formEl.validate((valid, fields) => {
+       formEl.validate((valid, fields) => {
         if (valid) {
           controlObj.isDialog.isRoleAddMenu = false;
 
@@ -374,6 +376,9 @@ export default {
 
           // 将修改的开关关闭
           isSetMsg.value = false;
+          
+          index.value < 1 ? router.go(0) : ""
+          index.value++
         } else {
           console.log("error submit!", fields);
         }
@@ -448,6 +453,7 @@ export default {
       handleCurrentChange,
       // 分页数组
       pageArr,
+      ...toRefs(dealTree()),
     };
   },
 };

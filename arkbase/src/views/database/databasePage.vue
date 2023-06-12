@@ -160,7 +160,7 @@ export default {
       }, 250);
 
       // 识别是哪个一级菜单
-      let newStr = route.fullPath.slice(10);
+      let newStr = route.fullPath.slice(1);
       let newStr2 = newStr.slice(0, newStr.indexOf("/"));
       switch (newStr2) {
         case "system":

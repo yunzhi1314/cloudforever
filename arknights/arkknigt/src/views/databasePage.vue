@@ -95,7 +95,7 @@
 </template>
   
 <script>
-import { reactive, ref, toRefs, onUpdated } from "vue";
+import { reactive, ref, onUpdated } from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
     name: 'databasePage',
@@ -144,14 +144,14 @@ export default {
                 }
             })
         }
-        setTimeout(() => {
-            router.push({
-                name: "homePage",
-                // params: {
-                //     userId
-                // }
-            });
-        }, 1000);
+        // setTimeout(() => {
+        //     router.push({
+        //         name: "homePage",
+        //         // params: {
+        //         //     userId
+        //         // }
+        //     });
+        // }, 1000);
         return {
             isScollape,
             toPage,

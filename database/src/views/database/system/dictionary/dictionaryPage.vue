@@ -16,9 +16,15 @@
             </el-col>
         </el-row>
         <!--  表格渲染-->
-        <el-table :data="isSearch ? searchData : newData" height="70vh" row-key="id" style="margin-top: 3vh;">
-            <el-table-column :prop="item.prop" :label="item.label" v-for="(item,index) in tableArr" :key="index"/>
+        <el-table :data="pagArr" height="70vh" row-key="id" style="margin-top: 3vh;">
+            <el-table-column prop="Profit_before_tax" label="Profit_before_tax" />
+            <el-table-column prop="EBIT" label="税前利润" />
+            <el-table-column prop="EBITDA" label="总利润" />
+            <el-table-column prop="growth_rate05" label="下半年增长" />
+            <el-table-column prop="growth_rate05" label="上半年增长" />
+            <el-table-column prop="Profit_from_operations" label="时当前资产间" />
             <el-table-column label="操作">
+
                 <template #default="scope">
                     <el-button type="text" size="mini" style="font-size: 12px;" @click="setList(scope.row)">修改</el-button>
                 </template>
@@ -32,7 +38,6 @@
     </div>
 
 
-  
         <!-- 点击添加按钮出现的遮罩层 -->
         <dialogPage>
             <div class="dialogMenu" @click.stop>
@@ -82,7 +87,6 @@
     setup() {
         let search = ref("")
         let database = ref(JSON.parse(sessionStorage.getItem('naweiCompany2')).naweiCompany2)
-        console.log(database);
         let timeArr = [
                   "2019年6月",
                   "2019年12月",
@@ -168,14 +172,19 @@
 
     watch([currentPage, pageSize, isSearch, searchData], (newValue) => {
       pagArr.value.splice(0, pagArr.value.length)
-      newValue[2] ? pagArr.value.push(...(searchData.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1])))
-        : pagArr.value.push(...database.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1]))
+      console.log(database.value);
+      newValue[2] 
+      ? pagArr.value.push(...(searchData.value.slice((newValue[0] - 1) 
+      * newValue[1], newValue[0] * newValue[1])))
+
+    : pagArr.value.push(...database.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1]))
     }, { immediate: true, deep: true })
 
-  
         return {
             search,
-            newData,
+            pageSize,
+            pagArr,
+            newData,currentPage,
             searchData,
             isSearch,
             msgObj,

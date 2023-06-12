@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+	<div style="height: 8.5rem"></div>
 	<div class="ThirdShare" v-for="(item, index) in datas" :key="index">
 		<section class="title">{{ item.title }}</section>
 		<div class="content">
@@ -46,22 +46,25 @@
 		padding: 1.5rem;
 		border-radius: 1rem;
 		.title {
-			font-size: 1.1rem;
 			font-weight: bold;
 			border-bottom: 1px solid #ddd;
 			padding-bottom: 1rem;
 		}
-    .content>section{
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      grid-template-rows:1fr;
-      grid-template-areas: "left right";
-      padding-top: 1rem;
-      gap: 1rem;
-    }
-    .content>section>span{
-      /*单词强制换行*/
-      word-break:break-all;
+		.content > section {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+			grid-template-rows: 1fr;
+			grid-template-areas: "left right";
+			padding-top: 1rem;
+			gap: 1rem;
+		}
+		.content > section > span {
+			/*单词强制换行*/
+			word-break: break-all;
+      font-size: 12px;
+		}
+    .content > section > span:nth-child(1){
+      color: #B5A8C5;
     }
 	}
 </style>

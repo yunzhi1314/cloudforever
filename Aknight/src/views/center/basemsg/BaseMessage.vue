@@ -32,7 +32,7 @@ export default {
     })
     data.telephone = JSON.parse(localStorage.getItem("token")).telephone
     data.userId = route.params.userId
-
+    
     return {
       baseCss,
       ...toRefs(getBaseMsg(data))

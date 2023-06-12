@@ -52,10 +52,20 @@ router.beforeEach((to, from, next) => {
 
           let routeData = JSON.parse(sessionStorage.getItem("menu")).menuRoutes
           routeData = handleRoutes(routeData, routeData.length-1)
-
           routeData.forEach(item=>{
             router.addRoute("centerPage",item)
           })
+
+          // 自定义添加子路由
+          let route2 = ["reChargePage", "exclusivePage", "sourcePage"]
+          route2.forEach(item=>{
+            router.addRoute("centerPage", {
+              path:`/center/${item}`,
+              name:item,
+              component:()=>import(`@/views/center/query/queryChildren/${item}`)
+            })
+          })
+
           next({
             ...to,
             replace:true

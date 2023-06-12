@@ -1,5 +1,6 @@
 <template>
     <div class="home-page">
+        <!-- 头部 -->
         <header>
             <div v-for="(item, index) in menu" :key="index" class="header-inner hoverStyle">
                 <section class="header-text">
@@ -64,10 +65,14 @@
                 </section>
             </div>
         </header>
+        <!-- 中间 -->
         <main>
+            <!-- 第一个图表 -->
             <div class="expMedicals hoverStyle" id="expMedicals"></div>
+            <!-- 第二个图表 -->
             <div class="basicMedical hoverStyle" id="basicMedical"></div>
         </main>
+        <!-- 脚部 -->
         <footer>
             <div class="navTools hoverStyle">
                 <p>快捷导航工具</p>
@@ -84,12 +89,12 @@
                                 fill="#D5E6FF" p-id="2393"></path>
                         </svg>
                         {{item.word}}
-
                     </span>
                     <span>{{item.data}}</span>
                 </section>
             </div>
         </div>
+        <!-- 第三个图表 -->
         <div class="naweiCompany hoverStyle" id="naweiCompany"></div>
     </footer>
 
@@ -109,18 +114,22 @@ import { getUser } from "@/api/getUser";
 export default {
     name: 'homePage',
     setup() {
-
+        // system文件夹内的user页面数据请求
         getUser()
         onMounted(() => {
+            // 三个图表
             expMedicals(document.getElementById('expMedicals'))
             basicMedical(document.getElementById('basicMedical'))
             naweiCompany(document.getElementById('naweiCompany'))
+            // system文件夹内的dictionary页面数据请求
             dictionary()
         })
 
         return {
             homeSCSS,
+            // 头部数据请求
             ...toRefs(getPagebeforeMount(url.database.home.messages, 'menu', 'menu')),
+            // 底部navTools数据请求
             ...toRefs(getPagebeforeMount(url.database.home.navTools, 'navTools', 'navTools'))
         }
     }

@@ -13,7 +13,8 @@ let  controlObj = reactive({
     isLogin:false, //是否是登录,
     // 吐丝
     isMsgTusi:false,
-    isCheck:false
+    isPlay:false,//是否动画播放
+    isDisable:false,//是否禁用按钮
 })
 
 export default controlObj

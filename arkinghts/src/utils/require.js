@@ -25,7 +25,7 @@ service.interceptors.request.use(
          'Content-Type' : 'application/json;charset=utf-8'
     }
 
-    let vuex = JSON.parse(localStorage.getItem('token'));//token权限
+    let vuex = JSON.parse(sessionStorage.getItem('token'));//token权限
     
     if(vuex){//如果有token权限的设置请求头为Authorization
         config.headers['Authorization'] = vuex.token

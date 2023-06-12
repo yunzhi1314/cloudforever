@@ -47,13 +47,13 @@
         <section>
           <input
             type="checkbox"
-            v-if="controlObj.isChange"
+            v-show="controlObj.isChange"
             :checked="controlObj.isChecked"
             @click="controlObj.isChecked = !controlObj.isChecked"
             style="width: 1vw; height: 2vh"
           />
           <span
-            @click="codeLogin"
+            @click="codeLogin(loginArr)"
             :style="{ color: controlObj.isCode ? '#000' : '' }"
             >{{
               controlObj.isChange
@@ -80,22 +80,20 @@
     <!-- 登录注册替换 -->
     <section class="change">
       <span
-        @click="changeLogin"
+        @click="changeBox(false,loginArr)"
         :style="{
           color: controlObj.isChange ? '#000' : '',
           fontSize: controlObj.isChange ? '1rem' : '',
         }"
-        >登录</span
-      >
+        >登录</span>
       <span>·</span>
       <span
-        @click="changeRegister"
+        @click="changeBox(true,loginArr,newArr)"
         :style="{
           color: controlObj.isChange ? '#158FC5' : '',
           fontSize: controlObj.isChange ? '1.3rem' : '',
         }"
-        >注册</span
-      >
+        >注册</span>
     </section>
   </div>
 
@@ -120,13 +118,13 @@
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive, provide } from "vue";
-import { watcher } from "@/hooks/personalCenter/watcher"; 
 import controlObj from "@/hooks/personalCenter/control";
-import { getMathCode,againGetMathCode,cancel,setCode} from "@/hooks/personalCenter/code";
+import { getMathCode,againGetMathCode,cancel,setCode,codeLogin} from "@/hooks/personalCenter/code";
 import svg from "@/hooks/personalCenter/code";
 import { toRefs } from "vue";
 import { pass } from "@/hooks/personalCenter/RegisterOrLogin"
-import { createNamespacedHelpers } from 'vuex'
+import { watcher } from "@/hooks/personalCenter/watcher"; 
+import { changeBox } from '@/hooks/personalCenter/changeBox'
 
 export default {
   name: "loginPage",
@@ -178,7 +176,7 @@ export default {
         use: "验证码",
       },
     ]);
-    // 点击去注册页面
+  /*   // 点击去注册页面
     function changeRegister() {
       controlObj.isChange = true;
       controlObj.isPlay = true
@@ -191,34 +189,8 @@ export default {
       controlObj.isChange = false;
       controlObj.isPlay = true
       loginArr.splice(2, 2);
-    }
-
-    let obj = {
-      value: "",
-      isShow: false,
-      tip: "*验证码格式不正确",
-      tip1: "*验证码不能为空",
-      type: "text",
-      placeholder: "输入验证码",
-      zz: /^\d{4}$/,
-    };
-    let obj1 = {
-      value: "",
-      isShow: false,
-      tip: "*密码格式不正确",
-      tip1: "*密码不能为空",
-      type: "password",
-      placeholder: "8-16位数字、字母、常用字符",
-      zz: /^\w{8,16}$/,
-      use: "密码",
-    };
-    // 点击切换密码或短信验证码登录
-    function codeLogin() {
-      controlObj.isCode = !controlObj.isCode;
-      controlObj.isChange
-        ? loginArr.splice(1, 1, obj)
-        : loginArr.splice(1, 1, obj1);
-    }
+    } */
+    
     watcher(loginArr); //调用监视函数监视账密框
     provide("controlDialog", "isMathCode");
 
@@ -295,10 +267,9 @@ export default {
 
     return {
       loginCSS,
-      // 登录数组渲染
-      loginArr,
-      changeRegister,
-      changeLogin,
+      loginArr,//登录数组
+      newArr,//注册数组
+      changeBox,//登录注册转换框的封装函数
       controlObj,//按钮开关集合
       getMathCode,//请求图形验证码
       svg,

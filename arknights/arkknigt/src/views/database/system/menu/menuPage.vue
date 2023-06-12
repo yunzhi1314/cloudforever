@@ -1,6 +1,5 @@
 <template>
     <div class="plans">
-       
     <!-- 查询新增按纽栏 -->
   <el-row>
     <el-col :span="7">
@@ -8,7 +7,7 @@
        <el-input v-model="search"
     prefix-icon="Search"
     placeholder="请输入查询内容"></el-input>
-    <el-button type="primary" icon="Search" style="margin-left: 1vw;">查询</el-button>
+    <el-button type="primary" icon="Search" style="margin-left: 1vw;" @click="query">查询</el-button>
     <el-button type="success">
         <el-icon><FolderAdd /></el-icon>
         <span >新增菜单</span>
@@ -18,7 +17,7 @@
     </el-col>
   </el-row>
   <el-table 
-  :data="datas" style="margin-top: 3vh" height="70vh" row-key="id">
+  :data="newData" style="margin-top: 3vh" height="70vh" row-key="id">
     <el-table-column prop="medical_name" label="药物名称" width="180" />
     <el-table-column prop="medical_company" label="所属公司" width="180" />
     <el-table-column prop="medical_target" label="靶向" width="180" />
@@ -29,7 +28,6 @@
     <el-button type="text" style="font-size:12px">新增</el-button>
     <el-button type="text" style="font-size:12px">修改</el-button>
     <el-button type="text" style="font-size:12px">删除</el-button>
-   
 </el-table-column>
 
   </el-table>
@@ -43,44 +41,30 @@ import {ref,toRefs} from "vue"
 import { Search } from '@element-plus/icons-vue'
 import service from "@/utils/example" //请求头，拦截器
 import  req  from '@/api/url.js' //路径
-import {tabledata} from '@/api/database/table/index'
-// import dataList from "@/api/database/table/index"
+// import {tabledata} from '@/api/database/table/index'
+import  {dealTree} from "@/hook/database/menuPage"
+import newData from "@/hook/database/menuPage"
 export default {
     name:'menuPage',
     setup () {
-       let search = ref("")
-      
-        console.log(Request,service,req)
-    //  tabledata()
-     
-//        const tableDatas = [
-//   {
-//     date: '2016-05-03',
-//     name: 'Tom',
-//     address: 'No. 189, Grove St, Los Angeles',
-//   },
-//   {
-//     date: '2016-05-02',
-//     name: 'Tom',
-//     address: 'No. 189, Grove St, Los Angeles',
-//   },
-//   {
-//     date: '2016-05-04',
-//     name: 'Tom',
-//     address: 'No. 189, Grove St, Los Angeles',
-//   },
-//   {
-//     date: '2016-05-01',
-//     name: 'Tom',
-//     address: 'No. 189, Grove St, Los Angeles',
-//   },
-// ]
 
-tabledata()
+       let search = ref("") 
+       let isSearch = ref(false) 
+         
+        console.log(Request,service,req)
+
+    
+      console.log(newData)
+    
+    console.log(dealTree())
+// tabledata()
         return {
          // 样式
             homePageCss,
 
+            // 判断
+            isSearch,
+       
         //icon图标类型 
             Search,
 
@@ -88,7 +72,7 @@ tabledata()
             search,
 
             // 请求过来的数据
-            ...toRefs(tabledata())
+            ...toRefs(dealTree()),
         }
     }
 }

@@ -19,52 +19,24 @@
 				<span>涉及个人信息类型</span><span>{{ item.messageType }}</span>
 			</section>
 			<section>
-				<span>第三方隐私协议政策或官网链接</span><span>{{ item.URL }}</span>
+				<span>第三方隐私协议政策或官网链接</span><a :href="item.URL">{{ item.URL }}</a>
 			</section>
 		</div>
 	</div>
 </template>
 
 <script>
-	import { getShare } from "@/api/arknight/centerPage/thirdShare";
-	import { toRefs } from "vue";
-	export default {
-		name: "ThirdShare",
-		setup() {
-			return {
-				...toRefs(getShare())
-			};
-		}
-	};
+import { getShare } from "@/api/arknight/centerPage/thirdShare";
+import { toRefs } from "vue";
+export default {
+	name: "ThirdShare",
+	setup() {
+		return {
+			...toRefs(getShare())
+		};
+	}
+};
 </script>
 
 <style lang="scss" scoped>
-	.ThirdShare {
-		background-color: #fff;
-		width: 30rem;
-		margin-bottom: 1rem;
-		padding: 1.5rem;
-		border-radius: 1rem;
-		.title {
-			font-weight: bold;
-			border-bottom: 1px solid #ddd;
-			padding-bottom: 1rem;
-		}
-		.content > section {
-			display: grid;
-			grid-template-columns: 1fr 2fr;
-			grid-template-rows: 1fr;
-			grid-template-areas: "left right";
-			padding-top: 1rem;
-			gap: 1rem;
-		}
-		.content > section > span {
-			/*单词强制换行*/
-			word-break: break-all;
-      font-size: 12px;
-		}
-    .content > section > span:nth-child(1){
-      color: #B5A8C5;
-    }
-	}
 </style>

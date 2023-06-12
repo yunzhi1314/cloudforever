@@ -101,7 +101,7 @@ body {
 				}
 			}
 
-			.account > span:nth-child(2) {
+			.account>span:nth-child(2) {
 				color: #000;
 			}
 		}
@@ -147,7 +147,7 @@ body {
 			}
 
 			// 设置短信登录或密码登录文字居左
-			.btns > section:nth-child(1) {
+			.btns>section:nth-child(1) {
 				text-align: left;
 			}
 
@@ -207,7 +207,7 @@ body {
 			}
 		}
 
-		.change-box > span:nth-child(2) {
+		.change-box>span:nth-child(2) {
 			font-weight: normal;
 		}
 
@@ -239,13 +239,16 @@ body {
 			background-color: #fff;
 			padding: 1rem;
 			border-radius: 1rem;
+
 			img {
 				width: 1.5rem;
 				vertical-align: middle;
 				margin-right: 0.5rem;
 			}
-			.QueryItem{
+
+			.QueryItem {
 				padding: 1rem;
+
 				button {
 					height: 3.5rem;
 					margin: 1rem 0;
@@ -255,6 +258,40 @@ body {
 					padding-left: 2rem;
 					font-size: 1.2rem;
 				}
+			}
+		}
+
+		//第三方共享清单
+		.ThirdShare {
+			background-color: #fff;
+			width: 30rem;
+			margin-bottom: 1rem;
+			padding: 1.5rem;
+			border-radius: 1rem;
+
+			.title {
+				font-weight: bold;
+				border-bottom: 1px solid #ddd;
+				padding-bottom: 1rem;
+			}
+
+			.content>section {
+				display: grid;
+				grid-template-columns: 1fr 2fr;
+				grid-template-rows: 1fr;
+				grid-template-areas: "left right";
+				padding-top: 1rem;
+				gap: 1rem;
+			}
+
+			.content>section>a {
+				/*单词强制换行*/
+				word-break: break-all;
+				font-size: 12px;
+			}
+
+			.content>section>span:nth-child(1) {
+				color: #B5A8C5;
 			}
 		}
 	}

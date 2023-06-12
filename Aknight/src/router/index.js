@@ -65,11 +65,11 @@ router.beforeEach((to, from, next) => {
 
           // 自定义添加子路由
           let route2 = ["reChargePage", "exclusivePage", "sourcePage"]
-          route2.forEach(item=>{
+          route2.forEach(item => {
             router.addRoute("centerPage", {
-              path:`/center/${item}`,
-              name:item,
-              component:()=>import(`@/views/center/query/queryChildren/${item}`)
+              path: `/center/${item}`,
+              name: item,
+              component: () => import(`@/views/center/query/queryChildren/${item}`)
             })
           })
 

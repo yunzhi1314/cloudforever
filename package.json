@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "echart": "^0.1.3"
+  }
+}

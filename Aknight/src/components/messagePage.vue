@@ -1,41 +1,50 @@
 <template>
-    <div> 
+    <div>
         <section class="tusi" :style='{
-        backgroundColor:status == 1? "red" : "green"
-    }'>
-
-        </section>  
+            backgroundColor: status == 1 ? "#FE1610" : "#0CB751"
+        }'>
+            {{ status == 1 ? msg : message }}
+        </section>
 
     </div>
 </template>
 
 <script>
 import controlObj from '@/hooks/personalCenter/controlObj'
+import { reactive } from 'vue'
 export default {
-    name:"messagePage",
-    setup () {
-        
-
+    name: "messagePage",
+    setup() {
+        let msg = JSON.parse(sessionStorage.getItem("msg"))
+        let message = reactive({
+            status: "",
+            msg: "",
+            message: ""
+        })
+        if (msg != null && msg != 0) {
+            msg = msg.msg
+            message.status = msg.status
+            message.msg = msg.msg
+            message.message = msg.message
+        }
         return {
             controlObj,
+            ...message
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.tusi{
+.tusi {
     width: 200px;
-    height: 50px;
-    background-color: green;
     border-radius: 1vw;
     position: absolute;
     left: 43vw;
     top: 12vh;
     color: #fff;
     text-align: center;
-    line-height: 50px; 
+    padding: 0.5vw;
 
 }
-
 </style>

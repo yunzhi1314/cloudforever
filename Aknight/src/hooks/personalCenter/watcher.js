@@ -4,13 +4,12 @@ import controlObj from "./controlObj";
 
 // 封装监听函数
 //            arr为要监听是数组，   index 为密码的下标
-export function observer(arr, index) {
+export function observer(arr, index=1) {
 	arr.forEach((item) => {
 		watch(
 			// 直接监听输入框的值，要写成函数的形式
 			() => item.value,
 			(newValue) => {
-				console.log(newValue);
 				if (newValue == "") {
 					//输入框值为空，显示错误
 					item.isShow = true;

@@ -1,3 +1,8 @@
+body {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
 .centerPage {
 	display: grid;
 	grid-template-rows: 1fr 8.5fr 1fr;
@@ -10,6 +15,8 @@
 
 	// 头部
 	header {
+		position: sticky;
+		top: 0;
 		grid-area: header;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
@@ -23,8 +30,6 @@
 			display: flex;
 			align-items: center;
 		}
-
-		.headerLeft {}
 
 		.logo {
 			justify-content: center;
@@ -54,6 +59,36 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		flex-direction: column;
+
+		//当前账号信息
+		.user-box {
+			min-width: 30rem;
+			height: 3.2rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			.account {
+				background-color: #158FC5;
+				width: 15rem;
+				height: 1.5rem;
+				border-radius: 1vw;
+				color: white;
+				font-size: 0.8rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				span {
+					margin: 0 0.5vw;
+				}
+			}
+
+			.account>span:nth-child(2) {
+				color: #000;
+			}
+		}
 
 		// 登录页面，登录框样式
 		.login {
@@ -64,6 +99,7 @@
 			border-radius: 1.3rem;
 			box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
 			padding: 1.8rem;
+			margin-bottom: 10vh;
 
 			h2 {
 				text-align: center;
@@ -96,6 +132,7 @@
 			.btns>section:nth-child(1) {
 				text-align: left;
 			}
+
 			// 前往注册框动画
 			@keyframes toRegister {
 				0% {
@@ -215,14 +252,187 @@ button {
 	margin: 1.5rem 0;
 	cursor: pointer;
 }
-button:hover{
+
+button:hover {
 	background-color: #1174A0;
 }
 
 // 按钮禁用样式
-.disabled{
+.disabled {
 	background-color: #797979;
 }
-.disabled:hover{
+
+.disabled:hover {
 	background-color: #626262;
+}
+
+//左上菜单动画(展开与收缩)
+@keyframes showOut {
+	0% {
+		width: 0vw;
+		height: 0vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: 0;
+		top: 0;
+	}
+
+	15% {
+		width: 4vw;
+		height: 4vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: 1px;
+		top: 3px;
+		border-radius: 50%;
+	}
+
+	50% {
+		width: 30vw;
+		height: 25vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 40%;
+	}
+
+	80% {
+		width: 35vw;
+		height: 38vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 20%;
+	}
+
+	100% {
+		width: 35.8vw;
+		height: 100vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 0%;
+	}
+}
+
+@keyframes showIn {
+	0% {
+		width: 0vw;
+		height: 0vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: 0;
+		top: 0;
+	}
+
+	15% {
+		width: 4vw;
+		height: 4vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: 1px;
+		top: 3px;
+		border-radius: 50%;
+	}
+
+	50% {
+		width: 30vw;
+		height: 25vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 40%;
+	}
+
+	80% {
+		width: 35vw;
+		height: 38vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 20%;
+	}
+
+	100% {
+		width: 35.8vw;
+		height: 100vw;
+		background-color: #0098dc;
+		position: fixed;
+		left: -155px;
+		top: -131px;
+		border-radius: 0%;
+	}
+}
+
+//反转动画按钮
+.reverseBtn::after,
+.reverseBtn::before {
+	content: "";
+	width: 35px;
+	height: 40px;
+	border-top: 3px solid #fff;
+	transform: rotateZ(45deg);
+	position: fixed;
+	left: 0px;
+	top: 29px;
+	z-index: 2;
+}
+
+.reverseBtn::after {
+	transform: rotateZ(-45deg);
+	left: 28px;
+}
+
+//菜单列表
+.menuMsg {
+	position: fixed;
+	top: 10vh;
+	left: 2vw;
+
+	li {
+		width: 20rem;
+		height: 4rem;
+		color: #fff;
+		border-bottom: 1px solid #1AA3E0;
+		line-height: 4rem;
+		filter: opacity(0);
+		cursor: pointer;
+
+		img {
+			width: 1.5rem;
+			margin-right: 1rem;
+		}
+
+		img,
+		span {
+			vertical-align: middle;
+			font-size: 1rem;
+		}
+	}
+}
+
+// 列表文本延迟出现动画
+@keyframes disappear {
+	0% {
+		filter: opacity(1)
+	}
+
+	100% {
+		filter: opacity(0)
+	}
+}
+
+@keyframes exist {
+	0% {
+		filter: opacity(0)
+	}
+
+	100% {
+		filter: opacity(1)
+	}
 }

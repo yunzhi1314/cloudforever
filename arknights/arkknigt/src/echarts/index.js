@@ -11,7 +11,7 @@ export async function exMpedicals(dom){
    let sources = await Request.getData('http://192.168.2.169:3000/api/expMedicals');
  
    console.log(sources);
-   sources = sources.data.map(item => ({
+   sources = sources.datas.data.map(item => ({
       medical_name:item.medical_name,
       鳞癌ORR: item.id > 9 ?  "" : item.medical_ORR.slice(0,item.medical_ORR.indexOf("%")),  // 从第零项开始找 %，找到的话就去掉它
       鳞癌OS: item.id > 9 ? "" :item.medical_OS == "/" ? "" : item.medical_OS,  //item.medical_OS 如果里面有 / 的话，就返回空，如果没有的话，直接返回item.medical_OS

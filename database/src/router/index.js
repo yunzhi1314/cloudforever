@@ -44,7 +44,6 @@ router.beforeEach((to, from, next) => {
 					token = JSON.parse(token).token		
 					let routeData = JSON.parse(sessionStorage.getItem("menuList"))
 					let route=Reflect.get(routeData,'delRoutes')
-					console.log(route);
 					let newRoute = dealRoutes(route, route.length - 1)
 					newRoute.forEach(item => {
 					router.addRoute("database", item)

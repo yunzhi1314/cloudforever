@@ -1,22 +1,33 @@
-<template>
+<template >
   <div
     :style="{
       backgroundImage: `url(${img.bgImg})`,
+      backgroundSize: route.meta.isContain ?   'contain' :  'cover' ,
+      height:route.meta.height,
+      
     }"
     class="bg"
   ></div>
-  <div class="center">
+  <div class="center" :style="{
+     height:route.meta.height,
+     gridTemplateRows:route.meta.gridTemplateRows
+  }">
     <header>
       <div v-if="boolObj.isRouter" class="unfold">
-        <span v-html="menuMsg.navSvg" class="svg" @click="unfold" style="cursor: pointer;"></span>
+        <span
+          v-html="menuMsg.navSvg"
+          class="svg"
+          @click="unfold"
+          style="cursor: pointer"
+        ></span>
         <ul v-show="boolObj.unfold">
           <li
             v-for="(item, index) in menuMsg.menuMsg"
             :key="index"
             @click="toPage(index)"
           >
-          <img :src="item.icon" >
-          <span>{{ item.name }}</span>            
+            <img :src="item.icon" />
+            <span>{{ item.name }}</span>
           </li>
         </ul>
       </div>
@@ -32,18 +43,33 @@
               style="width: 2vw; margin-right: 2vw"
             />
           </p>
-          
-            <p>
+
+          <p>
             <img :src="img.toCustomImg" />
           </p>
           <p>客服中心</p>
-          
-         
         </section>
       </div>
     </header>
     <main>
       <router-view></router-view>
+      <div v-if="boolObj.isRouter">
+        <section
+          style="
+            width: 15vw;
+            height: 3vh;
+            background-color: #22bbff;
+            border-radius: 2vw;
+            text-align: center;
+            line-height: 3vh;
+            position: absolute;
+            top: 12vh;
+            left: 43vw;
+          "
+        >
+          账号信息：{{ telephone }}
+        </section>
+      </div>
     </main>
     <footer>
       <section v-for="(item, index) in img.bottom" :key="index">
@@ -82,10 +108,12 @@ export default {
     // 为了承接会话存储中的信息
     let menuMsg;
     let baseRoutes;
+    let telephone;
 
     if (boolObj.isRouter) {
       menuMsg = JSON.parse(sessionStorage.getItem("baseMsg")).baseMessage; //存储的信息
       baseRoutes = JSON.parse(sessionStorage.getItem("baseMsg")).baseRoutes; //存储的路由
+      telephone = JSON.parse(sessionStorage.getItem('token')).telephone;// 账号信息，在baseMessage页面的main中的顶部信息
     }
 
     // 点击左上角的三个斜杆展开动态路由的函数
@@ -114,6 +142,8 @@ export default {
       boolObj,
       //点击去往每个页面
       toPage,
+      telephone,//账号信息
+      route
     };
   },
 };

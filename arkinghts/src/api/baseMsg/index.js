@@ -3,19 +3,21 @@ import url from "../url";
 import { onBeforeMount, reactive } from "vue";
 
 export function baseMessage() {
-  let data = {
+   // baseMessage页面需要的数据  
+    let data = {
     userId: JSON.parse(localStorage.getItem("users")).userId,
     telephone:JSON.parse(sessionStorage.getItem("token")).telephone,
     code:''
   };
-  console.log(data);
+  let dataList = reactive({
+    baseMsg: [],
+  });
+  //在挂载之前请求数据   
   onBeforeMount(() => {
-    let dataList = reactive({
-      baseMsg: [],
-    });
     Request.postData(url.personalCenter.baseMsg, data).then((res) => {
       dataList.baseMsg = res.data;
+      console.log(dataList.baseMsg)
     });
   });
-
+  return dataList
 }

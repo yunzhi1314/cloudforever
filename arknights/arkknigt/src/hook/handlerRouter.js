@@ -1,6 +1,5 @@
 export function dealRoutes(routes, index) {
     if (index < 0) {
-        console.log(routes)
         return routes;
     } else {
         routes[index].component = asyncComponent(routes[index].component);
@@ -57,6 +56,6 @@ function dealChildrenPaths(routes, newArr, name, index2 = 0) {
             return dealChildrenPaths(routes, newArr, name, index2 + 1);
         }
     } else {
-        return [...new Set(newArr)];
+        return [...new Set(newArr) ];
     }
 }

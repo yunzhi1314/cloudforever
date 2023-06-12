@@ -4,11 +4,11 @@
             <el-aside :width="!isScollape ? '12vw' : '4vw'" :style="{ transition: 'all 0.25s 0s linear', }">
                 <el-menu background-color="#545C64" text-color="#fff" active-text-color="#409EFF"
                     class="el-menu-vertical-demo" default-active="unknown" :collapse="isScollape" style="height: 100vh">
-                    <el-menu-item v-for="(item, index) in menus" :key="index" :index="index.toString()"
+                    <el-menu-item v-for="(item, index) in databaseMenu" :key="index" :index="index.toString()"
                         v-show="!item.meta.isIframe" @click="toPage(index)">
                         {{ item.meta.title }}
                     </el-menu-item>
-                    <el-sub-menu v-for="(item, index) in menus" :key="index" :index="index.toString()"
+                    <el-sub-menu v-for="(item, index) in databaseMenu" :key="index" :index="index.toString()"
                         v-show="item.meta.isIframe">
                         <template #title>
                             <el-icon>
@@ -40,10 +40,14 @@
                         </el-menu-item>
                         <!-- 面包屑 -->
                         <el-menu-item index="1">
-                            <el-breadcrumb separator-class="/">
+                            <el-breadcrumb separator="/">
                                 <el-breadcrumb-item :to="{ name: 'homePage', params: { userId } }">首页</el-breadcrumb-item>
-                                <el-breadcrumb-item v-show="route.meta.isHide"></el-breadcrumb-item>
-                                <el-breadcrumb-item v-show="route.meta.isHide">{{ route.meta.title }}</el-breadcrumb-item>
+                                <el-breadcrumb-item v-show="route.meta.isHide">
+                                    {{ metaName }}</el-breadcrumb-item>
+                                <el-breadcrumb-item v-show="route.meta.isHide" :style="{
+                                    Animation: isPlay ? 'breadcrumb 0.25s 0s 1 linear forwards' : '',
+                                }">{{ route.meta.title }}
+                                </el-breadcrumb-item>
                             </el-breadcrumb>
                         </el-menu-item>
                         <!-- 间隙 -->
@@ -72,9 +76,9 @@
                         <!-- 用户名 -->
                         <el-sub-menu index="3">
                             <!-- 用户名 -->
-                            <template>
+                            <template #title>
                                 <span>
-                                    yuyukosama
+                                    {{ baseMsg[1].inputs[0].inputItem }} 
                                 </span>
                             </template>
                             <el-menu-item index="3-1">鬼人正邪</el-menu-item>
@@ -95,7 +99,7 @@
 </template>
   
 <script>
-import { reactive, ref, toRefs, onUpdated } from "vue";
+import { reactive, ref, onUpdated, toRefs } from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
     name: 'databasePage',
@@ -103,14 +107,37 @@ export default {
         const isScollape = ref(false) // 是否折叠
         const router = useRouter() // 路由
         const route = useRoute() // 当前路由
-
-        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes'))) //获取存入vuex的路由
-        // let tabs = ref([]) // 保存tab
-
+        let title = ref(route.meta.title); // 标题
+        let metaName = ref('') // 面包屑
+        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu
+        ) //获取存入vuex的路由
+        console.log(pages)
+        let tabs = ref([]) // 保存tab
+        let userId = JSON.parse(localStorage.getItem("users")).userId;
         onUpdated(() => {
-            let newStr = route.fullPath
-            let new2str = newStr.slice(0, route.fullPath.indexOf('/'))
-            console.log(new2str)
+            let newStr = route.fullPath.slice(10)
+            let new2str = newStr.slice(0, newStr.indexOf('/'))
+            switch (new2str) {
+                case "system":
+                    metaName.value = "系统管理";
+                    break;
+                case "fun":
+                    metaName.value = "功能";
+                    break;
+                case "pages":
+                    metaName.value = "页面";
+                    break;
+            }
+            let newTabs = tabs.value.map(item => item.title)
+            if (!newTabs.includes(route.meta.title)) {
+                tabs.value.push({
+                    title: route.meta.title,
+                    name: route.meta.title,
+                    routeName: route.name,
+                })
+            }
+            title.value = route.meta.title;
+
         })
 
 
@@ -122,14 +149,14 @@ export default {
                 router.push({
                     name: pages[i].name,
                     params: {
-                        userId: '11111'
+                        userId
                     }
                 })
             } else {
                 router.push({
                     name: pages[i].children[j].name,
                     params: {
-                        userId: '11111'
+                        userId
                     }
                 })
             }
@@ -140,24 +167,31 @@ export default {
             router.span({
                 name: pages[i].name,
                 params: {
-                    userId: '11111'
+                    userId
                 }
             })
         }
+        //进入dataPage后跳转到homePage
         setTimeout(() => {
             router.push({
                 name: "homePage",
-                // params: {
-                //     userId
-                // }
+                params: {
+                    userId
+                }
             });
         }, 1000);
         return {
-            isScollape,
-            toPage,
-           
+            isScollape, // 是否折叠
+            toPage, // 点击菜单跳转路由
+            pages, // 保存路由
             route,
-            toTab
+            toTab,
+            ...toRefs(JSON.parse(sessionStorage.getItem("saveRoutes"))),
+            ...toRefs(JSON.parse(sessionStorage.getItem("baseMsg"))),
+            tabs,
+            title,
+            metaName
+
         }
     }
 }

@@ -27,7 +27,6 @@ export function dealRoutes(routes, index) {
     if(path[0] == "/"){
       path = path.slice(1)
     }
-    // @/views/center/resetpsw/ResetPassword.vue
     return () => import(`@/views/${path}`);
   }
   

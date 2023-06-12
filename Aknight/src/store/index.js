@@ -10,7 +10,8 @@ export default createStore({
 			reducer(state) {
 				let loginObj = {
 					token: state.personalCenter.token,
-					telephone: state.telephone
+					telephone: state.telephone,
+					realTelephone: state.realTelephone
 				};
 				return isStore(state, "token", "isLogin", loginObj, localStorage);
 			},
@@ -91,7 +92,8 @@ export default createStore({
 	state: {
 		msg: null, // 保存吐丝信息
 		countDown: 120, //验证码倒计时数字,
-		telephone: null,
+		telephone: null,//带*号的手机号
+		realTelephone: null,//真实显示的手机号
 		control: {
 			// vuex,控制存储条件集合
 			isRegister: false, //注册条件，
@@ -117,9 +119,13 @@ export default createStore({
 				Reflect.set(state.control, name, false);
 			}, 500);
 		},
-		//登录存telephone
+		//登录存telephone(带*)
 		changeTel(state, data) {
 			state.telephone = data
+		},
+		//登录存realTelephone(真实显示的)
+		changeRealTel(state, data) {
+			state.realTelephone = data
 		}
 	},
 	actions: {},

@@ -4,7 +4,7 @@ import controlObj from "./controlObj";
 
 // 封装监听函数
 //            arr为要监听是数组，   index 为密码的下标
-export function observer(arr, index=1) {
+export function observer(arr, index = 1) {
 	arr.forEach((item) => {
 		watch(
 			// 直接监听输入框的值，要写成函数的形式

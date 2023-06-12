@@ -5,4 +5,5 @@ export function toest(controlObj) {
     setTimeout(() => {
         controlObj.isTusi = false
     }, 2000)
+
 }

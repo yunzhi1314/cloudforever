@@ -1,9 +1,9 @@
 <template>
-  <div class="inof" style=" grid-template-rows: 1fr;margin-top: 4rem;">
+  <div class="inof" style=" grid-template-rows: 1fr;height:80%;margin:0;">
     <div>
       <!-- 动态标题 -->
       <section>
-        <span>{{ title }}</span>
+        <span style="color: #000">{{ title }}</span>
       </section>
       <section v-for="(item, index) in changeArr" :key="index">
         <!-- 输入框标题 -->
@@ -47,7 +47,7 @@
     </div>
   </div>
   <!-- 吐丝 -->
-  <messagePage v-show="controlObj.isTusi"></messagePage>
+  <messagePage v-if="controlObj.isTusi"></messagePage>
   <!-- 遮罩层 -->
   <dialogPage>
     <div class="mathcode" @click.stop>
@@ -167,7 +167,7 @@ export default {
       //吐丝
       toest(controlObj);
     }
-    //添加动态路由(避免页面刷新,返回不了上个页面)
+    //添加动态路由(避免页面刷新之后动态路由丢失,返回不了上个页面)
     let routes = JSON.parse(sessionStorage.getItem("menu")).menuRoutes
     routes = handleRoutes(routes, routes.length - 1)
     routes.forEach(item => {

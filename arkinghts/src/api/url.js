@@ -8,6 +8,30 @@ export default{
         register:'api/user/register',//注册按钮的请求路劲
         login:'api/user/login',//登录按钮的请求路劲
         codeLogin:'api/user/codeLogin',//验证码登录的等登录按钮的请求路劲
-        centerRoutes:'person/home'
-   }
+        centerRoutes:'person/home',
+        baseMsg:'person/baseMsg/userBasic',//个人信息baseMessage页面的数据请求路劲
+        // 置换密码
+       resetPsw:{
+          resetPsw:'person/resetPsw',
+          code:'person/resetPsw/code'
+       },
+       // 兑换礼包
+       exchangeGift:{
+          exchangeData:'person/exchangeGift/getContext',
+          exchangeGiftData:'person/exchangeGift/getGift'
+       },
+       // 自助查询
+          selfInquiries:'person/selfInquiries',
+      
+       // 个人清单
+       personalMsg:{
+          essentialMsg:'person/personalList/infoBasic',
+          realMsg:'person/personalList/infoRealname',
+          behaviorMsg:'person/personalList/infoBehavior',
+          deviceMsg:'person/personalList/infoDevice'
+       },
+       // 第三方共享清单
+       shareList:'person/shareList'
+   
+}
 }

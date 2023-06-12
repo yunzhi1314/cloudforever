@@ -1,24 +1,24 @@
 <template>
-  <div
-    :style="{
-      backgroundImage: `url(${img.bgImg})`,
-    }"
-    class="bg"
-  ></div>
+  <div :style="{
+    backgroundImage: `url(${img.bgImg})`,
+  }" class="bg"></div>
   <div class="center">
     <header>
       <div v-if="boolObj.isRouter" class="unfold">
-        <span v-html="menuMsg.navSvg" class="svg" @click="unfold" style="cursor: pointer;"></span>
-        <ul v-show="boolObj.unfold">
-          <li
-            v-for="(item, index) in menuMsg.menuMsg"
-            :key="index"
-            @click="toPage(index)"
-          >
-          <img :src="item.icon" >
-          <span>{{ item.name }}</span>            
-          </li>
-        </ul>
+        <span v-html="menuMsg.navSvg" class="svg" @click="unfold" style="cursor: pointer;"
+          v-show="!boolObj.isReverse"></span>
+        <div class="cancel" v-show="boolObj.isReverse" @click="unfold"></div>
+          <section :style='{
+                    animation: boolObj.isPlay ?
+                        (boolObj.isReverse ? "showOut 0.15s 0s 1 ease-in forwards" : "showIn 0.15s 0s 1 ease-in forwards reverse") : ""
+                }'>
+          </section>
+          <ul v-show="boolObj.isReverse" class="nav">
+            <li v-for="(item, index) in menuMsg.menuMsg" :key="index" @click="toPage(index)" >
+              <img :src="item.icon">
+              <span>{{ item.name }}</span>
+            </li>
+          </ul>
       </div>
 
       <div class="title">
@@ -27,18 +27,13 @@
       <div class="Customer">
         <section>
           <p v-if="boolObj.isRouter">
-            <img
-              :src="menuMsg.loginOut"
-              style="width: 2vw; margin-right: 2vw"
-            />
+            <img :src="menuMsg.loginOut" style="width: 2vw; margin-right: 2vw" />
           </p>
-          
-            <p>
+
+          <p>
             <img :src="img.toCustomImg" />
           </p>
           <p>客服中心</p>
-          
-         
         </section>
       </div>
     </header>
@@ -68,7 +63,8 @@ export default {
     // 条件控制总开关
     let boolObj = reactive({
       isRouter: null, // 控制是否是此页面的路由的状态
-      unfold: false, // 控制是否展开动态路由路劲页面
+      isReverse: false, //点击X是否收回菜单栏
+      isPlay: false, //是否播放动画
     });
 
     // 控制是否是此页面的路由的状态
@@ -90,8 +86,10 @@ export default {
 
     // 点击左上角的三个斜杆展开动态路由的函数
     function unfold() {
-      boolObj.unfold = !boolObj.unfold;
+      boolObj.isPlay = true
+      boolObj.isReverse = !boolObj.isReverse
     }
+
     // 点击去往每一个页面
     function toPage(index) {
       router.push({

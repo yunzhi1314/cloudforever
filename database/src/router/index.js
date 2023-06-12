@@ -27,7 +27,7 @@ const router = createRouter({
 	routes,
 });
 
-let whiteNames = ['/']
+let whiteNames = ['/database']
 
 router.beforeEach((to, from, next) => {
 	if (whiteNames.includes(to.path)) {

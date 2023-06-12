@@ -141,7 +141,7 @@ export default {
     let isSearch = ref(false)
     let dataList = ref(JSON.parse(sessionStorage.getItem("expMedicals")).expMedicals)
     let compary = ref(dataList.value.map(item => item.company))
-    // console.log('dataList', dataList.value);
+
 
 
 
@@ -159,7 +159,7 @@ export default {
       id: ''
     })
 
-    // console.log(msgObj);
+    
 
     let searchData = ref('')
     //  查询按钮事件
@@ -206,7 +206,7 @@ export default {
 
     let isSetMenu = ref(false)
 
-    // console.log('rules', rules);
+    
     // 遮罩层取消按钮事件
     function cancel() {
       controlObj.isDialog.isAddRole = false;
@@ -224,7 +224,7 @@ export default {
 
     // 删除按钮事件
     function deleList(item) {
-      // console.log(item);
+     
       ElMessageBox.confirm(
         '请问确定要删除该信息吗？',
         {
@@ -263,23 +263,18 @@ export default {
       })
     }
 
-
     // 分页
     let currentPage = ref(1);
     let pageSize = ref(5);
     let pagArr = ref([]);
 
 
-
-
     watch([currentPage, pageSize, isSearch, searchData], (newValue) => {
       pagArr.value.splice(0, pagArr.value.length)
-      console.log(dataList.value);
       newValue[2] ? pagArr.value.push(...(searchData.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1])))
         : pagArr.value.push(...dataList.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1]))
     }, { immediate: true, deep: true })
 
-    console.log('pagArr', pagArr);
 
     return {
       search,

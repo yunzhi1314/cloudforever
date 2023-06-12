@@ -24,8 +24,10 @@ export function dealRoutes(routes, index) {
 
   //将路由前面的/处理
   function asyncComponent(path) {
-    if(path[0] == "/"){
-      path = path.slice(1)
+    if(path){
+      if(path[0] == "/"){
+        path = path.slice(1)
+      }
     }
     return () => import(`@/views/${path}`);
   }

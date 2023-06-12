@@ -50,13 +50,13 @@
                 @click="toPage(index, index2)"
                  >
                 {{ item2.meta.title }}
-                </el-menu-item>
-                </el-sub-menu>      
+                </el-menu-item>       
+                </el-sub-menu>       
         </el-menu>
       </el-aside>
       <el-container>
         <!-- 头部 -->
-        <el-header style="padding-top: 1vh; height: 9vh;" >
+        <el-header style="padding-top: 1.5vh; height: 10vh;" >
           <el-menu mode="horizontal" :ellipsis="false">
             <el-menu-item index="0">
               <el-icon @click="isCollapse = !isCollapse">
@@ -65,6 +65,7 @@
               </el-icon>
             </el-menu-item>
 
+            <!-- 面包屑渲染 -->
             <el-menu-item index="1">
               <el-breadcrumb separator="/">
                  <el-breadcrumb-item :to="{name:'homePage',params:{userId}}"> 首页</el-breadcrumb-item>
@@ -87,10 +88,19 @@
               <el-icon> <Sunset />     </el-icon>
               <el-icon> <FullScreen /> </el-icon>
             </el-menu-item>
+            <el-sub-menu index="3">
+              <template #title>
+                <span id="sp1">admin</span>
+              </template>
+              <el-menu-item index="3-1">个人中心</el-menu-item>
+              <el-menu-item index="3-2">首页</el-menu-item>
+              <el-menu-item index="3-3">代码仓库</el-menu-item>
+              <el-menu-item index="3-3">404</el-menu-item>
+            </el-sub-menu>
           </el-menu>
           <div>
             <!-- 标签渲染及点击事件 -->
-            <el-tabs v-model="title" type="card" class="demo-tabs" closable @tab-remove="removeTab" @tab-click="toTab" >
+            <el-tabs v-model="title" type="card" class="demo-tabs" editable closable @tab-remove="removeTab" @tab-click="toTab" >
               <!-- 这里遍历标签页眉 -->
               <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.title" :name="item.name">
               </el-tab-pane>
@@ -133,7 +143,7 @@ export default {
             userId: JSON.parse(localStorage.getItem("users")).userId,
           },
         });
-      }, 500);
+      }, 500)
     
     // 点击页眉跳转页面
    function toTab(tabName){
@@ -184,6 +194,7 @@ export default {
       // 控制一级和二级菜单的面包屑是否显示/显示的是哪一个菜单名
       isPlay.value = true;
         if(index2 == undefined){//点击的不是二级路由
+         
             router.push({
                 name:pages[index].name,
                 params:{
@@ -192,6 +203,7 @@ export default {
             })
         }else{
           //index2存在，说明点击了子菜单，跳转到对应子路由
+          title.value = route.meta.title;
             router.push({
           name: pages[index].children[index2].name,
           params: {
@@ -199,6 +211,8 @@ export default {
           },
         });
         }
+        title.value = route.meta.title;
+        
    }
 
    onUpdated(()=>{ 
@@ -206,7 +220,7 @@ export default {
         isPlay.value = false;
       }, 250);
         //路径是’/‘所以截取一位
-    let newStr = route.fullPath.slice(1);
+    let newStr = route.fullPath.slice(10);
     //截取路径/前面的名称，赋予面包屑名称
     let newStr2 = newStr.slice(0, newStr.indexOf("/"));  
         switch(newStr2){
@@ -232,7 +246,6 @@ export default {
           title.value = route.meta.title;
         }
    })
-
 
     return {
       layoutCSS,

@@ -95,7 +95,6 @@ export default {
         Total_Equity_of_owners:item.Total_Equity_of_owners
       }))
 
-      console.log(newData);
       let isSearch = ref(false)
       let msgObj = reactive({
       })

@@ -1,5 +1,6 @@
 // 药物试验数据的js
 import *as echarts from "echarts";
+import store from "@/store";
 
 // import { homeData } from "";
 

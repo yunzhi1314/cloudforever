@@ -39,11 +39,11 @@
 import homePageCss from "@/public/database/homePage.scss"
 import {ref,toRefs} from "vue"
 import { Search } from '@element-plus/icons-vue'
-import service from "@/utils/example" //请求头，拦截器
+import service from "@/utils/request" //请求头，拦截器
 import  req  from '@/api/url.js' //路径
-// import {tabledata} from '@/api/database/table/index'
-import  {dealTree} from "@/hook/database/menuPage"
-import newData from "@/hook/database/menuPage"
+import {tabledata} from '@/api/database/menu/index'
+// import  {dealTree} from "@/hook/database/menuPage"
+import {newData} from "@/hook/database/menuPage"
 export default {
     name:'menuPage',
     setup () {
@@ -56,7 +56,7 @@ export default {
     
       console.log(newData)
     
-    console.log(dealTree())
+    // console.log(dealTree())
 // tabledata()
         return {
          // 样式
@@ -72,7 +72,7 @@ export default {
             search,
 
             // 请求过来的数据
-            ...toRefs(dealTree()),
+            ...toRefs(tabledata()),
         }
     }
 }

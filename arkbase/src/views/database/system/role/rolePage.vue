@@ -264,70 +264,21 @@ export default {
     });
 
     // 表单验证规则
-    let rules = reactive({
-      company: {
-        required: true,
-        message: "请输入药品信息",
-        trigger: "blur",
-      },
-      medical_ORR: {
-        required: true,
-        message: "请选择公司信息",
-        trigger: "blur",
-      },
-      medical_OS: {
-        required: true,
-        message: "请输入靶向信息",
-        trigger: "blur",
-      },
-      medical_PFS: {
-        required: true,
-        message: "请输入线数信息",
-        trigger: "blur",
-      },
-      medical_TREE: {
-        required: true,
-        message: "请输入治疗方式信息",
-        trigger: "blur",
-      },
-      medical_enrollees_population: {
-        required: true,
-        message: "请选择地区信息",
-        trigger: "blur",
-      },
-      medical_indications: {
-        required: true,
-        message: "请选择地区信息",
-        trigger: "blur",
-      },
-      medical_line: {
-        required: true,
-        message: "请选择地区信息",
-        trigger: "blur",
-      },
-      medical_name: {
-        required: true,
-        message: "请选择地区信息",
-        trigger: "blur",
-      },
-      medical_status: {
-        required: true,
-        message: "请选择地区信息",
-        trigger: "blur",
-      },
-    });
-    // let nameArr = ["药物信息",""]
+     // 表单验证规则
+     let rules = reactive({});
+    let nameArr = ["公司信息","ORR信息","OS信息","PFS信息",
+  "TREE信息","入组人数信息","应对癌症信息","线数信息","药品信息","研发管线信息"]
 
-    console.log(Reflect.ownKeys(addMsg));
     // 加入表单验证规则
-    /*   Reflect.ownKeys(addMsg).forEach(item =>{
+    Reflect.ownKeys(addMsg).forEach((item,index) =>{
         Reflect.set(rules,item,{
         required: true,
-        message: `请输入${item}`,
+        message: `请输入${nameArr[index]}`,
         trigger: "blur",
       })
-    }) */
+    })
 
+    console.log(rules)
     // 新增内容
     function addTable() {
       controlObj.isDialog.isRoleAddMenu = true;

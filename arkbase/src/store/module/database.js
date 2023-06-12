@@ -6,7 +6,9 @@ export default {
         menuRoutes:null,
         basicMedical:null,
         expMedical:null,
-        expMedicals:null
+        expMedicals:null,
+        naweiCompany:null,
+        naweiCompany2:null
     };
   },
   getters: {
@@ -26,6 +28,11 @@ export default {
         changeExpMedicals(state,data){
           state.expMedicals = data
         },
+        changeNaweiCompany(state,data){
+          state.naweiCompany = data.company
+          state.naweiCompany2 = data.company2
+          console.log(state)
+        }
   },
   actions: {
 

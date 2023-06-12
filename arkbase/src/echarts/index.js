@@ -225,6 +225,11 @@ export async function basicMedicals(dom) {
 // 纳微公司的营销利润与增长率，折柱复合统计图
 export async function naweiCompany(dom) {
   let sources = await Request.getData(url.database.home.naweiCompany);
+  let sources2 = await Request.getData(url.database.home.naweiCompany2);
+
+  // 将药物基本数据存入store
+  store.commit("database/changeNaweiCompany",{company:sources.data.datas,company2:sources2.data.datas})
+  store.commit("changeStore","isNaweiCompany")
 
   let source = sources.data.datas.map(
     (item) => item.Profit_from_operations.replace(",", "") * 1

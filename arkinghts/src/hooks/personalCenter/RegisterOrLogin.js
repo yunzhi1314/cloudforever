@@ -91,12 +91,12 @@ export function pass(obj) {
             console.log(dataList.data1);
         })
         // Toest()
-        // 并且有token权限，登录成功后跳转到bufferPage
-        if(store.state.personalCenter.token){
-            router.push({
-                name:"bufferPage"
-            })
-        }
-
+    }
+    
+    // 并且有token权限，登录成功后跳转到bufferPage
+    if(store.state.personalCenter.token){
+        router.push({
+            name:"bufferPage"
+        })
     }
 }

@@ -7,8 +7,12 @@ import { user } from "@/api/arknight/centerPage/code";
 import url from "@/api/url";
 //获取验证码图片
 let svg = ref("")
-export const getMathCode = (name) => {
+export const getMathCode = (name, name1, index) => {
     controlObj.isDialog[name] = true
+    if (index) {
+        index == 1 ? controlObj[name1] = false :
+            (index == 3 ? controlObj[name1] = true : '')
+    }
     svg.value = mathCode()
 }
 //切换验证码
@@ -33,6 +37,8 @@ export function setCountDown(name, arr) {
         //倒计时数字
         numberLogin: store.state.countDown,
         numberRegister: store.state.countDown,
+        numberNewPhone: store.state.countDown,
+        numberOldPhone: store.state.countDown,
         //倒计时开关
         isOpen: false,
         //倒计时定时器集合
@@ -41,7 +47,11 @@ export function setCountDown(name, arr) {
     //确认发送短信并开启定时器
     const confirm = (timeName) => {
         //发送短信所需要的手机号
-        getCode.telephone = arr.find(item => item.use == "手机号").value
+        if (timeName == "isNewPhone") {
+            getCode.telephone = arr.find((item) => item.use == "绑定手机").value;
+        } else {
+            getCode.telephone = arr.find((item) => item.use == "手机号").value;
+        }
 
         //请求发送短信
         user(url.centerPage.telCode, getCode)
@@ -62,6 +72,12 @@ export function setCountDown(name, arr) {
                 break;
             case "isLogin":
                 timerRun("numberLogin", timeName)
+                break;
+            case "isOldPhone":
+                timerRun("numberOldPhone", timeName)
+                break;
+            case "isNewPhone":
+                timerRun("numberNewPhone", timeName)
                 break;
         }
     }

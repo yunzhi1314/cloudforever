@@ -1,17 +1,28 @@
 <template>
-                <h1>ToDatabase组件</h1>
-            </template>
+	<div class="toDatabase">
+		<div>
+			<section><h1>前往数据库</h1></section>
+			<section><button @click="toDatabase">点击前往数据库</button></section>
+		</div>
+	</div>
+</template>
 
-            <script>
+<script>
+	import { useRouter } from "vue-router";
+	export default {
+		name: "ToDatabase",
+		setup() {
+			let router = useRouter();
+			function toDatabase() {
+				router.push({
+					name: "databasePage"
+				});
+			}
+			return {
+				toDatabase
+			};
+		}
+	};
+</script>
 
-            export default {
-              name:"ToDatabase",
-                setup() {
-                    return {
-                    }
-                }
-            }
-            </script>
-
-            <style lang="scss" scoped>
-            </style>
+<style lang="scss" scoped></style>

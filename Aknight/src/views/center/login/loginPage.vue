@@ -13,34 +13,26 @@
 			<!-- 输入框区 -->
 			<section class="userInput">
 				<input v-model="item.value" :type="item.type" :placeholder="item.placeHolder"
-					:style="{ backgroundColor: item.isShow ? '#FFDCDB' : '' }" />
-				<button v-if="item.isRender" @click="getMathCode('isLoginIn')" :class="controlObj.isChange
-					? countDown.nameArr.includes('isRegister')
-						? 'disabled'
-						: ''
-					: countDown.nameArr.includes('isLogin')
-						? 'disabled'
-						: ''
-					" :disabled="controlObj.isChange
-		? countDown.nameArr.includes('isRegister')
-		: countDown.nameArr.includes('isLogin')
-		">
+					:id="item.isShow ? 'inputRej' : 'inputRes'" :style="{
+						backgroundColor: item.isShow ? '#FFDCDB' : 'rgba(255,255,255,0)'
+					}" />
+				<button v-if="item.isRender" @click="getMathCode('isLoginIn')" :class="controlObj.isChange ? countDown.nameArr.includes('isRegister') ? 'disabled' : ''
+					: countDown.nameArr.includes('isLogin') ? 'disabled' : ''"
+					:disabled="controlObj.isChange ? countDown.nameArr.includes('isRegister') : countDown.nameArr.includes('isLogin')">
 					{{
-						controlObj.isChange
-						? countDown.nameArr.includes("isRegister")
-							? countDown.numberRegister + "S 后重试"
-							: "获取验证码"
+						controlObj.isChange ? countDown.nameArr.includes("isRegister")
+						? countDown.numberRegister + "S 后重试" : "获取验证码"
 						: countDown.nameArr.includes("isLogin")
-							? countDown.numberLogin + "S 后重试"
-							: "获取验证码"
+							? countDown.numberLogin + "S 后重试" : "获取验证码"
 					}}
 				</button>
 			</section>
 			<!-- 错误提示区 -->
-			<section class="errMsg" :style="{
+			<section :style="{
 							visibility: item.isShow ? 'visible' : 'hidden',
 							fontSize: '12px',
-							color: '#f00'
+							color: '#f00',
+							boxSizing: 'border-box'
 						}">
 				{{ item.value == "" ? item.tip01 : item.tip02 }}
 			</section>
@@ -55,13 +47,7 @@
 				<!-- 切换登录方式 -->
 				<span :style="{
 					color: controlObj.isChange ? '#000' : '#158fc5'
-				}">{{
-	controlObj.isChange
-	? "已阅读并同意"
-	: controlObj.isCode
-		? "使用密码登录"
-		: "使用短信验证码登录"
-}}</span>
+				}">{{ controlObj.isChange ? "已阅读并同意" : controlObj.isCode ? "使用密码登录" : "使用短信验证码登录" }}</span>
 				<span v-if="controlObj.isChange">《鹰角网络用户注册协议》</span>
 				<span v-if="controlObj.isChange" style="color: #000">及</span>
 				<span v-if="controlObj.isChange">《鹰角网络游戏个人信息保护政策》</span>
@@ -103,7 +89,6 @@
 	</dialogPage>
 	<!-- 路由视图，显示子路由 -->
 	<router-view></router-view>
-
 </template>
 
 <script>

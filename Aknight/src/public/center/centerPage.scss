@@ -15,8 +15,11 @@ body {
 
 	// 头部
 	header {
-		position: sticky;
+		z-index: 1;
+		position: fixed;
+		width: 100%;
 		top: 0;
+		width: 100%;
 		grid-area: header;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
@@ -35,7 +38,7 @@ body {
 			justify-content: center;
 
 			img {
-				width: 7vw;
+				width: 7rem;
 			}
 		}
 
@@ -44,7 +47,7 @@ body {
 			font-size: 14px;
 
 			img {
-				width: 1.7vw;
+				width: 1.7rem;
 			}
 
 			section {
@@ -61,6 +64,17 @@ body {
 		align-items: center;
 		flex-direction: column;
 
+		//输入框动画
+		#inputRes:focus {
+			border-bottom: 2px solid #158fc5;
+			transition: all 0.3s ease-out;
+		}
+
+		#inputRej:focus {
+			border-bottom: 2px solid #fe1610;
+			transition: all 0.3s ease-out;
+		}
+
 		//当前账号信息
 		.user-box {
 			min-width: 30rem;
@@ -68,9 +82,11 @@ body {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			position: absolute;
+			top: 4rem;
 
 			.account {
-				background-color: #158FC5;
+				background-color: #158fc5;
 				width: 15rem;
 				height: 1.5rem;
 				border-radius: 1rem;
@@ -111,7 +127,9 @@ body {
 				display: flex;
 
 				input {
+					box-sizing: content-box;
 					flex-grow: 1;
+					border-bottom: 2px transparent solid;
 				}
 
 				button {
@@ -141,7 +159,6 @@ body {
 
 				98% {
 					transform: rotateY(180deg);
-
 				}
 
 				100% {
@@ -157,15 +174,12 @@ body {
 
 				98% {
 					transform: rotateY(180deg);
-
 				}
 
 				100% {
 					transform: rotateY(0deg);
 				}
 			}
-
-
 		}
 
 		//切换登录注册
@@ -196,10 +210,95 @@ body {
 		.change-box>span:nth-child(2) {
 			font-weight: normal;
 		}
+
+		// 前往数据库
+		.toDatabase {
+			width: 20rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+
+			div {
+				width: 100%;
+				background-color: #fff;
+				padding: 2rem;
+				border-radius: 1rem;
+
+				section {
+					width: 100%;
+					text-align: center;
+				}
+			}
+		}
+
+		// 自助查询
+		.SelfQuery {
+			width: 30rem;
+			background-color: #fff;
+			padding: 1rem;
+			border-radius: 1rem;
+
+			img {
+				width: 1.5rem;
+				vertical-align: middle;
+				margin-right: 0.5rem;
+			}
+
+			.QueryItem {
+				padding: 1rem;
+
+				button {
+					height: 3.5rem;
+					margin: 1rem 0;
+					border-radius: 2rem;
+					background-size: cover;
+					text-align: left;
+					padding-left: 2rem;
+					font-size: 1.2rem;
+				}
+			}
+		}
+
+		//第三方共享清单
+		.ThirdShare {
+			background-color: #fff;
+			width: 30rem;
+			margin-bottom: 1rem;
+			padding: 1.5rem;
+			border-radius: 1rem;
+
+			.title {
+				font-weight: bold;
+				border-bottom: 1px solid #ddd;
+				padding-bottom: 1rem;
+			}
+
+			.content>section {
+				display: grid;
+				grid-template-columns: 1fr 2fr;
+				grid-template-rows: 1fr;
+				grid-template-areas: "left right";
+				padding-top: 1rem;
+				gap: 1rem;
+			}
+
+			.content>section>a {
+				/*单词强制换行*/
+				word-break: break-all;
+				font-size: 12px;
+			}
+
+			.content>section>span:nth-child(1) {
+				color: #B5A8C5;
+			}
+		}
 	}
 
 	// 脚部内容
 	footer {
+		padding: 0.5rem 0;
 		grid-area: footer;
 		display: flex;
 		justify-content: center;
@@ -254,7 +353,8 @@ button {
 }
 
 button:hover {
-	background-color: #1174A0;
+	background-color: #1174a0;
+	transition: all 0.3s ease-in 0.1s;
 }
 
 // 按钮禁用样式
@@ -264,6 +364,7 @@ button:hover {
 
 .disabled:hover {
 	background-color: #626262;
+	transition: all 0.3s ease-in 0.1s;
 }
 
 //左上菜单动画(展开与收缩)
@@ -398,7 +499,7 @@ button:hover {
 		width: 20rem;
 		height: 4rem;
 		color: #fff;
-		border-bottom: 1px solid #1AA3E0;
+		border-bottom: 1px solid #1aa3e0;
 		line-height: 4rem;
 		filter: opacity(0);
 		cursor: pointer;
@@ -419,20 +520,20 @@ button:hover {
 // 列表文本延迟出现动画
 @keyframes disappear {
 	0% {
-		filter: opacity(1)
+		filter: opacity(1);
 	}
 
 	100% {
-		filter: opacity(0)
+		filter: opacity(0);
 	}
 }
 
 @keyframes exist {
 	0% {
-		filter: opacity(0)
+		filter: opacity(0);
 	}
 
 	100% {
-		filter: opacity(1)
+		filter: opacity(1);
 	}
 }

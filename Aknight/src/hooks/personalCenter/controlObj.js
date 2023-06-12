@@ -8,11 +8,13 @@ let controlObj = reactive({
 	isDialog: {// 遮罩层状态
 		isLoginIn: false,//登录注册的倒计时遮罩层
 		isLoginOut: false,//登出状态的遮罩层
+		isChangeInfo:false,//更改数据页面的遮罩层
 	},
 	isRegister: true, // 是否能够注册
 	isLogin: true, // 是否能够登录
 	isTusi: false, // 展示吐丝弹窗的状态
 	isDisabled: false,//获取验证码按钮是否可用
+	isChangeTel:false,//分离更改手机号的两个按钮
 });
 
 export default controlObj;

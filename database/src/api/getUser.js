@@ -10,7 +10,11 @@ export function getUser(){
 
       Request.getData(url.database.user.queryMedicals).then(res=>{
         dataList.list={...res.data.datas}
-        store.commit("database/changeSystemUser",res.data.datas)
+        store.commit("database/SAVE_DATA",{
+          datas: res.data.datas,
+          key:'systemUser',
+        }
+          )
         store.commit("CHANGE_STORE","isSystemUser")
         // console.log("res",res);
       })

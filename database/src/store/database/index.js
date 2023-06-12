@@ -21,9 +21,6 @@ export default {
             state.delRoutes=data.delRoutes
             state.menuList=data.menuList
         },
-        changeSystemUser(state,data){
-            state.systemUser=data
-        }
     },
     actions: {
     },

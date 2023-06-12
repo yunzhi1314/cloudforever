@@ -97,7 +97,6 @@
 <script>
 import { reactive, ref, toRefs, onUpdated } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { layoutRoutes } from '@/api/database/layoutRoute/getRoutes'
 export default {
     name: 'databasePage',
     setup() {
@@ -156,7 +155,7 @@ export default {
         return {
             isScollape,
             toPage,
-            ...toRefs(layoutRoutes()),
+           
             route,
             toTab
         }

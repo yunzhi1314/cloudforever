@@ -28,8 +28,8 @@ export function dealRoutes(routes, index) {
       if(path[0] == "/"){
         path = path.slice(1)
       }
+      return () => import(`@/views/${path}`);
     }
-    return () => import(`@/views/${path}`);
   }
   
   // 处理嵌套路由（菜单栏）

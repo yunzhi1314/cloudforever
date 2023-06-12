@@ -123,7 +123,7 @@ export default {
     let metaName = ref("")
     let title=ref(route.meta.title)
     let isPlay=ref(false)
-    let userId="672023,90507AM"
+    let userId="6122023,90804AM"
     let pages=reactive(JSON.parse(sessionStorage.getItem('menuList'))).menuList
 
     setTimeout(() => {

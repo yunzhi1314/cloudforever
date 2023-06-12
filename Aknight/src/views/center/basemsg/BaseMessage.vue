@@ -1,23 +1,17 @@
 <template>
   <div class="inof">
     <!-- 账号信息框 -->
-    <div class="personal">
+    <div v-for="(item, index) in datas" :key="index">
       <section>
-        <img src="" alt="">
-        <h6>账号信息</h6>
+        <img :src="item.title.img" alt="">
+        <span>{{ item.title.word }}</span>
       </section>
-      <section>
-        <p>绑定手机</p>
-        <input type="let" placeholder="手机号"><button>变更</button>
-      </section>
-      <section>
-        <p>绑定邮箱</p>
-        <input type="text"><button>绑定</button>
-      </section>
-      <section>
-        <p>登入管理局</p>
-        <button>清楚其他设备的登入状态</button>
-        <p>*该操作将强制清楚您其他所有设备的登入状态，并需要重新输入密码或者验证码后登入</p>
+      <section v-for="(item1, index1) in item.inputs" :key="index1">
+        <p>{{ item1.inputTitle }}</p>
+        <input v-if="index1 < 2" type="text" :value="item1.inputItem" readonly>
+        <button v-if="index1 < 2 ? (index == 1 ? (index1 == 0 ? true : false) : true) : fasle">变更</button>
+        <button v-if="index1 == 2" style="width:100%; margin: 1vh 0;">清除其他设备的登入状态</button>
+        <span v-if="index1 == 2">{{ item1.inputItem }}</span>
       </section>
     </div>
   </div>

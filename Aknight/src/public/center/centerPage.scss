@@ -15,7 +15,9 @@ body {
 
 	// 头部
 	header {
-		position: sticky;
+		z-index: 1;
+		position: fixed;
+		width: 100%;
 		top: 0;
 		grid-area: header;
 		display: grid;
@@ -87,7 +89,7 @@ body {
 				}
 			}
 
-			.account > span:nth-child(2) {
+			.account>span:nth-child(2) {
 				color: #000;
 			}
 		}
@@ -131,7 +133,7 @@ body {
 			}
 
 			// 设置短信登录或密码登录文字居左
-			.btns > section:nth-child(1) {
+			.btns>section:nth-child(1) {
 				text-align: left;
 			}
 
@@ -191,7 +193,7 @@ body {
 			}
 		}
 
-		.change-box > span:nth-child(2) {
+		.change-box>span:nth-child(2) {
 			font-weight: normal;
 		}
 
@@ -202,11 +204,13 @@ body {
 			justify-content: center;
 			align-items: center;
 			height: 100%;
+
 			div {
 				width: 100%;
 				background-color: #fff;
 				padding: 2rem;
 				border-radius: 1rem;
+
 				section {
 					width: 100%;
 					text-align: center;
@@ -217,6 +221,7 @@ body {
 
 	// 脚部内容
 	footer {
+		padding: 0.5rem 0;
 		grid-area: footer;
 		display: flex;
 		justify-content: center;
@@ -272,6 +277,7 @@ button {
 
 button:hover {
 	background-color: #1174a0;
+	transition: all 0.3s ease-in 0.1s;
 }
 
 // 按钮禁用样式
@@ -281,6 +287,7 @@ button:hover {
 
 .disabled:hover {
 	background-color: #626262;
+	transition: all 0.3s ease-in 0.1s;
 }
 
 //左上菜单动画(展开与收缩)

@@ -1,10 +1,9 @@
 <template>
     <div class="common-layout">
-        <router-link :to="{ name: '', params }"></router-link>
         <el-container>
             <el-aside :width="!isScollape ? '12vw' : '4vw'" :style="{ transition: 'all 0.25s 0s linear', }">
                 <el-menu background-color="#545C64" text-color="#fff" active-text-color="#409EFF"
-                    class="el-menu-vertical-demo" default-active="0" :collapse="isScollape" style="height: 100vh">
+                    class="el-menu-vertical-demo" default-active="unknown" :collapse="isScollape" style="height: 100vh">
                     <el-menu-item v-for="(item, index) in menus" :key="index" :index="index.toString()"
                         v-show="!item.meta.isIframe" @click="toPage(index)">
                         {{ item.meta.title }}
@@ -27,7 +26,7 @@
             </el-aside>
             <el-container>
                 <el-header>
-                    <el-menu :default-active="0" mode="horizontal" :ellipsis="false" style=" height: 6vh;">
+                    <el-menu :default-active="unknown" mode="horizontal" :ellipsis="false" style=" height: 6vh;">
                         <!-- 点击显示菜单导航 -->
                         <el-menu-item index="0">
                             <el-radio-group v-model="isScollape">
@@ -106,7 +105,7 @@ export default {
         const router = useRouter() // 路由
         const route = useRoute() // 当前路由
 
-        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu) //获取存入vuex的路由
+        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes'))) //获取存入vuex的路由
         // let tabs = ref([]) // 保存tab
 
         onUpdated(() => {
@@ -149,9 +148,9 @@ export default {
         setTimeout(() => {
             router.push({
                 name: "homePage",
-                params: {
-                    userId:'2233'
-                }
+                // params: {
+                //     userId
+                // }
             });
         }, 1000);
         return {

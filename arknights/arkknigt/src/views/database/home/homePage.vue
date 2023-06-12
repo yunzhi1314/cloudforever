@@ -52,7 +52,6 @@ export default {
             ExpMedical(document.querySelector("#exMpedicals"));
 
         })
-        console.log(Math.sqrt(2, 10))
         return {
             ...toRefs(homeData('http://192.168.2.26:3000/api/message')),
             homeCss

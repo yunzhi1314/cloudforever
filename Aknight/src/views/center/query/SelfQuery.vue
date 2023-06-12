@@ -26,7 +26,10 @@ import { useRouter } from "vue-router";
       let route2 = ["reChargePage", "exclusivePage", "sourcePage"]
       function toPages(index){
         router.push({
-          name:route2[index]
+          name:route2[index],
+          query:{
+            index
+          }
         })
       }
 			return {

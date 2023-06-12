@@ -21,10 +21,11 @@ export default createStore({
 		createPersistedState({
 			storage: window.sessionStorage,
 			reducer(state) {
-				let msgObj = {
-					msg: state.msg,
-				};
-				return isStore(state, "msg", "isMsg", msgObj, sessionStorage);
+				// let msgObj = {
+				// 	msg: state.msg,
+				// };
+				// return isStore(state, "msg", "isMsg", msgObj, sessionStorage);
+				return {msg:state.msg}
 			},
 			key: "msg",
 		}),

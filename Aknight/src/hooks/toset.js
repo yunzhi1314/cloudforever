@@ -1,9 +1,9 @@
 // 封装吐丝
 export function toest(controlObj) {
-    controlObj.isTusi = true
-
-    setTimeout(() => {
-        controlObj.isTusi = false
-    }, 2000)
-
+	setTimeout(() => {
+		controlObj.isTusi = true;
+	}, 250);
+	setTimeout(() => {
+		controlObj.isTusi = false;
+	}, 2000);
 }

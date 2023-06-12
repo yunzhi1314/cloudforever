@@ -49,6 +49,16 @@ export default createStore({
       storage:sessionStorage,
       reducer(state){
         let obj = {
+          naweiCompany2:state.database.naweiCompany
+        }
+        return isStore(state,'naweiCompany2','isNaweiCompany2',obj,sessionStorage)
+      },
+      key:'naweiCompany2'
+    }),
+    createPersistedState({
+      storage:sessionStorage,
+      reducer(state){
+        let obj = {
           systemUser:state.database.systemUser
         }
         return isStore(state,'systemUser','isSystemUser',obj,sessionStorage)
@@ -65,6 +75,7 @@ export default createStore({
       isBasicMedical:false,
       // 存储NaweiCompany表格
       isNaweiCompany:false,
+      isNaweiCompany2:false,
       isSystemUser:false,
 //存储路由
 isMenuList:false

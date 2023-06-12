@@ -1,9 +1,9 @@
 
 export function dealMenu(){
-
+    
     let dataList=JSON.parse(sessionStorage.getItem("basicMedical")).basicMedical
     // console.log(dataList);
-    let compary=  [...new Set (dataList.map(item=>item.medical_company))];
+    let compary  =  [...new Set (dataList.map(item=>item.medical_company))];
     // console.log(compary);
     let newArr=[]
 

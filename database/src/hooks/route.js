@@ -46,7 +46,7 @@ export function dealRoutes(routes, index) {
       return dealpaths(routes, index + 1,name, newArr);
     }
   }
-  
+      //处理子路由
   function dealChildrenPaths(routes, newArr,name, index2 = 0) {
     if (routes[index2]) {
       newArr.push(...routes.filter((item) => Reflect.has(item, name)));

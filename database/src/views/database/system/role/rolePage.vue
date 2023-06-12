@@ -272,9 +272,9 @@ export default {
 
 
 
-
     watch([currentPage, pageSize, isSearch, searchData], (newValue) => {
       pagArr.value.splice(0, pagArr.value.length)
+      console.log(dataList.value);
       newValue[2] ? pagArr.value.push(...(searchData.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1])))
         : pagArr.value.push(...dataList.value.slice((newValue[0] - 1) * newValue[1], newValue[0] * newValue[1]))
     }, { immediate: true, deep: true })

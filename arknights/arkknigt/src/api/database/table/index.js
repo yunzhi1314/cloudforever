@@ -6,8 +6,8 @@ export function tabledata() {
         datas: [],
     })
 
-  
-    Request.get('http://192.168.2.26:3000/api/basicMedical')
+    
+    Request.get('http://192.168.2.169:3000/api/basicMedical')
         .then((res) => {
             dataList.datas = res.data
          
@@ -15,4 +15,3 @@ export function tabledata() {
     
         return dataList
 }
-

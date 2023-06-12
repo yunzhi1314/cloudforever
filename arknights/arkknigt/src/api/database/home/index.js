@@ -1,4 +1,18 @@
+import { onBeforeMount, reactive } from "vue";
 
-    // 抛出数据
-    return dataList
+import { Request } from "@/hook/request";
+
+export function homeData(url) {
+    let dataList = reactive({
+        data: [],
+    })
+
+    onBeforeMount(() => {
+        Request.getData(url)
+            .then((res) => {
+                dataList.data = { ...res.data };
+                console.log(res.data);
+            })
+            return dataList
+    })    
 }

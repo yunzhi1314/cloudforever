@@ -34,41 +34,49 @@
 
         </div>
     </div>
-    <div style="display: flex">
-        <div class="plan smallOne spc">
-
-        </div>
-        <div class="plan biggerOne">
-
-        </div>
+    
+    <!-- 饼图 -->
+    <div class="plans" id="besicMedicals" 
+    style="width: 56vw;
+        height: 50vh; 
+        background-color: #ff0000;"
+    >
+        
     </div>
-
-
-    <!--  -->
-
     <router-view></router-view>
 </template>
 
 <script>
-import { ExpMedical } from "@/echarts/echarts";
-import { onMounted, toRefs } from "vue";
-import { homeData } from '@/api/database/home/index.js'
-import homeCss from '@/public/database/homePage.scss'
-import url from "@/api/url";
+// import url from "@/api/url";
+
+import { exMpedicals,besicMedicals } from "@/echarts/index";
+
+import { onMounted } from "vue";
+
+// import { homeData } from "@/api/database/home/index";
+ 
 export default {
-    name: "homePage",
-    setup() {
+    name:"homePage",
+    setup () {
+        
         onMounted(() => {
             // 折线图
             ExpMedical(document.querySelector("#exMpedicals"));
 
+            // 各公司所持有的靶向药数据，环状图
+            besicMedicals(document.querySelector("#besicMedicals"));
+
         })
         return {
-            ...toRefs(homeData(url.database.home.messages)),
-            homeCss
+        //    ...toRefs(homeData())
         }
     }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#exMpedicals{
+    width: 100vw;
+    height: 100vh;
+}
+</style>

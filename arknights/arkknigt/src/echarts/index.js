@@ -1,38 +1,73 @@
 // 药物试验数据的js
-import *as echarts from "echarts";
+import *as echarts from "echarts"
 
-// import { homeData } from "";
+import { Request } from "@/hook/request"
+// import { reactive } from "vue"
 
 // import url from "@/api/url";
 
+// 靶向药实验数据的复合折线统计图
 export async function exMpedicals(dom){
-   let exp = echarts.init(dom);
+   let sources = await Request.getData('http://192.168.2.169:3000/api/expMedicals');
+ 
+   console.log(sources);
+   sources = sources.data.map(item => ({
+      medical_name:item.medical_name,
+      鳞癌ORR: item.id > 9 ?  "" : item.medical_ORR.slice(0,item.medical_ORR.indexOf("%")),  // 从第零项开始找 %，找到的话就去掉它
+      鳞癌OS: item.id > 9 ? "" :item.medical_OS == "/" ? "" : item.medical_OS,  //item.medical_OS 如果里面有 / 的话，就返回空，如果没有的话，直接返回item.medical_OS
+      非鳞癌ORR: item.id > 9 ? item.medical_ORR.slice(0,item.medical_ORR.indexOf("%")) : "",  // 从第零项开始找 %，找到的话就去掉它
+      非鳞癌OS: item.id > 9 ? item.medical_OS == "/" ? "" : item.medical_OS : "",  //item.medical_OS 如果里面有 / 的话，就返回空，如果没有的话，直接返回item.medical_OS
+      company: item.company,
+      medical_Tree: item.medical_TREE,
+      id:item.id,   // 通过id渲染后台传过来的数据，从第9项开始，是非鳞癌的数据
+   })
+   )
    
-   // let sources = await homeData(url.database.home.messages);
+   console.log(sources);
+
+   let exp = echarts.init(dom);
 
    let option = {
+      legend:{   // legend就是Echarts图表中对图形的解释部分：
+         orient: 'horizontal',   // 水平居中
+         right:0,   
+         top:10,
+      },
+
       dataset:{   // dataset数据集
-         dimensions:["medical_name","鳞癌ORR","鳞癌OS","非鳞癌ORR","非鳞癌OS","company","medical_Tree"],  //维度
-         source:[  
-            {
-               medical_name:"谁打我",
-               鳞癌ORR:"12",
-               鳞癌OS:"13",
-               非鳞癌ORR:"13",
-               非鳞癌OS:"14",
-               company:"康放生物",
-               medical_Tree:"26"
-            },
-            {
-               medical_name:"大大",
-               鳞癌ORR:"24",
-               鳞癌OS:"36",
-               非鳞癌ORR:"12",
-               非鳞癌OS:"50",
-               company:"康放生物",
-               medical_Tree:"13"
-            },
-         ], 
+         dimensions:[  //维度
+         "medical_name",
+         "鳞癌ORR",
+         "鳞癌OS",
+         "非鳞癌ORR",
+         "非鳞癌OS",
+         "company",
+         "medical_Tree",
+         "id",
+          ],  
+         
+
+         // source:[  
+         //    // {
+         //    //    medical_name:"谁打我",
+         //    //    鳞癌ORR:"12",
+         //    //    鳞癌OS:"13",
+         //    //    非鳞癌ORR:"13",
+         //    //    非鳞癌OS:"14",
+         //    //    company:"康放生物",
+         //    //    medical_Tree:"26"
+         //    // },
+         //    // {
+         //    //    medical_name:"大大",
+         //    //    鳞癌ORR:"24",
+         //    //    鳞癌OS:"36",
+         //    //    非鳞癌ORR:"12",
+         //    //    非鳞癌OS:"50",
+         //    //    company:"康放生物",
+         //    //    medical_Tree:"13"
+         //    // },
+         // ], 
+         source:sources,
       },
       xAxis:{   // x轴
          type: "category",   // type类型
@@ -68,9 +103,38 @@ export async function exMpedicals(dom){
             // console.log(params[0].data.company);
             // return params[0].dimensionNames[5] + ":" + params[0].data.company;  //
 
-            return (`<section>${params[0].dimensionNames[5] + ":" + params[0].data.company}</section>
-             <section>${params[0].dimensionNames[6] + ":" + params[0].data.medical_Tree}</section>
-            `)
+           return `
+           <section>
+              <div class="ball"></div>
+              <span>${params[0].dimensionNames[6]}:</span>
+              <span style="margin-left:2vw; font-weight:bold;">${params[0].data.company}</span>
+           </section>
+           <section>
+              <div class="ball"></div>
+              <span>${params[0].dimensionNames[7]}:</span>
+              <span style="margin-left:2vw; font-weight:bold;">${params[0].data.medical_Tree}</span>
+           </section>
+           <section>
+              <div class="ball"></div>
+              <span>${params[0].dimensionNames[2]}:</span>
+              <span style="margin-left:2vw; font-weight:bold;">${params[0].data["鳞癌ORR"]}%</span>
+           </section>
+           <section>
+              <div class="ball"></div>
+              <span>${params[0].dimensionNames[3]}:</span>
+              <span style="margin-left:2vw; font-weight:bold;">${params[0].data["鳞癌OS"]}%</span>
+           </section>
+           <section>
+              <div class="ball"></div>
+              <span>${params[0].dimensionNames[4]}:</span>
+              <span style="margin-left:2vw; font-weight:bold;">${params[0].data["非鳞癌ORR"]}%</span>
+           </section>
+           <section>
+              <div class="ball"></div>
+              <span>${params[0].dimensionNames[5]}:</span>
+              <span style="margin-left:2vw; font-weight:bold;">${params[0].data["非鳞癌OS"]}%</span>
+           </section>
+           `
          }
       },  
       series:[   //系列
@@ -126,10 +190,44 @@ export async function exMpedicals(dom){
    }  
    exp.setOption(option) 
 }
+console.log("11");
+// 各公司所持有的靶向药数据，环状图
+export async function besicMedicals(dom){
+   let sources = await Request.getData('http://192.168.2.169:3000/api/basicMedical')
+   console.log(dom);
+   console.log(sources);
+   let newData = reactive([])
 
-// export async function basicMedicals(dom){
-//    let sources = await Request.getData(url.database.home.basicMedicals)
-// }
+   let source = sources.datas.data;
+   source.forEach(item => {
+      switch(item.medical_company){
+         case "BMS":
+         if(newData[0] == undexfined){
+            newData.push({
+               company:item.medical_company,
+               number: 1
+            })
+         }
+         newData[0].number++;
+         break;
+         case "信达生物" :
+         
+         break;
+      }
+   })
+   
+   // let exp = echarts.init(dom);
+   // series:{
+   //    type:"pie",
+   //    data:[
+   //       {
+   //          value:,
+   //          name:,
+   //       }
+   //    ]
+   // }
+}
+
 
 // export function exMpedicals(dom){
 //    let exp = echarts.init(dom);

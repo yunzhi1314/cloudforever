@@ -14,7 +14,10 @@
                 }'>
           </section>
           <ul v-show="boolObj.isReverse" class="nav">
-            <li v-for="(item, index) in menuMsg.menuMsg" :key="index" @click="toPage(index)" >
+            <li v-for="(item, index) in menuMsg.menuMsg" :key="index" @click="toPage(index)" 
+            :style='{
+                    animation:boolObj.isReverse ? "exist 0.4s 0s 1 linear forwards" : "disappear  0.4s 0s 1 linear forwards" 
+                 }'>
               <img :src="item.icon">
               <span>{{ item.name }}</span>
             </li>

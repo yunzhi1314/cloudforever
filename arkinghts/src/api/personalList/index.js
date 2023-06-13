@@ -53,13 +53,16 @@ export function infoBehavior() {
 // 设备属性及定位信息
 export function infoDevice() {
     let dataList = reactive({
-        list: []
+        list: [],
+        children:[]
     })
     onBeforeMount(() => {
         Request.getData(url.personalCenter.personalMsg.deviceMsg)
             .then(res => {
-                dataList.list = reactive({ ...res.data });
-                console.log(dataList.list);
+                dataList.list = reactive({ ...res.data.infoDevice });
+                console.log(dataList.list );
+                dataList.children = reactive(res.data.infoDevice.map(item =>item.children))
+                console.log(dataList.children);
             })
     })
 

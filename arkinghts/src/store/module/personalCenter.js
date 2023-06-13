@@ -8,7 +8,6 @@ export default ({
             fullName: null,
             userId:null,
             token:null,
-            telephone:null,
             baseRoutes:null,
             baseMessage:null,
             contexts:null
@@ -23,12 +22,13 @@ export default ({
         },
         changeToken(state,data){
             state.token = data.token
-            state.telephone = data.telephone
         },
-        changeBaseRoutes(state,data){//存储路由
+        //存储路由
+        changeBaseRoutes(state,data){
             state.baseRoutes = data
         },
-        changeBaseMessage(state,data){//存储个人信息
+        //存储个人信息
+        changeBaseMessage(state,data){
             state.baseMessage = data
         },
         changeContexts(state,data){//存储兑换礼包

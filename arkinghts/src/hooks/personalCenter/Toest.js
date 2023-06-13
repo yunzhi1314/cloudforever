@@ -1,8 +1,9 @@
-export function Toest(controlObj){
-    controlObj.isMsgTusi = true
+import controlObj from "@/hooks/personalCenter/control";
 
-    setInterval(() => {
-    controlObj.isMsgTusi = false
-        
+export function Toest(){
+    // 点击确认后显示提示框
+    controlObj.isMsgTusi = true
+    setTimeout(() => {
+        controlObj.isMsgTusi = false
     }, 2000);
 }

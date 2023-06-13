@@ -5,6 +5,16 @@ import { isStore } from '@/hooks/personalCenter/store'
 
 export default createStore({
   plugins: [
+    // 吐丝信息
+    createPersistedState({
+      storage: window.sessionStorage,
+      reducer(state) {
+        return {
+          msg: state.msg
+        }
+      },
+      key: "msg"
+    }),
     createPersistedState({
       storage: window.localStorage,
       reducer(state) {
@@ -13,9 +23,9 @@ export default createStore({
           UID: state.personalCenter.UID,
           email: state.personalCenter.email,
           fullName: state.personalCenter.fullName,
-          userId:state.personalCenter.userId
+          userId: state.personalCenter.userId
         }
-        return isStore(state,"users","isRegister",registerObj,localStorage)
+        return isStore(state, "users", "isRegister", registerObj, localStorage)
       },
       key: "users"
     }),
@@ -24,9 +34,9 @@ export default createStore({
       reducer(state) {
         let tokenData = {
           token: state.personalCenter.token,
-          telephone: state.personalCenter.telephone
+          telephone:state.telephone
         }
-        return isStore(state,"token","isLogin",tokenData,sessionStorage)
+        return isStore(state, "token", "isLogin", tokenData, sessionStorage)
       },
       key: "token"
     }),
@@ -53,7 +63,9 @@ export default createStore({
    })
   ],
   state: {
-    countDown:10,
+    countDown: 120,
+    msg: null,
+    telephone:null,
     // 控制状态开关集合
     control:{
       isRegister:false,//存储注册信息开关
@@ -66,9 +78,18 @@ export default createStore({
   getters: {
   },
   mutations: {
-    changeStore(state,name){
-      Reflect.set(state.control,name,true)
+    // 改变存储函数的开关为true
+    changeStore(state, name) {
+      Reflect.set(state.control, name, true)
     },
+    // 储存提示框信息
+    changeMsg(state, message) {
+      state.msg = message
+    },
+    // 存储电话
+    changeTel(state,data){
+      state.telephone = data.telephone
+    }
   },
   actions: {
   },
@@ -76,6 +97,5 @@ export default createStore({
   namespaced: true,
   modules: {
     personalCenter
-    
   }
 })

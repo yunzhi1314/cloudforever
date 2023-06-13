@@ -54,3 +54,49 @@
         }
     }
 }
+
+// 设备属性及定位信息页面
+.infoDevice{
+    background-color:rgb(255,255,255);
+    width: 35vw;
+    border-radius: 2vw;
+    .title{
+        display: flex;
+        justify-content: space-around;
+        span{
+            width: 6vw;
+            height: 5vh;
+            background-color: #F5F5F5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 0.5vw;
+            cursor: pointer;
+        }
+    }
+   div{
+    padding: 1vw;
+    div{
+        div{
+            background-color: #F5F5F5;
+            height: 16vh;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: space-around;
+            section{
+                width: 100%;
+                margin-bottom: 0.1vh;
+                span{
+                    margin-right: 4vw;
+                    font-size: 0.7rem;
+                }
+            }
+          
+        }
+       
+    }
+   }
+}

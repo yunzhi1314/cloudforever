@@ -89,7 +89,6 @@ export function setCode(obj,name){
                 clearInterval(timer)
             }
         },1000)
-        // console.log(timer);
     }
 
     // 根据不同的开关调用倒计时函数

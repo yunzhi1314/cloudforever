@@ -1,4 +1,4 @@
-import { Request } from "@/hook/request"
+import { Request } from "@/hook/personalCenter/request";
 import {reactive,toRef} from 'vue'
 import store from '@/store'
 

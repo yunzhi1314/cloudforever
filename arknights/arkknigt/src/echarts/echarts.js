@@ -1,5 +1,5 @@
 import * as echarts from 'echarts';
-import { Request } from '@/hook/request';
+import { Request } from "@/hook/personalCenter/request";
 import store from '@/store';
 
 export async function ExpMedical(dom) {

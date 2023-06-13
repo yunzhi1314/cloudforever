@@ -27,33 +27,43 @@
         </div>
     </div>
     <!-- 折现统计图 -->
-    <div class="plans" style="width: 56vw;
-     height: 50vh; 
-     background-color: white;" id="exMpedicals">
-    </div>
-
-    <!-- 饼图 -->
-    <div class="plans" id="besicMedicals">
-
+    <div style="display:flex;">
+        <div class="plans" style="width: 56vw;
+         height: 50vh; 
+         background-color: white;
+         margin-top: 2.5vh" id="exMpedicals">
+        </div>
+    
+        <!-- 饼图 -->
+        <div class="plans" id="besicMedicals" 
+        style="width: 30vw;
+         height: 50vh;
+         margin-left: 1vw; 
+         margin-top: 2.5vh">
+    
+        </div>
     </div>
     <router-view></router-view>
 </template>
 
 <script>
-import { ExpMedical } from "@/echarts/echarts";
+import { exMpedicals,besicMedicals } from "@/echarts/index";
 import { onMounted, toRefs } from "vue";
 import { homeData } from '@/api/database/home/index.js'
 import homeCss from '@/public/database/homePage.scss'
+import url from "@/api/url";
 export default {
     name: "homePage",
     setup() {
         onMounted(() => {
             // 折线图
-            ExpMedical(document.querySelector("#exMpedicals"));
-
+            exMpedicals(document.querySelector("#exMpedicals"));
+            
+            // 
+            besicMedicals(document.querySelector("#besicMedicals"));
         })
         return {
-            ...toRefs(homeData('http://192.168.2.26:3000/api/message')),
+            ...toRefs(homeData(url.database.home.messages)),
             homeCss
         }
     }

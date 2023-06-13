@@ -1,5 +1,5 @@
 import { onBeforeMount,reactive } from "vue";
-import { Request } from "@/hook/request";
+import { Request } from "@/hook/personalCenter/request";
 
 export function homeData(url){
     let dataList = reactive({

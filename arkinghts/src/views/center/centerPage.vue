@@ -1,8 +1,11 @@
 <template>
-  <div :style="{
+  <div :style='{
     backgroundImage: `url(${img.bgImg})`,
-  }" class="bg"></div>
-  <div class="center">
+    height: route.meta.height, 
+    backgroundSize:route.meta.isContain ? "contain" : "cover"}' class="bg">
+  </div>
+
+  <div class="center" :style="{ gridTemplateRows: route.meta.gridTemplateRows, height: route.meta.height }">
     <header>
       <div v-if="boolObj.isRouter" class="unfold">
         <span v-html="menuMsg.navSvg" class="svg" @click="unfold" style="cursor: pointer;"
@@ -56,13 +59,14 @@
 import centerSCSS from "@/public/center.scss";
 import { centerImg } from "@/api/centerPage";
 import { toRefs, computed, reactive } from "vue";
-import { useRoute } from "vue-router";
-import router from "@/router";
+import { useRoute,useRouter } from "vue-router";
 
 export default {
   name: "centerPage",
   setup() {
     const route = useRoute();
+    const router = useRouter()
+    
     // 条件控制总开关
     let boolObj = reactive({
       isRouter: null, // 控制是否是此页面的路由的状态
@@ -115,6 +119,7 @@ export default {
       boolObj,
       //点击去往每个页面
       toPage,
+      route,
     };
   },
 };

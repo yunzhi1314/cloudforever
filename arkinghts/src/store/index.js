@@ -51,16 +51,7 @@ export default createStore({
        },
        key:'baseMsg'
     }),
-  //   createPersistedState({
-  //     storage:window.sessionStorage,
-  //     reducer(state){
-  //       let baseMsgs = {
-  //         baseMessage:state.personalCenter.baseMessage
-  //       }
-  //       return isStore(state,'baseMessage','isBaseMessage',baseMsgs,sessionStorage)
-  //     },
-  //     key:'baseMessage'
-  //  })
+
   ],
   state: {
     countDown: 120,

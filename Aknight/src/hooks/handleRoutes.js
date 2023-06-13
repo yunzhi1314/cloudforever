@@ -21,16 +21,16 @@ export function dealpaths(routes, index, name, newArr = []) {
 		// 判断第一层，是否有路由信息
 		if (Reflect.has(routes[index], name)) {
 			newArr.push(routes[index]);
-            // 第一项递归完，递归下一项
+			// 第一项递归完，递归下一项
 			return dealpaths(routes, index + 1, name, newArr);
 		} else if (routes[index].children && routes[index].children.length > 0) {
 			// 有孩子，处理孩子
 			newArr.push(...dealpathsChildren(routes[index].children, newArr, name));
-            // 这一项递归完，继续递归下一项
-            return dealpaths(routes, index + 1, name, newArr);
+			// 这一项递归完，继续递归下一项
+			return dealpaths(routes, index + 1, name, newArr);
 		}
-        // 为达到结束条件
-        return dealpaths(routes, index + 1, name, newArr);
+		// 为达到结束条件
+		return dealpaths(routes, index + 1, name, newArr);
 	}
 }
 
@@ -38,7 +38,6 @@ function dealpathsChildren(routes, newArr, name, index2 = 0) {
 	if (routes[index2]) {
 		// 有数据，处理路由，会出现很多重复的，因为每轮递归都会添加
 		newArr.push(...routes.filter((item) => Reflect.has(item, name)));
-        console.log(newArr);
 		// 判断有无孙子
 		if (routes[index2].children) {
 			// 设置锚点，标记已经遍历过这个子代

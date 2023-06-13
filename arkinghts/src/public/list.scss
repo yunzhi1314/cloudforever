@@ -54,49 +54,24 @@
         }
     }
 }
-
-// 设备属性及定位信息页面
-.infoDevice{
-    background-color:rgb(255,255,255);
-    width: 35vw;
-    border-radius: 2vw;
-    .title{
+// 第三方个人共享个人信息清单
+.share{
+    background-color: #fff;
+    padding: 0vw 2vw;
+    border-radius: 1.5vw;
+    font-size: 12px;
+    margin-bottom: 2vh;
+    section{
+        padding-top: 0.8vw;
+        font-size: 13px;
         display: flex;
-        justify-content: space-around;
-        span{
-            width: 6vw;
-            height: 5vh;
-            background-color: #F5F5F5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-radius: 0.5vw;
-            cursor: pointer;
+        span:nth-child(1){
+            flex: 2;
+            color: #A1A3A1;
+        }
+        span:nth-child(2){
+            flex: 6.5;
+            color: #4D4D53;
         }
     }
-   div{
-    padding: 1vw;
-    div{
-        div{
-            background-color: #F5F5F5;
-            height: 16vh;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            justify-content: space-around;
-            section{
-                width: 100%;
-                margin-bottom: 0.1vh;
-                span{
-                    margin-right: 4vw;
-                    font-size: 0.7rem;
-                }
-            }
-          
-        }
-       
-    }
-   }
 }

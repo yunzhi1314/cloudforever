@@ -17,11 +17,13 @@
         <span v-html="menuMsg.navSvg" class="svg" @click="unfold" style="cursor: pointer;"
           v-show="!boolObj.isReverse"></span>
         <div class="cancel" v-show="boolObj.isReverse" @click="unfold"></div>
+          <!-- 菜单栏的动画效果 -->
           <section :style='{
                     animation: boolObj.isPlay ?
                         (boolObj.isReverse ? "showOut 0.15s 0s 1 ease-in forwards" : "showIn 0.15s 0s 1 ease-in forwards reverse") : ""
                 }'>
           </section>
+          <!-- 菜单栏导航数据页面 -->
           <ul v-show="boolObj.isReverse" class="nav">
             <li v-for="(item, index) in menuMsg.menuMsg" :key="index" @click="toPage(index)" 
             :style='{
@@ -31,38 +33,23 @@
               <span>{{ item.name }}</span>
             </li>
           </ul>
-        <span
-          v-html="menuMsg.navSvg"
-          class="svg"
-          @click="unfold"
-          style="cursor: pointer"
-        ></span>
-        <ul v-show="boolObj.unfold">
-          <li
-            v-for="(item, index) in menuMsg.menuMsg"
-            :key="index"
-            @click="toPage(index)"
-          >
-            <img :src="item.icon" />
-            <span>{{ item.name }}</span>
-          </li>
-        </ul>
       </div>
 
       <div class="title">
         <img :src="img.titleImg" />
       </div>
       <div class="Customer">
-        <section>
+      
           <p v-if="boolObj.isRouter">
             <img :src="menuMsg.loginOut" style="width: 2vw; margin-right: 2vw" />
           </p>
-
-          <p>
+          <div>
+            <p>
             <img :src="img.toCustomImg" />
           </p>
           <p>客服中心</p>
-        </section>
+          </div>
+       
       </div>
     </header>
     <main>
@@ -98,13 +85,13 @@
 import centerSCSS from "@/public/center.scss";
 import { centerImg } from "@/api/centerPage";
 import { toRefs, computed, reactive } from "vue";
-import { useRoute } from "vue-router";
-import router from "@/router";
+import { useRoute,useRouter } from "vue-router";
 
 export default {
   name: "centerPage",
   setup() {
     const route = useRoute();
+    const router = useRouter()
     // 条件控制总开关
     let boolObj = reactive({
       isRouter: null, // 控制是否是此页面的路由的状态

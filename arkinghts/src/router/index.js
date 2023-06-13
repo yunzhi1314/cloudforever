@@ -43,7 +43,7 @@ const routes = [
           isContain:true,
           gridTemplateRows: "1fr 36fr 1fr"
         }
-      },
+      }
     ],
   },
 ];
@@ -70,8 +70,6 @@ router.beforeEach((to, from, next) => {
         if (to.matched[0]) {
           next();
         } else {
-         
-         
           let routeData = JSON.parse(sessionStorage.getItem('baseMsg'))
           
           let route = Reflect.get(routeData,'baseRoutes')
@@ -83,7 +81,6 @@ router.beforeEach((to, from, next) => {
           route.forEach((item)=>{
               router.addRoute('centerPage',item);
           })
-
           // 重复导航，直到路由能够找到正确的路径为止
           next({ ...to, replace: true });
         }

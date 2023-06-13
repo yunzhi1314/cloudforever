@@ -16,7 +16,6 @@ export function baseMessage() {
   onBeforeMount(() => {
     Request.postData(url.personalCenter.baseMsg, data).then((res) => {
       dataList.baseMsg = res.data;
-      console.log(dataList.baseMsg)
     });
   });
   return dataList

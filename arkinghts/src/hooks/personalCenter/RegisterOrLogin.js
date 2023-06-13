@@ -79,7 +79,6 @@ export function pass(obj) {
             dataList.data = toRef({...res.data})
             store.commit("personalCenter/changeUse", dataList.data);
             store.commit("changeStore", isStore);
-            console.log(dataList.data);
         })
     }else{
         Request.postData(url.personalCenter.login,target)
@@ -88,7 +87,6 @@ export function pass(obj) {
             store.commit("personalCenter/changeToken", dataList.data1);
             store.commit("changeStore", isStore);
             store.commit("changeTel",dataList.data1)
-            console.log(dataList.data1);
         })
         // Toest()
     }

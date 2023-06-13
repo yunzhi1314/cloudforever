@@ -1,7 +1,7 @@
 import { reactive,onBeforeMount } from "vue";
 import { Request } from "@/hooks/personalCenter/request";
 import url from "../url";
-
+// 重置密码请求数据
 export function ResetPassword(data){
     let dataList = reactive({
          datas:[]
@@ -11,7 +11,6 @@ export function ResetPassword(data){
          Request.putData(url.personalCenter.resetPsw.resetPsw,data)
          .then(res=>{
             dataList.datas = res.data
-            console.log(dataList.datas)
          })
     })
     return dataList

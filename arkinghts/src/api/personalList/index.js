@@ -11,7 +11,6 @@ export function infoBasic() {
         Request.getData(url.personalCenter.personalMsg.essentialMsg)
             .then(res => {
                 dataList.list = reactive({ ...res.data.infoBasic });
-                console.log(dataList.list);
             })
     })
 
@@ -27,7 +26,6 @@ export function realMsg() {
         Request.getData(url.personalCenter.personalMsg.realMsg)
             .then(res => {
                 dataList.list = reactive({ ...res.data.infoRealname });
-                console.log(dataList.list);
             })
     })
 
@@ -43,7 +41,6 @@ export function infoBehavior() {
         Request.getData(url.personalCenter.personalMsg.behaviorMsg)
             .then(res => {
                 dataList.list = reactive({ ...res.data.infoBehavior });
-                console.log(dataList.list);
             })
     })
 
@@ -58,8 +55,7 @@ export function infoDevice() {
     onBeforeMount(() => {
         Request.getData(url.personalCenter.personalMsg.deviceMsg)
             .then(res => {
-                dataList.list = reactive({ ...res.data });
-                console.log(dataList.list);
+                dataList.list = reactive({ ...res.data.infoDevice });
             })
     })
 

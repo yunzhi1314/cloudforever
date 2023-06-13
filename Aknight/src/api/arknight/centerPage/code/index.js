@@ -36,13 +36,14 @@ export function user(url, data, fn, isStore) {
             //调用吐丝
             store.commit("changeStore", "isMsg")
             store.commit("changeMsg", dataList.datas)
-            //存手机号
-            store.commit("changeTel", dataList.datas.telephone);
-            if(isStore == "isLogin"){
+            if (isStore == "isLogin") {
+                //存手机号(带*)
+                store.commit("changeTel", dataList.datas.telephone);
+                store.commit("changeRealTel", data.telephone)
                 // 有token，登录成功，页面跳转
-                if(store.state.personalCenter.token){
+                if (store.state.personalCenter.token) {
                     router.push({
-                        name:"bufferPage"
+                        name: "bufferPage"
                     })
                 }
             }

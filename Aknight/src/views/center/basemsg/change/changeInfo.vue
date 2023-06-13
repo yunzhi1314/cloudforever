@@ -1,9 +1,9 @@
 <template>
-  <div class="inof" style=" grid-template-rows: 1fr;margin-top: 4rem;">
+  <div class="inof" style=" grid-template-rows: 1fr;height:80%;margin:0;">
     <div>
       <!-- 动态标题 -->
       <section>
-        <span>{{ title }}</span>
+        <span style="color: #000">{{ title }}</span>
       </section>
       <section v-for="(item, index) in changeArr" :key="index">
         <!-- 输入框标题 -->
@@ -70,7 +70,7 @@
 <script>
 import baseCss from '@/public/baseMsg/baseMsg.scss'
 import { reactive, provide } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { observer } from "@/hooks/personalCenter/watcher";
 import { getMathCode, setCountDown, changeSvg, cancel } from "@/hooks/personalCenter/code";
 import dialogCss from "@/public/dialog/dialogPage.scss";
@@ -79,12 +79,10 @@ import svg from "@/hooks/personalCenter/code";
 import { setMsg } from '@/api/arknight/centerPage/baseMsg';
 import url from "@/api/url";
 import { toest } from "@/hooks/toset";
-import { handleRoutes } from "@/hooks/handleRoutes";
 
 export default {
   name: "changeInfo",
   setup() {
-    const router = useRouter()
     const route = useRoute()
     let userId = route.params.userId
     let title = route.query.title
@@ -167,12 +165,6 @@ export default {
       //吐丝
       toest(controlObj);
     }
-    //添加动态路由(避免页面刷新,返回不了上个页面)
-    let routes = JSON.parse(sessionStorage.getItem("menu")).menuRoutes
-    routes = handleRoutes(routes, routes.length - 1)
-    routes.forEach(item => {
-      router.addRoute("centerPage", item)
-    })
 
     return {
       baseCss,

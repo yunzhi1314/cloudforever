@@ -296,12 +296,13 @@ body {
 				grid-template-areas: "left right";
 				padding-top: 1rem;
 				gap: 1rem;
+				font-size: 0.9rem;
 			}
 
 			.content>section>a {
 				/*单词强制换行*/
 				word-break: break-all;
-				font-size: 12px;
+				font-size: 0.8rem;
 			}
 
 			.content>section>span:nth-child(1) {
@@ -309,7 +310,49 @@ body {
 			}
 		}
 
+		//个人信息清单
+		.list {
+			margin-top: -14rem;
+			width: 30rem;
+			background-color: #fff;
+			padding: 1rem 1.5rem;
+			border-radius: 1rem;
 
+			div {
+				height: 3.5rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				border-bottom: 1px solid #e3e3e3;
+				cursor: pointer;
+
+				section {
+					span {
+						font-size: 0.8rem;
+						color: #9b9b9b;
+					}
+
+					.arrow {
+						display: inline-block;
+						margin-left: 0.6em;
+						height: 0;
+						border-left: 0.4em solid #d8d8d8;
+						border-top: 0.4em solid transparent;
+						border-bottom: 0.4em solid transparent;
+					}
+				}
+			}
+
+			div>section:first-child>span {
+				font-size: 1rem;
+				font-weight: 600;
+				color: #000;
+			}
+		}
+
+		.list>div:last-child {
+			border: none;
+		}
 	}
 
 	// 脚部内容

@@ -19,11 +19,6 @@ const routes = [
           }
         ]
       },
-      {
-        path: "/center/change/:userId",
-        name: "changeInfo",
-        component: () => import("@/views/center/basemsg/change/changeInfo")
-      }
     ]
   },
   {
@@ -64,12 +59,27 @@ router.beforeEach((to, from, next) => {
           })
 
           // 自定义添加子路由
+          router.addRoute("centerPage", {
+            path: "/center/change/:userId",
+            name: "changeInfo",
+            component: () => import("@/views/center/basemsg/change/changeInfo")
+          })
+
           let route2 = ["reChargePage", "exclusivePage", "sourcePage"]
           route2.forEach(item => {
             router.addRoute("centerPage", {
               path: `/center/${item}`,
               name: item,
               component: () => import(`@/views/center/query/queryChildren/${item}`)
+            })
+          })
+
+          let route3 = ["infoBasic", "infoRePage", "infoDevice"]
+          route3.forEach(item => {
+            router.addRoute("centerPage", {
+              path: `/center/${item}`,
+              name: item,
+              component: () => import(`@/views/center/list/info/${item}`)
             })
           })
 

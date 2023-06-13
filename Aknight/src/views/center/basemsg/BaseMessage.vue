@@ -5,7 +5,7 @@
       <!-- 标题部分 -->
       <section>
         <img :src="item.title.img" alt="">
-        <span>{{ item.title.word }}</span>
+        <span style="color: #000">{{ item.title.word }}</span>
       </section>
       <!-- 具体内容部分 -->
       <section v-for="(item1, index1) in item.inputs" :key="index1">

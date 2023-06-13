@@ -1,14 +1,40 @@
-export function handleRoutes(arr, index) {
+export function handleRoutes(routes, index) {
 	// 递归
 	if (index < 0) {
-		return arr;
+		return routes;
 	} else {
-		arr[index].component = asyncComponent(arr[index].component);
-		return handleRoutes(arr, index - 1);
+		routes[index].component = asyncComponent(routes[index].component);
+		// 判断是否包含userId，包含是center，不包含是database
+		if (!routes[index].path.includes("/:userId")) {
+			// 截取字符串，去掉前面的 /
+			routes[index].path = routes[index].path.slice(1) + "/:userId";
+			// 截取database/后面的
+			routes[index].path = routes[index].path.slice(routes[index].path.includes("/"));
+		}
+		// 判断是否有孩子(嵌套)，并且孩子长度大于0
+		if (routes[index].children && routes[index].children.length > 0) {
+			// 遍历并重新赋值
+			routes[index].children = routes[index].children.map((item) => {
+				asyncComponent(item.component);
+				// 判断是否包含userId，包含是center，不包含是database
+				if (!item.path.includes("/:userId")) {
+					// 处理path，去掉database/
+					item.path = item.path.slice(1) + "/:userId";
+					item.path = item.path.slice(item.path.indexOf("/"));
+				}
+				return item;
+			});
+		}
+		return handleRoutes(routes, index - 1);
 	}
 }
 
+// 处理component
 function asyncComponent(path) {
+	// 去掉开头的"/"
+	if (path[0] == "/") {
+		path = path.slice(1);
+	}
 	return () => import(`@/views/${path}`);
 }
 

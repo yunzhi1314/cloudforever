@@ -33,5 +33,18 @@ export default {
 			infoDevice: "person/personalList/infoDevice",//设备属性及定位信息
 		},
 		thirdShare: "person/shareList",//第三方共享个人清单
-	}
+	},
+	//数据库
+	database: {
+		layout: {//布局,获取路由和基本信息
+			menu: "/database/layout/menu",
+		},
+		home: {
+			messages: "/database/home/messages",
+			expMedicals: "/database/home/expMedicals",
+			basicMedical: "/database/home/basicMedical",
+			navTools: "/database/home/navTools",
+			naweiCompany: "/database/home/naweiCompany",
+		},
+	},
 };

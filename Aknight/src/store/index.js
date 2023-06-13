@@ -2,6 +2,8 @@ import { createStore } from "vuex";
 import personalCenter from "./modules/personalCenter";
 import createPersistedState from 'vuex-persistedstate'
 import { isStore } from '@/hooks/store';
+import dataBase from "./modules/dataBase";
+
 export default createStore({
 	plugins: [
 		//登录时开启
@@ -25,7 +27,7 @@ export default createStore({
 				// 	msg: state.msg,
 				// };
 				// return isStore(state, "msg", "isMsg", msgObj, sessionStorage);
-				return {msg:state.msg}
+				return { msg: state.msg }
 			},
 			key: "msg",
 		}),
@@ -134,5 +136,7 @@ export default createStore({
 	modules: {
 		//个人中心子仓库
 		personalCenter,
+		//数据库子仓库
+		dataBase
 	}
 });

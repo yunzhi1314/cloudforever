@@ -1,4 +1,5 @@
 import url from "@/api/url";
+import { dealpaths } from "@/hooks/handleRoutes";
 import { Request } from "@/hooks/request";
 import { reactive } from "vue";
 
@@ -9,7 +10,9 @@ export function getMenu() {
     });
     Request.getData(url.database.layout.menu).then((res) => {
         dataList.datas = { ...res.data };
-        console.log(dataList.datas);
+        console.log(dataList.datas.menu);
+        let routes = dealpaths(res.data.menu, 0, "component")
+        console.log(routes);
     });
     return dataList;
 }

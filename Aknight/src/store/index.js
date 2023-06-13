@@ -2,6 +2,8 @@ import { createStore } from "vuex";
 import personalCenter from "./modules/personalCenter";
 import createPersistedState from 'vuex-persistedstate'
 import { isStore } from '@/hooks/store';
+import dataBase from "./modules/dataBase";
+
 export default createStore({
 	plugins: [
 		//登录时开启
@@ -10,7 +12,8 @@ export default createStore({
 			reducer(state) {
 				let loginObj = {
 					token: state.personalCenter.token,
-					telephone: state.telephone
+					telephone: state.telephone,
+					realTelephone: state.realTelephone
 				};
 				return isStore(state, "token", "isLogin", loginObj, localStorage);
 			},
@@ -20,10 +23,11 @@ export default createStore({
 		createPersistedState({
 			storage: window.sessionStorage,
 			reducer(state) {
-				let msgObj = {
-					msg: state.msg,
-				};
-				return isStore(state, "msg", "isMsg", msgObj, sessionStorage);
+				// let msgObj = {
+				// 	msg: state.msg,
+				// };
+				// return isStore(state, "msg", "isMsg", msgObj, sessionStorage);
+				return { msg: state.msg }
 			},
 			key: "msg",
 		}),
@@ -87,11 +91,23 @@ export default createStore({
 			},
 			key: "selfQuery",
 		}),
+		//databse页面开启
+		createPersistedState({
+			storage: window.sessionStorage,
+			reducer(state) {
+				let menusObj = {
+					menus: state.dataBase.menus
+				};
+				return isStore(state, "menus", "isMenus", menusObj, sessionStorage);
+			},
+			key: "menus",
+		}),
 	],
 	state: {
 		msg: null, // 保存吐丝信息
 		countDown: 120, //验证码倒计时数字,
-		telephone: null,
+		telephone: null,//带*号的手机号
+		realTelephone: null,//真实显示的手机号
 		control: {
 			// vuex,控制存储条件集合
 			isRegister: false, //注册条件，
@@ -101,6 +117,7 @@ export default createStore({
 			isBaseMsg: false,//baseMsg页面触发
 			isContext: false,//exChangeGift页面触发
 			isSelfQuery: false,//selfQuery页面触发
+			isMenus: false,//database页面触发
 		}
 	},
 	getters: {},
@@ -117,9 +134,13 @@ export default createStore({
 				Reflect.set(state.control, name, false);
 			}, 500);
 		},
-		//登录存telephone
+		//登录存telephone(带*)
 		changeTel(state, data) {
 			state.telephone = data
+		},
+		//登录存realTelephone(真实显示的)
+		changeRealTel(state, data) {
+			state.realTelephone = data
 		}
 	},
 	actions: {},
@@ -127,5 +148,7 @@ export default createStore({
 	modules: {
 		//个人中心子仓库
 		personalCenter,
+		//数据库子仓库
+		dataBase
 	}
 });

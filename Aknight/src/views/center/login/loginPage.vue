@@ -69,7 +69,7 @@
 			@click="changeBoard(loginArr, controlObj, true, loginArr.length < 3, addArr)">注册</span>
 	</div>
 	<!-- 吐丝 -->
-	<messagePage v-show="controlObj.isTusi"></messagePage>
+	<messagePage v-if="controlObj.isTusi"></messagePage>
 	<!-- 遮罩层 -->
 	<dialogPage>
 		<div class="mathcode" @click.stop>

@@ -1,17 +1,18 @@
 // 药物试验数据的js
-import *as echarts from "echarts"
+import *as echarts from "echarts";
 
-import { Request } from "@/hook/request"
-// import { reactive } from "vue"
+import { Request } from "@/hook/personalCenter/request";
 
-// import url from "@/api/url";
+import { reactive } from "vue";
+
+import url from "@/api/url";
 
 // 靶向药实验数据的复合折线统计图
 export async function exMpedicals(dom){
-   let sources = await Request.getData('http://192.168.2.169:3000/api/expMedicals');
+   let sources = await Request.get(url.database.home.expMedicals);
  
    console.log(sources);
-   sources = sources.datas.data.map(item => ({
+   sources = sources.data.datas.map(item => ({
       medical_name:item.medical_name,
       鳞癌ORR: item.id > 9 ?  "" : item.medical_ORR.slice(0,item.medical_ORR.indexOf("%")),  // 从第零项开始找 %，找到的话就去掉它
       鳞癌OS: item.id > 9 ? "" :item.medical_OS == "/" ? "" : item.medical_OS,  //item.medical_OS 如果里面有 / 的话，就返回空，如果没有的话，直接返回item.medical_OS
@@ -31,8 +32,12 @@ export async function exMpedicals(dom){
       legend:{   // legend就是Echarts图表中对图形的解释部分：
          orient: 'horizontal',   // 水平居中
          right:0,   
-         top:10,
+         top:30,
       },
+      
+      title:{
+         text:"医疗公司的靶向药（鳞癌和非鳞癌）的数据",
+       },
 
       dataset:{   // dataset数据集
          dimensions:[  //维度
@@ -191,42 +196,113 @@ export async function exMpedicals(dom){
    exp.setOption(option) 
 }
 console.log("11");
-// 各公司所持有的靶向药数据，环状图
+//各公司所持有的靶向药数据，环状图
 export async function besicMedicals(dom){
-   let sources = await Request.getData('http://192.168.2.169:3000/api/basicMedical')
+   let sources = await Request.get(url.database.home.basicMedical)
    console.log(dom);
    console.log(sources);
-   let newData = reactive([])
 
-   let source = sources.datas.data;
-   source.forEach(item => {
-      switch(item.medical_company){
-         case "BMS":
-         if(newData[0] == undexfined){
-            newData.push({
-               company:item.medical_company,
-               number: 1
-            })
-         }
-         newData[0].number++;
-         break;
-         case "信达生物" :
-         
-         break;
-      }
-   })
+   let newData = reactive([]);
+
+   let source = sources.data.datas;
    
-   // let exp = echarts.init(dom);
-   // series:{
-   //    type:"pie",
-   //    data:[
-   //       {
-   //          value:,
-   //          name:,
-   //       }
-   //    ]
-   // }
+   let companies = [...new Set(source.map(item => item.medical_company))]   // 遍历公司的名字，把它变成数组，并且扩展开来
+   console.log(companies);
+   
+   // 处理数据集对象
+   function cases(index,item){
+      if(newData[index] == undefined){    // newData等于空的话 ，执行下列的语句
+         newData.push({
+            name:item.medical_company,   // 后台传过来的公司名
+            value: 1,
+            label:{
+               /*
+               {a}:系列名
+               {b}:数据名
+               {c}:数据值
+               {d}:百分比
+               {@xxx}：数据中名为'xxx'的维度的值，如{@prpduct}表示名为'product'维度的值
+               {@n}:数据中维度n的值，如{@[3]}表示维度3的值，从0开始计数
+               */
+               formatter: `{b}:{c}款:占市场{d}%`,
+            }
+         })
+      }
+      newData[index].value++;
+   }
+   
+   // 处理不同公司的药物数量
+   source.forEach((item) => {
+      companies.forEach((item2,index2) =>{
+         switch(item.medical_company){
+            // 
+            case item2:    // 把companies的数组遍历的名字赋上去
+            cases(index2,item)  // 把index2下标传进去给cases,因为我们要把公司名对应的下标传进去，所以用的是companies数组处理好的下标，用的是外面的item，因为要找到对应的公司才可以赋值上去
+            break;
+         }
+      })
+      
+   })
+   console.log(newData);
+
+   // 绘制图表
+   let ring = echarts.init(dom);
+   
+   let option = {
+      legend:{   // legend就是Echarts图表中对图形的解释部分：
+         orient: 'vertical',   // 垂直居中居中
+         right:0,   
+         top:30,
+      },
+
+      title:{
+        text:"各公司持有的靶向药数量市场占比",
+      },
+      
+      series:{
+         type: "pie",   //饼图
+         
+         left:-90,
+         top:10,
+
+         // 饼图半径(根据容器的宽高来决定)
+         radius: ["80%", "90%"],
+
+         // 避免文字超出圆环的范围
+         avoidLabelOverlap: false,
+         
+         // 文字显示的位置
+         label:{
+            position:"center",
+            show:false,
+         },
+
+         emphasis:{
+            label:{
+               show:true,
+               fontSize:"1.25rem",
+               fontWeight:"bold",
+               color:"#ff0000",
+            },
+         },
+
+         data:newData,   // 这个newData是上面处理好的格式
+      }
+   }
+
+   ring.setOption(option);
 }
+//    // let exp = echarts.init(dom);
+//    // series:{
+//    //    type:"pie",
+//    //    data:[
+//    //       {
+//    //          value:,
+//    //          name:,
+//    //       }
+//    //    ]
+//    // }
+// }
 
 
 // export function exMpedicals(dom){

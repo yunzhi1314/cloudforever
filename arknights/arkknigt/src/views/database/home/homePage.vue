@@ -26,49 +26,46 @@
             </div>
         </div>
     </div>
-    <!-- 折现统计图/饼图 -->
-    <div style="display: flex">
-        <div class="plan biggerOne" id="exMpedicals">
+    <!-- 折现统计图 -->
+    <div style="display:flex;">
+        <div class="plans" style="width: 56vw;
+         height: 50vh; 
+         background-color: white;
+         margin-top: 2.5vh" id="exMpedicals">
         </div>
-        <div class="plan smallOne" id="basicMedicals">
-
-        </div>
-    </div>
     
-    <!-- 饼图 -->
-    <div class="plans" id="besicMedicals" 
-    style="width: 56vw;
-        height: 50vh; 
-        background-color: #ff0000;"
-    >
-        
+        <!-- 饼图 -->
+        <div class="plans" id="besicMedicals" 
+        style="width: 30vw;
+         height: 50vh;
+         margin-left: 1vw; 
+         margin-top: 2.5vh">
+    
+        </div>
     </div>
     <router-view></router-view>
 </template>
 
 <script>
-// import url from "@/api/url";
-
 import { exMpedicals,besicMedicals } from "@/echarts/index";
-
-import { onMounted } from "vue";
-
-// import { homeData } from "@/api/database/home/index";
- 
+import { onMounted, toRefs } from "vue";
+import { homeData } from '@/api/database/home/index.js'
+import homeCss from '@/public/database/homePage.scss'
+import url from "@/api/url";
 export default {
     name:"homePage",
     setup () {
         
         onMounted(() => {
             // 折线图
-            ExpMedical(document.querySelector("#exMpedicals"));
-
-            // 各公司所持有的靶向药数据，环状图
+            exMpedicals(document.querySelector("#exMpedicals"));
+            
+            // 
             besicMedicals(document.querySelector("#besicMedicals"));
-
         })
         return {
-        //    ...toRefs(homeData())
+            ...toRefs(homeData(url.database.home.messages)),
+            homeCss
         }
     }
 }

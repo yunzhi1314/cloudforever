@@ -54,6 +54,49 @@
         }
     }
 }
+// 设备属性及定位信息
+.infoDevice{
+    height: 95%;
+    background-color: #fff;
+    border-radius: 1vw;
+    padding: 1.5vw;
+    .time{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #E3E3E3;
+        padding-bottom: 1vw;
+        cursor: pointer;
+        section{
+            background-color: #E5F4FB;
+            width: 7vw;
+            height: 5vh;
+            border-radius: 7px;
+            text-align: center;
+            line-height: 5vh;
+            font-size: 13px;
+        }
+    }
+    .mess{
+        section{
+            padding-top: 0.8vw;
+            font-size: 13px;
+            display: flex;
+            background-color: #F5F5F5;
+            padding: 1vw;
+            span:nth-child(1){
+                flex: 2;
+                color: #A1A3A1;
+            }
+            span:nth-child(2){
+                flex: 6.5;
+                color: #4D4D53;
+            }
+        }
+    }
+}
+
+
 // 第三方个人共享个人信息清单
 .share{
     background-color: #fff;

@@ -45,6 +45,7 @@ router.beforeEach((to, from, next) => {
          
          
           let routeData = JSON.parse(sessionStorage.getItem('baseMsg'))
+          
           let route = Reflect.get(routeData,'baseRoutes')
          
 

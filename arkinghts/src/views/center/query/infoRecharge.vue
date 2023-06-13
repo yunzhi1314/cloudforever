@@ -6,24 +6,26 @@
       <span>充值记录</span>
     </section>
     <section>UID:{{ UID }}</section>
-    <table>
-       <tr>
-        <th>游戏订单号</th>
-        <th>平台</th>
-        <th>金额￥</th>
-        <th>商品名称</th>
-        <th>交易时间</th>
-       </tr>
-       <div v-for="(item,index) in selfData.items" :key="index" v-show="index == 0">
-        <tr v-for="(item2,index2) in item.children" :key="index2">
-         <td >{{ item2.Inumber }}</td>
-         <td >{{ item2.amount }}</td>
-         <td >{{ item2.place }}</td>
-         <td >{{ item2.shopping }}</td>
-         <td >{{ item2.time }}</td>
-        </tr>
+    <div>
+
+  
+       <section>
+        <span>游戏订单号</span>
+        <span>平台</span>
+        <span>金额￥</span>
+        <span>商品名称</span>
+        <span>交易时间</span>
+       </section>
+        <section v-for="(item,index) in Reacharge" :key="index"  class="ReachargeDatas">
+         <span >{{ item.Inumber }}</span>
+         <span >{{ item.place }}</span>
+         <span>{{ item.amount }}</span>
+         <span >{{ item.shopping }}</span>
+         <span >{{ item.time }}</span>
+        </section >
       </div>
-    </table>
+      <section style="margin-top: 8vh;">*1.可查询30日、100条以内有效数字</section>
+      <section>**2.查询结果可能与游戏内实际操作存在延迟</section>
   </div>
  </div>
 </template>

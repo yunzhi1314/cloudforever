@@ -91,6 +91,17 @@ export default createStore({
 			},
 			key: "selfQuery",
 		}),
+		//databse页面开启
+		createPersistedState({
+			storage: window.sessionStorage,
+			reducer(state) {
+				let menusObj = {
+					menus: state.dataBase.menus
+				};
+				return isStore(state, "menus", "isMenus", menusObj, sessionStorage);
+			},
+			key: "menus",
+		}),
 	],
 	state: {
 		msg: null, // 保存吐丝信息
@@ -106,6 +117,7 @@ export default createStore({
 			isBaseMsg: false,//baseMsg页面触发
 			isContext: false,//exChangeGift页面触发
 			isSelfQuery: false,//selfQuery页面触发
+			isMenus: false,//database页面触发
 		}
 	},
 	getters: {},

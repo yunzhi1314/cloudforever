@@ -16,17 +16,6 @@ export default {
     name: "messagePage",
     setup() {
         let {msg} = reactive(JSON.parse(sessionStorage.getItem("msg")))
-        // let message = reactive({
-        //     status: "",
-        //     msg: "",
-        //     message: ""
-        // })
-        // if (msg != null && msg != 0) {
-        //     msg = msg.msg
-        //     message.status = msg.status
-        //     message.msg = msg.msg
-        //     message.message = msg.message
-        // }
         return {
             controlObj,
             ...msg

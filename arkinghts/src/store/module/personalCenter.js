@@ -10,7 +10,8 @@ export default ({
             token:null,
             telephone:null,
             baseRoutes:null,
-            baseMessage:null
+            baseMessage:null,
+            contexts:null
         }
     },
     getters: {
@@ -29,7 +30,11 @@ export default ({
         },
         changeBaseMessage(state,data){//存储个人信息
             state.baseMessage = data
+        },
+        changeContexts(state,data){//存储兑换礼包
+            state.contexts = data
         }
+
     },
     actions: {
     },

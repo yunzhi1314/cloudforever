@@ -41,16 +41,16 @@ export default createStore({
        },
        key:'baseMsg'
     }),
-  //   createPersistedState({
-  //     storage:window.sessionStorage,
-  //     reducer(state){
-  //       let baseMsgs = {
-  //         baseMessage:state.personalCenter.baseMessage
-  //       }
-  //       return isStore(state,'baseMessage','isBaseMessage',baseMsgs,sessionStorage)
-  //     },
-  //     key:'baseMessage'
-  //  })
+    createPersistedState({
+      storage:window.sessionStorage,
+      reducer(state){
+        let context = {
+          contexts:state.personalCenter.contexts
+        }
+        return isStore(state,'contexts','isContext',context,sessionStorage)
+      },
+      key:'contexts'
+   })
   ],
   state: {
     countDown:10,
@@ -60,6 +60,7 @@ export default createStore({
       isLogin:false,//存储登录信息开关
       // isBaseRoutes:false,//存储路由开关
       isBaseMessage:false,//存储个人信息开关
+      isContext:false,//存储兑换礼包信息开关
     }
   },
   getters: {
@@ -67,8 +68,7 @@ export default createStore({
   mutations: {
     changeStore(state,name){
       Reflect.set(state.control,name,true)
-    }
-    
+    },
   },
   actions: {
   },

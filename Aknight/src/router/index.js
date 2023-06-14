@@ -24,8 +24,14 @@ const routes = [
   {
     path:"/dataBase",
     name:"dataBase",
-    component:()=>import("@/views/dataBasePage.vue")
+    component:()=>import("@/views/dataBasePage.vue"),
+  },
+  {
+    path:"/dataBase/home",
+    name:"homePage",
+    component:()=> import("@/views/database/home/homePage.vue")
   }
+
 ];
 
 const router = createRouter({

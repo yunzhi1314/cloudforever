@@ -97,8 +97,8 @@
           </el-tabs>
         </el-header>
         <!-- 展示内容 -->
-        <el-main>
-          
+        <el-main style="background-color: #ededed;margin-top: 1.7vh;">
+
         </el-main>
       </el-container>
     </el-container>
@@ -106,17 +106,17 @@
 </template>
 
 <script>
-import { databaseMenu } from "@/views/database/dataBase";
+import dataBase from "@/store/modules/dataBase";
 import { ref } from "vue";
 export default {
   name: "dataBase",
   setup() {
     const isCollapse = ref(false);
-    console.log(databaseMenu);
+    console.log(dataBase);
 
     return {
       isCollapse,
-      databaseMenu,
+      dataBase,
     };
   },
 };

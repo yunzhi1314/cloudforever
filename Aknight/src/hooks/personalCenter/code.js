@@ -13,8 +13,8 @@ export const getMathCode = (name, name1, index) => {
 		index == 1
 			? (controlObj[name1] = false)
 			: index == 3
-			? (controlObj[name1] = true)
-			: "";
+				? (controlObj[name1] = true)
+				: "";
 	}
 	svg.value = mathCode();
 };
@@ -55,7 +55,6 @@ export function setCountDown(name, arr) {
 		} else {
 			getCode.telephone = arr.find((item) => item.use == "手机号").value;
 		}
-
 		//请求发送短信
 		user(url.centerPage.telCode, getCode);
 		// 开启定时器
@@ -64,7 +63,7 @@ export function setCountDown(name, arr) {
 		//关闭遮罩层
 		controlObj.isDialog[name] = false;
 		//打开吐丝
-			toest(controlObj);
+		toest(controlObj);
 	};
 	//定时器分离,根据定时器名字实现定时器分离
 	const timerSeparate = (timeName) => {

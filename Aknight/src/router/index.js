@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
   {
-    path: "/center", 
+    path: "/center",
     name: "centerPage",
     component: () => import("@/views/center/centerPage"),
     children: [
@@ -22,14 +22,14 @@ const routes = [
     ]
   },
   {
-    path:"/dataBase",
-    name:"dataBase",
-    component:()=>import("@/views/dataBasePage.vue"),
+    path: "/database",
+    name: "databasePage",
+    component: () => import("@/views/database/databasePage"),
   },
   {
-    path:"/dataBase/home",
-    name:"homePage",
-    component:()=> import("@/views/database/home/homePage.vue")
+    path: "/database/home",
+    name: "homePage",
+    component: () => import("@/views/database/home/homePage")
   }
 
 ];

@@ -9,7 +9,6 @@ export function getInfo(name) {
     });
     Request.getData(url.centerPage.personalList[name]).then((res) => {
         dataList.datas = { ...res.data[name] };
-        console.log(dataList.datas);
     });
     return dataList;
 }    

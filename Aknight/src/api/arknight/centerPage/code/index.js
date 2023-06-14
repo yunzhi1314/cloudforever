@@ -25,7 +25,6 @@ export function user(url, data, fn, isStore) {
     let dataList = reactive({
         datas: [],
     });
-
     Request.postData(url, data).then((res) => {
         dataList.datas = toRef({ ...res.data });
         if (fn) {//代表存在调用的是子仓库函数

@@ -1,16 +1,16 @@
 .bg{
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100vw;
     height: 100vh;
-    position: absolute;
+    width: 100vw;
+    background-position-x: center;
+    background-position-y: -27vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: -1;
 }
 .center{
-    width: 100vw;
-    height: 100vh;
     display: grid;
     grid-template-rows: 1fr 8fr 1fr;
     grid-template-columns: 1fr;
@@ -18,10 +18,6 @@
     "header"
     "main"
     "footer";
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 3;
 }
 header{
     grid-area: header;
@@ -95,7 +91,6 @@ footer{
         }
     }
 }
-
 
 // 菜单动画
 // 展示nav展开的动画

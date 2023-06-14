@@ -10,6 +10,10 @@ const routes = [
         path: "/center/login",
         name: "loginPage",
         component: () => import("@/views/center/loginPage.vue"),
+        meta: {
+          lists: "1fr 8fr 0.7fr",
+          height:"100vh"
+        },
       },
       {
         path: "/center/buffer",

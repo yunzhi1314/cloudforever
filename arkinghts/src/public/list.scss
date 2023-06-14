@@ -54,49 +54,67 @@
         }
     }
 }
-
-// 设备属性及定位信息页面
+// 设备属性及定位信息
 .infoDevice{
-    background-color:rgb(255,255,255);
-    width: 35vw;
-    border-radius: 2vw;
-    .title{
+    height: 95%;
+    background-color: #fff;
+    border-radius: 1vw;
+    padding: 1.5vw;
+    .time{
         display: flex;
-        justify-content: space-around;
-        span{
-            width: 6vw;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #E3E3E3;
+        padding-bottom: 1vw;
+        cursor: pointer;
+        section{
+            background-color: #E5F4FB;
+            width: 7vw;
             height: 5vh;
-            background-color: #F5F5F5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-radius: 0.5vw;
-            cursor: pointer;
+            border-radius: 7px;
+            text-align: center;
+            line-height: 5vh;
+            font-size: 13px;
         }
     }
-   div{
-    padding: 1vw;
-    div{
-        div{
-            background-color: #F5F5F5;
-            height: 16vh;
+    .mess{
+        section{
+            padding-top: 0.8vw;
+            font-size: 13px;
             display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            justify-content: space-around;
-            section{
-                width: 100%;
-                margin-bottom: 0.1vh;
-                span{
-                    margin-right: 4vw;
-                    font-size: 0.7rem;
-                }
+            background-color: #F5F5F5;
+            padding: 1vw;
+            span:nth-child(1){
+                flex: 2;
+                color: #A1A3A1;
             }
-          
+            span:nth-child(2){
+                flex: 6.5;
+                color: #4D4D53;
+            }
         }
-       
     }
-   }
+}
+
+
+// 第三方个人共享个人信息清单
+.share{
+    background-color: #fff;
+    padding: 0vw 2vw;
+    border-radius: 1.5vw;
+    font-size: 12px;
+    margin-bottom: 2vh;
+    section{
+        padding-top: 0.8vw;
+        font-size: 13px;
+        display: flex;
+        span:nth-child(1){
+            flex: 2;
+            color: #A1A3A1;
+        }
+        span:nth-child(2){
+            flex: 6.5;
+            color: #4D4D53;
+        }
+    }
 }

@@ -1,17 +1,11 @@
-<template >
-  <div
-    :style="{
-      backgroundImage: `url(${img.bgImg})`,
-      backgroundSize: route.meta.isContain ?   'contain' :  'cover' ,
-      height:route.meta.height,
-      
-    }"
-    class="bg"
-  ></div>
-  <div class="center" :style="{
-     height:route.meta.height,
-     gridTemplateRows:route.meta.gridTemplateRows
-  }">
+<template>
+  <div :style='{
+    backgroundImage: `url(${img.bgImg})`,
+    height: route.meta.height, 
+    backgroundSize:route.meta.isContain ? "contain" : "cover"}' class="bg">
+  </div>
+
+  <div class="center" :style="{ gridTemplateRows: route.meta.gridTemplateRows, height: route.meta.height }">
     <header>
       <div v-if="boolObj.isRouter" class="unfold">
         <span v-html="menuMsg.navSvg" class="svg" @click="unfold" style="cursor: pointer;"
@@ -91,6 +85,8 @@ export default {
   name: "centerPage",
   setup() {
     const route = useRoute();
+    const router = useRouter()
+    
     const router = useRouter()
     // 条件控制总开关
     let boolObj = reactive({

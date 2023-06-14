@@ -7,10 +7,11 @@ import { reactive } from "vue";
 
 import url from "@/api/url";
 
+
 // 靶向药实验数据的复合折线统计图
 export async function exMpedicals(dom){
    let sources = await Request.get(url.database.home.expMedicals);
- 
+
    console.log(sources);
    sources = sources.data.datas.map(item => ({
       medical_name:item.medical_name,
@@ -51,7 +52,6 @@ export async function exMpedicals(dom){
          "id",
           ],  
          
-
          // source:[  
          //    // {
          //    //    medical_name:"谁打我",
@@ -195,9 +195,9 @@ export async function exMpedicals(dom){
    }  
    exp.setOption(option) 
 }
-console.log("11");
-//各公司所持有的靶向药数据，环状图
-export async function besicMedicals(dom){
+
+// 各公司所持有的靶向药数据，环状图
+export async function basicMedicals(dom){
    let sources = await Request.get(url.database.home.basicMedical)
    console.log(dom);
    console.log(sources);
@@ -292,6 +292,86 @@ export async function besicMedicals(dom){
 
    ring.setOption(option);
 }
+
+// 纳微公司的营销利润与增长率，折柱复合统计图
+export async function naweiCompany(dom){
+   console.log(dom);
+   let sources = await Request.get(url.database.home.naweiCompany);
+   console.log(sources);
+
+   let source = sources.data.datas.map(item => item.Profit_from_operations.replace(",","") * 1);  // 因为里面有一个逗号，把它替换成空
+   console.log(source);
+   
+   let source2 = sources.data.datas.map(item => item.growth_rate01 * 1);
+   console.log(source2);
+
+   let naweiCompany = echarts.init(dom);
+
+   let option = {
+      legend:{   // legend就是Echarts图表中对图形的解释部分：
+         orient: 'horizontal',   // 垂直居中居中
+         right:0,   
+         top:30,
+      },
+
+      tooltip:{   
+         // trigger: "yAxis",  // 跟随鼠标，更新鼠标的变化
+         axisPointer:{
+            // 类型为穿过
+            type:"cross",
+         }
+   
+      },
+
+      title:{
+         text:"2019年6月至2023年6月,纳微公司的营销利润与增长率的ba半年财务报表",
+      },
+      
+      xAxis:[  // x轴
+         {
+            type:"category",
+            data:["2019年12月","2020年6月","2020年12月","2021年6月","2021年12月","2022年6月","2022年12月","2023年6月"]
+         }
+      ],
+      
+      yAxis:[  // y轴
+        {
+         type:"value",
+         max: 47500,  // 轴的最大值
+         min: 1000,   // 轴的最小值
+        },
+        {
+         type: "value",
+         max: 200,
+         min: 0,
+        }
+      ],
+      series:[   // 系列
+         {
+            type:"bar",
+            name:"营销利润",
+            yAxisIndex: 0,
+            tooltip:{
+               formatter:`{a}{b}{c}`,
+            },
+            data:source,
+         },
+         {
+            type:"line",
+            name:"营销利润增长率",
+            smooth:true,  // 折线开启平滑
+            yAxisIndex: 1,
+            tooltip:{
+               formatter:`{a}{b}{c}`,
+            },
+            data:source2,
+         }
+      ],
+   }
+
+   naweiCompany.setOption(option);
+}
+
 //    // let exp = echarts.init(dom);
 //    // series:{
 //    //    type:"pie",

@@ -56,13 +56,15 @@ router.beforeEach((to, from, next) => {
         if (to.matched[0]) {
           next()
         } else {
+          let PATH = to.path.split("/")[1];
+          let routeData = JSON.parse(sessionStorage.getItem(PATH =="center" ? "menu" :""))
+          let route = Reflect.get(routeData, PATH =="center" ? "menuRoutes" :"menuRoutes")
+          route = handleRoutes(route, route.length - 1)
 
-          let routeData = JSON.parse(sessionStorage.getItem("menu")).menuRoutes
-          routeData = handleRoutes(routeData, routeData.length - 1)
-
-          routeData.forEach(item => {
-            router.addRoute("centerPage", item)
+          route.forEach(item => {
+            router.addRoute(PATH == "center" ? "centerPage" :"databasePage", item)
           })
+          console.log(router.getRoutes());
 
           // 自定义添加子路由
           router.addRoute("centerPage", {

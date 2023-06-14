@@ -26,7 +26,6 @@ export function getMenu() {
         routes.forEach(item => {
             router.addRoute("databasePage", item)
         })
-        console.log(router.getRoutes());
 
     });
     return dataList;

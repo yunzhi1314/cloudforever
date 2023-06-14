@@ -37,26 +37,48 @@
     background-color: #fff;
 }
 
-.ball {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #ff0000;
-    display: inline-block;
+#homePage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.biggerOne{
-    width: 50vw;
-    height: 50vh;
-    margin-left: 0.65vw;
-    margin-top: 2.5vh;
+.common_place {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.smallOne{
-    width: 30vw;
-    height: 50vh;
-    margin-left: 1vw;
-    margin-top: 2.5vh;
-}
-.spc{
-    margin-left: 0.65vw;
-    padding: 1vw;
+
+.tools {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.75vw;
+    height: 80%;
+
+    .tool {
+        background-color: #D4D7FA;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        section {
+            height: 50%;
+            width: 100%;
+            justify-content: center;
+            display: flex;
+            font-size: 14px;
+        }
+
+    }
+
+    .tool>section:nth-child(1) {
+        align-items: flex-end;
+        margin-bottom: 1vh;
+    }
+
+    .tool:hover {
+        background-color: #aeb4f5;
+
+    }
 }

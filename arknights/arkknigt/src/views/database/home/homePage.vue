@@ -31,25 +31,60 @@
         <div class="plans" style="width: 56vw;
          height: 50vh; 
          background-color: white;
+         margin-left: 1vw; 
          margin-top: 2.5vh" id="exMpedicals">
         </div>
     
         <!-- 饼图 -->
-        <div class="plans" id="besicMedicals" 
+        <div class="plans" id="basicMedicals" 
         style="width: 30vw;
          height: 50vh;
          margin-left: 1vw; 
-         margin-top: 2.5vh">
+         margin-top: 2.5vh;">
     
+        </div>
+    </div>
+    <div style="display:flex;">
+        <!--  -->
+        <div class="plans" id="navTools"
+           style="display: block;
+           padding:1vw;
+           width: 27vw; 
+           height: 50vh; 
+           margin-top: 2.5vh; 
+           margin-left: 0.65vw"
+        >
+           <section class="word">
+            快捷导航工具
+           </section>
+           <div class="tools">
+               <div v-for="(item,index) in data.navTools" :key="index">
+                   <section>
+                       <span>{{ item.word }}</span>
+                   </section>
+                   <section>
+                        {{ item.data }}
+                   </section>
+               </div>
+           </div>
+        </div>
+
+        <!-- 折柱复合统计图 -->
+        <div class="plans" id="naweiCompany" style="
+            width: 50vw;
+            height: 50vh;
+            margin-left: 1vw;
+            margin-top: 2.5vh;
+            ">
         </div>
     </div>
     <router-view></router-view>
 </template>
 
 <script>
-import { exMpedicals,besicMedicals } from "@/echarts/index";
+import { exMpedicals,basicMedicals,naweiCompany } from "@/echarts/index";
 import { onMounted, toRefs } from "vue";
-import { homeData } from '@/api/database/home/index.js'
+import { homeData,homeData2 } from '@/api/database/home/index.js'
 import homeCss from '@/public/database/homePage.scss'
 import url from "@/api/url";
 export default {
@@ -60,12 +95,18 @@ export default {
             // 折线图
             exMpedicals(document.querySelector("#exMpedicals"));
             
-            // 
-            besicMedicals(document.querySelector("#besicMedicals"));
+            // 饼图
+            basicMedicals(document.querySelector("#basicMedicals"));
+
+            // 折柱复合统计图
+            naweiCompany(document.querySelector("#naweiCompany"));
         })
         return {
             ...toRefs(homeData(url.database.home.messages)),
-            homeCss
+
+            homeCss,
+            
+            ...toRefs(homeData2(url.database.home.navTools)),
         }
     }
 }

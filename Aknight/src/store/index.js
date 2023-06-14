@@ -96,7 +96,8 @@ export default createStore({
 			storage: window.sessionStorage,
 			reducer(state) {
 				let menusObj = {
-					menus: state.dataBase.menus
+					menu: state.dataBase.menu,
+					menuRoutes: state.dataBase.menuRoutes
 				};
 				return isStore(state, "menus", "isMenus", menusObj, sessionStorage);
 			},

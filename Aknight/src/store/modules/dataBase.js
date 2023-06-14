@@ -3,12 +3,16 @@ export default ({
     namespaced: true,
     state() {
         return {
-            menus: null,
+            menu: null,
+            menuRoutes: null
         }
     },
     mutations: {
-        changeMenus(state, data) {
-            state.menus = data
+        changeMenu(state, data) {
+            state.menu = data
+        },
+        changeMenuRoutes(state,data){
+            state.menuRoutes =data
         }
     }
 })

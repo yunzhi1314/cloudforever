@@ -26,16 +26,26 @@
             </div>
         </div>
     </div>
-    <!-- 折现统计图 -->
-    <div class="plans" style="width: 56vw;
-     height: 50vh; 
-     background-color: white;" id="exMpedicals">
+    <!-- 折现统计图/饼图 -->
+    <div style="display: flex">
+        <div class="plan biggerOne" id="exMpedicals">
+        </div>
+        <div class="plan smallOne" id="basicMedicals">
+
+        </div>
+    </div>
+    <div style="display: flex">
+        <div class="plan smallOne spc">
+
+        </div>
+        <div class="plan biggerOne">
+
+        </div>
     </div>
 
-    <!-- 饼图 -->
-    <div class="plans" id="besicMedicals">
 
-    </div>
+    <!--  -->
+
     <router-view></router-view>
 </template>
 

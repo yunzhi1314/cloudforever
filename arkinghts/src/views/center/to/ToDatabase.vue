@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
+import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import { layout } from "@/api/database/layout"
 
 export default {
@@ -36,8 +36,11 @@ export default {
         name: "databasePage",
       })
     }
-
-    layout()
+    // 离开页面守卫
+    onBeforeRouteLeave(()=>{
+      layout()
+    })
+    
     return {
       // 点击前往数据库
       confirm,

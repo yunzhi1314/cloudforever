@@ -29,9 +29,13 @@
 import home from "@/public/home/home.scss";
 import { expMedicals, basicMedical } from "@/echarts"
 import { onMounted } from 'vue';
+import { useRouter } from "vue-router";
+
 export default {
   name: "homePage",
   setup() {
+    let router = useRouter();
+    console.log(router.getRoutes());
     const list = [
       {
         sum: "11125,12",
@@ -58,6 +62,7 @@ export default {
         img: "",
       },
     ];
+
 
     // 列表的引入
     onMounted(() => {

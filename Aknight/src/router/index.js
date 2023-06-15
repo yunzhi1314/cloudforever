@@ -49,14 +49,12 @@ router.beforeEach((to, from, next) => {
       let token = JSON.parse(localStorage.getItem("token")).token
       if (token) {
         if (to.matched[0]) {
-          console.log(111);
           next()
         } else {
           //防止页面空白
           let PATH = to.path.split("/")[1];
-          let routeData = JSON.parse(sessionStorage.getItem(PATH =="center" ? "menu" :"menus"))
+          let routeData = JSON.parse(sessionStorage.getItem(PATH == "center" ? "menu" : "menus"))
           let route = Reflect.get(routeData, "menuRoutes")
-          route = handleRoutes(route, route.length - 1)
 
           route = handleRoutes(route, route.length - 1)
           route.forEach(item => {

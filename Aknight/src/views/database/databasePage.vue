@@ -2,7 +2,7 @@
 	<div class="common-layout">
 		<el-container style="height: 100vh; width: 100vw">
 			<!-- 侧边栏 -->
-			<el-aside :width="!isCollapse ? '12vw' : '4vw'">
+			<el-aside :width="!isCollapse ? '14vw' : '4vw'">
 				<!-- 菜单 -->
 				<el-menu background-color="#545c64" text-color="#fff" active-text-color="#409Eff" class="el-menu-demo"
 					default-active="1" :collapse="isCollapse" :collapse-transition="false" style="height: 100vh">
@@ -33,8 +33,8 @@
 			<router-link :to="{ name: '', query }"></router-link>
 			<el-container>
 				<!-- 头部 -->
-				<el-header style="height: 11.5vh ; grid-template-columns:repeat:1fr">
-					<el-menu text-color="#aaa" mode="horizontal" :ellipsis="false">
+				<el-header style="height: 11.5vh ; grid-template-columns:repeat:1fr;padding:0;">
+					<el-menu text-color="#aaa" mode="horizontal" :ellipsis="false" style="height:6.5vh;">
 						<el-menu-item index="0">
 							<el-icon @click="isCollapse = !isCollapse">
 								<Expand v-show="isCollapse" />
@@ -95,7 +95,7 @@
 					</el-tabs>
 				</el-header>
 				<!-- 展示内容 -->
-				<el-main style="background-color: #ededed; margin-top: 1.7vh">
+				<el-main style="background-color: #F8F8F8;">
 					<router-view />
 				</el-main>
 			</el-container>
@@ -118,6 +118,7 @@ export default {
 		console.log(router.getRoutes());
 		getMedical("expMedicals")
 		getMedical("basicMedical")
+
 
 		// 跳转页面
 		function toPage(index, index2) {

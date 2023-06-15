@@ -4,15 +4,29 @@
 			<!-- 侧边栏 -->
 			<el-aside :width="!isCollapse ? '14vw' : '4vw'">
 				<!-- 菜单 -->
-				<el-menu background-color="#545c64" text-color="#fff" active-text-color="#409Eff" class="el-menu-demo"
-					default-active="1" :collapse="isCollapse" :collapse-transition="false" style="height: 100vh">
+				<el-menu
+					background-color="#545c64"
+					text-color="#fff"
+					active-text-color="#409Eff"
+					class="el-menu-demo"
+					default-active="1"
+					:collapse="isCollapse"
+					:collapse-transition="false"
+					style="height: 100vh">
 					<!-- 首页 ， 一级菜单-->
-					<el-menu-item index="1" v-for="(item, index) in menu" :key="index" v-show="!item.meta.isIframe"
+					<el-menu-item
+						index="1"
+						v-for="(item, index) in menu"
+						:key="index"
+						v-show="!item.meta.isIframe"
 						@click="toPage(index)">
 						{{ item.meta.title }}
 					</el-menu-item>
 					<!-- 可下拉的菜单 -->
-					<el-sub-menu v-for="(item, index) in menu" :key="index" :index="index.toString()"
+					<el-sub-menu
+						v-for="(item, index) in menu"
+						:key="index"
+						:index="index.toString()"
 						v-show="item.meta.isIframe">
 						<template #title>
 							<el-icon>
@@ -21,8 +35,11 @@
 							<span> {{ item.meta.title }}</span>
 						</template>
 						<!-- 子菜单 -->
-						<el-menu-item v-for="(item2, index2) in item.children" :key="index + '-' + index2"
-							:index="index.toString() + '-' + index2.toString()" v-show="!item2.meta.isIframe"
+						<el-menu-item
+							v-for="(item2, index2) in item.children"
+							:key="index + '-' + index2"
+							:index="index.toString() + '-' + index2.toString()"
+							v-show="!item2.meta.isIframe"
 							@click="toPage(index, index2)">
 							{{ item2.meta.title }}
 						</el-menu-item>
@@ -33,8 +50,13 @@
 			<router-link :to="{ name: '', query }"></router-link>
 			<el-container>
 				<!-- 头部 -->
-				<el-header style="height: 11.5vh ; grid-template-columns:repeat:1fr;padding:0;">
-					<el-menu text-color="#aaa" mode="horizontal" :ellipsis="false" style="height:6.5vh;">
+				<el-header
+					style="height: 11.5vh ; grid-template-columns:repeat:1fr;padding:0;">
+					<el-menu
+						text-color="#aaa"
+						mode="horizontal"
+						:ellipsis="false"
+						style="height: 6.5vh">
 						<el-menu-item index="0">
 							<el-icon @click="isCollapse = !isCollapse">
 								<Expand v-show="isCollapse" />
@@ -43,41 +65,56 @@
 						</el-menu-item>
 						<el-menu-item index="1">
 							<!-- 面包屑 -->
+							<!-- separator，每个面包屑用 / 分隔 -->
 							<el-breadcrumb separator="/">
-								<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-								<el-breadcrumb-item><a href="/">第二个页面</a></el-breadcrumb-item>
-								<el-breadcrumb-item>第三个页面</el-breadcrumb-item>
-								<el-breadcrumb-item>第四个页面</el-breadcrumb-item>
+								<el-breadcrumb-item
+									:to="{ name: 'homePage', params: { userId } }">
+									首页
+								</el-breadcrumb-item>
+								<!-- 二级面包屑 -->
+								<el-breadcrumb-item
+									v-if="isbreadcrumb ? route.meta.isHide : ''">
+									{{ metaName }}
+								</el-breadcrumb-item>
+								<!-- 三级面包屑 -->
+								<el-breadcrumb-item
+									:style="{
+										animation: isPlay
+											? 'flyIn 0.25s 0s 1 linear forwards'
+											: ''
+									}"
+									v-if="isbreadcrumb ? route.meta.isHide : ''">
+									{{ route.meta.title }}
+								</el-breadcrumb-item>
 							</el-breadcrumb>
-							<span>首页</span>
 						</el-menu-item>
 						<div class="flex-grow" />
-						<el-menu-item index="2">
+						<el-menu-item index="2" style="padding: 0">
 							<el-icon>
 								<ChatSquare />
 							</el-icon>
 						</el-menu-item>
-						<el-menu-item index="3">
+						<el-menu-item index="3" style="padding: 0">
 							<el-icon>
 								<EditPen />
 							</el-icon>
 						</el-menu-item>
-						<el-menu-item index="4">
+						<el-menu-item index="4" style="padding: 0">
 							<el-icon>
 								<Search />
 							</el-icon>
 						</el-menu-item>
-						<el-menu-item index="5">
+						<el-menu-item index="5" style="padding: 0">
 							<el-icon>
 								<Avatar />
 							</el-icon>
 						</el-menu-item>
-						<el-menu-item index="6">
+						<el-menu-item index="6" style="padding: 0">
 							<el-icon>
 								<Bell />
 							</el-icon>
 						</el-menu-item>
-						<el-menu-item index="7">
+						<el-menu-item index="7" style="padding: 0">
 							<el-icon>
 								<FullScreen />
 							</el-icon>
@@ -89,13 +126,24 @@
 							<el-menu-item index="8-3">个人中心</el-menu-item>
 						</el-sub-menu>
 					</el-menu>
-					<!-- 标签页面 -->
-					<el-tabs type="card" class="demo-tabs" closable @tab-remove="removeTab">
-						<el-tab-pane> </el-tab-pane>
+					<!-- tag标签,页眉标签 -->
+					<el-tabs
+						v-model="title"
+						type="card"
+						class="demo-tabs"
+						closable
+						@tab-remove="removeTab"
+						@tab-click="toTab">
+						<el-tab-pane
+							v-for="item in tabs"
+							:key="item.name"
+							:label="item.title"
+							:name="item.name">
+						</el-tab-pane>
 					</el-tabs>
 				</el-header>
 				<!-- 展示内容 -->
-				<el-main style="background-color: #F8F8F8;">
+				<el-main style="background-color: #f8f8f8">
 					<router-view />
 				</el-main>
 			</el-container>
@@ -104,58 +152,167 @@
 </template>
 
 <script>
-import dataBase from "@/store/modules/dataBase";
-import { ref, reactive, toRefs } from "vue";
-import { useRouter } from "vue-router";
-import { getMedical } from '@/api/arknight/database/home';
-export default {
-	name: "databasePage",
-	setup() {
-		let router = useRouter();
-		const isCollapse = ref(false);
-		let pages = reactive(JSON.parse(sessionStorage.getItem("menus"))).menu;
-		let userId = JSON.parse(localStorage.getItem("userMsg")).userId;
-		console.log(router.getRoutes());
-		getMedical("expMedicals")
-		getMedical("basicMedical")
+	import databaseScss from "@/public/database/dataBase.scss";
+	import dataBase from "@/store/modules/dataBase";
+	import { ref, reactive, toRefs, onUpdated } from "vue";
+	import { useRouter, useRoute } from "vue-router";
+	import { getMedical } from "@/api/arknight/database/home";
+	export default {
+		name: "databasePage",
+		setup() {
+			let router = useRouter();
+			let route = useRoute();
+			// 控制面包屑内容
+			let metaName = ref("");
+			// 控制菜单栏折叠
+			let isCollapse = ref(false);
+			// 控制面包屑动画
+			let isPlay = ref(false);
+			// 控制刚进页面面包屑显隐
+			let isbreadcrumb = ref(false);
+			// 控制面包屑的内容展示，点击菜单某个页面后添加入数组
+			let tabs = ref([]);
+			// 控制页眉的值，v-model绑定
+			let title = ref("");
+			// 路由数据
+			let pages = reactive(JSON.parse(sessionStorage.getItem("menus"))).menu;
+			// uerId
+			let userId = JSON.parse(localStorage.getItem("userMsg")).userId;
 
+			getMedical("expMedicals");
+			getMedical("basicMedical");
 
-		// 跳转页面
-		function toPage(index, index2) {
-			if (index2 == undefined) {
-				// 调往首页
-				router.push({
-					name: pages[index].name,
-					params: {
-						userId
-					}
-				});
-			} else {
-				// 跳转其他二级路由
-				router.push({
-					name: pages[index].children[index2].name,
-					params: {
-						userId
+			onUpdated(() => {
+				// 关闭面包屑动画
+				setTimeout(() => {
+					isPlay.value = false;
+				}, 250);
+
+				// 判断当前页面的路径，显示面包屑的内容
+				let newStr = route.fullPath.split("/")[2];
+				switch (newStr) {
+					case "system":
+						metaName.value = "系统设置";
+						break;
+					case "fun":
+						metaName.value = "功能";
+						break;
+					case "pages":
+						metaName.value = "页面";
+						break;
+					case "5312023,23459P":
+						metaName.value = "菜单嵌套";
+				}
+
+				// 添加页眉
+				// 通过当前路由的信息添加
+				let newTabs = tabs.value.map((item) => item.title);
+				if (!newTabs.includes(route.meta.title)) {
+					tabs.value.push({
+						title: route.meta.title,
+						name: route.meta.title,
+						routeName: route.name
+					});
+				}
+				// 让高亮标题成为当前的标题显示
+				title.value = route.meta.title;
+			});
+			// 跳转页面
+			function toPage(index, index2) {
+				// 控制点击之后才显示面包屑
+				isbreadcrumb.value = true;
+				// 为了控制一级和二级菜单的面包屑是否显示/显示的是哪一个菜单名
+				route.meta.isHide = false;
+				// 打开面包屑动画开关
+				isPlay.value = true;
+				if (index2 == undefined) {
+					// 调往首页
+					router.push({
+						name: pages[index].name,
+						params: {
+							userId
+						}
+					});
+				} else {
+					// 防止连续点击两次同个菜单后，面包屑隐藏
+					route.meta.isHide = true;
+					// 跳转其他二级路由
+					router.push({
+						name: pages[index].children[index2].name,
+						params: {
+							userId
+						}
+					});
+				}
+			}
+			// 点击页眉跳转
+			function toTab(name) {
+				// 点击页眉跳转页面，开启面包屑动画
+				isPlay.value = true;
+				// 点击页眉，跳转页面
+				tabs.value.forEach((item) => {
+					if (item.title == name.paneName) {
+						router.push({
+							name: item.routeName,
+							params: {
+								userId
+							}
+						});
 					}
 				});
 			}
+			// 点击删除页眉
+			function removeTab(targetName) {
+				const newTabs = tabs.value;
+				let activeName = title.value;
+				// 判断当前删除的页眉是是否为高亮页眉
+				if (activeName === targetName) {
+					newTabs.forEach((item, index) => {
+						if (item.name === targetName) {
+							// 获取高亮页眉前一项或后一项，如果当前高亮页眉不为最后一项，则获取后一项，为最后一项就获取前一项
+							const nextTab = newTabs[index + 1] || newTabs[index - 1];
+							if (nextTab) {
+								// 保存获取到的前一项或后一项页眉
+								activeName = nextTab.name;
+								// 跳转到高亮页眉
+								toTab({ paneName: activeName });
+							}
+						}
+					});
+				}
+				// 将前一项或后一项设置为高亮
+				title.value = activeName;
+				// 将点击删除的页眉过滤掉
+				tabs.value = newTabs.filter((item) => item.name !== targetName);
+				// 将过滤后剩下的页眉重新赋值
+				tabs.value = reactive(tabs.value);
+			}
+			return {
+				databaseScss,
+				isPlay,
+				route,
+				isbreadcrumb,
+				isCollapse,
+				dataBase,
+				userId,
+				metaName,
+				title,
+				tabs,
+				toTab,
+				toPage,
+				removeTab,
+				...toRefs(JSON.parse(sessionStorage.getItem("menus")))
+			};
 		}
-		return {
-			isCollapse,
-			dataBase,
-			toPage,
-			...toRefs(JSON.parse(sessionStorage.getItem("menus")))
-		};
-	}
-};
+	};
 </script>
 
 <style lang="scss" scoped>
-.flex-grow {
-	flex-grow: 1;
-}
+	.flex-grow {
+		flex-grow: 1;
+	}
 
-.el-header>ul {
-	align-items: center;
-}
+	.el-header > ul {
+		align-items: center;
+	}
 </style>

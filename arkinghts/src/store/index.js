@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import createPersistedState from "vuex-persistedstate"
 import personalCenter from "./module/personalCenter"
 import { isStore } from '@/hooks/personalCenter/store'
+import database from "./module/database"
 
 export default createStore({
   plugins: [
@@ -59,8 +60,19 @@ export default createStore({
         return isStore(state, 'baseMessage', 'isBaseMessage', baseMsgs, sessionStorage)
       },
       key: 'baseMessage'
-    })
-  ],
+    })    // 存储数据库的路由信息
+    createPersistedState({
+      storage:window.sessionStorage,
+      reducer(state){
+        let dataBaseRoute = {
+            menuList:state.database.menuList,
+            menuRoutes:state.database.menuRoutes,
+        }
+        return isStore(state,'databaseMenu','isDatabase',dataBaseRoute,sessionStorage)
+      },
+      key:'databaseMenu'
+   }),
+ ],
   state: {
     countDown: 120,
     msg: null,
@@ -71,6 +83,7 @@ export default createStore({
       isLogin: false,//存储登录信息开关
       isBaseRoutes: false,//存储路由开关
       isBaseMessage: false,//存储个人信息开关
+      isDatabase:false
     }
   },
   getters: {
@@ -94,6 +107,7 @@ export default createStore({
   // 开启子仓库
   namespaced: true,
   modules: {
-    personalCenter
+    personalCenter,
+    database
   }
 })

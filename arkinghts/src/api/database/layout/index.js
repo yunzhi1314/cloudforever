@@ -1,22 +1,37 @@
 import { Request } from "@/hooks/personalCenter/request";
 import url from "../../url";
-import { onBeforeMount, reactive } from "vue";
+import { reactive } from "vue";
+import { dealRoutes, dealpaths } from "@/hooks/personalCenter/route" //引入路由处理函数
+import router from "@/router"
+import store from "@/store";
 
-export function baseMessage() {
-   // baseMessage页面需要的数据  
-    let data = {
-    userId: JSON.parse(localStorage.getItem("users")).userId,
-    telephone:JSON.parse(sessionStorage.getItem("token")).telephone,
-    code:''
-  };
+export function layout() {
   let dataList = reactive({
-    baseMsg: [],
+      menu: [],
   });
-  //在挂载之前请求数据   
-  onBeforeMount(() => {
-    Request.postData(url.personalCenter.baseMsg, data).then((res) => {
-      dataList.baseMsg = res.data;
+
+  // 数据库左边导航栏路由
+    Request.getData(url.dataBase.layout.menu)
+    .then((res) => {
+      dataList.menu = {...res.data.menu};
+      console.log(dataList.menu);
+
+      // 调用处理路由函数，处理路由路径component
+      let fsRoutes = dealpaths(res.data.menu, 0, "component")
+      
+      // 存储路由信息
+      store.commit("database/changeMenuList",{fsRoutes,menuList:dataList.menu})
+      store.commit("changeStore","isDatabase")
+
+      // 给路由添加userId,拼接component
+      let routes = dealRoutes(fsRoutes,fsRoutes.length-1)
+
+      // 将子路由添加到databasePage
+      routes.forEach( item => {
+          router.addRoute("databasePage",item)
+          console.log(item)
+      });
     });
-  });
+
   return dataList
 }

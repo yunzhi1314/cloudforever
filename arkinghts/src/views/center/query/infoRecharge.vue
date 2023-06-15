@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { selfInquiries } from "@/api/selfInquiries";
+import { selfInquiries } from "@/api/personalCenter/selfInquiries";
 import { reactive,toRefs } from "vue";
 import { baseMsgScss } from "@/public/baseMsg.scss";
 

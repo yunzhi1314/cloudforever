@@ -31,7 +31,13 @@ export default{
           deviceMsg:'person/personalList/infoDevice'
        },
        // 第三方共享清单
-       shareList:'person/shareList'
+       shareList:'person/shareList',
+       changePersonalMsg:{
+          changePhone:'person/baseMsg/telephone',//修改手机号码
+          bindEmail:'person/baseMsg/email',//修改邮箱
+          changeNick:'person/baseMsg/nickName',//修改昵称
+          changeIdCard:'person/baseMsg/idNumber',//修改身份证
+       }
    
 }
 }

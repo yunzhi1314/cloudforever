@@ -1,3 +1,4 @@
+// 个人信息主页
 .personalData {
   height: 45vh;
   width: 33vw;
@@ -50,6 +51,53 @@
       display: flex;
       justify-content: space-between;
      margin-bottom: 1vh;
+    }
+  }
+}
+
+
+// 修改信息页面
+.changeBox {
+  background-color: #fff;
+  width: 30vw;
+  height: 45vh;
+  border-radius: 2vw;
+  padding: 1vw;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 40vh;
+    p {
+      color: #22bbff;
+      font-size: 0.8rem;
+      margin-bottom: 0.51vh;
+      display: flex;
+      button{
+        border-radius: 3vw;
+        border: none;
+        background-color: #22bbff;
+        color: #fff;
+        width: 12vw;
+        font-size: 1.2rem;
+      }
+      input {
+        width: 100%;
+        height: 5vh;
+        border: none;
+        border-bottom: 1px solid #aaa;
+        padding: 1vw;
+        
+      }
+    }
+
+    .confirm{
+        border-radius: 3vw;
+        border: none;
+        background-color: #22bbff;
+        color: #fff;
+        height: 5vh;
+        font-size: 1.2rem;
     }
   }
 }

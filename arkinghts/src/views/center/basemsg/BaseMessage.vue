@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { baseMessage } from "@/api/baseMsg";
+import { baseMessage } from "@/api/personalCenter/baseMsg";
 import { toRefs, reactive } from "vue";
 import {baseMsgScss} from '@/public/baseMsg.scss'
 import {useRouter} from 'vue-router'
@@ -46,9 +46,9 @@ export default {
         path:'/center/basemsg/bindEmail',
         component:()=>import('@/views/center/basemsg/bindEmail.vue')
       },{
-        name:'changeNilk',
-        path:'/center/basemsg/changeNilk',
-        component:()=>import('@/views/center/basemsg/changeNilk.vue')
+        name:'changeNick',
+        path:'/center/basemsg/changeNick',
+        component:()=>import('@/views/center/basemsg/changeNick.vue')
       },{
         name:'changeUid',
         path:'/center/basemsg/changeUid',

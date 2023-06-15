@@ -77,7 +77,7 @@
 
 <script>
 import centerSCSS from "@/public/center.scss";
-import { centerImg } from "@/api/centerPage";
+import { centerImg } from "@/api/personalCenter/centerPage";
 import { toRefs, computed, reactive } from "vue";
 import { useRoute,useRouter } from "vue-router";
 
@@ -87,7 +87,6 @@ export default {
     const route = useRoute();
     const router = useRouter()
     
-    const router = useRouter()
     // 条件控制总开关
     let boolObj = reactive({
       isRouter: null, // 控制是否是此页面的路由的状态

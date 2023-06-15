@@ -1,7 +1,7 @@
 <template>
     <div class="infoBox">
     <div style="height: 4%;"></div>
-    <div class="share" v-for="(item,index) in data" :key="index">
+    <div class="share"  v-for="(item,index) in data" :key="index">
       <section style="border-bottom: 1px solid #E3E3E3;  padding: 0.7vw 0;
           font-weight: bold; font-size: 15px;">
         <span style="color: #000;">{{ item.title }}</span>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {shareList} from "@/api/share"
+import {shareList} from "@/api/personalCenter/share"
 import listcss from "@/public/list.scss"
 import { toRefs } from "vue";
 
@@ -51,4 +51,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+ 
+</style>

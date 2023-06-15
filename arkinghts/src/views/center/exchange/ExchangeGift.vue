@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { exchangeData, exchangeGiftData } from "@/api/exchangeGift";
+import { exchangeData, exchangeGiftData } from "@/api/personalCenter/exchangeGift";
 import { toRefs, reactive, ref } from 'vue'
 
 export default {

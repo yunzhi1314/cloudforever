@@ -1,5 +1,5 @@
 import { Request } from "@/hooks/personalCenter/request";
-import url from "../url";
+import url from "../../url";
 import { onBeforeMount, reactive } from "vue";
 
 export function baseMessage() {
@@ -19,4 +19,18 @@ export function baseMessage() {
     });
   });
   return dataList
+}
+
+export function changePhone(data){
+    let dataList = reactive({
+        data:[] 
+    })
+
+    Request.putData(url.personalCenter.changePersonalMsg.changePhone,data)
+    .then(res=>{
+       console.log(res)
+       dataList.data = res.data
+    })
+
+    return dataList
 }

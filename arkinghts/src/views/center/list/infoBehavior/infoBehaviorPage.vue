@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { infoBehavior } from "@/api/personalList"
+import { infoBehavior } from "@/api/personalCenter/personalList"
 import { toRefs } from "vue"
 import listcss from "@/public/list.scss"
 

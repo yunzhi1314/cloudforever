@@ -1,5 +1,5 @@
 import moment from "moment/moment"
-
+//个人中心仓库
 export default ({
     namespaced: true,
     state() {

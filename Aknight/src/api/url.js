@@ -39,12 +39,27 @@ export default {
 		layout: {//布局,获取路由和基本信息
 			menu: "/database/layout/menu",
 		},
-		home: {
-			messages: "/database/home/messages",
-			expMedicals: "/database/home/expMedicals",
-			basicMedical: "/database/home/basicMedical",
-			navTools: "/database/home/navTools",
-			naweiCompany: "/database/home/naweiCompany",
+		home: {//首页
+			messages: "/database/home/messages",//首页上方信息框
+			expMedicals: "/database/home/expMedicals",//靶向药实验数据,用于复合折线统计图
+			basicMedical: "/database/home/basicMedical",//各公司所持有的靶向药数据，用于环状图
+			naweiCompany: "/database/home/naweiCompany",//纳微公司的营销利润与增长率，用于折柱复合统计图
+			navTools: "/database/home/navTools",//首页左下工具栏
+		},
+		menu: {//菜单管理
+			addMenu: "/database/menu/addMedical",//添加
+			setMenu: "/database/menu/setMedical",//修改
+			delMenu: "/database/menu/delMedical"//删除
+		},
+		role: {//角色管理
+			addMenu: "/database/role/addMedical",//添加
+			delMenu: "/database/role/delMedical",//修改
+			setMenu: "/database/role/setMedical",//删除
+		},
+		user: {//用户管理
+			addMenu: "/database/user/addMedical",//添加
+			delMenu: "/database/user/delMedical",//修改
+			setMenu: "/database/user/setMedical",//删除
 		},
 	},
 };

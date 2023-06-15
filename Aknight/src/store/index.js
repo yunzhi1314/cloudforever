@@ -103,6 +103,18 @@ export default createStore({
 			},
 			key: "menus",
 		}),
+		//home页面开启
+		createPersistedState({
+			storage: window.sessionStorage,
+			reducer(state) {
+				let medicalObj = {
+					expMedicals: state.dataBase.expMedicals,
+					basicMedical: state.dataBase.basicMedical
+				};
+				return isStore(state, "medical", "isMedical", medicalObj, sessionStorage);
+			},
+			key: "medical",
+		}),
 	],
 	state: {
 		msg: null, // 保存吐丝信息
@@ -119,6 +131,7 @@ export default createStore({
 			isContext: false,//exChangeGift页面触发
 			isSelfQuery: false,//selfQuery页面触发
 			isMenus: false,//database页面触发
+			isMedical: false,//home页面触发
 		}
 	},
 	getters: {},

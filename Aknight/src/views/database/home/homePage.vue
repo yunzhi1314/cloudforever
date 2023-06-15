@@ -2,12 +2,7 @@
   <div>
     <div style="display: flex;">
       <!-- 头部的四个小盒子 -->
-      <div
-        style="display: flex"
-        v-for="(item, index) in list"
-        :key="index"
-        class="centbox"
-      >
+      <div style="display: flex" v-for="(item, index) in list" :key="index" class="centbox">
         <div>
           <section>
             <span>{{ item.sum }}</span>
@@ -21,16 +16,18 @@
       </div>
     </div>
     <!-- 第一个列表部分 -->
-    <div class="plang" id="min">
+    <div class="plang" id="expMedicals">
+
+    </div>
+    <div class="plang" id="basicMedical">
 
     </div>
   </div>
-
 </template>
 
 <script>
 import home from "@/public/home/home.scss";
-import {expMedicals} from "@/echarts"
+import { expMedicals, basicMedical } from "@/echarts"
 import { onMounted } from 'vue';
 export default {
   name: "homePage",
@@ -63,9 +60,9 @@ export default {
     ];
 
     // 列表的引入
-    onMounted(()=>{
-      expMedicals(document.querySelector("#min"))
-
+    onMounted(() => {
+      expMedicals(document.querySelector("#expMedicals"))
+      basicMedical(document.querySelector("#basicMedical"))
     })
     return {
       home,

@@ -50,6 +50,12 @@ const routes = [
       }
     ],
   },
+  // 数据库
+  {
+    path: "/database",
+    name: "databasePage",
+    component: () => import("@/views/database/databasePage.vue"),
+  }
 ];
 
 const router = createRouter({

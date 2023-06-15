@@ -1,7 +1,7 @@
 
 // 导出请求路劲
 export default{
-    centerPage:{
+   personalCenter:{
         centerImg:"api/personalCenter",//整体内容（centerPage页面）的请求路劲
         mathCode:'api/user/getCode',//获取数字验证码按钮的请求路劲
         telCode:'api/user/telCode',//短信验证码的请求路劲
@@ -31,14 +31,18 @@ export default{
           deviceMsg:'person/personalList/infoDevice'
        },
        // 第三方共享清单
-       shareList:'person/shareList',
-       changePersonalMsg:{
-          changePhone:'person/baseMsg/telephone',//修改手机号码
-          bindEmail:'person/baseMsg/email',//修改邮箱
-          changeNick:'person/baseMsg/nickName',//修改昵称
-          changeIdCard:'person/baseMsg/idNumber',//修改身份证
-       }
-   
- }
-   
+       shareList:'person/shareList'
+},
+ // 数据库
+ dataBase:{
+   // 首页左侧菜单
+   layout:{
+       menu:"/database/layout/menu"    
+   },
+   // homePage数据
+   home:{
+       messages:"/database/home/messages",
+       expMedicals:"/database/home/expMedicals",
+   }
+},
 }

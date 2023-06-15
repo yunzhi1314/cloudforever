@@ -25,11 +25,6 @@ const routes = [
     path: "/database",
     name: "databasePage",
     component: () => import("@/views/database/databasePage"),
-  },
-  {
-    path: "/database/home",
-    name: "homePage",
-    component: () => import("@/views/database/home/homePage")
   }
 
 ];
@@ -54,11 +49,13 @@ router.beforeEach((to, from, next) => {
       let token = JSON.parse(localStorage.getItem("token")).token
       if (token) {
         if (to.matched[0]) {
+          console.log(111);
           next()
         } else {
+          console.log(222);
           let PATH = to.path.split("/")[1];
-          let routeData = JSON.parse(sessionStorage.getItem(PATH =="center" ? "menu" :""))
-          let route = Reflect.get(routeData, PATH =="center" ? "menuRoutes" :"menuRoutes")
+          let routeData = JSON.parse(sessionStorage.getItem(PATH =="center" ? "menu" :"menus"))
+          let route = Reflect.get(routeData, "menuRoutes")
           route = handleRoutes(route, route.length - 1)
 
           route.forEach(item => {

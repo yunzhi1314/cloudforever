@@ -9,7 +9,10 @@ export function handleRoutes(routes, index) {
 			// 截取字符串，去掉前面的 /
 			routes[index].path = routes[index].path.slice(1) + "/:userId";
 			// 截取database/后面的
-			routes[index].path = routes[index].path.slice(routes[index].path.includes("/"));
+			routes[index].path = routes[index].path.slice(
+				// 查找 / 的下标
+				routes[index].path.indexOf("/")+1
+			);
 		}
 		// 判断是否有孩子(嵌套)，并且孩子长度大于0
 		if (routes[index].children && routes[index].children.length > 0) {
@@ -20,7 +23,7 @@ export function handleRoutes(routes, index) {
 				if (!item.path.includes("/:userId")) {
 					// 处理path，去掉database/
 					item.path = item.path.slice(1) + "/:userId";
-					item.path = item.path.slice(item.path.indexOf("/"));
+					item.path = item.path.slice(item.path.indexOf("/"))+1;
 				}
 				return item;
 			});

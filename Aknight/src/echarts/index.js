@@ -1,10 +1,13 @@
 import * as echarts from "echarts"
-import { getMedical } from '@/api/arknight/database/home';
 
 //靶向药实验数据的复合折线统计图
 export function expMedicals(dom) {
-    getMedical("expMedicals")
+    let medical = JSON.parse(sessionStorage.getItem("medical"))
+    console.log(medical);
+    console.log(medical!=null&&medical!=0);
+    // if (JSON.parse(sessionStorage.getItem("medicals"))!=0) {
 
+    // }
     let exp = echarts.init(dom)
 
     let option = {
@@ -56,9 +59,8 @@ export function expMedicals(dom) {
     exp.setOption(option)
 }
 
-
+//各公司所持有的靶向药数据，环状图
 export function basicMedical(dom) {
-    getMedical("basicMedical")
 
     let exp = echarts.init(dom)
 

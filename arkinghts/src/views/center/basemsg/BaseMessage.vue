@@ -15,9 +15,7 @@
          ">{{ item2.inputTitle }}</p>
         <p>
           <input type="text" :placeholder="item2.inputItem" v-if="index2 != 2" />
-         
           <button  v-if="index2 != 2" @click="changePage(index,index2)" style="cursor: pointer;">更改</button>
-          
         </p>
         <p v-if="index2 == 2"> <button style="width: 100%;">清除其他设备的登录状态</button></p>
         <p  v-if="index2 ==2"><span style="font-size: 14px;">{{ item2.inputItem }}</span></p>
@@ -81,7 +79,6 @@ export default {
         })
     }
     
-   
     return {
       ...toRefs(reactive(baseMessage())),
       baseMsgScss,//样式

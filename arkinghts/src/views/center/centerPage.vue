@@ -33,7 +33,6 @@
         <img :src="img.titleImg" />
       </div>
       <div class="Customer">
-      
           <p v-if="boolObj.isRouter">
             <img :src="menuMsg.loginOut" style="width: 2vw; margin-right: 2vw" />
           </p>
@@ -43,7 +42,6 @@
           </p>
           <p>客服中心</p>
           </div>
-       
       </div>
     </header>
     <main>
@@ -87,7 +85,6 @@ export default {
     const route = useRoute();
     const router = useRouter()
     
-    const router = useRouter()
     // 条件控制总开关
     let boolObj = reactive({
       isRouter: null, // 控制是否是此页面的路由的状态

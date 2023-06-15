@@ -1,5 +1,34 @@
+// #homePage {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+// .common_place {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+#homePage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // the top echarts
+    #commonCss {
+        width: 50vw;
+        height: 50vh;
+    }
+}
+
+
+.common_place{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .plans {
-    width: 23vw;
+    width: 21.5vw;
     height: 15vh;
     border: 1px solid #eee;
     display: flex;
@@ -8,13 +37,26 @@
     background-color: #fff;
 }
 
-#homePage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.ball {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ff0000;
+    display: inline-block;
 }
-.common_place {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.biggerOne{
+    width: 50vw;
+    height: 50vh;
+    margin-left: 0.65vw;
+    margin-top: 2.5vh;
+}
+.smallOne{
+    width: 30vw;
+    height: 50vh;
+    margin-left: 1vw;
+    margin-top: 2.5vh;
+}
+.spc{
+    margin-left: 0.65vw;
+    padding: 1vw;
 }

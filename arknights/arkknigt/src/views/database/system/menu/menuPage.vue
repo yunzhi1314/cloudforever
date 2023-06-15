@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import homePageCss from "@/public/database/homePage.scss"
+import homePageCss from "@/public/database/tablePage.scss"
 import {ref} from "vue"
 import { Search } from '@element-plus/icons-vue'
 // import { ElMessage,ElMessageBox } from "element-plus"

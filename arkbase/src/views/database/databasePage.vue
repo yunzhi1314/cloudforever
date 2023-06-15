@@ -135,6 +135,8 @@ import { ref, toRefs, reactive, onUpdated } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import layoutCSS from "@/public/database/layout.scss";
 import router from "@/router";
+import {sourceData} from "@/api/database/layout"
+import url from "@/api/url";
 export default {
   name: "databasePage",
   setup() {
@@ -243,7 +245,6 @@ export default {
     }
 
     // 页眉删除标签页的函数
-
     const removeTab = (targetName) => {
       const newTabs = tabs.value;
       let activeName = title.value;
@@ -263,6 +264,8 @@ export default {
       tabs.value = newTabs.filter((item) => item.name !== targetName);
       tabs.value = reactive(tabs.value);
     };
+
+    sourceData(url.database.home.basicMedical);
 
     return {
       isCollapse,

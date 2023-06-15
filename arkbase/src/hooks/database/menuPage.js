@@ -4,7 +4,7 @@ export function dealTree() {
   ).basicMedical;
   let companies = [...new Set(dataList.map((item) => item.medical_company))];
   let newData = []
-
+  
   // 处理不同公司的药物数量
   dataList.forEach((item) => {
     companies.forEach((item2, index2) => {

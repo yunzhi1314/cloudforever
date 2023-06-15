@@ -344,9 +344,9 @@ export default {
     };
 
     // 提交表单
-    const submitForm = async (formEl) => {
+    const submitForm =  async (formEl) => {
       if (!formEl) return;
-      await formEl.validate((valid, fields) => {
+       formEl.validate((valid, fields) => {
         if (valid) {
           controlObj.isDialog.isAddMenu = false;
 
@@ -355,6 +355,13 @@ export default {
 
           // 将修改的开关关闭
           isSetMsg.value = false;
+          let dataList = JSON.parse(
+            sessionStorage.getItem("basicMedical")
+          ).basicMedical;
+          addMsg.id = dataList.length.toString()
+          console.log(addMsg)
+          dataList.push(addMsg)
+          sessionStorage.setItem("basicMedical",{basicMedical:dataList})
         } else {
           console.log("error submit!", fields);
         }

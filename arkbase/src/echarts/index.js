@@ -3,6 +3,7 @@ import { Request } from "@/hooks/request";
 import url from "@/api/url";
 import { reactive } from "vue";
 import store from "@/store";
+import { sourceData } from "@/api/database/layout";
 
 // 靶向药实验数据的复合折线统计图
 export async function expMedicals(dom) {
@@ -11,7 +12,6 @@ export async function expMedicals(dom) {
   // 将药物基本数据存入store
   store.commit("database/changeExpMedical",sources.data.datas)
   store.commit("changeStore","isExpMedical")
-
   sources = sources.data.datas.map((item) => ({
     medical_name: item.medical_name,
     鳞癌ORR:
@@ -152,14 +152,8 @@ export async function expMedicals(dom) {
 
 // 各公司所持有的靶向药数据，环状图
 export async function basicMedicals(dom) {
-  let sources = await Request.getData(url.database.home.basicMedical);
-  let source = sources.data.datas;
+  let {source,companies} = await sourceData(url.database.home.basicMedical);
   let newData = reactive([]);
-  let companies = [...new Set(source.map((item) => item.medical_company))];
-  
-  // 将药物基本数据存入store
-  store.commit("database/changeBasicMedical",source)
-  store.commit("changeStore","isBasicMedical")
 
   // 处理数据集对象
   function cases(index, item) {

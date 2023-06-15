@@ -1,5 +1,5 @@
 <template>
-    <div class="common-layout">
+    <div class="common-layout" style="position: fixed;">
         <el-container>
             <el-aside :width="!isScollape ? '12vw' : '4vw'" :style="{ transition: 'all 0.25s 0s linear', }">
                 <el-menu background-color="#545C64" text-color="#fff" active-text-color="#409EFF"
@@ -26,7 +26,7 @@
             </el-aside>
             <el-container>
                 <el-header>
-                    <el-menu :default-active="unknown" mode="horizontal" :ellipsis="false" style=" height: 6vh;">
+                    <el-menu :default-active="0" mode="horizontal" :ellipsis="false" style=" height: 6vh;">
                         <!-- 点击显示菜单导航 -->
                         <el-menu-item index="0">
                             <el-radio-group v-model="isScollape">
@@ -44,9 +44,7 @@
                                 <el-breadcrumb-item :to="{ name: 'homePage', params: { userId } }">首页</el-breadcrumb-item>
                                 <el-breadcrumb-item v-show="route.meta.isHide">
                                     {{ metaName }}</el-breadcrumb-item>
-                                <el-breadcrumb-item v-show="route.meta.isHide" :style="{
-                                    Animation: isPlay ? 'breadcrumb 0.25s 0s 1 linear forwards' : '',
-                                }">{{ route.meta.title }}
+                                <el-breadcrumb-item v-show="route.meta.isHide">{{ route.meta.title }}
                                 </el-breadcrumb-item>
                             </el-breadcrumb>
                         </el-menu-item>
@@ -76,14 +74,15 @@
                         <!-- 用户名 -->
                         <el-sub-menu index="3">
                             <!-- 用户名 -->
-                           
+                            
                             <el-menu-item index="3-1">鬼人正邪</el-menu-item>
                             <el-menu-item index="3-2">安全中心</el-menu-item>
                             <el-menu-item index="3-3">退出</el-menu-item>
                         </el-sub-menu>
                     </el-menu>
                     <el-tabs class="demo-tabs" type="card" v-model="title">
-                        <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.title" :name="item.name"></el-tab-pane>
+                        <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.title"
+                            :name="item.name"></el-tab-pane>
                     </el-tabs>
                 </el-header>
                 <el-main>

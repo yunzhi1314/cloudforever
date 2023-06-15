@@ -11,8 +11,9 @@ export default ({
     mutations: {
         // 存储数据库首页路由
         changDatabaseMenu(state,data){
-            state.menuList = data
-            state.menuRoutes = data
+            console.log("传进来的数据",data);
+            state.menuList = data.menuList
+            state.menuRoutes = data.fsRoutes
         }
     },
     actions: {

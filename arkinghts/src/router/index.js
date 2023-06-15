@@ -82,7 +82,7 @@ router.beforeEach((to, from, next) => {
         } else {
           // 截取路径的第一项，利用判断是个人中心页面还是数据库页面
           let PATH = to.path.split("/")[1]
-          
+          console.log(PATH);
           // 利用path去判断获取哪个页面的路由存储key
           let routeData = JSON.parse(sessionStorage.getItem(PATH == "center" ? 'baseMsg' : 'databaseMenu'))
           let route = Reflect.get(routeData,PATH == "center" ?  'baseRoutes' : 'menuRoutes')
@@ -91,7 +91,7 @@ router.beforeEach((to, from, next) => {
           route = dealRoutes(route, route.length -1);
           
           route.forEach((item)=>{
-              router.addRoute(PATH == "center" ?  'centerPage' : 'database',item);
+              router.addRoute(PATH == "center" ?  'centerPage' : 'databasePage',item);
           })
           // 重复导航，直到路由能够找到正确的路径为止
           next({ ...to, replace: true });

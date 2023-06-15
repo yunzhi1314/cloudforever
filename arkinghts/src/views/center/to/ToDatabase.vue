@@ -17,7 +17,7 @@
           border-radius: 1vw;
           border: none;
           width: 14vw;
-          text-align: center;" @click="confirm">前往数据库</button>
+          text-align: center;" @click="toPage">前往数据库</button>
     </section>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   setup() {
     const router = useRouter()
     // 跳数据库
-    function confirm() {
+    function toPage() {
       router.push({
         name: "databasePage",
       })
@@ -43,7 +43,7 @@ export default {
     
     return {
       // 点击前往数据库
-      confirm,
+      toPage,
     };
   },
 };

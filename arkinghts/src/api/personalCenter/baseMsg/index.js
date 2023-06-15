@@ -1,5 +1,5 @@
 import { Request } from "@/hooks/personalCenter/request";
-import url from "../url";
+import url from "../../url";
 import { onBeforeMount, reactive } from "vue";
 
 export function baseMessage() {

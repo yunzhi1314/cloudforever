@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {shareList} from "@/api/share"
+import {shareList} from "@/api/personalCenter/share"
 import listcss from "@/public/list.scss"
 import { toRefs } from "vue";
 

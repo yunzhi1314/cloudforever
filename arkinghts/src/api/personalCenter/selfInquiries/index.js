@@ -1,4 +1,4 @@
-import url from "../url";
+import url from "../../url";
 import { Request } from "@/hooks/personalCenter/request";
 import { onBeforeMount, reactive } from "vue";
 

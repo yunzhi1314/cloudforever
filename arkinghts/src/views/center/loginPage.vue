@@ -70,7 +70,7 @@
             >《鹰角网络游戏个人信息保护政策》</span
           >
         </section>
-        <button @click="loginOrRegister">
+        <button @click="loginOrRegister" style="cursor: pointer;">
           {{ controlObj.isChange ? "注册" : "登录" }}
         </button>
         <section v-if="!controlObj.isChange">使用bilibili账号</section>

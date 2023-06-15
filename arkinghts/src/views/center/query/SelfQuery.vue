@@ -22,7 +22,7 @@
 
 <script>
 import { baseMsgScss } from "@/public/baseMsg.scss";
-import { selfInquiries } from "@/api/selfInquiries";
+import { selfInquiries } from "@/api/personalCenter/selfInquiries";
 import { toRefs, reactive } from "vue";
 import { useRouter } from "vue-router";
 export default {

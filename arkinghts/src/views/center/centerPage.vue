@@ -75,7 +75,7 @@
 
 <script>
 import centerSCSS from "@/public/center.scss";
-import { centerImg } from "@/api/centerPage";
+import { centerImg } from "@/api/personalCenter/centerPage";
 import { toRefs, computed, reactive } from "vue";
 import { useRoute,useRouter } from "vue-router";
 

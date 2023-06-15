@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { baseMessage } from "@/api/baseMsg";
+import { baseMessage } from "@/api/personalCenter/baseMsg";
 import { toRefs, reactive } from "vue";
 import {baseMsgScss} from '@/public/baseMsg.scss'
 import {useRouter} from 'vue-router'

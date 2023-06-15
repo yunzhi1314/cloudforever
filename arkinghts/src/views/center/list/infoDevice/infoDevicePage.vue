@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { infoDevice } from "@/api/personalList"
+import { infoDevice } from "@/api/personalCenter/personalList"
 import { toRefs, ref } from "vue"
 import listcss from "@/public/list.scss"
 

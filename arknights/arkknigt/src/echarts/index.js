@@ -7,10 +7,15 @@ import { reactive } from "vue";
 
 import url from "@/api/url";
 
+import store from "@/store";
+
 
 // 靶向药实验数据的复合折线统计图
 export async function exMpedicals(dom){
    let sources = await Request.get(url.database.home.expMedicals);
+    
+   store.commit('dataStore/SAVE_EXP_MEDICAL',sources.data.datas);
+   store.commit('CHANGE_STORE','isExpMedical');
 
    console.log(sources);
    sources = sources.data.datas.map(item => ({
@@ -209,6 +214,9 @@ export async function basicMedicals(dom){
    let companies = [...new Set(source.map(item => item.medical_company))]   // 遍历公司的名字，把它变成数组，并且扩展开来
    console.log(companies);
    
+   store.commit('dataStore/SAVE_BASIC_MEDICAL',source);
+   store.commit('CHANGE_STORE','isBasicMedical');
+
    // 处理数据集对象
    function cases(index,item){
       if(newData[index] == undefined){    // newData等于空的话 ，执行下列的语句

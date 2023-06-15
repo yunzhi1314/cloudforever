@@ -58,7 +58,7 @@
             快捷导航工具
            </section>
            <div class="tools">
-               <div v-for="(item,index) in data.navTools" :key="index">
+               <div v-for="(item,index) in data.navTools" :key="index" class="tool">
                    <section>
                        <span>{{ item.word }}</span>
                    </section>

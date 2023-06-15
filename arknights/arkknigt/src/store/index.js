@@ -22,7 +22,7 @@ export default createStore({
       storage: window.sessionStorage,
       reducer(state) {
         let expMedicalData = {
-          expMedical: state.dataStore.expMedical
+          expMedical: state.dataStore.ExpMedical
         }
         return isStore(state, "expMedical", "isExpMedical", expMedicalData, sessionStorage)
       },

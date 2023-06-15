@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { centerMenu } from '@/api/routes';
+import { centerMenu } from '@/api/personalCenter/routes';
 export default {
     name:'bufferPage',
   setup() {

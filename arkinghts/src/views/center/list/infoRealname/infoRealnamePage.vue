@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { realMsg } from "@/api/personalList"
+import { realMsg } from "@/api/personalCenter/personalList"
 import { toRefs } from "vue"
 import listcss from "@/public/list.scss"
 

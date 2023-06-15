@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { infoBasic } from "@/api/personalList"
+import { infoBasic } from "@/api/personalCenter/personalList"
 import { toRefs } from "vue"
 import listcss from "@/public/list.scss"
 

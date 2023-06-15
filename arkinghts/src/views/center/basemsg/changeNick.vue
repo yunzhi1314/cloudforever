@@ -5,7 +5,7 @@
             <script>
 
             export default {
-              name:'changeNilk',
+              name:'changeNick',
                 setup() {
                     return {
                     }

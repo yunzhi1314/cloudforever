@@ -108,13 +108,11 @@
         padding-top: 0.8vw;
         font-size: 13px;
         display: flex;
-        span:nth-child(1){
-            flex: 2;
-            color: #A1A3A1;
-        }
-        span:nth-child(2){
-            flex: 6.5;
-            color: #4D4D53;
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 'left right';
+        span{
+            margin-right: 2vw;
         }
     }
 }

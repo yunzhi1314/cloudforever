@@ -33,7 +33,6 @@
         <img :src="img.titleImg" />
       </div>
       <div class="Customer">
-      
           <p v-if="boolObj.isRouter">
             <img :src="menuMsg.loginOut" style="width: 2vw; margin-right: 2vw" />
           </p>
@@ -43,7 +42,6 @@
           </p>
           <p>客服中心</p>
           </div>
-       
       </div>
     </header>
     <main>

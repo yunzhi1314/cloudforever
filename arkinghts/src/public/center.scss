@@ -32,6 +32,7 @@ header{
     0px 0px 8px #999797;
     position: sticky;
     top: 0;
+    z-index: 4;
     // 头部左上角的三个斜杆的样式
     .unfold{
         grid-area: left;

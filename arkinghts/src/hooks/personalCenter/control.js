@@ -14,6 +14,7 @@ let  controlObj = reactive({
     isPlay:false,//是否动画播放
     isDisable:false,//是否禁用按钮
     isChecked:false,//是否同意勾选框
+    isChangeMsgCode:false,//是否修改个人信息页面
 })
 
 export default controlObj

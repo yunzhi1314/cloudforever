@@ -21,12 +21,13 @@ export function baseMessage() {
   return dataList
 }
 
-export function changePhone(data){
+// 更换个人信息请求函数
+export function changeMsg(url,data){
     let dataList = reactive({
         data:[] 
     })
 
-    Request.putData(url.personalCenter.changePersonalMsg.changePhone,data)
+    Request.putData(url,data)
     .then(res=>{
        console.log(res)
        dataList.data = res.data
@@ -34,3 +35,4 @@ export function changePhone(data){
 
     return dataList
 }
+

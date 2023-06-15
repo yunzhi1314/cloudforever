@@ -1,17 +1,16 @@
 .bg{
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100vw;
     height: 100vh;
-    position: absolute;
+    width: 100vw;
+    background-position-x: center;
+    background-position-y: -27vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: -1;
 }
 .center{
-    width: 100vw;
-    height: 100vh;
     display: grid;
     grid-template-rows: 1fr 8fr 1fr;
     grid-template-columns: 1fr;
@@ -19,15 +18,11 @@
     "header"
     "main"
     "footer";
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 3;
 }
 header{
     grid-area: header;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 9fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: 'left middle right';
     background-color: #fff;
@@ -35,39 +30,21 @@ header{
     0px 0px 4px #999797,
     0px 0px 6px #999797,
     0px 0px 8px #999797;
-     // 头部左上角的三个斜杆的样式
+    position: sticky;
+    top: 0;
+    // 头部左上角的三个斜杆的样式
     .unfold{
         grid-area: left;
         display: flex;
         align-items: center;
+        margin-left: 1vw;
         .svg>svg{
-            width: 2vw;
+            width: 2.3vw;
             position: relative;
             z-index: 1;
         }
-        ul{
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            width: 20vw;
-            background-color: #22bbff;
-            z-index: 0;
-            li{
-                margin-top: 5vh;
-                width: 100%;
-                height: 4vh;
-                cursor: pointer;
-                font-size: 1.2rem;
-                display: flex;
-                align-items: center;
-                img{
-                    width: 2vw;
-                    margin-right: 1vw;
-                }
-            }
-        }
-    }
+        
+}
    
     .title{
         grid-area: middle;
@@ -82,26 +59,17 @@ header{
     .Customer{
         grid-area: right;
         display: flex;
-        
         align-items: center;
         img{
             width: 2vw;
             text-align: center;
             cursor: pointer;
         }
-        section{
-            margin-right: 1vw;
-            display: flex;
-            align-items: center;
-        }
         p{
             font-size: 13px;
             text-align: center;
-
         }
     }
-   
-    
 }
 main{
     grid-area: main;
@@ -121,5 +89,162 @@ footer{
         img{
             width: 1vw;
         }
+    }
+}
+
+// 菜单动画
+// 展示nav展开的动画
+@keyframes showOut {
+    0% {
+        width: 0vw;
+        height: 0vh;
+        background-color: #fff;
+        border-radius: 0;
+        position: absolute;
+        left: -20px;
+    }
+
+    15% {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: rgb(0, 152, 220);
+        position: absolute;
+        left: -20px;
+    }
+
+    50% {
+        width: 370px;
+        height: 400px;
+        border-radius: 50%;
+        background-color: rgb(0, 152, 220);
+        position: absolute;
+        left: -155px;
+    }
+    85%{
+        width: 450px;
+        height: 60vw;
+        border-radius: 25%;
+        background-color: rgb(0, 152, 220);
+        position: absolute;
+        left: -155px;
+    }
+    100% {
+        width: 550px;
+        height: 94vw;
+        border-radius: 0;
+        background-color: rgb(0, 152, 220);
+        position: absolute;
+        left: -155px;
+    }
+}
+
+@keyframes showIn {
+    0% {
+        width: 0vw;
+        height: 0vh;
+        background-color: #fff;
+        border-radius: 0;
+        position: absolute;
+        left: -20px;
+    }
+
+    15% {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: rgb(0, 152, 220);
+        position: absolute;
+        left: -20px;
+    }
+
+    50% {
+        width: 370px;
+        height: 400px;
+        border-radius: 50%;
+        background-color: rgb(0, 152, 220);
+        position: absolute;
+        left: -155px;
+    }
+    85%{
+        width: 450px;
+        height: 60vh;
+        border-radius: 25%;
+        background-color: rgb(0, 152, 220);
+        position: absolute;
+        left: -155px;
+    }
+    100% {
+        width: 550px;
+        height: 94vw;
+        border-radius: 0;
+        background-color: rgb(0, 152, 220);
+        position: absolute;
+        left: -155px;
+    }
+}
+.cancel {
+    position: absolute;
+    left: 0vw;
+    top: 1.7vw;
+}
+// X按钮--取消nav展开
+.cancel::before,.cancel::after{
+    content: "";
+    border-top: 3px solid #fff;
+    transform: rotateZ(45deg);
+    width: 35px;
+    height: 40px;
+    position: absolute;
+    left:0px;
+    z-index: 5;
+}
+.cancel::after{
+    transform: rotateZ(-45deg);
+    left:28px;
+}
+
+// 菜单
+.nav{
+    z-index: 1;
+    position: fixed;
+    top: 11vh;
+    left: 2vw;
+    img{
+        width:1.5vw;
+        margin-right:0.5vw;
+    }
+    li{
+        color:#fff;
+        height: 8vh;
+        width: 20vw;
+        border-bottom: 1px solid #1AA3E0;
+        line-height: 8vh;
+        cursor: pointer;
+        font-weight: bold;
+        font-family: "宋体";
+        filter:opacity(0);
+    }
+    img,span{
+        vertical-align: middle;
+    }
+    
+}
+
+@keyframes disappear{
+    0%{
+        filter:opacity(1)
+    }
+    100%{
+        filter:opacity(0)
+    }
+}
+
+@keyframes exist {
+    0%{
+        filter:opacity(0)
+    }
+    100%{
+        filter:opacity(1)
     }
 }

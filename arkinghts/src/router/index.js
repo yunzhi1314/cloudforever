@@ -10,12 +10,44 @@ const routes = [
         path: "/center/login",
         name: "loginPage",
         component: () => import("@/views/center/loginPage.vue"),
+        meta: {
+          lists: "1fr 8fr 0.7fr",
+          height:"100vh"
+        },
       },
       {
         path: "/center/buffer",
         name: "bufferPage",
         component: () => import("@/views/center/bufferPage.vue"),
       },
+      {
+        path:"/center/personalList/infoBasic/:userId",
+        name:"infoBasicPage",
+        component:()=> import("@/views/center/list/infoBasic/infoBasicPage"),
+        meta:{
+          height:"110vh"
+        }
+      },
+      {
+        path:"/center/personalList/infoRealname/:userId",
+        name:"infoRealnamePage",
+        component:()=> import("@/views/center/list/infoRealname/infoRealnamePage")
+      },
+      {
+        path:"/center/personalList/infoBehavior/:userId",
+        name:"infoBehaviorPage",
+        component:()=> import("@/views/center/list/infoBehavior/infoBehaviorPage")
+      },
+      {
+        path:"/center/personalList/infoDevice/:userId",
+        name:"infoDevicePage",
+        component:()=> import("@/views/center/list/infoDevice/infoDevicePage"),
+        meta:{
+          height:"350vh",
+          isContain:true,
+          gridTemplateRows: "1fr 36fr 1fr"
+        }
+      }
     ],
   },
 ];
@@ -42,9 +74,8 @@ router.beforeEach((to, from, next) => {
         if (to.matched[0]) {
           next();
         } else {
-         
-         
           let routeData = JSON.parse(sessionStorage.getItem('baseMsg'))
+          
           let route = Reflect.get(routeData,'baseRoutes')
          
 
@@ -54,7 +85,6 @@ router.beforeEach((to, from, next) => {
           route.forEach((item)=>{
               router.addRoute('centerPage',item);
           })
-
           // 重复导航，直到路由能够找到正确的路径为止
           next({ ...to, replace: true });
         }

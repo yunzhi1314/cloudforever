@@ -1,16 +1,18 @@
 <template>
-    <div class="tosi">
-    <!-- :style="{backgroundColor: status ==1 ?'#ff0000':'#0CB751' }"> -->
-       <!-- {{status ==1 ? msg:message}} -->
-    </div>
+    <teleport to="body">
+        <div class="tosi" :style="{ backgroundColor: status == 1 ? '#ff0000' : '#0CB751' }">
+            {{ status == 1 ? msg : message }}
+        </div>
+    </teleport>
 </template>
 
 <script>
 import { reactive } from 'vue';
 
 export default {
-    setup () {
-        let {msg} = reactive(JSON.parse(localStorage.getItem(msg)))
+    name:"messagePage",
+    setup() {
+        let { msg } = reactive(JSON.parse(sessionStorage.getItem("msg")))
 
         return {
             ...msg
@@ -20,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- .tosi{
+.tosi {
     width: 13vw;
     height: 10vh;
     background-color: #19d781;
@@ -30,5 +32,5 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
- }
+}
 </style>

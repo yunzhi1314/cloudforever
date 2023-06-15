@@ -4,8 +4,8 @@
     <div
       class="login"
       :style="{ 
-        Animation:controlObj.isPlay ? '' :
-          controlObj.isChange ? 'register 0.35s 0s 1 ease-in forwards' : 'login 0.35s 0s 1 ease-in forwards'
+        Animation: controlObj.isPlay ? 
+          (controlObj.isChange ? 'register 0.35s 0s 1 ease-in forwards' : 'login 0.35s 0s 1 ease-in forwards') : ''
     }"
     >
       <section>{{ controlObj.isChange ? "注册" : "登录" }}</section>
@@ -25,16 +25,16 @@
               v-if="
                 controlObj.isChange
                   ? index == 3
-                  : controlObj.isCode && index == 1
-              "
+                  : controlObj.isCode && index == 1"
               class="btn"
               @click="getMathCode('isMathCode')"
-              :style='{
-                backgroundColor: controlObj.isDisable ? "#158FC5": "#797979"
-              }'
-              :disabled='controlObj.isDisable ? "":"" '
-            >
-              获取验证码
+             :disabled='controlObj.isChange? 
+             countDownNames.includes("isRegister") : 
+             countDownNames.includes("isLogin")'>
+              {{ controlObj.isChange? 
+                (countDownNames.includes("isRegister") ? registerCount + "S" : "获取验证码") : 
+                (countDownNames.includes("isLogin")? loginCount + "S" : "获取验证码")
+                }}
             </button>
           </p>
           <p :style="{ visibility: item.isShow ? 'visible' : 'hidden' }">
@@ -47,11 +47,13 @@
         <section>
           <input
             type="checkbox"
-            v-if="controlObj.isChange"
+            v-show="controlObj.isChange"
+            :checked="controlObj.isChecked"
+            @click="controlObj.isChecked = !controlObj.isChecked"
             style="width: 1vw; height: 2vh"
           />
           <span
-            @click="codeLogin"
+            @click="codeLogin(loginArr)"
             :style="{ color: controlObj.isCode ? '#000' : '' }"
             >{{
               controlObj.isChange
@@ -78,22 +80,20 @@
     <!-- 登录注册替换 -->
     <section class="change">
       <span
-        @click="changeLogin"
+        @click="changeBox(false,loginArr)"
         :style="{
           color: controlObj.isChange ? '#000' : '',
           fontSize: controlObj.isChange ? '1rem' : '',
         }"
-        >登录</span
-      >
+        >登录</span>
       <span>·</span>
       <span
-        @click="changeRegister"
+        @click="changeBox(true,loginArr,newArr)"
         :style="{
           color: controlObj.isChange ? '#158FC5' : '',
           fontSize: controlObj.isChange ? '1.3rem' : '',
         }"
-        >注册</span
-      >
+        >注册</span>
     </section>
   </div>
 
@@ -105,34 +105,31 @@
         <span v-html="svg.code" @click="againGetMathCode"></span>
       </section>
       <section>
-        <button @click="confirm('isMathCode')">确认</button>
+        <button @click='confirm(controlObj.isChange? "isRegister" : "isLogin")'>确认</button>
         <button @click="cancel('isMathCode')">取消</button>
       </section>
     </div>
   </dialogPage>
   <!-- 吐丝提示 -->
   <messagePage v-if="controlObj.isMsgTusi"></messagePage>
+  <router-view></router-view>
 </template>
 
 <script>
 import loginCSS from "@/public/login.scss";
 import { reactive, provide } from "vue";
-import { watcher } from "@/hooks/personalCenter/watcher"; //监视函数
 import controlObj from "@/hooks/personalCenter/control";
-import { getMathCode,againGetMathCode,cancel,} from "@/hooks/personalCenter/code";
+import { getMathCode,againGetMathCode,cancel,setCode,codeLogin} from "@/hooks/personalCenter/code";
 import svg from "@/hooks/personalCenter/code";
-import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
-import { Request } from "@/hooks/personalCenter/request";
-import url from "@/api/url";
-import store from "@/store";
-import { useRouter } from "vue-router";
-// import {Toest} from "@/hooks/personalCenter/Toest" //吐丝的函数
+import { toRefs } from "vue";
+import { pass } from "@/hooks/personalCenter/RegisterOrLogin"
+import { watcher } from "@/hooks/personalCenter/watcher"; 
+import { changeBox } from '@/hooks/personalCenter/changeBox'
 
 export default {
   name: "loginPage",
   setup() {
-    // 路由
-    const router = useRouter();
+
     // 登录数组
     let loginArr = reactive([
       {
@@ -179,147 +176,34 @@ export default {
         use: "验证码",
       },
     ]);
-    // 点击去注册页面
-    function changeRegister() {
-      controlObj.isChange = true;
-      if (loginArr.length < 4) {
-        loginArr.push(...newArr);
-      }
-    }
-    // 点击去登录页面
-    function changeLogin() {
-      controlObj.isChange = false;
-      loginArr.splice(2, 2);
-    }
 
-    let obj = {
-      value: "",
-      isShow: false,
-      tip: "*验证码格式不正确",
-      tip1: "*验证码不能为空",
-      type: "text",
-      placeholder: "输入验证码",
-      zz: /^\d{4}$/,
-    };
-    let obj1 = {
-      value: "",
-      isShow: false,
-      tip: "*密码格式不正确",
-      tip1: "*密码不能为空",
-      type: "password",
-      placeholder: "8-16位数字、字母、常用字符",
-      zz: /^\w{8,16}$/,
-      use: "密码",
-    };
-    // 点击切换密码或短信验证码登录
-    function codeLogin() {
-      controlObj.isCode = !controlObj.isCode;
-      controlObj.isChange
-        ? loginArr.splice(1, 1, obj)
-        : loginArr.splice(1, 1, obj1);
-    }
     watcher(loginArr); //调用监视函数监视账密框
     provide("controlDialog", "isMathCode");
-    // 短信验证码需传送的数据
-    let useInfo = reactive({
-      telephone: "",
-      mathCode: "",
-    });
-    // 点击遮罩层确认按钮，请求短信验证码，并且关闭遮罩层
-    function confirm(name) {
-      controlObj.isDialog[name] = false;
-      let obj = loginArr.find((item) => item.use == "手机号");
-      useInfo.telephone = obj.value;
-      telCode(useInfo);
-      // Toest(controlObj) //调用吐丝的函数
-    }
-    // 注册需要的数据
-    let registerData = reactive({
-      telephone: "", 
-      password: "",
-      confirmPassword: "",
-      code: "",
-    });
 
-    // 登录需要的数据
-   
-    let loginData = reactive({
-      telephone: "",
-      password: "",
-      userId: JSON.parse(localStorage.getItem("users")).userId,
-    });
-  
- 
-    function loginOrRegister() {
-      let dataList = reactive({
-        data: [], //注册数据
-        data1: [], //登录数据
-      });
-      // 注册和登录分离
-      if (controlObj.isChange) {
-        // 将账密框的数据赋予新声明注册需要的数据的对象
-        loginArr.forEach((item, index) => {
-          Reflect.set(registerData,Reflect.ownKeys(registerData)[index],item.value);
-        });
-        Request.postData(url.personalCenter.register,registerData)
-          .then((res) => {
-            dataList.data = res.data;
-            setTimeout(() => {
-          store.commit("personalCenter/changeUse", dataList.data);
-          store.commit("changeStore", "isRegister");
-        }, 300);
+    // 引入倒计时函数以及变量和遮罩层开关
+    let { confirm, useInfo,countDown} = setCode(loginArr,"isMathCode")
 
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-       
-       
-
-        // Toest(controlObj)//调用吐丝的函数
-      } else {
-        // 将账密框的数据赋予新声明登录需要的数据的对象
-        loginArr.forEach((item, index) => {
-          Reflect.set(loginData, Reflect.ownKeys(loginData)[index], item.value);
-        });
-        Request.postData(url.personalCenter.login, loginData).then((res) => {
-          dataList.data1 = res.data;
-          console.log(dataList.data1)
-        });
-        setTimeout(() => {
-          store.commit("personalCenter/changeToken", dataList.data1);
-          store.commit("changeStore", "isLogin");
-          router.push({
-            name: "bufferPage",
-            params: {
-              userId: JSON.parse(localStorage.getItem("users")).userId,
-            },
-          });
-        },1000);
-
-        // Toest(controlObj)//调用吐丝的函数
-      }
+    // 调用请求函数并传送数组数据
+    function loginOrRegister(){
+        pass(loginArr)
     }
 
     return {
       loginCSS,
-      // 登录数组渲染
-      loginArr,
-      changeRegister, //去往注册页面
-      changeLogin, //去往登录页面
-      controlObj, //全局状态控制开关
-      getMathCode, //获取图形验证码
-      svg, //图形装载工具
-      againGetMathCode, //点击图形验证码图片再次发起请求刷新图形验证码
-      // 取消遮罩层
-      cancel,
-      // 遮罩层的确认按钮
-      confirm,
-      // 发送短信传送的数据
-      useInfo,
-      loginOrRegister, //点击注册或登录按钮
+      loginArr,//登录数组
+      newArr,//注册数组
+      changeBox,//登录注册转换框的封装函数
+      controlObj,//按钮开关集合
+      getMathCode,//请求图形验证码
+      svg,
+      againGetMathCode,//更新图形验证码请求
+      cancel, // 取消遮罩层
+      confirm,// 遮罩层的确认按钮
+      useInfo,// 发送短信传送的数据
       codeLogin, // 点击切换密码或短信验证码登录
+      ...toRefs(countDown),// 将countDown对象扩展开并变成响应式数据
       // Toest,//吐丝的函数
+      loginOrRegister
     };
   },
 };

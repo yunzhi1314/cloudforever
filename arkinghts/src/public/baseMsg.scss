@@ -1,0 +1,55 @@
+.personalData {
+  height: 45vh;
+  width: 33vw;
+  background-color: #fff;
+  margin-bottom: 3vh;
+  border-radius: 2vw;
+  padding: 1vw;
+  section {
+    display: flex;
+    align-items: center;
+  }
+  div {
+    .BJ {
+      width: 26vw;
+      height: 8vh;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 3vw;
+      margin-bottom: 2vh;
+      font-size: 1.5rem;
+      padding-left: 5vw;
+      cursor: pointer;
+    }
+    padding: 0px 2vw;
+
+    p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5vh;
+      input {
+        border: none;
+        border-bottom: 1px solid #aaa;
+        width: 18vw;
+        padding-left: 0.5vw;
+        font-size: 0.9rem;
+      }
+      button {
+        width: 10vw;
+        height: 4vh;
+        border-radius: 1vw;
+        background-color: #158fc5;
+        color: #fff;
+        border: none;
+        font-size: 1rem;
+      }
+    }
+    section{
+      display: flex;
+      justify-content: space-between;
+     margin-bottom: 1vh;
+    }
+  }
+}

@@ -27,7 +27,6 @@ export function centerMenu() {
             store.commit("changeStore", "isMenu")
             //处理路由
             routes = handleRoutes(routes, routes.length - 1)
-
             // 添加动态路由
             routes.forEach(item => {
                 router.addRoute("centerPage", item)

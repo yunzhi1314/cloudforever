@@ -64,7 +64,6 @@ router.beforeEach((to, from, next) => {
           route.forEach(item => {
             router.addRoute(PATH == "center" ? "centerPage" :"databasePage", item)
           })
-          console.log(router.getRoutes());
 
           // 自定义添加子路由
           router.addRoute("centerPage", {

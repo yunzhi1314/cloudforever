@@ -1,3 +1,4 @@
+
 //持久化保存vuex数据
 export function isStore(state, key, name, obj, storageType) {
   

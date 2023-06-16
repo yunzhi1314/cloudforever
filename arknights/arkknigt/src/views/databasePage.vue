@@ -1,9 +1,9 @@
 <template>
-    <div class="common-layout">
+    <div class="common-layout" >
         <el-container>
             <el-aside :width="!isScollape ? '12vw' : '4vw'" :style="{ transition: 'all 0.25s 0s linear', }">
                 <el-menu background-color="#545C64" text-color="#fff" active-text-color="#409EFF"
-                    class="el-menu-vertical-demo" default-active="unknown" :collapse="isScollape" style="height: 100vh">
+                    class="el-menu-vertical-demo" default-active="unknown" :collapse="isScollape" style="height: 100%">
                     <el-menu-item v-for="(item, index) in databaseMenu" :key="index" :index="index.toString()"
                         v-show="!item.meta.isIframe" @click="toPage(index)">
                         {{ item.meta.title }}
@@ -26,7 +26,7 @@
             </el-aside>
             <el-container>
                 <el-header>
-                    <el-menu :default-active="unknown" mode="horizontal" :ellipsis="false" style=" height: 6vh;">
+                    <el-menu :default-active="0" mode="horizontal" :ellipsis="false" style=" height: 6vh;">
                         <!-- 点击显示菜单导航 -->
                         <el-menu-item index="0">
                             <el-radio-group v-model="isScollape">
@@ -44,9 +44,7 @@
                                 <el-breadcrumb-item :to="{ name: 'homePage', params: { userId } }">首页</el-breadcrumb-item>
                                 <el-breadcrumb-item v-show="route.meta.isHide">
                                     {{ metaName }}</el-breadcrumb-item>
-                                <el-breadcrumb-item v-show="route.meta.isHide" :style="{
-                                    Animation: isPlay ? 'breadcrumb 0.25s 0s 1 linear forwards' : '',
-                                }">{{ route.meta.title }}
+                                <el-breadcrumb-item v-show="route.meta.isHide">{{ route.meta.title }}
                                 </el-breadcrumb-item>
                             </el-breadcrumb>
                         </el-menu-item>
@@ -76,14 +74,14 @@
                         <!-- 用户名 -->
                         <el-sub-menu index="3">
                             <!-- 用户名 -->
-                           
                             <el-menu-item index="3-1">鬼人正邪</el-menu-item>
                             <el-menu-item index="3-2">安全中心</el-menu-item>
                             <el-menu-item index="3-3">退出</el-menu-item>
                         </el-sub-menu>
                     </el-menu>
-                    <el-tabs class="demo-tabs" type="card" v-model="title">
-                        <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.title" :name="item.name"></el-tab-pane>
+                    <el-tabs class="demo-tabs" type="card" v-model="title" @tab-click="toTab">
+                        <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.title"
+                            :name="item.name"></el-tab-pane>
                     </el-tabs>
                 </el-header>
                 <el-main>
@@ -105,8 +103,7 @@ export default {
         const route = useRoute() // 当前路由
         let title = ref(route.meta.title); // 标题
         let metaName = ref('') // 面包屑
-        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu
-        ) //获取存入vuex的路由
+        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu) //获取存入vuex的路由
         console.log(pages)
         let tabs = ref([]) // 保存tab
         let userId = JSON.parse(localStorage.getItem("users")).userId;
@@ -157,13 +154,17 @@ export default {
                 })
             }
         }
-        //面包屑的显示与隐藏
+        //面包屑的跳转
         function toTab(i) {
-            route.meta.isHide = true;
-            router.span({
-                name: pages[i].name,
-                params: {
-                    userId
+            route.meta.isHide = false // 面包屑的显示与隐藏;
+            tabs.value.forEach(item =>{
+                if(item.name == i.paneName){
+                    router.push({
+                        name: item.routeName,
+                        params: {
+                            userId
+                        }
+                    })
                 }
             })
         }
@@ -186,7 +187,8 @@ export default {
             ...toRefs(JSON.parse(sessionStorage.getItem("baseMsg"))),
             tabs,
             title,
-            metaName
+            metaName,
+            userId
 
         }
     }

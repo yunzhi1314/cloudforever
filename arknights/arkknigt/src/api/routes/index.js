@@ -27,7 +27,6 @@ export function centerMenu(){
             menuMsg = {menuMsg,loginOut,navSvg}
          
             store.commit('personalCenter/changeBaseMessage',menuMsg)
-            store.commit('CHANGE_STORE','isBaseMessage')
             // 存储路由信息
             let routes = nav.map(item=>item.route)
             store.commit('personalCenter/changeBaseRoutes',routes)

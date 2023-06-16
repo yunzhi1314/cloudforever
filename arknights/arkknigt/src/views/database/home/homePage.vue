@@ -49,10 +49,10 @@
         <div class="plans" id="navTools"
            style="display: block;
            padding:1vw;
-           width: 36.1vw; 
+           width: 27vw; 
            height: 50vh; 
            margin-top: 2.5vh; 
-           margin-left: 0.92vw"
+           margin-left: 0.65vw"
         >
            <section class="word">
             快捷导航工具
@@ -88,8 +88,9 @@ import { homeData,homeData2 } from '@/api/database/home/index.js'
 import homeCss from '@/public/database/homePage.scss'
 import url from "@/api/url";
 export default {
-    name: "homePage",
-    setup() {
+    name:"homePage",
+    setup () {
+        
         onMounted(() => {
             // 折线图
             exMpedicals(document.querySelector("#exMpedicals"));
@@ -111,4 +112,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#exMpedicals{
+    width: 100vw;
+    height: 100vh;
+}
+</style>

@@ -35,16 +35,10 @@
 </template>
 
 <script>
-// import {Request} from "@/hook/request" //请求方法
-import homePageCss from "@/public/database/homePage.scss"
-import {ref,toRefs} from "vue"
-import  {dealTree} from "@/hook/database/menuPage"
-// import { Search } from '@element-plus/icons-vue'
-// import service from "@/utils/request" //请求头，拦截器
-// import  req  from '@/api/url.js' //路径
-// import {tabledata} from '@/api/database/menu/index'
-
-// import {newData} from "@/hook/database/menuPage"
+import homePageCss from "@/public/database/tablePage.scss"
+import {ref} from "vue"
+import { Search } from '@element-plus/icons-vue'
+// import { ElMessage,ElMessageBox } from "element-plus"
 export default {
     name:'menuPage',
     setup () {

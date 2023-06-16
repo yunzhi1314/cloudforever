@@ -1,7 +1,7 @@
 
 // 导出请求路劲
 export default{
-      personalCenter:{
+   personalCenter:{
         centerImg:"api/personalCenter",//整体内容（centerPage页面）的请求路劲
         mathCode:'api/user/getCode',//获取验证码按钮的请求路劲
         telCode:'api/user/telCode',//短信验证码的请求路劲
@@ -38,6 +38,32 @@ export default{
           changeNick:'person/baseMsg/nickName',//修改昵称
           changeIdCard:'person/baseMsg/idNumber',//修改身份证
        }
+},
+ // 数据库
+ dataBase:{
    
-}
+   // 首页左侧菜单
+   layoutMenu:"/database/layout/menu",   
+
+   // homePage数据
+   home:{
+       messages:"/database/home/messages",
+       expMedicals:"/database/home/expMedicals",
+       basicMedical:"/database/home/basicMedical",
+       navTools:"/database/home/navTools",
+       naweiCompany:"/database/home/naweiCompany",
+   },
+   menu:{
+      addMenu:"/database/menu/addMedical",
+      setMenu:"/database/menu/setMedical",
+      delMenu:"/database/menu/delMedical"
+   },
+   role:{
+         addMenu:"/database/role/addMedical",
+         delMenu:"/database/role/delMedical"
+   },
+   user:{
+         queryMedicals:"database/home/expMedical"
+   }
+},
 }

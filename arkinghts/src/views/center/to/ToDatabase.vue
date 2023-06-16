@@ -1,28 +1,49 @@
 <template>
- <div>
-     <section>确定前往数据库吗</section>
-     <section>
-      <button @click="confirm">确定</button>
-      <button @click="cancel">取消</button>
+  <div style="
+      background-color: rgba(255, 255, 255, 0.8);
+      width: 20vw;
+      height: 25vh;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: space-around;
+      text-align: center;
+      border-radius: 2vw">
+    <section style="width: 100%;">前往数据库</section>
+    <section style="width: 100%;">
+      <button style="color:#fff;
+          background-color:  #158FC5;
+          height: 5vh;
+          border-radius: 1vw;
+          border: none;
+          width: 14vw;
+          text-align: center;" @click="toPage">前往数据库</button>
     </section>
- </div>
+  </div>
 </template>
 
 <script>
-import { useRouter } from 'vue-router';
+import { onBeforeRouteLeave, useRouter } from 'vue-router';
+import { layout } from "@/api/database/layout"
+
 export default {
   name: "ToDatabase",
   setup() {
     const router = useRouter()
-     function confirm(){
-         router
-     }
-     function cancel(){
-
-     }
+    // 跳数据库
+    function toPage() {
+      router.push({
+        name: "databasePage",
+      })
+    }
+    // 离开页面守卫
+    onBeforeRouteLeave(()=>{
+      layout()
+    })
+    
     return {
-      confirm,
-      cancel
+      // 点击前往数据库
+      toPage,
     };
   },
 };

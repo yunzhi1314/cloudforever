@@ -26,6 +26,22 @@
             </div>
         </div>
     </div>
+    <!-- 折现统计图/饼图 -->
+    <div style="display: flex">
+        <div class="plan biggerOne" id="exMpedicals">
+        </div>
+        <div class="plan smallOne" id="basicMedicals">
+
+        </div>
+    </div>
+    <div style="display: flex">
+        <div class="plan smallOne spc">
+
+        </div>
+        <div class="plan biggerOne">
+
+        </div>
+    </div>
     <!-- 折现统计图 -->
     <div style="display:flex;">
         <div class="plans" style="width: 56vw;
@@ -78,6 +94,10 @@
             ">
         </div>
     </div>
+
+
+    <!--  -->
+
     <router-view></router-view>
 </template>
 
@@ -102,7 +122,6 @@ export default {
         })
         return {
             ...toRefs(homeData(url.database.home.messages)),
-
             homeCss,
             
             ...toRefs(homeData2(url.database.home.navTools)),

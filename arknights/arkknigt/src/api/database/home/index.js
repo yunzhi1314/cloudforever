@@ -9,7 +9,7 @@ export function homeData(url){
     onBeforeMount(() => {
         Request.get(url)
         .then((res) =>{
-            dataList.homedata = {...res.data};
+            dataList.homedata = {...res.data.menu};
         })
     })
 

@@ -77,6 +77,7 @@ export default createStore({
       },
       key: 'baseMsg'
     }),
+
   ],
   state: {
     countDown: 10,//倒计时
@@ -87,6 +88,7 @@ export default createStore({
       isRegister: false,//存储注册信息开关
       isLogin: false,//存储登录信息开关
       isBaseMessage: false,//存储个人信息开关
+      isMenusMsg:false
     }
   },
   getters: {

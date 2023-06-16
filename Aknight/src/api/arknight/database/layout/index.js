@@ -12,19 +12,23 @@ export function getMenu() {
 	});
 	Request.getData(url.database.layout.menu).then((res) => {
 		dataList.datas = { ...res.data.menu };
+		//存数据
+		store.commit("dataBase/changeMenu", res.data.menu);
 		//打开存储开关
 		store.commit("changeStore", "isMenus");
-		//存数据
-		store.commit("dataBase/changeMenu", dataList.datas);
+
 		//处理路由并存路由
 		let routes = dealpaths(res.data.menu, 0, "component");
 		store.commit("dataBase/changeMenuRoutes", routes);
 
+
 		//处理路由并添加进路由组
-		let routes2 = handleRoutes(routes, (routes.length - 1));
-		routes2.forEach((item) => {
-			router.addRoute("databasePage", item);
-		});
+		setTimeout(() => {
+			handleRoutes(routes, routes.length - 1);
+			routes.forEach((item) => {
+				router.addRoute("databasePage", item);
+			});
+		}, 1000);
 	});
 	return dataList;
 }

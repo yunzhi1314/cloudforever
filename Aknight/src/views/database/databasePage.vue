@@ -153,10 +153,10 @@
 
 <script>
 	import databaseScss from "@/public/database/dataBase.scss";
-	import dataBase from "@/store/modules/dataBase";
 	import { ref, reactive, toRefs, onUpdated } from "vue";
 	import { useRouter, useRoute } from "vue-router";
 	import { getMedical } from "@/api/arknight/database/home";
+	// import router from "@/router";
 	export default {
 		name: "databasePage",
 		setup() {
@@ -171,7 +171,13 @@
 			// 控制刚进页面面包屑显隐
 			let isbreadcrumb = ref(false);
 			// 控制面包屑的内容展示，点击菜单某个页面后添加入数组
-			let tabs = ref([]);
+			let tabs = ref([
+				{
+					title: "首页",
+					name: "首页",
+					routeName: "homePage"
+				}
+			]);
 			// 控制页眉的值，v-model绑定
 			let title = ref("");
 			// 路由数据
@@ -280,12 +286,14 @@
 						}
 					});
 				}
-				// 将前一项或后一项设置为高亮
-				title.value = activeName;
 				// 将点击删除的页眉过滤掉
-				tabs.value = newTabs.filter((item) => item.name !== targetName);
-				// 将过滤后剩下的页眉重新赋值
-				tabs.value = reactive(tabs.value);
+				if (targetName != "首页") {
+					// 将前一项或后一项设置为高亮
+					title.value = activeName;
+					tabs.value = newTabs.filter((item) => item.name !== targetName);
+					// 将过滤后剩下的页眉重新赋值
+					tabs.value = reactive(tabs.value);
+				}
 			}
 			return {
 				databaseScss,
@@ -293,7 +301,6 @@
 				route,
 				isbreadcrumb,
 				isCollapse,
-				dataBase,
 				userId,
 				metaName,
 				title,
@@ -303,7 +310,7 @@
 				removeTab,
 				...toRefs(JSON.parse(sessionStorage.getItem("menus")))
 			};
-		}
+		},
 	};
 </script>
 

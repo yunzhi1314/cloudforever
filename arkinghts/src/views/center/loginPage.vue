@@ -112,6 +112,7 @@
   </dialogPage>
   <!-- 吐丝提示 -->
   <messagePage v-if="controlObj.isMsgTusi"></messagePage>
+
   <router-view></router-view>
 </template>
 

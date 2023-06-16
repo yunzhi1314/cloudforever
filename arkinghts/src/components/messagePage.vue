@@ -28,7 +28,8 @@ export default {
     background-color: #19d781;
     border-radius: 1vw;
     position: absolute;
-    top: 10vh;
+    top: 11vh;
+    left: 44vw;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -15,3 +15,16 @@ export function ResetPassword(data){
     })
     return dataList
 }
+
+export function resetPasw(data){
+     let dataList = reactive({
+          msg:[]
+     })
+
+     Request.postData(url.personalCenter.resetPsw.code,data)
+     .then(res=>{
+           dataList.msg = res.data
+           console.log(res.data)
+     })
+     return dataList
+}

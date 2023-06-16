@@ -1,17 +1,11 @@
 import { Request } from "@/hooks/request";
-import { onBeforeMount, reactive } from "vue";
+import type { URL } from '@/namespace/animation'
+import { toRef } from 'vue'
+import url from '@/api/url'
 
-export function getIndexDatas(url:string){
-    let dataList = reactive({
-        datas:[]
-    })
+export async function getIndexDatas(prop:string){
+    let API = Reflect.get(<URL.urlObj>url.index,prop)
+    const datas =  toRef(await Request.getData(API)).value.data
 
-    onBeforeMount(():void=>{
-        Request.getData(url).then(res=>{
-            dataList.datas = {...res.data}
-            console.log(res.data)
-        })
-    })
-
-    return dataList
+    return datas
 }

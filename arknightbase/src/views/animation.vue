@@ -1,15 +1,16 @@
 <script setup lang="ts">
-  // import {getIndexDatas} from "@/api/animation"
-  import url from "@/api/url";
-  import type{URL} from "@/namespace/animation"
+import { getIndexDatas } from '@/api/animation'
 
-  
-  console.log(((url.index)as URL.urlObj).images)
-  // getIndexDatas()
+const datas =  await getIndexDatas("images")
+
 </script>
 
 <template>
-  <main></main>
+  <main
+    :style="{
+      backgroundImage: `url(${datas.img.scene})`
+    }"
+  ></main>
 </template>
 
 <style scoped>

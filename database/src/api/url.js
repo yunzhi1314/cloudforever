@@ -1,4 +1,30 @@
 export default {
+	centerPage: {
+		centerImg: "api/personalCenter",
+		mathCode: "api/user/getCode",
+		telCode: "api/user/telCode",
+		register: "api/user/register",
+		login: "api/user/login",
+		codeLogin: "api/user/codeLogin",
+		centerRoutes: "person/home",
+		baseMsg: "person/baseMsg/userBasic",
+		resetPsw: {
+			code: "person/resetPsw/code",
+			resetPsw: "person/resetPsw",
+		},
+		exchangeGift: {
+			datas:"person/exchangeGift/getContext",
+			getGift:'person/exchangeGift/getGift'
+		},
+		selfInquiries: "person/selfInquiries",
+		personalList:{
+			infoBasic:'person/personalList/infoBasic',
+			infoRealname:'person/personalList/infoRealname',
+			infoBehavior:'person/personalList/infoBehavior',
+			infoDevice:'person/personalList/infoDevice',
+		},
+		shareList:'person/shareList',
+	},
 	database:{
 		layout:{
 			menu:'/database/layout/menu'

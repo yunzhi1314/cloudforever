@@ -74,13 +74,12 @@
                         <!-- 用户名 -->
                         <el-sub-menu index="3">
                             <!-- 用户名 -->
-                            
                             <el-menu-item index="3-1">鬼人正邪</el-menu-item>
                             <el-menu-item index="3-2">安全中心</el-menu-item>
                             <el-menu-item index="3-3">退出</el-menu-item>
                         </el-sub-menu>
                     </el-menu>
-                    <el-tabs class="demo-tabs" type="card" v-model="title">
+                    <el-tabs class="demo-tabs" type="card" v-model="title" @tab-click="toTab">
                         <el-tab-pane v-for="item in tabs" :key="item.name" :label="item.title"
                             :name="item.name"></el-tab-pane>
                     </el-tabs>
@@ -104,8 +103,7 @@ export default {
         const route = useRoute() // 当前路由
         let title = ref(route.meta.title); // 标题
         let metaName = ref('') // 面包屑
-        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu
-        ) //获取存入vuex的路由
+        let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu) //获取存入vuex的路由
         console.log(pages)
         let tabs = ref([]) // 保存tab
         let userId = JSON.parse(localStorage.getItem("users")).userId;
@@ -156,13 +154,17 @@ export default {
                 })
             }
         }
-        //面包屑的显示与隐藏
+        //面包屑的跳转
         function toTab(i) {
-            route.meta.isHide = true;
-            router.span({
-                name: pages[i].name,
-                params: {
-                    userId
+            route.meta.isHide = false // 面包屑的显示与隐藏;
+            tabs.value.forEach(item =>{
+                if(item.name == i.paneName){
+                    router.push({
+                        name: item.routeName,
+                        params: {
+                            userId
+                        }
+                    })
                 }
             })
         }
@@ -185,7 +187,8 @@ export default {
             ...toRefs(JSON.parse(sessionStorage.getItem("baseMsg"))),
             tabs,
             title,
-            metaName
+            metaName,
+            userId
 
         }
     }

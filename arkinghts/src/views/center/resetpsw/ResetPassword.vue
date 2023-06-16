@@ -129,7 +129,7 @@ export default {
     })
      
     function confirm(){
-      resetPasw(resetPsw,'isChangeMsgCode')
+      resetPasw(resetPsw)
      }
 
     provide("controlDialog", "isChangeMsgCode");

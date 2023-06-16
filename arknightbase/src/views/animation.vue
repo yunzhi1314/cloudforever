@@ -1,9 +1,9 @@
 <script setup lang="ts">
   // import {getIndexDatas} from "@/api/animation"
   import url from "@/api/url";
-  console.log(((url.index)as {
-          [propName: string]: string
-        }).images)
+  import type{URL} from "@/namespace/animation"
+
+  console.log(((url.index)as URL.urlObj).images)
   // getIndexDatas()
 </script>
 

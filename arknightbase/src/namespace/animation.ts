@@ -1,13 +1,10 @@
 export namespace URL {
-  // enum url {
-  //    URL=
-  // }
+  export interface urlObj {
+    [propName: string]: string
+  }
   
+
   export interface Url {
-    [propName: string]:
-      | {
-          [propName: string]: string
-        }
-      | string
+    [propName: string]: urlObj | string
   }
 }

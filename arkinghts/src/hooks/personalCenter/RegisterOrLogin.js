@@ -5,6 +5,7 @@ import { reactive, toRef } from "vue";
 import { Request } from "@/hooks/personalCenter/request";
 import url from "@/api/url"
 import router from "@/router";
+import { Toest } from "./Toest";
 
 // 注册需要的数据
 let registerData = reactive({
@@ -57,8 +58,8 @@ export function pass(obj) {
                 status: "1",
                 msg: "未同意《鹰角网络用户注册协议》"
             })
-            // Toest()
             isPass = false
+            Toest(controlObj)
         } else {
             isPass = true
         }
@@ -78,17 +79,23 @@ export function pass(obj) {
         .then(res=>{
             dataList.data = toRef({...res.data})
             store.commit("personalCenter/changeUse", dataList.data);
+            store.commit("changeMsg", dataList.data);
             store.commit("changeStore", isStore);
+
+            
         })
+        Toest(controlObj)
     }else{
         Request.postData(url.personalCenter.login,target)
         .then(res=>{
             dataList.data1 = toRef({...res.data})
             store.commit("personalCenter/changeToken", dataList.data1);
+            store.commit("changeMsg", dataList.data1);
             store.commit("changeStore", isStore);
             store.commit("changeTel",dataList.data1)
         })
-        // Toest()
+        Toest(controlObj)
+        
     }
     
     // 并且有token权限，登录成功后跳转到bufferPage

@@ -94,7 +94,6 @@
             </el-form-item>
           </div>
 
-
           <div style="display: flex; justify-content:space-around;">
             <el-form-item label="id" style="flex: 3;">
               <el-input v-model="msgObj.id" placeholder="" disabled="true"></el-input>

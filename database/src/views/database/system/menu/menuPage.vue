@@ -77,6 +77,7 @@ import {deleList,confirm,getMsgObj} from '@/hooks/menuPage'
 export default {
     name: "menuPage",
     setup() {
+        
         let search = ref("")
         let { dataList, newArr, compary } = dealMenu()
         let isSearch = ref(false)
@@ -94,8 +95,9 @@ export default {
         getMsgObj(dataList[0],msgObj,rules,requireTextArr,tableArr)
         // console.log(tableArr);
         let searchData = ref('')
-
+        
         //  查询按钮事件
+        console.time();
         function query() {
             isSearch.value = true;
             searchData.value = dataList.filter(item =>
@@ -132,7 +134,7 @@ export default {
                 Reflect.set(msgObj, key, item[key])
             })
         }
-
+        console.timeEnd();
         return {
             search,
             newArr,

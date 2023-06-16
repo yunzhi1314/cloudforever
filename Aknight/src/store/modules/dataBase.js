@@ -12,10 +12,8 @@ export default ({
     mutations: {
         //database页面请求
         changeMenu(state, data) {
-            state.menu = data
-        },
-        changeMenuRoutes(state, data) {
-            state.menuRoutes = data
+            state.menu = data.menuList
+            state.menuRoutes = data.routes
         },
         //home页面请求
         changeExpMedicals(state, data) {

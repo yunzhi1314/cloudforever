@@ -104,7 +104,6 @@
 </template>
 
 <script>
-import dataBase from "@/store/modules/dataBase";
 import { ref, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
 import { getMedical } from '@/api/arknight/database/home';
@@ -113,9 +112,13 @@ export default {
 	setup() {
 		let router = useRouter();
 		const isCollapse = ref(false);
-		let pages = reactive(JSON.parse(sessionStorage.getItem("menus"))).menu;
+		let pages
+		console.log(JSON.parse(sessionStorage.getItem("menus")));
+		if (JSON.parse(sessionStorage.getItem("menus")) != 0&&JSON.parse(sessionStorage.getItem("menus"))!=null) {
+			pages = reactive(JSON.parse(sessionStorage.getItem("menus"))).menu;
+		}
 		let userId = JSON.parse(localStorage.getItem("userMsg")).userId;
-		console.log(router.getRoutes());
+		// console.log(router.getRoutes());
 		getMedical("expMedicals")
 		getMedical("basicMedical")
 
@@ -142,7 +145,6 @@ export default {
 		}
 		return {
 			isCollapse,
-			dataBase,
 			toPage,
 			...toRefs(JSON.parse(sessionStorage.getItem("menus")))
 		};

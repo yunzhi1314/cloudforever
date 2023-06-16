@@ -20,3 +20,13 @@ export function getMedical(key) {
     });
     return dataList;
 }
+
+export function getMessages() {
+    let dataList = reactive({
+        menus: [],
+    });
+    Request.getData(url.database.home.messages).then((res) => {
+        dataList.menus = { ...res.data.menu };
+    });
+    return dataList;
+}

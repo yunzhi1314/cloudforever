@@ -1,77 +1,53 @@
 <template>
-  <div>
-    <div style="display: flex;">
-      <!-- 头部的四个小盒子 -->
-      <div style="display: flex" v-for="(item, index) in list" :key="index" class="centbox">
-        <div>
+  <div class="home-box">
+    <!-- 头部(四个盒子) -->
+    <div class="header">
+      <div v-for="(item, index) in menus" :key="index" class="centbox">
+        <div class="msg">
           <section>
-            <span>{{ item.sum }}</span>
-            <span>{{ item.percent }}</span>
+            <span>{{ item.number }}</span>
+            <span :style="{
+              color: item.rate.includes('-') ? 'rgb(255, 100, 98)' : 'rgb(102, 144, 249',
+              fontSize: '16px',
+              marginLeft: '5px'
+            }">{{ item.rate }}</span>
           </section>
           <section>
-            <span>{{ item.sort }}</span>
+            <span>{{ item.word }}</span>
           </section>
         </div>
-        <div class="yuan">{{ item.img }}</div>
+        <div class="cricle"></div>
       </div>
     </div>
-    <!-- 第一个列表部分 -->
-    <div class="plang" id="expMedicals">
-
+    <div class="center">
+      <!-- 靶向药实验数据的复合折线统计图 -->
+      <div id="expMedicals"></div>
+      <!-- 各公司所持有的靶向药数据，环状图 -->
+      <div id="basicMedical"></div>
     </div>
-    <div class="plang" id="basicMedical">
-
-    </div>
+    <div class="footer">2222</div>
   </div>
 </template>
 
 <script>
 import home from "@/public/home/home.scss";
 import { expMedicals, basicMedical } from "@/echarts"
-import { onMounted } from 'vue';
-import { useRouter } from "vue-router";
+import { onMounted, toRefs } from 'vue';
+import { getMessages } from '@/api/arknight/database/home';
 
 export default {
   name: "homePage",
   setup() {
-    let router = useRouter();
-    console.log(router.getRoutes());
-    const list = [
-      {
-        sum: "11125,12",
-        percent: "-12.32%",
-        sort: "订单统计信息",
-        img: "",
-      },
-      {
-        sum: "653,33",
-        percent: "+42.32%",
-        sort: "月度计划信息",
-        img: "",
-      },
-      {
-        sum: "125,65",
-        percent: "+17.32%",
-        sort: "年度计划信息",
-        img: "",
-      },
-      {
-        sum: "520,43",
-        percent: "-10%",
-        sort: "访问统计信息",
-        img: "",
-      },
-    ];
-
-
     // 列表的引入
     onMounted(() => {
+      //靶向药实验数据的复合折线统计图
       expMedicals(document.querySelector("#expMedicals"))
+      //各公司所持有的靶向药数据，环状图
       basicMedical(document.querySelector("#basicMedical"))
     })
     return {
       home,
-      list,
+      ...toRefs(getMessages()),
     };
   },
 };

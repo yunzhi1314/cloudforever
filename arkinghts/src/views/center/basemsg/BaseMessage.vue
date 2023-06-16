@@ -5,7 +5,7 @@
         <img :src="item.title.img" />
         <span>{{ item.title.word }}</span>
       </section>
-      <div v-for="(item2, index2) in item.inputs" :key="index2" >
+      <div v-for="(item2, index2) in item.inputs" :key="index2">
         <p 
         style="font-size: 14px;
          color: #22bbff; 
@@ -15,7 +15,7 @@
          ">{{ item2.inputTitle }}</p>
         <p>
           <input type="text" :placeholder="item2.inputItem" v-if="index2 != 2" />
-          <button  v-if="index2 != 2 " @click="changePage(index,index2)" style="cursor: pointer;">更改</button>
+          <button  v-if=" (index == 1 && index2 == 0) || (index == 0 && index2 != 2) || index == 2" @click="changePage(index,index2)" style="cursor: pointer;">更改</button>
         </p>
         <p v-if="index2 == 2"> <button style="width: 100%;">清除其他设备的登录状态</button></p>
         <p  v-if="index2 ==2"><span style="font-size: 14px;">{{ item2.inputItem }}</span></p>
@@ -63,11 +63,8 @@ export default {
 
    //点击去往相对应的页面  
     function changePage(index,index2){
-      console.log(index2)
-      if(index == 1){
-         index2 =  index2 + 1
-      }else if(index == 2){
-        index2 = index2 + 2
+      if(index != 0){
+         index2 += 1  
       }
       router.push({
            name:routes[index + index2].name,

@@ -41,7 +41,6 @@ export default{
 },
  // 数据库
  dataBase:{
-   
    // 首页左侧菜单
    layoutMenu:"/database/layout/menu",   
 

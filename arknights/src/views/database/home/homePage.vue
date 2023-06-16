@@ -29,13 +29,17 @@
 
 <script>
 import homePageCss from "@/public/homePage.scss"
+import { onMounted } from "vue";
+import { basicMedical } from "@/echarts"
+
 export default {
   name: "homePage",
   setup() {
-
+    onMounted(()=>{
+      basicMedical(document.querySelector("#basicMedical"))
+    })
     return {
       homePageCss
-
     }
   }
 }

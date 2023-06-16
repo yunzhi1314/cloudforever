@@ -3,6 +3,7 @@
   import url from "@/api/url";
   import type{URL} from "@/namespace/animation"
 
+  
   console.log(((url.index)as URL.urlObj).images)
   // getIndexDatas()
 </script>

@@ -1,5 +1,5 @@
 import { Request } from "@/hooks/personalCenter/request";
-import url from "../../url";
+import url from "@/api/url";
 import { reactive } from "vue";
 import { dealRoutes, dealpaths } from "@/hooks/personalCenter/route" //引入路由处理函数
 import router from "@/router"

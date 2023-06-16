@@ -9,7 +9,10 @@
           :style="{backgroundColor: item.isShow  ?  '#FFDCDB' :  '',}"
           />
           <button v-if="index == 1" 
-          @click="getMathCode('isChangeMsgCode')">
+          @click="getMathCode('isChangeMsgCode')"
+          :disabled='disabled'
+          :style="{backgroundColor: disabled? '#aaa' : '#22bbff'}"
+          >
             {{countDownNames.includes("isChangeMsgCode") ? codeCount + "S" : "获取验证码"}}
           </button>
         </p>
@@ -41,7 +44,7 @@
 <script>
 
 import { watcher } from "@/hooks/personalCenter/watcher";
-import { reactive,toRefs ,provide} from "vue";
+import { reactive,toRefs ,provide,watch,ref} from "vue";
 // 调用请求函数，修改手机号
 import {changeMsg} from '@/api/personalCenter/baseMsg'
 import { changeBoxScss } from "@/public/baseMsg.scss";
@@ -98,7 +101,6 @@ export default {
       email:'',
       userId: JSON.parse(localStorage.getItem('users')).userId
     })
-     
 
     //点击获取验证码的函数解构，遮罩层的确认函数，短信验证码需传送的数据以及数字倒计时函数
     let { confirm, useInfo,countDown} = setCode(data,"isChangeMsgCode")
@@ -117,6 +119,18 @@ export default {
     //调用请求函数
     changeMsg(url.personalCenter.changePersonalMsg.bindEmail,personalMsg)
     }
+
+     //利用监听属性判断用户是否输入的是正确的账号以此来开开启是否禁用获取验证码按钮
+     let disabled = ref(true)
+      watch(data[0],()=>{
+        if(data[0].zz.test(data[0].value)){
+          disabled.value = false
+        }else{
+          disabled.value = true
+        }
+      })
+
+    
 
     provide("controlDialog", "isChangeMsgCode");
     return {
@@ -137,7 +151,7 @@ export default {
       confirm,// 遮罩层的确认按钮
       cancel, // 取消遮罩层
       ...toRefs(countDown),// 将countDown对象扩展开并变成响应式数据
-
+      disabled,//是否禁用获取验证码按钮
 
      
     };

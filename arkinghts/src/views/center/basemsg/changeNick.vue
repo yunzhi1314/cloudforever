@@ -9,7 +9,10 @@
           :style="{backgroundColor: item.isShow  ?  '#FFDCDB' :  '',}"
           />
           <button v-if="index == 1" 
-          @click="getMathCode('isChangeMsgCode')">
+          @click="getMathCode('isChangeMsgCode')"
+          :disabled='disabled'
+          :style="{backgroundColor: disabled? '#aaa' : '#22bbff'}"
+          >
             {{countDownNames.includes("isChangeMsgCode") ? codeCount + "S" : "获取验证码"}}
           </button>
         </p>
@@ -41,7 +44,7 @@
 <script>
 
 import { watcher } from "@/hooks/personalCenter/watcher";
-import { reactive,toRefs ,provide} from "vue";
+import { reactive,toRefs ,provide,ref,watch} from "vue";
 // 调用请求函数，修改手机号
 import {changeMsg} from '@/api/personalCenter/baseMsg'
 import { changeBoxScss } from "@/public/baseMsg.scss";
@@ -82,7 +85,7 @@ export default {
         title: `换绑昵称`,
         input: "输入昵称",
         value: "",
-        zz:/^\d{4}$/,
+        zz:/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/,
         isShow: false,
         tip1: "*昵称不能为空",
       },
@@ -92,6 +95,8 @@ export default {
 
     // 点击确认更改按钮所需要的数据
     let personalMsg = reactive({
+      telephone:'',
+      code:'',
       nickName:'',
       userId: JSON.parse(localStorage.getItem('users')).userId
     })
@@ -115,6 +120,17 @@ export default {
     changeMsg(url.personalCenter.changePersonalMsg.changeNick,personalMsg)
     }
 
+     //利用监听属性判断用户是否输入的是正确的账号以此来开开启是否禁用获取验证码按钮
+     let disabled = ref(true)
+      watch(data[0],()=>{
+        if(data[0].zz.test(data[0].value)){
+          disabled.value = false
+        }else{
+          disabled.value = true
+        }
+      })
+
+   
     provide("controlDialog", "isChangeMsgCode");
     return {
       // 处理页面渲染数据
@@ -134,7 +150,7 @@ export default {
       confirm,// 遮罩层的确认按钮
       cancel, // 取消遮罩层
       ...toRefs(countDown),// 将countDown对象扩展开并变成响应式数据
-
+      disabled,//是否禁用获取验证码按钮
 
      
     };

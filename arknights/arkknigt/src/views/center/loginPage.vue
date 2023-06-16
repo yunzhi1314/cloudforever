@@ -89,7 +89,7 @@ import controlObj from "@/hook/personalCenter/control";
 import { getMathCode, againGetMathCode, cancel } from "@/hook/personalCenter/code";
 import svg from "@/hook/personalCenter/code";
 import { telCode } from "@/api/telCode"; // 获取短信验证码请求的API
-import { Request } from "@/hook/request";
+import { Request } from "@/hook/personalCenter/request";
 import url from "@/api/url";
 import store from "@/store";
 import { useRouter } from "vue-router";
@@ -230,6 +230,7 @@ export default {
         Request.post(url.personalCenter.register, registerData)
           .then((res) => {
             dataList.data = res.data;
+            console.log(dataList.data);
             setTimeout(() => {
               store.commit("personalCenter/changeUse", dataList.data);
               store.commit("CHANGE_STORE", "isRegister");

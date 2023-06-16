@@ -2,13 +2,13 @@
 import req from '@/utils/request'
 
 export class Request{
-    static async getData(url){
+    static async get(url){
         return await req.get(url)
      }
-     static async postData(url,data){
+     static async post(url,data){
            return await req.post(url,data)
      }
-     static async putData(url,data){
+     static async put(url,data){
            return await req.put(url,data)
      }
 }

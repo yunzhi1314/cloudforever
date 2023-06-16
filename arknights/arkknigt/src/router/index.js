@@ -28,7 +28,12 @@ const routes = [
     path:"/menuPage",
     name:"menuPage",
     component:()=> import("@/views/database/system/menu/menuPage.vue")
-  }
+  },
+  {
+    path: '/homePage',
+    name: 'homePage',
+    component: () => import('../views/database/home/homePage.vue')
+  },
 ]
 
 const router = createRouter({

@@ -16,10 +16,12 @@ export default{
         },
         SAVE_EXP_MEDICAL(state,data){
             state.ExpMedical = data
+            console.log(state.ExpMedical);
         },
         SAVE_BASIC_MEDICAL(state,data){
             // console.log(data);
             state.basicMedical = data
+            console.log(state.basicMedical);
         }
         
     },

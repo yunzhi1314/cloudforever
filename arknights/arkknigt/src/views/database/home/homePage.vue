@@ -49,10 +49,10 @@
         <div class="plans" id="navTools"
            style="display: block;
            padding:1vw;
-           width: 27vw; 
+           width: 36.1vw; 
            height: 50vh; 
            margin-top: 2.5vh; 
-           margin-left: 0.65vw"
+           margin-left: 0.92vw"
         >
            <section class="word">
             快捷导航工具

@@ -1,7 +1,7 @@
 // 药物试验数据的js
 import *as echarts from "echarts";
 
-import { Request } from "@/hook/personalCenter/request";
+import { Request } from "@/hook/request";
 
 import { reactive } from "vue";
 

@@ -1,5 +1,5 @@
 import * as echarts from 'echarts';
-import { Request } from "@/hook/personalCenter/request";
+import { Request } from "@/hook/request";
 import store from '@/store';
 import url from '@/api/url';
 

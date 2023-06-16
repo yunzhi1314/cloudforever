@@ -1,9 +1,9 @@
-import { mathCode } from "@/api/personalCenter/mathCode"// 获取图形验证码请求的API
-import {  reactive, ref } from "vue"
-import controlObj from "@/hooks/personalCenter/control";// 导入按钮
-import store from "@/store" //引入仓库
+import { mathCode } from "@/api/personalCenter/mathCode"; // 获取图形验证码请求的API
+import { reactive, ref } from "vue";
+import controlObj from "@/hooks/personalCenter/control"; // 导入按钮
+import store from "@/store"; //引入仓库
 import { telCode } from "@/api/personalCenter/telCode"; // 获取短信验证码请求的API
-import { watcher } from "@/hooks/personalCenter/watcher"; 
+import { watcher } from "@/hooks/personalCenter/watcher";
 
   // 点击切换密码或短信验证码登录
     export function codeLogin(loginArr) {

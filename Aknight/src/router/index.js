@@ -26,11 +26,6 @@ const routes = [
     name: "databasePage",
     component: () => import("@/views/database/databasePage"),
   },
-  {
-    path:"/database/home/:userId",
-    name:"homePage",
-    component:()=>import("@/views/database/home/homePage"),
-  }
 
 ];
 

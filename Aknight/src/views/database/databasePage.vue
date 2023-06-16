@@ -156,7 +156,7 @@
 	import { ref, reactive, toRefs, onUpdated } from "vue";
 	import { useRouter, useRoute } from "vue-router";
 	import { getMedical } from "@/api/arknight/database/home";
-	// import router from "@/router";
+	import router from "@/router";
 	export default {
 		name: "databasePage",
 		setup() {
@@ -311,6 +311,21 @@
 				...toRefs(JSON.parse(sessionStorage.getItem("menus")))
 			};
 		},
+		// 组件内守卫：进入该组件路由之前。目的：知道从哪个页面进来的
+		// 页面导航拦截
+		beforeRouteEnter(to, from, next) {
+			if (from.name == "ToDatabase") {
+				setTimeout(() => {
+					router.push({
+						name: "homePage",
+						params: {
+							userId: JSON.parse(localStorage.getItem("userMsg")).userId
+						}
+					});
+				}, 1000);
+			}
+			next();
+		}
 	};
 </script>
 

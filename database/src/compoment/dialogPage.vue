@@ -16,7 +16,7 @@ export default {
     setup() {
         let name = inject("name")
         // console.log('isdialog', isDialog);
-        console.log('name', name);
+        // console.log('name', name);
         function cancel() {
             // controlObj.isDialog = false
             Reflect.set(controlObj.isDialog, name, false)

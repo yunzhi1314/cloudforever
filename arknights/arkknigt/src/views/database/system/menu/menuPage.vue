@@ -38,23 +38,26 @@
 // import {Request} from "@/hook/request" //请求方法
 import homePageCss from "@/public/database/homePage.scss"
 import {ref,toRefs} from "vue"
-import { Search } from '@element-plus/icons-vue'
-import service from "@/utils/request" //请求头，拦截器
-import  req  from '@/api/url.js' //路径
-import {tabledata} from '@/api/database/menu/index'
-// import  {dealTree} from "@/hook/database/menuPage"
-import {newData} from "@/hook/database/menuPage"
+import  {dealTree} from "@/hook/database/menuPage"
+// import { Search } from '@element-plus/icons-vue'
+// import service from "@/utils/request" //请求头，拦截器
+// import  req  from '@/api/url.js' //路径
+// import {tabledata} from '@/api/database/menu/index'
+
+// import {newData} from "@/hook/database/menuPage"
 export default {
     name:'menuPage',
     setup () {
+        let search = ref("") 
 
-       let search = ref("") 
-       let isSearch = ref(false) 
+        let dataLister = JSON.parse(sessionStorage.getItem("basicMedical")).basicMedical
+        console.log(dataLister)
+        dealTree()
+    //    let isSearch = ref(false) 
          
-        console.log(Request,service,req)
 
     
-      console.log(newData)
+ 
     
     // console.log(dealTree())
 // tabledata()
@@ -63,16 +66,16 @@ export default {
             homePageCss,
 
             // 判断
-            isSearch,
+            // isSearch,
        
         //icon图标类型 
-            Search,
+            // Search,
 
          // 变量 
             search,
 
             // 请求过来的数据
-            ...toRefs(tabledata()),
+            ...toRefs(dealTree()),
         }
     }
 }

@@ -1,5 +1,5 @@
 // 引入请求文件require
-import req from '@/utils/require'
+import req from '@/utils/request'
 
 export class Request{
     static async getData(url){

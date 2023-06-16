@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { ExpMedical } from "@/echarts/echarts";
+// import { ExpMedical } from "@/echarts";
 import { onMounted, toRefs } from "vue";
 import { homeData } from '@/api/database/home/index.js'
 import homeCss from '@/public/database/homePage.scss'
@@ -50,7 +50,7 @@ export default {
     setup() {
         onMounted(() => {
             // 折线图
-            ExpMedical(document.querySelector("#exMpedicals"));
+            // ExpMedical(document.querySelector("#exMpedicals"));
 
         })
         return {

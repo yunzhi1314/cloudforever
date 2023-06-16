@@ -26,6 +26,7 @@ export default ({
             state.baseRoutes = data
         },
         changeBaseMessage(state,data){//存储个人信息
+            console.log(data)
             state.baseMessage = data
         },
     },

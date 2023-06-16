@@ -22,7 +22,7 @@ export default createStore({
       storage: window.sessionStorage,
       reducer(state) {
         let expMedicalData = {
-          expMedical: state.dataStore.expMedical
+          expMedical: state.dataStore.ExpMedical
         }
         return isStore(state, "expMedical", "isExpMedical", expMedicalData, sessionStorage)
       },
@@ -34,11 +34,14 @@ export default createStore({
       reducer(state) {
         let basicMedicalData = {
           basicMedical: state.dataStore.basicMedical
+          
         }
         return isStore(state, "basicMedical", "isBasicMedical", basicMedicalData, sessionStorage)
       },
       key: 'basicMedical'
+      
     }),
+   
     //保存用户注册时候的信息
     createPersistedState({
       storage: window.localStorage,
@@ -96,10 +99,15 @@ export default createStore({
   mutations: {
     CHANGE_STORE(state, data) {
       Reflect.set(state.control, data, true)
+     
       setTimeout(() => {
         Reflect.set(state.control, data, false)
       }, 1000)
-    }
+    },
+      // basicMedicalswih(state,data) {
+      //   Reflect.set(state.control, data, true)
+      // } 
+    
   },
   actions: {
   },

@@ -1,34 +1,5 @@
-// #homePage {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// }
-// .common_place {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// }
-
-#homePage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    // the top echarts
-    #commonCss {
-        width: 50vw;
-        height: 50vh;
-    }
-}
-
-
-.common_place{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .plans {
-    width: 21.5vw;
+    width: 23vw;
     height: 15vh;
     border: 1px solid #eee;
     display: flex;

@@ -1,6 +1,6 @@
 import url from "@/api/url";
 import {reactive,toRef} from 'vue'
-import { Request } from "@/hook/personalCenter/request";
+import { Request } from "@/hook/request";
 import { dealRoutes } from "@/hook/handlerRouter";
 import router from '@/router'
 import store from '@/store'

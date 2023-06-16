@@ -1,4 +1,4 @@
-import { Request } from "@/hook/personalCenter/request";
+import { Request } from "@/hook/request";
 import url from "@/api/url"
 import { reactive } from 'vue'
 

@@ -10,6 +10,7 @@ export function getBaseMsg(data) {
     })
     Request.postData(url.centerPage.baseMsg.getBaseMsg, data).then(res => {
         datalist.datas = { ...res.data.users }
+        //存baseMsg
         store.commit("personalCenter/changeBaseMsg", datalist.datas)
         store.commit("changeStore", "isBaseMsg")
     })

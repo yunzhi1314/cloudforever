@@ -16,7 +16,7 @@ export default {
 	name: "ToDatabase",
 	setup() {
 		let router = useRouter();
-		//跳转到布局页面
+		//跳转到数据库布局页面
 		function toDatabase() {
 			router.push({
 				name: "databasePage"
@@ -27,6 +27,7 @@ export default {
 			getMenu()
 		})
 		return {
+			//点击前往数据库
 			toDatabase
 		};
 	}

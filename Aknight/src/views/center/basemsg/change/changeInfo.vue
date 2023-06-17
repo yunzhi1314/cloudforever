@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import baseCss from '@/public/baseMsg/baseMsg.scss'
+import baseCss from '@/public/personalCenter/baseMsg/baseMsg.scss'
 import { reactive, provide } from 'vue'
 import { useRoute } from 'vue-router'
 import { observer } from "@/hooks/personalCenter/watcher";
@@ -167,19 +167,29 @@ export default {
     }
 
     return {
+      //样式
       baseCss,
       dialogCss,
+      //输入框渲染数据
       changeArr,
+      //标题
       title,
+      //解构验证码倒计时函数之后得到的
       getCode,
       countDown,
       confirm,
+      //按钮集合
       controlObj,
+      //获取验证码
       getMathCode,
+      //切换验证码
       changeSvg,
+      //取消遮罩层
       cancel,
+      //验证码svg图片
       svg,
       route,
+      //确认更改
       changeInfo
     }
   }

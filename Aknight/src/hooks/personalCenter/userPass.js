@@ -7,7 +7,8 @@ import url from "@/api/url";
 // 登录要用的数据
 let loignObj = reactive({
 	telephone: "",
-	password: ""
+	password: "",
+	code: ""
 });
 
 // 注册要用的数据
@@ -17,6 +18,7 @@ let registerObj = reactive({
 	code: ""
 });
 
+//arr:输入框数据 usrName:请求名字 methoName:调用子仓库的方法名 fn:调用子仓库方法的映射 
 export function userPass(arr, urlName, methodName, fn) {
 	// 登录或注册的数据
 	let target;
@@ -75,6 +77,11 @@ export function userPass(arr, urlName, methodName, fn) {
 	} else {
 		// 登录,需要userId
 		target.userId = JSON.parse(localStorage.getItem("userMsg")).userId;
+		//短信登录需要修改请求参数
+		if (controlObj.isCode) {
+			let index = arr.findIndex((item) => item.use == "验证码");
+			Reflect.set(target, "code", arr[index].value);
+		}
 	}
 
 	// 判断是否可以登录或注册

@@ -28,6 +28,7 @@ export default {
   setup() {
 
     return {
+      //数据请求
       ...toRefs(getInfo("infoBasic"))
     }
   }

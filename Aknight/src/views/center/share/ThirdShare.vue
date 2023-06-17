@@ -32,6 +32,7 @@ export default {
 	name: "ThirdShare",
 	setup() {
 		return {
+			//渲染数据
 			...toRefs(getShare())
 		};
 	}

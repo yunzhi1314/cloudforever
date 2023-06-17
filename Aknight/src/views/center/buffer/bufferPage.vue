@@ -1,3 +1,4 @@
+<!-- 过渡组件 -->
 <template>
     <div>
     </div>
@@ -10,11 +11,14 @@ export default {
     name: "bufferPage",
     setup() {
         const router = useRouter()
+        //请求BaseMessage页面数据
         centerMenu()
+        //组件内离开时触发的守卫
         onBeforeRouteLeave(() => {
+            //刷新页面
             setTimeout(()=>{
                 router.go(0)
-            },50)
+            },10)
         })
         return {}
     }

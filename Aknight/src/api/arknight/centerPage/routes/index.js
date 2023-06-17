@@ -1,11 +1,10 @@
-// 登录成功请求路由，并处理动态路由
 import url from "@/api/url";
 import { handleRoutes } from "@/hooks/handleRoutes";
 import { Request } from "@/hooks/request";
 import router from "@/router";
 import store from "@/store";
 import { reactive, toRef } from "vue";
-
+// 登录成功请求路由
 export function centerMenu() {
     let dataList = reactive({ menu: [] })
 
@@ -31,7 +30,7 @@ export function centerMenu() {
             routes.forEach(item => {
                 router.addRoute("centerPage", item)
             })
-
+            //2秒后跳转到BaseMessage页面
             setTimeout(() => {
                 router.push({
                     name: "BaseMessage",

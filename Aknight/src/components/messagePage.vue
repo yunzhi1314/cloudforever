@@ -1,3 +1,4 @@
+<!-- 吐丝封装 -->
 <template>
     <div>
         <section class="tusi" :style='{
@@ -15,9 +16,12 @@ import { reactive } from 'vue'
 export default {
     name: "messagePage",
     setup() {
+        //获取存储的msg
         let {msg} = reactive(JSON.parse(sessionStorage.getItem("msg")))
         return {
+            //按钮集合
             controlObj,
+            //扩展msg
             ...msg
         }
     }

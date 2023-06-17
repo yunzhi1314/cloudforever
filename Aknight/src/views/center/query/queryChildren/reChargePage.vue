@@ -1,7 +1,7 @@
 <template>
 	<!-- <div class="childrenItem"> -->
 	<div class="SelfQuery" style="width: 35rem">
-		<section style="font-size: 1.3rem">{{ title }}</section>
+		<section style="font-size: 1rem;font-weight:bold;">{{ title }}</section>
 		<div class="QueryItem">
 			<section>
 				<span style="color: #158fc5; margin-right: 0.5rem">UID</span
@@ -35,21 +35,19 @@
 <script>
 	import { useRoute } from "vue-router";
 	import { toRefs } from "vue";
-	import { centerPageScss } from "@/public/center/centerPage.scss";
 	export default {
 		name: "reChargePage",
 		setup() {
 			let route = useRoute();
 			let UID = JSON.parse(localStorage.getItem("userMsg")).UID;
+			let data =JSON.parse(sessionStorage.getItem("selfQuery")).selfQuery
 
 			return {
-				centerPageScss,
+				//本地存储的UID
 				UID,
 				route,
-				...toRefs(
-					JSON.parse(sessionStorage.getItem("selfQuery")).selfQuery.items[
-						route.query.index
-					]
+				//请求数据
+				...toRefs(data.items[route.query.index]
 				)
 			};
 		}

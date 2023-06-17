@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import baseCss from '@/public/baseMsg/baseMsg.scss'
+import baseCss from '@/public/personalCenter/baseMsg/baseMsg.scss'
 import { getBaseMsg } from '@/api/arknight/centerPage/baseMsg';
 import { reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -53,8 +53,11 @@ export default {
       })
     }
     return {
+      //样式
       baseCss,
+      //页面数据
       ...toRefs(getBaseMsg(data)),
+      //跳转对应更改页面
       changeInof
     }
   }

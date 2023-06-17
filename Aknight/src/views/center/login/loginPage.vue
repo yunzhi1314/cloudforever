@@ -163,30 +163,48 @@ export default {
 				use: "验证码"
 			}
 		]);
+		//监视输入框变化
 		observer(loginArr);
+		//给遮罩层组件传对应遮罩层按钮
 		provide("controlDialog", "isLoginIn");
+		//定时器倒计时
 		let { getCode, countDown, confirm } = setCountDown("isLoginIn", loginArr);
 
-		// 登录或注册
+		// 登录和注册
 		function registerOrLogin() {
-
-			controlObj.isChange ? userPass(loginArr, "register", "changeUserMsg", mapMutations) : userPass(loginArr, "login", "changeToken", mapMutations);
+			//判断是注册还是登录
+			controlObj.isChange ? 
+			//注册
+			userPass(loginArr, "register", "changeUserMsg", mapMutations) :
+			//登录=>同时要区分是密码登录/短信登录
+			userPass(loginArr,(controlObj.isCode ? "codeLogin" : "login"), "changeToken", mapMutations)
 		}
 
 		return {
+			//样式
 			dialogCss,
+			//渲染数组
 			loginArr,
 			addArr,
+			//按钮集合
 			controlObj,
+			//验证码svg图片
 			svg,
+			//切换登录方式
 			loginMethod,
+			//切换登录注册框
 			changeBoard,
+			//点击获取验证码
 			getMathCode,
+			//切换验证码
 			changeSvg,
+			//遮罩层取消按钮
 			cancel,
+			//解构验证码倒计时函数之后得到的
 			getCode,
 			countDown,
 			confirm,
+			//点击登录/注册
 			registerOrLogin
 		};
 	}

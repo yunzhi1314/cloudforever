@@ -18,7 +18,7 @@ export default {
             //刷新页面
             setTimeout(()=>{
                 router.go(0)
-            },10)
+            },50)
         })
         return {}
     }

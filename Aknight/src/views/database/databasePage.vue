@@ -181,7 +181,12 @@
 			// 控制页眉的值，v-model绑定
 			let title = ref("");
 			// 路由数据
-			let pages = reactive(JSON.parse(sessionStorage.getItem("menus"))).menu;
+			let menu = JSON.parse(sessionStorage.getItem("menus"));
+			let pages = reactive();
+			// 在menu不为空后再获取路由信息
+			if (menu != 0 && menu != null) {
+				pages = menu.menu;
+			}
 			// uerId
 			let userId = JSON.parse(localStorage.getItem("userMsg")).userId;
 
@@ -269,25 +274,26 @@
 			}
 			// 点击删除页眉
 			function removeTab(targetName) {
-				const newTabs = tabs.value;
-				let activeName = title.value;
-				// 判断当前删除的页眉是是否为高亮页眉
-				if (activeName === targetName) {
-					newTabs.forEach((item, index) => {
-						if (item.name === targetName) {
-							// 获取高亮页眉前一项或后一项，如果当前高亮页眉不为最后一项，则获取后一项，为最后一项就获取前一项
-							const nextTab = newTabs[index + 1] || newTabs[index - 1];
-							if (nextTab) {
-								// 保存获取到的前一项或后一项页眉
-								activeName = nextTab.name;
-								// 跳转到高亮页眉
-								toTab({ paneName: activeName });
-							}
-						}
-					});
-				}
-				// 将点击删除的页眉过滤掉
+				// 首页的页眉不能删除
 				if (targetName != "首页") {
+					const newTabs = tabs.value;
+					let activeName = title.value;
+					// 判断当前删除的页眉是是否为高亮页眉
+					if (activeName === targetName) {
+						newTabs.forEach((item, index) => {
+							if (item.name === targetName) {
+								// 获取高亮页眉前一项或后一项，如果当前高亮页眉不为最后一项，则获取后一项，为最后一项就获取前一项
+								const nextTab = newTabs[index + 1] || newTabs[index - 1];
+								if (nextTab) {
+									// 保存获取到的前一项或后一项页眉
+									activeName = nextTab.name;
+									// 跳转到高亮页眉
+									toTab({ paneName: activeName });
+								}
+							}
+						});
+					}
+					// 将点击删除的页眉过滤掉
 					// 将前一项或后一项设置为高亮
 					title.value = activeName;
 					tabs.value = newTabs.filter((item) => item.name !== targetName);
@@ -322,7 +328,7 @@
 							userId: JSON.parse(localStorage.getItem("userMsg")).userId
 						}
 					});
-				}, 1000);
+				}, 500);
 			}
 			next();
 		}

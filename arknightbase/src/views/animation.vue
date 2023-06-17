@@ -17,16 +17,14 @@ let timer = setInterval(() => {
 }, 100)
 
 // 鼠标跟随移动功能
-let circle : HTMLDivElement;
-
 onMounted(() => {
-  circle = document.querySelector(".circle") as HTMLDivElement
+  let circle  = document.querySelector(".circle") as HTMLDivElement
+  mouseFollow(circle)
 })
 
 
 // 请求图片数据
 let { img } = await getIndexDatas('images')
-
 </script>
 
 <template>
@@ -59,11 +57,13 @@ let { img } = await getIndexDatas('images')
   </div>
 
   <!-- 首页 -->
-  <div class="index">
+  <div class="index" :style="{
+     cursor:`url(${img.points.image1}),auto`
+  }">
       <div></div>
       <div></div>
       <!-- 鼠标跟随移动 -->
-      <div  class="circle" v-html="mouseFollow(img,circle)">
+      <div  class="circle">
       </div>
   </div>
 </template>

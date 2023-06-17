@@ -119,11 +119,17 @@
 								<FullScreen />
 							</el-icon>
 						</el-menu-item>
-						<el-sub-menu index="8">
-							<template #title>用户名</template>
+						<el-sub-menu index="8" style="height: 6.3vh; padding: 0">
+							<template #title>
+								<div class="img"></div>
+								用户名
+							</template>
 							<el-menu-item index="8-1">首页</el-menu-item>
 							<el-menu-item index="8-2">代码仓库</el-menu-item>
 							<el-menu-item index="8-3">个人中心</el-menu-item>
+							<el-menu-item index="8-4" @click="isDialog.isLoginOut = true"
+								>退出</el-menu-item
+							>
 						</el-sub-menu>
 					</el-menu>
 					<!-- tag标签,页眉标签 -->
@@ -131,14 +137,15 @@
 						v-model="title"
 						type="card"
 						class="demo-tabs"
-						closable
 						@tab-remove="removeTab"
 						@tab-click="toTab">
 						<el-tab-pane
 							v-for="item in tabs"
 							:key="item.name"
 							:label="item.title"
-							:name="item.name">
+							:name="item.name"
+							:closable="item.title=='首页'?false:true"
+							>
 						</el-tab-pane>
 					</el-tabs>
 				</el-header>
@@ -149,13 +156,29 @@
 			</el-container>
 		</el-container>
 	</div>
+	<!-- 遮罩层 -->
+	<dialogPage>
+		<div class="loginout" @click.stop>
+			<div>
+				<section>确定要退出吗?</section>
+				<section>
+					<button @click="confirm">确认</button>
+					<button @click="isDialog.isLoginOut = false">取消</button>
+				</section>
+			</div>
+		</div>
+	</dialogPage>
 </template>
 
 <script>
+	import centerPagescss from "@/public/center/centerPage.scss";
+	import dialogCss from "@/public/dialog/dialogPage.scss";
+
 	import databaseScss from "@/public/database/dataBase.scss";
-	import { ref, reactive, toRefs, onUpdated } from "vue";
+	import { ref, reactive, toRefs, onUpdated, provide } from "vue";
 	import { useRouter, useRoute } from "vue-router";
 	import { getMedical } from "@/api/arknight/database/home";
+	import controlObj from "@/hooks/personalCenter/controlObj";
 	import router from "@/router";
 	export default {
 		name: "databasePage",
@@ -275,7 +298,7 @@
 			// 点击删除页眉
 			function removeTab(targetName) {
 				// 首页的页眉不能删除
-				if (targetName != "首页") {
+				// if (targetName != "首页") {
 					const newTabs = tabs.value;
 					let activeName = title.value;
 					// 判断当前删除的页眉是是否为高亮页眉
@@ -299,9 +322,23 @@
 					tabs.value = newTabs.filter((item) => item.name !== targetName);
 					// 将过滤后剩下的页眉重新赋值
 					tabs.value = reactive(tabs.value);
-				}
+				// }
 			}
+			// 退出
+			//点击遮罩层确认按钮
+			const confirm = () => {
+				Reflect.set(controlObj.isDialog, "isLoginOut", false);
+				localStorage.removeItem("token");
+				router.push({
+					path: "/center/login"
+				});
+				router.go(0);
+			};
+			provide("controlDialog", "isLoginOut");
+
 			return {
+				dialogCss,
+				centerPagescss,
 				databaseScss,
 				isPlay,
 				route,
@@ -311,10 +348,12 @@
 				metaName,
 				title,
 				tabs,
+				confirm,
 				toTab,
 				toPage,
 				removeTab,
-				...toRefs(JSON.parse(sessionStorage.getItem("menus")))
+				...toRefs(JSON.parse(sessionStorage.getItem("menus"))),
+				...controlObj
 			};
 		},
 		// 组件内守卫：进入该组件路由之前。目的：知道从哪个页面进来的
@@ -342,5 +381,12 @@
 
 	.el-header > ul {
 		align-items: center;
+	}
+	.img {
+		width: 30px;
+		height: 30px;
+		border: 1px solid;
+		background-color: #ff00ff;
+		border-radius: 50%;
 	}
 </style>

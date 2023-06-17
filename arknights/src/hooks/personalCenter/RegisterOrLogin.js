@@ -77,6 +77,7 @@ export function pass(obj) {
         console.log(isPass == controlObj.isRegister);
         Request.postData(url.personalCenter.register,target)
         .then(res=>{
+            console.log(res.data)
             dataList.data = toRef({...res.data})
             store.commit("personalCenter/changeUse", dataList.data);
             store.commit("changeMsg", dataList.data);

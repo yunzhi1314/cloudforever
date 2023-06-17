@@ -24,7 +24,7 @@ export default createStore({
           UID: state.personalCenter.UID,
           email: state.personalCenter.email,
           fullName: state.personalCenter.fullName,
-          userId: state.personalCenter.userId
+          userId: state.personalCenter.userId,
         }
         return isStore(state, "users", "isRegister", registerObj, localStorage)
       },
@@ -35,7 +35,7 @@ export default createStore({
       reducer(state) {
         let tokenData = {
           token: state.personalCenter.token,
-          telephone:state.telephone
+          telephone:state.telephone,
         }
         return isStore(state, "token", "isLogin", tokenData, sessionStorage)
       },
@@ -79,6 +79,7 @@ export default createStore({
     countDown: 120,
     msg: null,
     telephone:null,
+   
     // 控制状态开关集合
     control:{
       isRegister:false,//存储注册信息开关
@@ -100,7 +101,7 @@ export default createStore({
     changeMsg(state, message) {
       state.msg = message
     },
-    // 存储电话
+    // 存储账密
     changeTel(state,data){
       state.telephone = data.telephone
     }

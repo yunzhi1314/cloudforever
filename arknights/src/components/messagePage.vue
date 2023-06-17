@@ -12,8 +12,9 @@ import { reactive } from 'vue';
 export default {
     name:"messagePage",
     setup() {
+        // if(JSON.parse(sessionStorage.getItem("msg"))){}
         let { msg } = reactive(JSON.parse(sessionStorage.getItem("msg")))
-
+        
         return {
             ...msg
         }

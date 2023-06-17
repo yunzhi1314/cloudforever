@@ -19,6 +19,7 @@ export default ({
         changeUse(state,data){
             state.UID = data.UID
             state.userId = data.userId
+           
         },
         changeToken(state,data){
             state.token = data.token

@@ -2,6 +2,24 @@ import { onBeforeMount, reactive } from "vue";
 import { Request } from "@/hooks/personalCenter/request";
 import url from "@/api/url";
 
+// 顶部message数据
+export function message(){
+  let dataList = reactive({
+     msg:[]
+  })
+
+  onBeforeMount(()=>{
+      Request.getData(url.dataBase.home.messages)
+      .then(res=>{
+         dataList.msg = {...res.data}
+         console.log(dataList.msg)
+      })
+  })
+
+  return dataList
+}
+
+// 快捷导航栏数据
 export function navTools() {
     let dataList = reactive({
       data: [],

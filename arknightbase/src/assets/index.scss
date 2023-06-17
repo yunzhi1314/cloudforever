@@ -1,0 +1,23 @@
+.index {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+.index > div:nth-child(1) {
+  flex: 4;
+}
+.index > div:nth-child(2) {
+  flex: 1.15;
+}
+/* 鼠标跟随圆圈 */
+.circle{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    position: absolute;
+    text-align: center;
+    line-height: 35px;
+}
+

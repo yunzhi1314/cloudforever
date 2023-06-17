@@ -1,0 +1,18 @@
+.wirpper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #e4e7ed;
+  border-radius: 3px;
+  transition: all 0.1s 0s linear;
+
+  .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 5vh;
+  }
+}
+.wirpper:hover {
+  box-shadow: 0px 0px 5px #ccc, 0px 0px 7.5px #ccc, 0px 0px 10px #ccc;
+}

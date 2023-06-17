@@ -27,13 +27,18 @@
       </section>
     </div>
   </div>
+  <!-- 吐丝 -->
+  <messagePage v-if="controlObj.isTusi"></messagePage>
 </template>
 
 <script>
-import baseCss from '@/public/baseMsg/baseMsg.scss'
+import baseCss from '@/public/personalCenter/baseMsg/baseMsg.scss'
 import { reactive } from 'vue'
 import { observer } from "@/hooks/personalCenter/watcher";
 import { getCode, setMsg } from '@/api/arknight/centerPage/resetPsw';
+import controlObj from "@/hooks/personalCenter/controlObj";
+import { toest } from "@/hooks/toset";
+
 export default {
   name: "ResetPassword",
   setup() {
@@ -102,12 +107,20 @@ export default {
         code: pwdArr[2].value,
         userId: userId
       })
+      //调用吐丝
+      toest(controlObj)
     }
     return {
+      //样式
       baseCss,
+      //输入框渲染数组
       pwdArr,
+      //点击自动发送短信
       getTelCode,
-      changePwd
+      //确认更改密码
+      changePwd,
+      //按钮集合
+      controlObj
     }
   }
 }

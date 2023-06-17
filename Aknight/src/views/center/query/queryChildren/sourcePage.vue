@@ -1,8 +1,8 @@
 <template>
 	<!-- <div class="childrenItem"> -->
 	<div class="SelfQuery" style="width: 35rem">
-		<section style="font-size: 1.3rem">
-			<img :src="titleImg" alt="" />{{ title }}
+		<section style="font-size: 1rem;font-weight:bold;">
+			{{ title }}
 		</section>
 		<div class="QueryItem">
 			<section>
@@ -67,17 +67,17 @@
 <script>
 	import { useRoute } from "vue-router";
 	import { ref, watch, reactive } from "vue";
-	import { centerPageScss } from "@/public/center/centerPage.scss";
 	export default {
 		name: "sourcePage",
 		setup() {
 			let route = useRoute();
 			let UID = JSON.parse(localStorage.getItem("userMsg")).UID;
 			let number = ref(1);
-			let { title, titleImg, children } = JSON.parse(
-				sessionStorage.getItem("selfQuery")
-			).selfQuery.items[route.query.index];
+			//获取存储中的数据
+			let { title,children } = 
+			JSON.parse(sessionStorage.getItem("selfQuery")).selfQuery.items[route.query.index];
 			let arr = reactive({});
+			//监听数据
 			watch(
 				number,
 				(newValue) => {
@@ -86,6 +86,7 @@
 				},
 				{ immediate: true }
 			);
+			//翻页
 			function handlePage(str) {
 				switch (str) {
 					case "-":
@@ -102,19 +103,17 @@
 				}
 			}
 			return {
-				centerPageScss,
+				//本地存储的UID
 				UID,
 				route,
+				//页数
 				number,
+				//渲染数据
 				arr,
+				//标题
 				title,
-				titleImg,
+				//翻页
 				handlePage
-				// ...toRefs(
-				// 	JSON.parse(sessionStorage.getItem("selfQuery")).selfQuery.items[
-				// 		route.query.index
-				// 	]
-				// )
 			};
 		}
 	};

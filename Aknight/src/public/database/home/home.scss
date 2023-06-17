@@ -5,14 +5,14 @@
     grid-template-columns: 1fr;
     grid-template-areas: "header" "center" "footer";
     row-gap: 1rem;
-
+    /* 头部 */
     .header {
         grid-area: header;
         height: 7.5rem;
         display: flex;
         align-items: center;
 
-        //四个盒子的样式
+        /* 四个盒子的样式 */
         .centbox {
             height: 100%;
             width: 20rem;
@@ -48,7 +48,7 @@
                 background-color: #ECF5FF;
             }
         }
-
+        
         .centbox:hover {
             box-shadow: 0 0 10px #e1dddd;
             transition: all 0.3s ease-in 0.1s;
@@ -58,7 +58,7 @@
             margin-left: 0;
         }
     }
-
+    /* 中间两个echarts图 */
     .center {
         grid-area: center;
         height: 25rem;
@@ -71,43 +71,23 @@
             box-shadow: 0 0 10px #e1dddd;
             transition: all 0.3s ease-in 0.1s;
         }
-
+        /* 复合折线图 */
         #expMedicals {
             height: 100%;
             width: 55.5rem;
             background-color: #fff;
             margin-right: 1rem;
         }
-
+        /* 圆环图 */
         #basicMedical {
             height: 100%;
             width: 26.5rem;
             background-color: #fff;
         }
     }
-
+    /* 底部 */
     .footer {
         grid-area: footer;
         background-color: aqua;
     }
 }
-
-
-
-
-
-
-// .yuan {
-//     width: 50px;
-//     height: 50px;
-//     border-radius: 50%;
-//     background-color: burlywood;
-// }
-
-// .plang {
-//     width: 56vw;
-//     height: 50vh;
-//     border: 1px solid;
-//     margin-top: 2vh;
-//     margin-left: 5vw;
-// }

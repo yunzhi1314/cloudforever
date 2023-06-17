@@ -7,6 +7,8 @@ import { user } from "@/api/arknight/centerPage/code";
 import url from "@/api/url";
 //获取验证码图片
 let svg = ref("");
+//name:传入的遮罩层按钮名 name1:分离新旧手机号开关 
+//index:1表示点击获取旧手机号验证码 3表示获取新手机号验证码
 export const getMathCode = (name, name1, index) => {
 	controlObj.isDialog[name] = true;
 	if (index) {
@@ -67,7 +69,9 @@ export function setCountDown(name, arr) {
 	};
 	//定时器分离,根据定时器名字实现定时器分离
 	const timerSeparate = (timeName) => {
+		//添加定时器到集合里
 		countDown.nameArr.push(timeName);
+		//根据定时器名字调用对应的定时器
 		switch (timeName) {
 			case "isRegister":
 				timerRun("numberRegister", timeName);
@@ -103,8 +107,11 @@ export function setCountDown(name, arr) {
 		}, 1000);
 	};
 	return {
+		//发送短信的参数(手机号,验证码)
 		getCode,
+		//倒计时的数字,开关,集合
 		countDown,
+		//点击遮罩层确认按钮触发的事件
 		confirm
 	};
 }

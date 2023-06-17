@@ -6,7 +6,8 @@ export default {
 		mathCode: "api/user/getCode",//获取验证码图片
 		telCode: "api/user/telCode",//发送短信
 		register: "api/user/register",//注册请求
-		login: "api/user/login",//登录请求
+		login: "api/user/login",//密码登录请求
+		codeLogin:"api/user/codeLogin",//短信登录请求
 		centerRoutes: "person/home",//个人中心主页图片及路由信息
 		baseMsg: {//个人信息页面
 			getBaseMsg: "person/baseMsg/userBasic",//获取页面信息

@@ -1,3 +1,4 @@
+<!-- 遮罩层封装 -->
 <template>
     <Teleport to="body">
         <div class="masked" v-show="controlObj.isDialog[controlDialog]" @click="ceale">
@@ -20,8 +21,11 @@ export default {
         }
 
         return {
+            //点击页面取消遮罩层
             ceale,
+            //按钮集合
             controlObj,
+            //传入的遮罩层按钮
             controlDialog
         }
     }

@@ -16,7 +16,7 @@
 		name: "ToDatabase",
 		setup() {
 			let router = useRouter();
-			//跳转到布局页面
+			//跳转到数据库布局页面
 			function toDatabase() {
 				router.push({
 					name: "databasePage"
@@ -27,9 +27,9 @@
 				getMenu();
 				// 刷新页面，解决进入数据库后，菜单栏没有内容问题
 				// 但是要卡在路由添加之后再刷新
-				setTimeout(()=>{
-					router.go(0)
-				},1500)
+				setTimeout(() => {
+					router.go(0);
+				}, 1500);
 			});
 			return {
 				toDatabase

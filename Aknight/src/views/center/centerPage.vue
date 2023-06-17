@@ -95,12 +95,14 @@ export default {
 		let menuRoutes
 		let userId
 		let telephone
+		//到达BaseMessage页面
 		if (!bool.value) {
 			menus = JSON.parse(sessionStorage.getItem("menu")).menus
 			menuRoutes = JSON.parse(sessionStorage.getItem("menu")).menuRoutes
 			userId = JSON.parse(localStorage.getItem("userMsg")).userId
 			telephone = JSON.parse(localStorage.getItem("token")).telephone
 		}
+		//传遮罩层对应的按钮开关
 		provide("controlDialog", "isLoginOut")
 
 
@@ -134,18 +136,28 @@ export default {
 		}
 
 		return {
+			//样式
 			centerPagescss,
 			dialogCss,
+			//渲染图片
 			...toRefs(centerImg()),
 			...menus,
+			//判断是否进入了BaseMessage页面
 			bool,
+			//遮罩层确认按钮
 			confirm,
 			route,
+			//是否开启菜单动画
 			isShowPlay,
+			//是否开启动画反转
 			isReverse,
+			//点击打开菜单动画
 			menusClick,
+			//点击菜单列表的某一项跳转对应路由
 			toPage,
+			//按钮集合
 			...controlObj,
+			//当前账号(用户手机号,带*)
 			telephone
 		};
 	}

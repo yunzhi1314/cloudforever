@@ -29,13 +29,16 @@ export default {
     const route = useRoute()
     let index = route.query.index
     let name
+    //一个组件(实际上是针对两个页面),根据传过来的下标,请求对应数据进行渲染
     if (index == 1) {
       name = "infoRealname"
     } else {
       name = "infoBehavior"
     }
     return {
+      //数据请求
       ...toRefs(getInfo(name)),
+      //上个页面点击的下标
       index
     }
   }

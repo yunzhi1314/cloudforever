@@ -3,13 +3,12 @@
   <div class="infoDevice">
     <section class="btns">
       <button v-for="(item, index) in datas" :key="index" @click="changeActive(index)"
-      :class="number==index ?'active':'' "
-      >
+        :class="number == index ? 'active' : ''">
         {{ item.time }}
       </button>
     </section>
-    <div class="content" v-for="(item,index) in (datas.length != 0 ? datas[number].children : '')" :key="index">
-      <section class="title">{{item.title}}</section>
+    <div class="content" v-for="(item, index) in (datas.length != 0 ? datas[number].children : '')" :key="index">
+      <section class="title">{{ item.title }}</section>
       <div>
         <section>
           <span>收集场景</span>
@@ -29,20 +28,21 @@
 </template>
 
 <script>
-import infoDeviceCss from '@/public/list/infoDevice.scss'
 import { getInfo } from '@/api/arknight/centerPage/personalList';
-import { toRefs,ref } from 'vue'
+import { toRefs, ref } from 'vue'
 
 export default {
   name: "infoDevice",
   setup() {
-    let number =ref(0)
-    const changeActive =(index) =>{
-      number.value =index
+    let number = ref(0)
+    //数字变为点击的按钮下标,渲染对应的数据
+    const changeActive = (index) => {
+      number.value = index
     }
     return {
-      infoDeviceCss,
+      //数据请求
       ...toRefs(getInfo("infoDevice")),
+      //点击按钮事件
       changeActive,
       number
     }

@@ -11,16 +11,16 @@ export function getMedical(key) {
     });
     Request.getData(url.database.home[key]).then((res) => {
         dataList.datas = { ...res.data.datas };
-        if (key == "expMedicals") {
+        if (key == "expMedicals") {//存expMedicals
             store.commit("dataBase/changeExpMedicals", res.data.datas)
-        } else {
+        } else {//存changeBasicMedical
             store.commit("dataBase/changeBasicMedical", res.data.datas)
             store.commit("changeStore", "isMedical")
         }
     });
     return dataList;
 }
-
+//获取页面信息(homePage头部四个盒子)
 export function getMessages() {
     let dataList = reactive({
         menus: [],

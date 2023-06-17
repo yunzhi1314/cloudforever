@@ -14,7 +14,7 @@ let controlObj = reactive({
 	isLogin: true, // 是否能够登录
 	isTusi: false, // 展示吐丝弹窗的状态
 	isDisabled: false,//获取验证码按钮是否可用
-	isChangeTel:false,//分离更改手机号的两个按钮
+	isChangeTel:false,//分离更改新旧手机号
 });
 
 export default controlObj;

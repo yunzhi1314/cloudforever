@@ -1,3 +1,4 @@
+//处理路由的path和component
 export function handleRoutes(routes, index) {
 	// 递归
 	if (index < 0) {

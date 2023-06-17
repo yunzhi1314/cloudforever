@@ -37,7 +37,7 @@
 
 <script>
 import { ref, reactive, toRefs, onUpdated } from "vue";
-import exchangeGiftScss from "@/public/exchange/exchangeGift.scss";
+import exchangeGiftScss from "@/public/personalCenter/exchange/exchangeGift.scss";
 import { getRedemptionCode, getGift } from "@/api/arknight/centerPage/exchangeGift";
 import { toest } from "@/hooks/toset";
 import controlObj from "@/hooks/personalCenter/controlObj";
@@ -47,28 +47,35 @@ export default {
 		let context = ref("");
 		let gift = reactive({});
 		onUpdated(() => {
+			//获取历史记录
 			let datalist = JSON.parse(localStorage.getItem("context"))
 				? JSON.parse(localStorage.getItem("context")).contexts.filter(
 					(item) => item.items)
 				: [];
 			Reflect.set(gift, "context", datalist);
 		});
-		// 兑换礼物函数
+		// 兑换礼包函数
 		function exchangeGift() {
 			let zz = /^\w{13,}$/;
 			if (zz.test(context.value)) {
 				getGift(context.value);
-				// 吐丝
+				// 调用吐丝
 				toest(controlObj);
 			}
 			context.value = "";
 		}
 		return {
+			//样式
 			exchangeGiftScss,
+			//按钮集合
 			controlObj,
+			//输入框文字
 			context,
+			//历史兑换记录
 			gift,
+			//图标请求
 			...toRefs(getRedemptionCode()),
+			//点击兑换
 			exchangeGift
 		};
 	}

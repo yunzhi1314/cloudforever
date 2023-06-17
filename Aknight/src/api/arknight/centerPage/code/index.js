@@ -38,6 +38,7 @@ export function user(url, data, fn, isStore) {
             if (isStore == "isLogin") {
                 //存手机号(带*)
                 store.commit("changeTel", dataList.datas.telephone);
+                //存手机号(不带*)
                 store.commit("changeRealTel", data.telephone)
                 // 有token，登录成功，页面跳转
                 if (store.state.personalCenter.token) {

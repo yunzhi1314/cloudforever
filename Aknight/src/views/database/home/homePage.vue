@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import home from "@/public/home/home.scss";
+import home from "@/public/database/home/home.scss";
 import { expMedicals, basicMedical } from "@/echarts"
 import { onMounted, toRefs } from 'vue';
 import { getMessages } from '@/api/arknight/database/home';
@@ -46,7 +46,9 @@ export default {
       basicMedical(document.querySelector("#basicMedical"))
     })
     return {
+      //样式
       home,
+      //页面数据请求
       ...toRefs(getMessages()),
     };
   },

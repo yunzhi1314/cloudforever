@@ -13,7 +13,7 @@ body {
 		"main"
 		"footer";
 
-	// 头部
+	/* 头部  */
 	header {
 		z-index: 1;
 		position: fixed;
@@ -56,7 +56,7 @@ body {
 		}
 	}
 
-	// 主体内容
+	/* 主体内容 */
 	main {
 		grid-area: main;
 		display: flex;
@@ -64,7 +64,7 @@ body {
 		align-items: center;
 		flex-direction: column;
 
-		//输入框动画
+		/* 输入框动画 */
 		#inputRes:focus {
 			border-bottom: 2px solid #158fc5;
 			transition: all 0.3s ease-out;
@@ -75,7 +75,7 @@ body {
 			transition: all 0.3s ease-out;
 		}
 
-		//当前账号信息
+		/* 当前账号信息 */
 		.user-box {
 			min-width: 30rem;
 			height: 5rem;
@@ -106,11 +106,9 @@ body {
 			}
 		}
 
-		// 登录页面，登录框样式
+		/* 登录页面，登录框样式 */
 		.login {
 			width: 20rem;
-			// 不用设高度，由内容撑高
-			// height: 10vh;
 			background-color: rgba(255, 255, 255, 0.7);
 			border-radius: 1.3rem;
 			box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
@@ -137,7 +135,7 @@ body {
 				}
 			}
 
-			// 按钮区样式
+			/* 按钮区样式 */
 			.btns {
 				color: #158fc5;
 				font-size: 12px;
@@ -146,12 +144,12 @@ body {
 				cursor: pointer;
 			}
 
-			// 设置短信登录或密码登录文字居左
+			/* 设置短信登录或密码登录文字居左 */
 			.btns>section:nth-child(1) {
 				text-align: left;
 			}
 
-			// 前往注册框动画
+			/* 前往注册框动画 */
 			@keyframes toRegister {
 				0% {
 					transform: rotateY(0deg);
@@ -166,7 +164,7 @@ body {
 				}
 			}
 
-			// 前往登录框动画
+			/* 前往登录框动画 */
 			@keyframes toLogin {
 				0% {
 					transform: rotateY(0deg);
@@ -182,7 +180,7 @@ body {
 			}
 		}
 
-		//切换登录注册
+		/* 切换登录注册 */
 		.change-box {
 			position: absolute;
 			bottom: 8rem;
@@ -206,34 +204,11 @@ body {
 				color: #158fc5;
 			}
 		}
-
+		
 		.change-box>span:nth-child(2) {
 			font-weight: normal;
 		}
-
-		// 前往数据库
-		.toDatabase {
-			width: 20rem;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			height: 100%;
-
-			div {
-				width: 100%;
-				background-color: #fff;
-				padding: 2rem;
-				border-radius: 1rem;
-
-				section {
-					width: 100%;
-					text-align: center;
-				}
-			}
-		}
-
-		// 自助查询
+		/* 自助查询 */
 		.SelfQuery {
 			width: 30rem;
 			background-color: #fff;
@@ -248,6 +223,7 @@ body {
 
 			.QueryItem {
 				padding: 1rem;
+
 				button {
 					height: 3.5rem;
 					margin: 1rem 0;
@@ -257,11 +233,13 @@ body {
 					padding-left: 2rem;
 					font-size: 1.2rem;
 				}
-				th{
+
+				th {
 					padding: 0.1rem;
 					color: #158fc5;
 				}
-				td{
+
+				td {
 					padding: 0.2rem;
 					font-size: 14px;
 					text-align: center;
@@ -269,48 +247,12 @@ body {
 			}
 		}
 
-		.childrenItem{
+		.childrenItem {
 			width: 30rem;
 			height: 10rem;
 			background-color: #fff;
 		}
-
-		//第三方共享清单
-		.ThirdShare {
-			background-color: #fff;
-			width: 30rem;
-			margin-bottom: 1rem;
-			padding: 1.5rem;
-			border-radius: 1rem;
-
-			.title {
-				font-weight: bold;
-				border-bottom: 1px solid #ddd;
-				padding-bottom: 1rem;
-			}
-
-			.content>section {
-				display: grid;
-				grid-template-columns: 1fr 2fr;
-				grid-template-rows: 1fr;
-				grid-template-areas: "left right";
-				padding-top: 1rem;
-				gap: 1rem;
-				font-size: 0.9rem;
-			}
-
-			.content>section>a {
-				/*单词强制换行*/
-				word-break: break-all;
-				font-size: 0.8rem;
-			}
-
-			.content>section>span:nth-child(1) {
-				color: #B5A8C5;
-			}
-		}
-
-		//个人信息清单
+		/* 个人信息清单 */
 		.list {
 			margin-top: -14rem;
 			width: 30rem;
@@ -353,9 +295,139 @@ body {
 		.list>div:last-child {
 			border: none;
 		}
+
+		/* infoDevice页面 */
+		.infoDevice {
+			background-color: #fff;
+			width: 30rem;
+			margin-bottom: 1rem;
+			padding: 1.5rem;
+			border-radius: 1rem;
+
+			.btns {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 4rem;
+				border-bottom: 1px solid #ccc;
+
+				button {
+					margin-right: 0.5rem;
+					background-color: #f5f1f1;
+					border-radius: 0.5rem;
+					color: #000;
+					font-weight: normal;
+					font-size: 0.9rem;
+				}
+
+				button:hover {
+					background-color: rgba(0, 152, 220, .1);
+					transition: all 0.3s ease-in 0.1s;
+
+				}
+
+				.active {
+					color: #158fc5;
+					border: 1px solid #158fc5;
+					background-color: rgba(0, 152, 220, .1);
+					transition: all 0.3s ease-in 0.1s;
+				}
+			}
+
+			.btns>button:last-child {
+				margin-right: 0;
+			}
+
+			.content {
+				.title {
+					font-weight: bold;
+					padding: 1rem 0;
+				}
+
+				div {
+					background-color: #f5f1f1;
+					padding: 0.8rem;
+
+					section {
+						span {
+							font-size: 0.8rem;
+						}
+					}
+				}
+			}
+
+			.content>div>section {
+				display: grid;
+				grid-template-columns: 1fr 2.9fr;
+				grid-template-rows: 1fr;
+				grid-template-areas: "left right";
+				padding-top: 1rem;
+				gap: 1rem;
+			}
+			
+		}
+		/* 第三方共享清单 */
+		.ThirdShare {
+			background-color: #fff;
+			width: 30rem;
+			margin-bottom: 1rem;
+			padding: 1.5rem;
+			border-radius: 1rem;
+
+			.title {
+				font-weight: bold;
+				border-bottom: 1px solid #ddd;
+				padding-bottom: 1rem;
+			}
+
+			.content>section {
+				display: grid;
+				grid-template-columns: 1fr 2fr;
+				grid-template-rows: 1fr;
+				grid-template-areas: "left right";
+				padding-top: 1rem;
+				gap: 1rem;
+				font-size: 0.9rem;
+			}
+
+			.content>section>a {
+				/*单词强制换行*/
+				word-break: break-all;
+				font-size: 0.8rem;
+			}
+
+			.content>section>span:nth-child(1) {
+				color: #B5A8C5;
+			}
+		}
+		
+		/* 前往数据库 */
+		.toDatabase {
+			width: 20rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+
+			div {
+				width: 100%;
+				background-color: #fff;
+				padding: 2rem;
+				border-radius: 1rem;
+
+				section {
+					width: 100%;
+					text-align: center;
+				}
+			}
+		}
+
+
+
 	}
 
-	// 脚部内容
+	/* 脚部内容 */
 	footer {
 		padding: 0.5rem 0;
 		grid-area: footer;
@@ -376,7 +448,7 @@ body {
 	}
 }
 
-// 背景图片
+/* 背景图片 */
 .bgImg {
 	background-size: cover;
 	width: 100vw;
@@ -386,7 +458,7 @@ body {
 	background-position-y: -15vh;
 }
 
-// 输入框样式，几乎所有输入框样式都相同，可以考虑放外面
+/* 输入框样式，几乎所有输入框样式都相同，可以考虑放外面 */
 input {
 	width: 100%;
 	height: 2rem;
@@ -397,7 +469,7 @@ input {
 	border-bottom: 1px solid #ccc;
 }
 
-// button样式写在login里面，所有按钮都能吃到，如有不一样的单独添加样式
+ /* button样式，所有按钮都能通用，如有不一样的单独添加样式 */
 button {
 	background-color: #158fc5;
 	border: none;
@@ -416,7 +488,7 @@ button:hover {
 	transition: all 0.3s ease-in 0.1s;
 }
 
-// 按钮禁用样式
+/*  按钮禁用样式 */
 .disabled {
 	background-color: #797979;
 }
@@ -426,7 +498,7 @@ button:hover {
 	transition: all 0.3s ease-in 0.1s;
 }
 
-//左上菜单动画(展开与收缩)
+/* 左上菜单动画(展开与收缩) */
 @keyframes showOut {
 	0% {
 		width: 0vw;
@@ -529,7 +601,7 @@ button:hover {
 	}
 }
 
-//反转动画按钮
+/* 反转动画按钮(叉叉) */
 .reverseBtn::after,
 .reverseBtn::before {
 	content: "";
@@ -548,7 +620,7 @@ button:hover {
 	left: 28px;
 }
 
-//菜单列表
+/* 菜单列表 */
 .menuMsg {
 	position: fixed;
 	top: 10vh;
@@ -576,7 +648,7 @@ button:hover {
 	}
 }
 
-// 列表文本延迟出现动画
+/* 列表文本延迟出现动画 */
 @keyframes disappear {
 	0% {
 		filter: opacity(1);

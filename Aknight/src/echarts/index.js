@@ -3,9 +3,12 @@ import * as echarts from "echarts"
 //靶向药实验数据的复合折线统计图
 export function expMedicals(dom) {
     let medical = JSON.parse(sessionStorage.getItem("medical"))
+    let source1
+    //获取本地存的expMedicals数据
     if (JSON.parse(sessionStorage.getItem("medicals")) != 0) {
-        let source1 = medical.expMedicals
-        console.log(source1);
+        source1 = medical.expMedicals
+
+        //处理数组
         source1= source1.map(item =>({
             medical_name:item.medical_name,//药名
             company:item.company,//公司
@@ -16,8 +19,8 @@ export function expMedicals(dom) {
             非鳞癌OS:item.id<9 ? "" :(item.medical_OS=="/"? "":item.medical_OS ),
             
         }))
-        console.log(source1);
     }
+    console.log(source1);
     let exp = echarts.init(dom)
 
     let option = {

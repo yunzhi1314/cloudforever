@@ -146,7 +146,7 @@ export default createStore({
 			// 500秒后设置为false，否者刷新后还是会丢失，
 			setTimeout(() => {
 				Reflect.set(state.control, name, false);
-			}, 1000);
+			}, 200);
 		},
 		//登录存telephone(带*)
 		changeTel(state, data) {

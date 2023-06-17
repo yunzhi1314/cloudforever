@@ -24,7 +24,8 @@ export function getMenu() {
 			routes2.forEach((item) => {
 				router.addRoute("databasePage", item);
 			});
-		},1000)
+			// 要等仓库中开关关闭之后再处理添加路由
+		},200)
 	});
 	return dataList;
 }

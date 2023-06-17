@@ -6,4 +6,9 @@ export namespace URL {
   export interface Url {
     [propName: string]: urlObj | string
   }
+
+  export interface NavLis{
+    item:string;
+    isEnter:boolean
+  }
 }

@@ -74,6 +74,17 @@ export default createStore({
       },
       key:'databaseMenu'
    }),
+    // 存储饼状图医药信息
+    createPersistedState({
+      storage:window.sessionStorage,
+      reducer(state){
+        let basicMedical = {
+          basicMedical:state.database.basicMedical,
+        }
+        return isStore(state,'basicMedical','isBasicMedical',basicMedical,sessionStorage)
+      },
+      key:'basicMedical'
+   }),
   ],
   state: {
     countDown: 120,
@@ -87,7 +98,8 @@ export default createStore({
       // isBaseRoutes:false,//存储路由开关
       isBaseMessage:false,//存储个人信息开关
       isContext:false,//存储兑换礼包信息开关
-      isDatabase:false
+      isDatabase:false,//存储数据库路由开关
+      isBasicMedical:false,//存储环状图医药信息开关
     }
   },
   getters: {

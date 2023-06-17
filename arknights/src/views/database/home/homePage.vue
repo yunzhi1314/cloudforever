@@ -17,7 +17,13 @@
     <div class="three">
       <!-- 快捷工具 -->
       <div id="navTools">
-
+        <section style="padding: 1.5vw 0;font-weight: bold;">快捷导航工具</section>
+        <div class="tool">
+          <div v-for="(item,index) in data.navTools" :key="index" class="tools">
+            <section>{{ item.word }}</section>
+            <section>{{ item.data }}</section>
+          </div>
+        </div>
       </div>
       <!-- 财务图 -->
       <div id="naweiCompany">
@@ -31,15 +37,21 @@
 import homePageCss from "@/public/homePage.scss"
 import { onMounted } from "vue";
 import { basicMedical } from "@/echarts"
+import { toRefs } from "vue";
+import { navTools } from "@/api/database/home"
 
 export default {
   name: "homePage",
   setup() {
     onMounted(()=>{
-      basicMedical(document.querySelector("#basicMedical"))
+      // 环状图
+      basicMedical(document.querySelector("#basicMedical"))  
+
     })
+
     return {
-      homePageCss
+      homePageCss,
+      ...toRefs(navTools()), //导航工具栏
     }
   }
 }

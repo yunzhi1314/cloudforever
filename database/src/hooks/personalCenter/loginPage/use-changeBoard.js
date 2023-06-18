@@ -9,7 +9,6 @@ let infoArr = [
         placeholder: "确认密码",
         tip01: "*请确认密码",
         tip02: "*两次输入的密码不一致",
-        zz: /^\w{8,16}$/,
     },
     {
         value: null,

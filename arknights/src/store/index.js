@@ -83,6 +83,17 @@ export default createStore({
       },
       key:'basicMedical'
    }),
+
+   createPersistedState({
+     storage:window.sessionStorage,
+     reducer(state){
+       let expMedicals = {
+         expMedicals:state.database.expMedicals
+       }
+       return isStore(state,'expMedicals','isExpMedicals',expMedicals,sessionStorage)
+     },
+     key:'expMedicals'
+   })
   ],
   state: {
     countDown: 120,
@@ -98,6 +109,7 @@ export default createStore({
       isContext:false,//存储兑换礼包信息开关
       isDatabase:false,//存储数据库路由开关
       isBasicMedical:false,//存储环状图医药信息开关
+      isExpMedicals:false,//存储折线图数据信息开关
     }
   },
   getters: {

@@ -12,7 +12,6 @@ export function message(){
       Request.getData(url.dataBase.home.messages)
       .then(res=>{
          dataList.msg = {...res.data}
-         console.log(dataList.msg)
       })
   })
 
@@ -29,7 +28,6 @@ export function navTools() {
       Request.getData(url.dataBase.home.navTools).then((res) => {
         // 将我们获取到响应式数据对象深拷贝为一个普通的对象
         dataList.data = { ...res.data };
-        console.log(dataList.data);
       });
     });
     // 抛出响应数据

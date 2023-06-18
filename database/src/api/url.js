@@ -1,10 +1,16 @@
 export default {
 	centerPage: {
+		// 个人中心图片
 		centerImg: "api/personalCenter",
+		// 获取验证码
 		mathCode: "api/user/getCode",
+		// 点击获取验证码发送短信
 		telCode: "api/user/telCode",
+		// 注册
 		register: "api/user/register",
+		// 登陆
 		login: "api/user/login",
+		// 验证码登陆
 		codeLogin: "api/user/codeLogin",
 		centerRoutes: "person/home",
 		baseMsg: "person/baseMsg/userBasic",

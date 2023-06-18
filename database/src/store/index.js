@@ -2,8 +2,10 @@ import { createStore } from 'vuex'
 import database from './database'
 import createPersistedState from 'vuex-persistedstate'
 import { isStore } from '@/hooks/use-store'
+import PersonalCenter from './PersonalCenter'
 export default createStore({
   plugins:[
+    // 持久化存储配置
     createPersistedState({
       storage:sessionStorage,
       reducer(state){
@@ -65,10 +67,36 @@ export default createStore({
       },
       key:'systemUser'
     }),
-
+    createPersistedState({
+      storage:sessionStorage,
+      reducer(state){
+        return isStore(state,'msg','isMsg',state.msg,sessionStorage)
+      },
+      key:'msg'
+    }),
+    createPersistedState({
+      storage:localStorage,
+      reducer(state){
+        return isStore(state,'token','isToken',state.PersonalCenter.token,localStorage)
+      },
+      key:'token'
+    }),
+    createPersistedState({
+      storage:localStorage,
+      reducer(state){
+        return isStore(state,'user','isUser',state.PersonalCenter.userInfo,localStorage)
+      },
+      key:'user'
+    }),
   ],
   state: {
+    // 倒计时初始化
+    count:60,
+    // 存储事件返回信息
+    msg:null,
     control:{
+      // 存储msg--用于吐司
+      isMsg:false,
       // 存储ExpMedicals表格
       isExpMedicals:false,
       // 存储BasicMedical表格
@@ -77,8 +105,12 @@ export default createStore({
       isNaweiCompany:false,
       isNaweiCompany2:false,
       isSystemUser:false,
-//存储路由
-isMenuList:false
+      //存储路由
+      isMenuList:false,
+      // 存储注册信息
+      isUser:false,
+      // 存储登录信息
+      isToken:false,
     }
   },
   getters: {
@@ -90,12 +122,19 @@ isMenuList:false
       setTimeout(()=>{
         state.control[name] = false
       },1000)
-    }
+    },
+    // 改变仓库状态函数
+    SAVE_DATA(state,data){
+      state[data.key] = data.datas
+  },
   },
   actions: {
   },
   namespace:true,
   modules: {
-    database
+    // 数据库模块
+    database,
+    // 个人中心模块
+    PersonalCenter
   }
 })

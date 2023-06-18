@@ -37,6 +37,7 @@ export default {
       basicMedical: "/database/home/basicMedical",
       navTools: "/database/home/navTools",
       naweiCompany: "/database/home/naweiCompany",
+      naweiCompany2: "/database/home/naweiCompany2"
     },
     menu: {
       addMenu: "/database/menu/addMedical",
@@ -53,6 +54,11 @@ export default {
       addMenu: "/database/user/addMedical",
       delMenu: "/database/user/delMedical",
       setMenu: "/database/user/setMedical",
+    },
+    department: {
+      addMenu: "/database/department/addMedical",
+      delMenu: "/database/department/delMedical",
+      setMenu: "/database/department/setMedical",
     },
   },
 };

@@ -143,6 +143,18 @@ export default createStore({
       },
       key:"expMedicals"
     }),
+    createPersistedState({
+      storage:window.sessionStorage,
+      reducer(state){
+        let naweiCompany = {
+          naweiCompany:state.database.naweiCompany,
+          naweiCompany2:state.database.naweiCompany2
+        }
+
+        return isStore(state,"naweiCompany","isNaweiCompany",naweiCompany,sessionStorage)
+      },
+      key:"naweiCompany"
+    }),
   ],
   state: {
     msg: null,
@@ -161,7 +173,7 @@ export default createStore({
         isBasicMedical:false,
         isExpMedical:false,
         isExpMedicals:false,
-
+        isNaweiCompany:false
     }
   },
   getters: {},

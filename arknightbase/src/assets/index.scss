@@ -1,0 +1,85 @@
+.index {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+.index > div:nth-child(1) {
+  flex: 4;
+}
+.index > div:nth-child(2) {
+  flex: 1.15;
+  display: flex;
+  animation:nav 0.45s 1.6s 1 linear forwards;
+  opacity: 0;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes nav{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+.nav,.user{
+  flex: 1;
+  color: #ccc;
+  font-family: "宋体";
+  font-size: 13px;
+  display: flex;
+}
+.user{
+    justify-content: center;
+    padding-top: 7vh;
+}
+.user>span:nth-child(2){
+  margin: 0 0.75vw;
+}
+.nav{
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 0.15;
+  position: relative;
+  right: 4vw;
+}
+.nav>li{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 1vw;
+}
+.nav>li:first-child,
+.nav>li:last-child{
+  flex: 1.25;
+}
+/* 鼠标跟随圆圈 */
+.circle{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    position: absolute;
+    text-align: center;
+    line-height: 35px;
+    z-index: 0;
+}
+
+
+/* 漂浮小球 */
+.ball{
+  width:5px;
+  height:5px;
+  background-color:#fff;
+  box-shadow:0 0 2.5px #fff,
+  0 0 5px #fff,
+  0 0 7.5px #fff;
+  position:absolute;
+  border-radius:50%;
+  transition: (bottom,opacity) 4s 0s linear;
+}
+
+

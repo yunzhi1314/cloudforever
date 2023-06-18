@@ -14,11 +14,11 @@ import { inject } from "vue"
 export default {
     name: "dialogPage",
     setup() {
+        // 获取对应遮罩层状态
         let name = inject("name")
-        // console.log('isdialog', isDialog);
-        // console.log('name', name);
+
+        // 取消遮罩层事件
         function cancel() {
-            // controlObj.isDialog = false
             Reflect.set(controlObj.isDialog, name, false)
 
         }

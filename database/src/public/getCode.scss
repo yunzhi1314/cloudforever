@@ -1,7 +1,35 @@
+// 验证码遮罩层样式
 .get-Code{
-    width: 30vw;
-    height: 40vh;
-    padding: 2vw;
-    background-color: rgba(255, 255, 255, .85);
-    border-radius: 2vw;
+	width: 20vw;
+	height: 30vh;
+display: flex;
+justify-content: space-around;
+align-items: center;
+flex-direction: column;
+background-color: rgba(255, 255, 255, .85);
+flex-wrap: wrap;
+border-radius: 2vw;
+padding: 2vw;
+section{
+	flex: 1;
+	input{
+		height: 4vh;
+		text-align: center;
+		border: 1px dashed #082E54;
+	}
+	button{
+		border: none;
+		width: 5vw;
+		height: 4vh;
+		border-radius: 1vw;
+		box-shadow: 0 0 1px #aaa,
+		0 0 2px #aaa,
+		0 0 3px #aaa;
+		background-color: #33A1C9;
+	}
+	button:first-child{
+		margin-right: 1vw;
+		background-color: #F4A460;
+	}
+}
 }

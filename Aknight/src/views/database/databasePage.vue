@@ -144,13 +144,12 @@
 							:key="item.name"
 							:label="item.title"
 							:name="item.name"
-							:closable="item.title=='首页'?false:true"
-							>
+							:closable="item.title == '首页' ? false : true">
 						</el-tab-pane>
 					</el-tabs>
 				</el-header>
 				<!-- 展示内容 -->
-				<el-main style="background-color: #f8f8f8">
+				<el-main style="background-color: #f8f8f8; padding-bottom: 0">
 					<router-view />
 				</el-main>
 			</el-container>
@@ -299,29 +298,29 @@
 			function removeTab(targetName) {
 				// 首页的页眉不能删除
 				// if (targetName != "首页") {
-					const newTabs = tabs.value;
-					let activeName = title.value;
-					// 判断当前删除的页眉是是否为高亮页眉
-					if (activeName === targetName) {
-						newTabs.forEach((item, index) => {
-							if (item.name === targetName) {
-								// 获取高亮页眉前一项或后一项，如果当前高亮页眉不为最后一项，则获取后一项，为最后一项就获取前一项
-								const nextTab = newTabs[index + 1] || newTabs[index - 1];
-								if (nextTab) {
-									// 保存获取到的前一项或后一项页眉
-									activeName = nextTab.name;
-									// 跳转到高亮页眉
-									toTab({ paneName: activeName });
-								}
+				const newTabs = tabs.value;
+				let activeName = title.value;
+				// 判断当前删除的页眉是是否为高亮页眉
+				if (activeName === targetName) {
+					newTabs.forEach((item, index) => {
+						if (item.name === targetName) {
+							// 获取高亮页眉前一项或后一项，如果当前高亮页眉不为最后一项，则获取后一项，为最后一项就获取前一项
+							const nextTab = newTabs[index + 1] || newTabs[index - 1];
+							if (nextTab) {
+								// 保存获取到的前一项或后一项页眉
+								activeName = nextTab.name;
+								// 跳转到高亮页眉
+								toTab({ paneName: activeName });
 							}
-						});
-					}
-					// 将点击删除的页眉过滤掉
-					// 将前一项或后一项设置为高亮
-					title.value = activeName;
-					tabs.value = newTabs.filter((item) => item.name !== targetName);
-					// 将过滤后剩下的页眉重新赋值
-					tabs.value = reactive(tabs.value);
+						}
+					});
+				}
+				// 将点击删除的页眉过滤掉
+				// 将前一项或后一项设置为高亮
+				title.value = activeName;
+				tabs.value = newTabs.filter((item) => item.name !== targetName);
+				// 将过滤后剩下的页眉重新赋值
+				tabs.value = reactive(tabs.value);
 				// }
 			}
 			// 退出

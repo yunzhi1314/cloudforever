@@ -3,6 +3,7 @@ export default {
     state(){
         return{
             menuList:null,
+            // 数据库图表一至三个的数据
             expMedicals:null,
             basicMedical:null,
             naweiCompany:null,

@@ -1,0 +1,14 @@
+.menu{
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    padding: 1vw;
+}
+.menu:hover{
+    box-shadow: 
+    0px 0px 4px #ccc,
+    0px 0px 6px #ccc,
+    0px 0px 8px #ccc,
+    0px 0px 10px #ccc,
+    0px 0px 12px #ccc;
+}

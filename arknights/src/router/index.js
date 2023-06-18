@@ -60,7 +60,12 @@ const routes = [
         path: "/database/home",
         name: "homePage",
         component: () => import("@/views/database/home/homePage.vue"),
-      }
+      },
+      {
+        path: "/database/menu",
+        name: "menuPage",
+        component: () => import("@/views/database/system/menu/menuPage.vue"),
+      },
     ]
   }
 ];

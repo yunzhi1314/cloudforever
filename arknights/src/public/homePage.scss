@@ -13,7 +13,28 @@
     background-color: #F8F8F8;
     .one{
         grid-area: one;
-        background-color: #fff;
+        display: flex;
+        color: #fff;
+        div{
+            flex: 1;
+            background-color: #aaa;
+            margin-right: 1vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            section{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                span{
+                    color: red;
+                    margin-right: 2vw;
+                    font-size: 1.1rem;
+                }
+            }
+        }
+
     }
     .two{
         grid-area: two;

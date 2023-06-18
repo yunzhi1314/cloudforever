@@ -6,6 +6,8 @@ export default ({
             menuRoutes:null,
             // 环状图
             basicMedical:null,
+            // 折线图数据
+            expMedicals:null,
         }
     },
     getters: {
@@ -21,6 +23,11 @@ export default ({
         changeBasicMedical(state,data){
             state.basicMedical = data
           },
+
+        // 存储折线图数据
+        changeExpMedicals(state,data){
+             state.expMedicals = data
+        }
     },
     actions: {
     },

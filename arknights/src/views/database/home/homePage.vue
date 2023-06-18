@@ -2,12 +2,18 @@
   <div class="home">
     <!-- 订单信息 -->
     <div class="one">
-
+        <div v-for="(item,index) in msg.menu" :key="index">
+            <section>{{ item.word }}</section>
+            <section>
+              <span>{{item.number}}</span>
+              <span style="color: #fff;">{{item.rate}}</span>
+            </section>
+        </div>
     </div>
     <div class="two">
       <!-- 折线图 -->
       <div id="expMedicals">
-
+           
       </div>
       <!-- 环状图 -->
       <div id="basicMedical">
@@ -36,9 +42,9 @@
 <script>
 import homePageCss from "@/public/homePage.scss"
 import { onMounted } from "vue";
-import { basicMedical } from "@/echarts"
+import { basicMedical,expMedicals } from "@/echarts"
 import { toRefs } from "vue";
-import { navTools } from "@/api/database/home"
+import { navTools,message } from "@/api/database/home"
 
 export default {
   name: "homePage",
@@ -46,12 +52,17 @@ export default {
     onMounted(()=>{
       // 环状图
       basicMedical(document.querySelector("#basicMedical"))  
+      // 折线图
+      expMedicals(document.querySelector("#expMedicals"))  
+
+
 
     })
 
     return {
       homePageCss,
       ...toRefs(navTools()), //导航工具栏
+      ...toRefs(message())
     }
   }
 }

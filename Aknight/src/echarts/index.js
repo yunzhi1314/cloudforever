@@ -159,18 +159,18 @@ export function basicMedical(dom) {
         let source2 = medical.basicMedical
         let company =new Set(medical.basicMedical.map(item=>item.medical_company)) 
         //处理数据
-        function add(item,index){
-            if(company[index]==undefined){
+        // function add(item,index){
+        //     if(company[index]==undefined){
                 
-            }
-        }
-        source2.forEach(item=>{
-            company.forEach((item1,index1)=>{
+        //     }
+        // }
+        // source2.forEach(item=>{
+        //     company.forEach((item1,index1)=>{
                 
-            })
-        })
+        //     })
+        // })
        
-        console.log(company);
+        console.log(company,source2,newData);
     }
     let bas = echarts.init(dom)
 

@@ -8,14 +8,3 @@ export async function mouseFollow(dom: HTMLDivElement) {
     })
 
 }
-
-/* 
-// 控制圆球移入移出函数
-export function mouseEnter(){
-
-
-
-    return {
-      isEnter
-    }
-} */

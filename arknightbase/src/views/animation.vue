@@ -10,6 +10,7 @@ import {RouterView} from "vue-router"
 // 调整进度条数字
 let proNum: Ref<number> = ref(0)
 
+// 时间进度数字随机增加
 let timer = setInterval(() => {
   proNum.value += Math.floor((Math.random() + 5) * 5)
   if (proNum.value > 100) {
@@ -132,13 +133,12 @@ let height:Ref<number> = ref(0)
 
 // 页面滚动函数
 function toPage(index:number){
- /*  let res = navData.find((item,index2) =>{
-      if( index == index2 ){
-        return item
-      }
-  }) */
+  // 寻找到对应的对象
   let res = navData.find((item,index2) =>index == index2 )
+
+  // 计算滚动高度
   height.value = 100 * index
+  // 开启滚动
   res.isRoll = true
 }
 
@@ -236,7 +236,6 @@ let shows = await getIndexDatas('shows')
     <div v-for="(item,index) in ball"
     :key="index"
     class="ball"
-    
     :style='{
       left:item.left,
       bottom:item.bottom + "vh",

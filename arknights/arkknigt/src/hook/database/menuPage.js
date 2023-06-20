@@ -67,7 +67,7 @@ export function dealTree() {
       
     // });
 
-    return {dataList,companies,newData}
+    return {newData,dataList,companies,}
   }
 
 

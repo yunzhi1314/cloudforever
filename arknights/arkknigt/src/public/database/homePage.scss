@@ -54,4 +54,21 @@
         background-color: #aeb4f5;
 
     }
+
+  
+}
+
+//数据库表格渲染中 添加菜单的遮罩层 
+.addmenu{
+    width: 45vw;
+    height: 55vh;
+    background-color: #fff;
+    border-radius: 3vw;
+    padding: 3vh;
+    .menusection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2vh;
+    }
 }

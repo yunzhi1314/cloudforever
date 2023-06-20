@@ -1,5 +1,5 @@
 import * as echarts from "echarts"
-import { reactive} from 'vue'
+import { reactive } from 'vue'
 
 //靶向药实验数据的复合折线统计图
 export function expMedicals(dom) {
@@ -153,27 +153,43 @@ export function expMedicals(dom) {
 //各公司所持有的靶向药数据，环状图
 export function basicMedical(dom) {
     let medical = JSON.parse(sessionStorage.getItem("medical"))
-    let newData =reactive([])
+    let newData = reactive([])
+    let source2
+    let company
     //获取本地存的basicMedical数据
     if (JSON.parse(sessionStorage.getItem("medicals")) != 0) {
-        let source2 = medical.basicMedical
-        let company =new Set(medical.basicMedical.map(item=>item.medical_company)) 
-        //处理数据
-        // function add(item,index){
-        //     if(company[index]==undefined){
-                
-        //     }
-        // }
-        // source2.forEach(item=>{
-        //     company.forEach((item1,index1)=>{
-                
-        //     })
-        // })
-       
-        console.log(company,source2,newData);
+        source2 = medical.basicMedical
+        company = new Set(medical.basicMedical.map(item => item.medical_company))
     }
+    //给newData添加数据
+    function add(item) {
+        if (newData.length >= company.size) {
+            return
+        } else {
+            newData.push({
+                name: item,
+                value: 0,
+                label: {
+                    formatter:
+                    `{b}:{c}款,\n占市场的{d}%`,
+                }
+            })
+        }
+    }
+    //处理数据,给value计数
+    source2.forEach((item) => {
+        company.forEach((item1) => {
+            add(item1)
+            if (item.medical_company == item1) {
+                let index = newData.findIndex(item => item.name == item1)
+                newData[index].value++
+            }
+        });
+    })
+
     let bas = echarts.init(dom)
 
+    // console.log(newData);
     let option = {
         title: {
             // 标题
@@ -212,9 +228,9 @@ export function basicMedical(dom) {
                     color: "#ff0000",
                 },
             },
+            //数据
+            data: newData
         }
-
-
     }
     bas.setOption(option)
 }

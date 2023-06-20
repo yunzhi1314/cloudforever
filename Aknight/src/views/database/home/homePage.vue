@@ -25,16 +25,29 @@
       <!-- 各公司所持有的靶向药数据，环状图 -->
       <div id="basicMedical"></div>
     </div>
-    <div class="footer">2222</div>
+    <div class="footer">
+      <div class="tool">
+        <div class="tool-box">
+          <dir class="title">快捷导航工具</dir>
+          <div>
+            <div v-for="(item, index) in tools" :key="index" class="tools">
+              <section>{{ item.word }}</section>
+              <section>{{ item.data }}</section>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 纳微公司的营销利润与增长率，折柱复合统计图 -->
+      <div id="naweiCompany"></div>
+    </div>
   </div>
-  
 </template>
 
 <script>
 import home from "@/public/database/home/home.scss";
 import { expMedicals, basicMedical } from "@/echarts"
 import { onMounted, toRefs } from 'vue';
-import { getMessages } from '@/api/arknight/database/home';
+import { getMessages, getNavTools } from '@/api/arknight/database/home';
 
 export default {
   name: "homePage",
@@ -51,6 +64,7 @@ export default {
       home,
       //页面数据请求
       ...toRefs(getMessages()),
+      ...toRefs(getNavTools())
     };
   },
 };

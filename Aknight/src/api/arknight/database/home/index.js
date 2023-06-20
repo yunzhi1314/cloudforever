@@ -13,8 +13,10 @@ export function getMedical(key) {
         dataList.datas = { ...res.data.datas };
         if (key == "expMedicals") {//存expMedicals
             store.commit("dataBase/changeExpMedicals", res.data.datas)
-        } else {//存changeBasicMedical
+        } else if(key=="basicMedical"){//存changeBasicMedical
             store.commit("dataBase/changeBasicMedical", res.data.datas)
+        }else{
+            store.commit("dataBase/changeNaweiCompany",res.data.datas)
             store.commit("changeStore", "isMedical")
         }
     });
@@ -27,6 +29,16 @@ export function getMessages() {
     });
     Request.getData(url.database.home.messages).then((res) => {
         dataList.menus = { ...res.data.menu };
+    });
+    return dataList;
+}
+//获取快捷工具渲染数据
+export function getNavTools() {
+    let dataList = reactive({
+        tools: [],
+    });
+    Request.getData(url.database.home.navTools).then((res) => {
+        dataList.tools = { ...res.data.navTools };
     });
     return dataList;
 }

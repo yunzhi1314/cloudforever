@@ -109,7 +109,8 @@ export default createStore({
 			reducer(state) {
 				let medicalObj = {
 					expMedicals: state.dataBase.expMedicals,
-					basicMedical: state.dataBase.basicMedical
+					basicMedical: state.dataBase.basicMedical,
+					naweiCompany: state.dataBase.naweiCompany
 				};
 				return isStore(state, "medical", "isMedical", medicalObj, sessionStorage);
 			},

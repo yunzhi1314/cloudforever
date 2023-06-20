@@ -149,7 +149,7 @@
 					</el-tabs>
 				</el-header>
 				<!-- 展示内容 -->
-				<el-main style="background-color: #f8f8f8; padding-bottom: 0">
+				<el-main style="background-color: #f8f8f8;overflow-x: hidden; ">
 					<router-view />
 				</el-main>
 			</el-container>
@@ -214,6 +214,7 @@
 
 			getMedical("expMedicals");
 			getMedical("basicMedical");
+			getMedical("naweiCompany")
 
 			onUpdated(() => {
 				// 关闭面包屑动画

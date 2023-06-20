@@ -11,13 +11,22 @@ export function getMedical(key) {
     });
     Request.getData(url.database.home[key]).then((res) => {
         dataList.datas = { ...res.data.datas };
-        if (key == "expMedicals") {//存expMedicals
-            store.commit("dataBase/changeExpMedicals", res.data.datas)
-        } else if(key=="basicMedical"){//存changeBasicMedical
-            store.commit("dataBase/changeBasicMedical", res.data.datas)
-        }else{
-            store.commit("dataBase/changeNaweiCompany",res.data.datas)
-            store.commit("changeStore", "isMedical")
+        switch (key) {
+            case "expMedicals":
+                store.commit("dataBase/changeExpMedicals", res.data.datas)
+                break;
+            case "basicMedical":
+                store.commit("dataBase/changeBasicMedical", res.data.datas)
+                break;
+            case "naweiCompany":
+                store.commit("dataBase/changeNaweiCompany", res.data.datas)
+                break;
+            case "naweiCompany2":
+                store.commit("dataBase/changeNaweiCompany2", res.data.datas)
+                store.commit("changeStore", "isMedical")
+                break;
+
+
         }
     });
     return dataList;

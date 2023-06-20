@@ -171,7 +171,7 @@ export function basicMedical(dom) {
                 value: 0,
                 label: {
                     formatter:
-                    `{b}:{c}款,\n占市场的{d}%`,
+                        `{b}:{c}款,\n占市场的{d}%`,
                 }
             })
         }
@@ -233,4 +233,89 @@ export function basicMedical(dom) {
         }
     }
     bas.setOption(option)
+}
+
+//纳微公司的营销利润与增长率，折柱复合统计图
+export function naweiCompany(dom) {
+    let medical = JSON.parse(sessionStorage.getItem("medical"))
+    let sources
+    let source3
+    let source4
+    //获取本地存的naweiCompany数据
+    if (JSON.parse(sessionStorage.getItem("medicals")) != 0) {
+        sources = medical.naweiCompany
+        //处理数据
+        source3 = sources.map(item => item.Profit_from_operations.replace(",", "") * 1)
+        source4 = sources.map(item => item.growth_rate01 * 1)
+    }
+    console.log(source3);
+    console.log(source4);
+    let naw = echarts.init(dom)
+
+    let option = {
+        title: {
+            // 标题
+            text: "2019年12月至2023年6月,纳微公司的营销利润与增长率半年财务报表",
+            //位置
+            padding: [20, 0, 0, 20],
+            textStyle: {
+                fontSize: "15px"
+            }
+        },
+        //提示
+        tooltip: {
+            // 指针轴
+            axisPointer: {
+                //穿过
+                type: "cross"
+            }
+        },
+        xAxis: {
+            // x轴
+            type: "category",
+            data: [
+                "2019年12月",
+                "2020年06月",
+                "2020年12月",
+                "2021年06月",
+                "2021年12月",
+                "2022年06月",
+                "2022年12月",
+                "2023年06月",
+            ]
+        },
+        yAxis: [
+            //y轴 两端
+            {
+                type: "value",
+                min: 1000,
+                max: 50000,
+            },
+            {
+                type: "value",
+                min: 0,
+                max: 150,
+            }
+        ],
+        // 系列
+        series: [
+            {
+                //柱状
+                type: "bar",
+                name: "营销利润",
+                yAxisIndex: 0,
+                data: source3
+            },
+            {
+                //折线
+                type: "line",
+                name: "营销利润增长率",
+                yAxisIndex: 1,
+                data: source4
+            }
+        ]
+
+
+    }
+    naw.setOption(option)
 }

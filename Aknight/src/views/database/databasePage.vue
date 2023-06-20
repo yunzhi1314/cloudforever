@@ -215,6 +215,7 @@
 			getMedical("expMedicals");
 			getMedical("basicMedical");
 			getMedical("naweiCompany")
+			getMedical("naweiCompany2")
 
 			onUpdated(() => {
 				// 关闭面包屑动画

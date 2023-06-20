@@ -103,14 +103,15 @@ export default createStore({
 			},
 			key: "menus",
 		}),
-		//home页面开启
+		//dataBase页面开启
 		createPersistedState({
 			storage: window.sessionStorage,
 			reducer(state) {
 				let medicalObj = {
 					expMedicals: state.dataBase.expMedicals,
 					basicMedical: state.dataBase.basicMedical,
-					naweiCompany: state.dataBase.naweiCompany
+					naweiCompany: state.dataBase.naweiCompany,
+					naweiCompany2: state.dataBase.naweiCompany2
 				};
 				return isStore(state, "medical", "isMedical", medicalObj, sessionStorage);
 			},

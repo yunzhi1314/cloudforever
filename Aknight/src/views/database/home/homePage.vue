@@ -45,7 +45,7 @@
 
 <script>
 import home from "@/public/database/home/home.scss";
-import { expMedicals, basicMedical } from "@/echarts"
+import { expMedicals, basicMedical, naweiCompany } from "@/echarts"
 import { onMounted, toRefs } from 'vue';
 import { getMessages, getNavTools } from '@/api/arknight/database/home';
 
@@ -58,6 +58,8 @@ export default {
       expMedicals(document.querySelector("#expMedicals"))
       //各公司所持有的靶向药数据，环状图
       basicMedical(document.querySelector("#basicMedical"))
+      //纳微公司的营销利润与增长率，折柱复合统计图
+      naweiCompany(document.querySelector("#naweiCompany"))
     })
     return {
       //样式

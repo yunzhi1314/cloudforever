@@ -8,6 +8,7 @@ export default ({
             expMedicals: null,//靶向药实验数据
             basicMedical: null,///各公司所持有的靶向药数据
             naweiCompany: null,//纳微公司的营销利润与增长率
+            naweiCompany2: null,
         }
     },
     mutations: {
@@ -16,7 +17,6 @@ export default ({
             state.menu = data.menuList
             state.menuRoutes = data.routes
         },
-        //home页面请求
         changeExpMedicals(state, data) {
             state.expMedicals = data
         },
@@ -25,6 +25,9 @@ export default ({
         },
         changeNaweiCompany(state, data) {
             state.naweiCompany = data
+        },
+        changeNaweiCompany2(state, data) {
+            state.naweiCompany2 = data
         }
     }
 })

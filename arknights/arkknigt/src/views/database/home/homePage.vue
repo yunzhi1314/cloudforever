@@ -1,7 +1,7 @@
 <template>
     <!-- 饼状统计图 -->
     <div id="homePage">
-        <div v-for="(a, b) in homedata" :key="b" class="plans">
+        <div v-for="(a, b) in mmenus" :key="b" class="plans">
             <div>
                 <section>
                     <span style="font-size: 1.75rem">{{ a.number }}</span>

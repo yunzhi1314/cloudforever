@@ -104,7 +104,6 @@ export default {
         let title = ref(route.meta.title); // 标题
         let metaName = ref('') // 面包屑
         let pages = reactive(JSON.parse(sessionStorage.getItem('saveRoutes')).databaseMenu) //获取存入vuex的路由
-        console.log(pages)
         let tabs = ref([]) // 保存tab
         let userId = JSON.parse(localStorage.getItem("users")).userId;
         onUpdated(() => {

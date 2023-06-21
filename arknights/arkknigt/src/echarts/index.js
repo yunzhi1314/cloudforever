@@ -241,7 +241,6 @@ export async function basicMedicals(dom){
 }
 // 纳微公司的营销利润与增长率，折柱复合统计图
 export async function naweiCompany(dom){
-   console.log(dom);
    let sources = await Request.get(url.database.home.naweiCompany);
    let source = sources.data.datas.map(item => item.Profit_from_operations.replace(",","") * 1);  // 因为里面有一个逗号，把它替换成空
    let source2 = sources.data.datas.map(item => item.growth_rate01 * 1);

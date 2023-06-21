@@ -65,45 +65,7 @@ export async function exMpedicals(dom){
             max: 100,  //最大值
          }
       ],
-      // tooltip:{   // 一开始在外面写上tooltip，里面的tooltip里面的维度才能显示出来
-      //    trigger:"axis",   //trigger触发提示框，axis坐标轴触发，主要在柱状图，折线图等会使用的类目轴的图标使用
-       
-      //    formatter:function (params){
-         
-      //      return `
-      //      <section>
-      //         <div class="ball"></div>
-      //         <span>${params[0].dimensionNames[6]}:</span>
-      //         <span style="margin-left:2vw; font-weight:bold;">${params[0].data.company}</span>
-      //      </section>
-      //      <section>
-      //         <div class="ball"></div>
-      //         <span>${params[0].dimensionNames[7]}:</span>
-      //         <span style="margin-left:2vw; font-weight:bold;">${params[0].data.medical_Tree}</span>
-      //      </section>
-      //      <section>
-      //         <div class="ball"></div>
-      //         <span>${params[0].dimensionNames[2]}:</span>
-      //         <span style="margin-left:2vw; font-weight:bold;">${params[0].data["鳞癌ORR"]}%</span>
-      //      </section>
-      //      <section>
-      //         <div class="ball"></div>
-      //         <span>${params[0].dimensionNames[3]}:</span>
-      //         <span style="margin-left:2vw; font-weight:bold;">${params[0].data["鳞癌OS"]}%</span>
-      //      </section>
-      //      <section>
-      //         <div class="ball"></div>
-      //         <span>${params[0].dimensionNames[4]}:</span>
-      //         <span style="margin-left:2vw; font-weight:bold;">${params[0].data["非鳞癌ORR"]}%</span>
-      //      </section>
-      //      <section>
-      //         <div class="ball"></div>
-      //         <span>${params[0].dimensionNames[5]}:</span>
-      //         <span style="margin-left:2vw; font-weight:bold;">${params[0].data["非鳞癌OS"]}%</span>
-      //      </section>
-      //      `
-      //    }
-      // },  
+  
       tooltip: {    //简化版的tooltip
          trigger: 'axis',
          formatter: (params) => {

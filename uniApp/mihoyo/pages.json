@@ -3,24 +3,28 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"style": {
-				"navigationBarTitleText": "动态"
+				"navigationBarTitleText": "动态",
+				"enablePullDownRefresh": true
 			},
 			"path": "pages/active/active"
 		},
 		{
 			"style": {
-				"navigationBarTitleText": "消息"
+				"navigationBarTitleText": "消息",
+				"enablePullDownRefresh": true
 			},
 			"path": "pages/message/message"
 		},
 		{
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": true
 			},
 			"path": "pages/mine/mine"
 		}
@@ -35,6 +39,7 @@
 		"backgroundColor": "#ebebeb",
 		"color": "#0a0a0a",
 		"fontSize": "0.4rem",
+		"custom":true,
 		"list": [
 			{
 				"text": "首页",

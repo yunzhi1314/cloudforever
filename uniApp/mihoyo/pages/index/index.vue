@@ -4,7 +4,7 @@
 	}'></view>
 	<view class="bg">
 		<view class="content">
-		<scroll-view scroll-x="true" class="scroll-content" :scroll-into-view="topIndex">
+		<scroll-view scroll-x="true" class="scroll-content" :scroll-into-view="topIndex" :show-scrollbar="false">
 			<view class="scroll-item" v-for="(item,index) in topTab" :key="index" 
 			:id="'top'+index" @tap="changeTop(index)">
 				<text :class='selectIndex == index ? "f-active-color" : "f-color"'>{{item}}</text>
@@ -59,7 +59,7 @@ defineComponent({
 })
 
 // 传递子组件数据
-provide("selectIndex",{selectIndex,changeTop,changeView})
+provide("selectIndex",selectIndex)
 </script>
 <style scoped>
 	.animation{

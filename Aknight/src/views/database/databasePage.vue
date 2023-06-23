@@ -146,9 +146,11 @@ export default {
 	name: "databasePage",
 	setup() {
 		onBeforeMount(() => {
-			Promise.all([getMedical("expMedicals"),
-			getMedical("basicMedical"),
-			getMedical("naweiCompany"), getMedical("naweiCompany2")])
+			Promise.all([
+				getMedical("expMedicals"),
+				getMedical("basicMedical"),
+				getMedical("naweiCompany"),
+				getMedical("naweiCompany2")])
 		})
 		let router = useRouter();
 		let route = useRoute();
@@ -325,14 +327,15 @@ export default {
 	// 页面导航拦截
 	beforeRouteEnter(to, from, next) {
 		if (from.name == "ToDatabase") {
+			//前往home页面
 			setTimeout(() => {
 				router.push({
 					name: "homePage",
 					params: {
 						userId: JSON.parse(localStorage.getItem("userMsg")).userId
 					}
-				});
-			}, 500);
+				})
+			}, 50)
 		}
 		next();
 	}

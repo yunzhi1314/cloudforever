@@ -1,9 +1,9 @@
 import * as echarts from "echarts"
 import { reactive } from 'vue'
 
+let medical = JSON.parse(sessionStorage.getItem("medical"))
 //靶向药实验数据的复合折线统计图
 export function expMedicals(dom) {
-    let medical = JSON.parse(sessionStorage.getItem("medical"))
     let source1
     //获取本地存的expMedicals数据
     if (medical != 0) {
@@ -25,8 +25,6 @@ export function expMedicals(dom) {
         } else {
             return
         }
-    } else {
-        return
     }
     // console.log(source1);
     let exp = echarts.init(dom)
@@ -158,7 +156,6 @@ export function expMedicals(dom) {
 
 //各公司所持有的靶向药数据，环状图
 export function basicMedical(dom) {
-    let medical = JSON.parse(sessionStorage.getItem("medical"))
     let newData = reactive([])
     let source2
     let company
@@ -170,8 +167,6 @@ export function basicMedical(dom) {
         } else {
             return
         }
-    } else {
-        return
     }
     //给newData添加数据
     function add(item) {
@@ -249,7 +244,6 @@ export function basicMedical(dom) {
 
 //纳微公司的营销利润与增长率，折柱复合统计图
 export function naweiCompany(dom) {
-    let medical = JSON.parse(sessionStorage.getItem("medical"))
     let sources
     let source3
     let source4
@@ -263,8 +257,6 @@ export function naweiCompany(dom) {
         } else {
             return
         }
-    } else {
-        return
     }
     console.log(source3);
     console.log(source4);

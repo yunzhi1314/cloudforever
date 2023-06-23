@@ -1,0 +1,74 @@
+
+// body{
+//     display: flex;
+//     justify-content: flex-end;
+//     margin-right: 3vw;
+
+.plans{
+    height: 85vh;
+    width: 83vw;
+    background-color: #fff;
+}
+
+#homePage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.common_place {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tools {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.75vw;
+    height: 80%;
+
+    .tool {
+        background-color: #D4D7FA;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        section {
+            height: 50%;
+            width: 100%;
+            justify-content: center;
+            display: flex;
+            font-size: 14px;
+        }
+
+    }
+
+    .tool>section:nth-child(1) {
+        align-items: flex-end;
+        margin-bottom: 1vh;
+    }
+
+    .tool:hover {
+        background-color: #aeb4f5;
+
+    }
+
+  
+}
+
+//数据库表格渲染中 添加菜单的遮罩层 
+.addmenu{
+    width: 45vw;
+    height: 55vh;
+    background-color: #fff;
+    border-radius: 3vw;
+    padding: 3vh;
+    .menusection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2vh;
+    }
+}

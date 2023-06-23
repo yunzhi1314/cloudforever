@@ -1,10 +1,9 @@
 .wirpper {
-  width:83.4vw;
-  height:84vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   border: 1px solid #e4e7ed;
   border-radius: 3px;
-  background-color: white;
-  padding:1vw;
   transition: all 0.1s 0s linear;
 
   .nav {
@@ -16,19 +15,4 @@
 }
 .wirpper:hover {
   box-shadow: 0px 0px 5px #ccc, 0px 0px 7.5px #ccc, 0px 0px 10px #ccc;
-}
-
-.addMenu{
-  background-color: #fff;
-  padding: 2vh;
-  border-radius: 1vw;
-}
-// 删除信息框按钮的样式
-.MSGBOX{
-  .el-message-box__headerbtn{
-    width: 5vw;
-  }
-  .OKCSS{
-    width: 12.4vw;
-  }
 }

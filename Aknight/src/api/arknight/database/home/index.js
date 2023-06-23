@@ -23,11 +23,9 @@ export function getMedical(key) {
                 break;
             case "naweiCompany2":
                 store.commit("dataBase/changeNaweiCompany2", res.data.datas)
-                store.commit("changeStore", "isMedical")
                 break;
-
-
         }
+        store.commit("changeStore", "isMedical")
     });
     return dataList;
 }

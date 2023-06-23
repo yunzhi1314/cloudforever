@@ -19,13 +19,13 @@ export function getMenu() {
 		//打开存储开关
 		store.commit("changeStore", "isMenus");
 		//处理路由并添加进路由组
-		setTimeout(()=>{
+		setTimeout(() => {
 			let routes2 = handleRoutes(routes, routes.length - 1);
 			routes2.forEach((item) => {
 				router.addRoute("databasePage", item);
 			});
 			// 要等仓库中开关关闭之后再处理添加路由
-		},200)
+		}, 300)
 	});
 	return dataList;
 }

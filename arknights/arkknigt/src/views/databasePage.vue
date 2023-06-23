@@ -3,7 +3,7 @@
         <el-container>
             <el-aside :width="!isScollape ? '12vw' : '4vw'" :style="{ transition: 'all 0.25s 0s linear', }">
                 <el-menu background-color="#545C64" text-color="#fff" active-text-color="#409EFF"
-                    class="el-menu-vertical-demo" default-active="unknown" :collapse="isScollape" style="height: 100%">
+                    class="el-menu-vertical-demo" default-active="unknown" :collapse="isScollape" style="height: 100vh">
                     <el-menu-item v-for="(item, index) in databaseMenu" :key="index" :index="index.toString()"
                         v-show="!item.meta.isIframe" @click="toPage(index)">
                         {{ item.meta.title }}

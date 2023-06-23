@@ -230,7 +230,7 @@ export default {
         Request.post(url.personalCenter.register, registerData)
           .then((res) => {
             dataList.data = res.data;
-            console.log(dataList.data);
+            
             setTimeout(() => {
               store.commit("personalCenter/changeUse", dataList.data);
               store.commit("CHANGE_STORE", "isRegister");

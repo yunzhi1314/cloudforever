@@ -303,7 +303,7 @@ export default {
 				title: "删除信息",
 				// 提示框渲染的信息，用h函数渲染
 				// h(HTMLCollaption:string,CSS:object,html内容:array | string):htmlTag
-				message: h("p", null, "你确认删除这项信息吗？"),
+				message: h("p", { style: "font-size:19px;font-weight:bold;" }, "你确认删除这项信息吗？"),
 				// 显示取消按钮
 				showCancelButton: true,
 				// 确认按钮的文本

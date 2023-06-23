@@ -216,7 +216,7 @@ export default {
         title: "删除信息",
         /* 提示框内容 */
         message: h("p", null, [
-          h("span", null, "你确认删除这项信息吗？")
+          h("span", { style: "font-size:19px;font-weight:bold;" }, "你确认删除这项信息吗？")
         ]),
         // 显示取消按钮
         showCancelButton: true,
@@ -224,6 +224,9 @@ export default {
         confirmButtonText: "确认",
         // 取消按钮的文本
         cancelButtonText: "取消",
+        customClass: "MSGBOX",
+        confirmButtonClass: "OKCSS",
+        cancelButtonClass: "OKCSS",
         beforeClose: (action, instance, done) => {
           if (action === "confirm") {
             // 开启提示框确认按钮的加载动画

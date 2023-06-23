@@ -27,11 +27,14 @@
 
 // 删除信息框按钮的样式
 .MSGBOX {
+
   .el-message-box__headerbtn {
     width: 5vw;
+    background-color: #fff;
   }
 
   .OKCSS {
-    width: 12.4vw;
+    width: 5vw;
+    margin-right: 2vw;
   }
 }

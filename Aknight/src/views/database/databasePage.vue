@@ -146,10 +146,9 @@ export default {
 	name: "databasePage",
 	setup() {
 		onBeforeMount(() => {
-			Promise.all([getMedical("expMedicals"), 
-			getMedical("basicMedical"), 
-			getMedical("naweiCompany"), 
-			getMedical("naweiCompany2")])
+			Promise.all([getMedical("expMedicals"),
+			getMedical("basicMedical"),
+			getMedical("naweiCompany"), getMedical("naweiCompany2")])
 		})
 		let router = useRouter();
 		let route = useRoute();

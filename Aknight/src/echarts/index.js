@@ -6,7 +6,7 @@ export function expMedicals(dom) {
     let medical = JSON.parse(sessionStorage.getItem("medical"))
     let source1
     //获取本地存的expMedicals数据
-    if (medical != 0 && medical != null) {
+    if (medical != 0) {
         source1 = medical.expMedicals
         if (source1 != null) {
             //处理数据
@@ -163,7 +163,7 @@ export function basicMedical(dom) {
     let source2
     let company
     //获取本地存的basicMedical数据
-    if (medical != 0 && medical != null) {
+    if (medical != 0) {
         source2 = medical.basicMedical
         if (source2 != null) {
             company = new Set(medical.basicMedical.map(item => item.medical_company))
@@ -254,7 +254,7 @@ export function naweiCompany(dom) {
     let source3
     let source4
     //获取本地存的naweiCompany数据
-    if (medical != 0 && medical != null) {
+    if (medical != 0) {
         sources = medical.naweiCompany
         if (sources != null) {
             //处理数据

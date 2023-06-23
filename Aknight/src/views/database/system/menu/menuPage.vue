@@ -1,18 +1,18 @@
 <template>
-  <div class="wirpper" style="width:78vw; height:83vh;display:block;padding:1vw; background-color: white;">
+  <div class="wirpper" style="display:block;padding:1vw; background-color: white;">
 
     <el-row>
       <el-col :span="7">
         <el-row class="nav" justify="space-around" style="flex-wrap: nowrap">
-          <el-input v-model="search"  placeholder="请输入查询内容" style="width: 60vw;" />
+          <el-input v-model="search" placeholder="请输入查询内容" style="width: 60vw;" />
           <el-button icon="search" @click="query" type="primary" style="margin-left:1vw">查询</el-button>
           <el-button icon="FolderAdd" type="success" @click="addTabMenu">新增菜单</el-button>
         </el-row>
       </el-col>
     </el-row>
 
-    <el-table :data="isSearch ? searchData : newData" style="margin-top: 3vh" row-key="id">
-      <el-table-column label="药物名称" prop="medical_name"></el-table-column>
+    <el-table :data="isSearch ? searchData : newData" height="530" style="margin-top: 3vh" row-key="id">
+      <el-table-column fixed label="药物名称" prop="medical_name"></el-table-column>
       <el-table-column label="所属公司" prop="medical_company"></el-table-column>
       <el-table-column label="靶向" prop="medical_target" width="140"></el-table-column>
       <el-table-column label="线数" prop="medical_indications"></el-table-column>
@@ -21,43 +21,37 @@
       <el-table-column label="区域" prop="medical_area" width="140"></el-table-column>
       <el-table-column label="操纵">
         <template #default="scope">
-          <el-button type="text" size="mini" style="font-size: 12px;margin:0; width:28%;" @click="addTabMenu">新增</el-button>
-          <el-button type="text" size="mini" style="font-size: 12px;margin:0;width:28%;" @click="setTabMenu(scope.row)" >修改</el-button>
-          <el-button type="text" size="mini" style="font-size: 12px;margin:0;width:28%;" @click="delTabMenu(scope.row)">删除</el-button>
+          <el-button type="text" size="mini" style="font-size: 12px;margin:0; width:28%;"
+            @click="addTabMenu">新增</el-button>
+          <el-button type="text" size="mini" style="font-size: 12px;margin:0;width:28%;"
+            @click="setTabMenu(scope.row)">修改</el-button>
+          <el-button type="text" size="mini" style="font-size: 12px;margin:0;width:28%;"
+            @click="delTabMenu(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <dialogPage> 
+    <dialogPage>
       <!-- 头部区 -->
-        <div style=" width: 40vw;
+      <div style=" width: 40vw;
         height:45vh;
         background-color: #fff;
         padding:1vw;
         border-radius: 1vw;" @click.stop>
-          <section  style="display: flex;
+        <section style="display: flex;
           justify-content: space-between;
           align-items: center;
           margin-bottom: 3.5vh;">
-          <span>{{isSetMenu ? "修改菜单" :  "新增菜单" }}</span>
-          <el-icon color="#666" style="cursor: pointer;" @click="controlObj.isDialog.isAddMenu=false">
+          <span>{{ isSetMenu ? "修改菜单" : "新增菜单" }}</span>
+          <el-icon color="#666" style="cursor: pointer;" @click="controlObj.isDialog.isAddMenu = false">
             <Close></Close>
           </el-icon>
         </section>
         <!-- 表单区 -->
         <el-form :model="addLab" :rules="rules" ref="ruleMenu">
           <el-form-item label="* 所属公司">
-            <el-select
-              style="width: 100%"
-              v-model="addLab.medical_company"
-              placeholder="请选择所属公司"
-            >
-              <el-option
-                v-for="(item, index) in companys"
-                :key="index"
-                :label="item"
-                :value="item"
-              ></el-option>
+            <el-select style="width: 100%" v-model="addLab.medical_company" placeholder="请选择所属公司">
+              <el-option v-for="(item, index) in companys" :key="index" :label="item" :value="item"></el-option>
             </el-select>
           </el-form-item>
 
@@ -74,29 +68,15 @@
           </div>
 
           <div style="display: flex; justify-content: space-between;">
-            <el-form-item
-              label="线数"
-              prop="medical_indications"
-              style="flex: 2.5"
-            >
-              <el-input
-                v-model="addLab.medical_indications"
-                placeholder=""
-              ></el-input>
+            <el-form-item label="线数" prop="medical_indications" style="flex: 2.5">
+              <el-input v-model="addLab.medical_indications" placeholder=""></el-input>
             </el-form-item>
 
             <div style="flex: 0.7"></div>
 
-            <el-form-item
-              label="治疗方式"
-              prop="medical_treatment"
-              style="flex: 3.25"
-            >
-              <el-input
-                v-model="addLab.medical_treatment"
-                placeholder=""
-              >
-            </el-input>
+            <el-form-item label="治疗方式" prop="medical_treatment" style="flex: 3.25">
+              <el-input v-model="addLab.medical_treatment" placeholder="">
+              </el-input>
             </el-form-item>
           </div>
 
@@ -107,18 +87,18 @@
             </el-radio-group>
           </el-form-item>
 
-          <el-form-item >
+          <el-form-item>
             <div>
               <div style="flex: 1;"></div>
               <el-button style="width:60px" @click="cancel">取消</el-button>
-              <el-button style="width:60px" @click="submitForm(ruleMenu)" type="primary" >
-                  {{isSetMenu? "修改":"新增"}}
-            </el-button>
+              <el-button style="width:60px" @click="submitForm(ruleMenu)" type="primary">
+                {{ isSetMenu ? "修改" : "新增" }}
+              </el-button>
             </div>
           </el-form-item>
         </el-form>
 
-        </div>
+      </div>
     </dialogPage>
 
 
@@ -126,43 +106,43 @@
 </template>
 
 <script>
-import { provide, reactive, ref, toRefs,h} from "vue"
+import { provide, reactive, ref, toRefs, h } from "vue"
 import menuPage from "@/public/database/menu/menuPage.scss"
 import { dealTree } from "@/hooks/database/menuPage"
 import controlObj from '@/hooks/personalCenter/controlObj'
-import {addMenu,setMenu,delMenu} from "@/api/arknight/database/menu"
+import { addMenu, setMenu, delMenu } from "@/api/arknight/database/menu"
 import { ElMessage, ElMessageBox } from "element-plus";
 
 export default {
   name: "menuPage",
   setup() {
-      /* 菜单数据原始数据 */
+    /* 菜单数据原始数据 */
     let Datalist = ref(JSON.parse(sessionStorage.getItem("medical")).basicMedical)
     /* 搜索框内容 */
     let search = ref('')
     /* 判断是否开始搜索 */
     let isSearch = ref(false)
     /* 搜索框输入时筛选的数据内容 */
-    let searchData =ref('')
+    let searchData = ref('')
 
     /* 点击搜索按钮 */
-    function query(){
+    function query() {
       isSearch.value = true;
-      searchData.value = Datalist.value.filter((item)=>
+      searchData.value = Datalist.value.filter((item) =>
         item.medical_area == search.value ||
-          item.medical_company == search.value ||
-          item.medical_indications == search.value ||
-          item.medical_name == search.value ||
-          item.medical_target == search.value ||
-          item.medical_treatment == search.value ||
-          search.value == ''
+        item.medical_company == search.value ||
+        item.medical_indications == search.value ||
+        item.medical_name == search.value ||
+        item.medical_target == search.value ||
+        item.medical_treatment == search.value ||
+        search.value == ''
       )
-      if(search.value == ''){
+      if (search.value == '') {
         isSearch.value = false
       }
     }
     /* 遮罩层所需参数 */
-    provide("controlDialog","isAddMenu")
+    provide("controlDialog", "isAddMenu")
     let ruleMenu = ref("")
     /* 表单输入内容 */
     let addLab = reactive({
@@ -173,7 +153,7 @@ export default {
       medical_treatment: "",
       medical_area: "",
       id: "",
-    })  
+    })
     /* 表单规则 */
     let rules = reactive({
       medical_name: {
@@ -207,39 +187,39 @@ export default {
         trigger: "blur",
       },
     })
-    
+
     /* 新增按钮的事件 */
-    function addTabMenu(){
-        controlObj.isDialog.isAddMenu = true
-      Reflect.ownKeys(addLab).forEach((key)=>{
-        Reflect.set(addLab,key,'')
+    function addTabMenu() {
+      controlObj.isDialog.isAddMenu = true
+      Reflect.ownKeys(addLab).forEach((key) => {
+        Reflect.set(addLab, key, '')
       })
     }
 
     /* 是否是修改内容的按钮 */
     let isSetMenu = ref(false)
     /* 修改按钮事件 */
-    function setTabMenu(item){
+    function setTabMenu(item) {
       /* 修改按钮开启  */
       isSetMenu.value = true
       /* 通过传入的值 遍历出对应key值内容 */
-      Reflect.ownKeys(addLab).forEach(key =>{
-        Reflect.set(addLab,key,item[key])
+      Reflect.ownKeys(addLab).forEach(key => {
+        Reflect.set(addLab, key, item[key])
       })
       /* 遮罩层开启 */
       controlObj.isDialog.isAddMenu = true
     }
     /* 删除按钮事件 */
-    function delTabMenu(item){
+    function delTabMenu(item) {
       ElMessageBox({
         /* 标题头 */
-        title:"删除信息",
+        title: "删除信息",
         /* 提示框内容 */
         message: h("p", null, [
           h("span", null, "你确认删除这项信息吗？")
         ]),
-       // 显示取消按钮
-       showCancelButton: true,
+        // 显示取消按钮
+        showCancelButton: true,
         // 确认按钮的文本
         confirmButtonText: "确认",
         // 取消按钮的文本
@@ -264,32 +244,32 @@ export default {
             done();
           }
         },
-      }).then(()=>{
+      }).then(() => {
         ElMessage({
-          type:'info',
-          message:'删除成功'
+          type: 'info',
+          message: '删除成功'
         })
       }).catch(err => console.log(err))
     }
 
     /* 表单内提交按钮 */
-    const submitForm = async(forElement)=>{
-      if(!forElement) return;
-      await forElement.validate((valid,fields)=>{
-        if(valid){
+    const submitForm = async (forElement) => {
+      if (!forElement) return;
+      await forElement.validate((valid, fields) => {
+        if (valid) {
           controlObj.isDialog.isAddMenu = false
           /* 判断修改按钮的是否开启 来使用对应请求 */
-          isSetMenu.value ? setMenu(addLab): addMenu(addLab)
+          isSetMenu.value ? setMenu(addLab) : addMenu(addLab)
           /* 关闭修改按钮 */
-          isSetMenu.value = false          
-        }else{
-          console.log("error Submit",fields);
+          isSetMenu.value = false
+        } else {
+          console.log("error Submit", fields);
         }
       })
     }
 
     /* 表单内按钮取消 撤销遮罩层 */
-    function cancel(){
+    function cancel() {
       controlObj.isDialog.isAddMenu = false
       isSetMenu.value = false
     }
@@ -321,8 +301,11 @@ export default {
 <style lang="scss" scoped>
 .el-form-item {
   margin-bottom: 3vh;
-  .el-form-item__content{
-    display: flex; flex-wrap:nowrap;justify-content: flex-end;
+
+  .el-form-item__content {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
   }
 }
 </style>

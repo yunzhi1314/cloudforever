@@ -1,7 +1,12 @@
 export function dealTree() {
     let datalist = JSON.parse(sessionStorage.getItem('medical')).basicMedical
     /* 所有公司名字 */
-    let companys = [...new Set(datalist.map((item) => item.medical_company))]
+    let companys
+    if (datalist != null) {
+        companys = [...new Set(datalist.map((item) => item.medical_company))]
+    } else {
+        return
+    }
     let newData = []
     /*遍历 筛选 */
     datalist.forEach((item) => {
@@ -12,7 +17,7 @@ export function dealTree() {
             }
         })
     })
-        /* 处理的数据结构*/
+    /* 处理的数据结构*/
     function cases(index, item) {
         if (newData[index] == undefined) {
             newData.push({

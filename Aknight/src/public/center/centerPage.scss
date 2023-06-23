@@ -64,15 +64,28 @@ body {
 		align-items: center;
 		flex-direction: column;
 
-		/* 输入框动画 */
+		/* 输入框动画(个人中心所有输入框通用) */
+		/* 正确 */
+		#inputRes {
+			background: linear-gradient(to right, #158fc5, #158fc5) no-repeat left bottom;
+			background-size: 0 2px;
+			transition: background-size 0.3s ease-out;
+		}
+
 		#inputRes:focus {
-			border-bottom: 2px solid #158fc5;
-			transition: all 0.3s ease-out;
+			background-size: 100% 2px;
+		}
+
+		/* 错误 */
+		#inputRej {
+			background: linear-gradient(to right, #fe1610, #fe1610) no-repeat left bottom;
+			background-size: 0 2px;
+			transition: background-size 0.3s ease-out;
 		}
 
 		#inputRej:focus {
-			border-bottom: 2px solid #fe1610;
-			transition: all 0.3s ease-out;
+			background-size: 100% 2px;
+
 		}
 
 		/* 当前账号信息 */
@@ -204,10 +217,11 @@ body {
 				color: #158fc5;
 			}
 		}
-		
+
 		.change-box>span:nth-child(2) {
 			font-weight: normal;
 		}
+
 		/* 自助查询 */
 		.SelfQuery {
 			width: 30rem;
@@ -252,6 +266,7 @@ body {
 			height: 10rem;
 			background-color: #fff;
 		}
+
 		/* 个人信息清单 */
 		.list {
 			margin-top: -14rem;
@@ -364,8 +379,9 @@ body {
 				padding-top: 1rem;
 				gap: 1rem;
 			}
-			
+
 		}
+
 		/* 第三方共享清单 */
 		.ThirdShare {
 			background-color: #fff;
@@ -400,7 +416,7 @@ body {
 				color: #B5A8C5;
 			}
 		}
-		
+
 		/* 前往数据库 */
 		.toDatabase {
 			width: 20rem;
@@ -469,7 +485,7 @@ input {
 	border-bottom: 1px solid #ccc;
 }
 
- /* button样式，所有按钮都能通用，如有不一样的单独添加样式 */
+/* button样式，所有按钮都能通用，如有不一样的单独添加样式 */
 button {
 	background-color: #158fc5;
 	border: none;

@@ -171,15 +171,15 @@ export default {
       controlObj.isDialog.isAddmenu = false
     }
     // 表单新增按钮
-    function submit(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!')
-          } else {
-            console.log('error submit!!')
-            return false
-          }
-        })
+    function submit() {
+        // this.$refs[formName].validate((valid) => {
+        //   if (valid) {
+        //     alert('submit!')
+        //   } else {
+        //     console.log('error submit!!')
+        //     return false
+        //   }
+        // })
       }
     // 传参接收遮罩层
     provide("controlDialog", "isAddmenu");

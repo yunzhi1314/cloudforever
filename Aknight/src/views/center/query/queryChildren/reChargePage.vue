@@ -4,8 +4,7 @@
 		<section style="font-size: 1rem;font-weight:bold;">{{ title }}</section>
 		<div class="QueryItem">
 			<section>
-				<span style="color: #158fc5; margin-right: 0.5rem">UID</span
-				><span>{{ UID }}</span>
+				<span style="color: #158fc5; margin-right: 0.5rem">UID</span><span>{{ UID }}</span>
 			</section>
 			<table style="width: 100%">
 				<tr>
@@ -33,25 +32,25 @@
 </template>
 
 <script>
-	import { useRoute } from "vue-router";
-	import { toRefs } from "vue";
-	export default {
-		name: "reChargePage",
-		setup() {
-			let route = useRoute();
-			let UID = JSON.parse(localStorage.getItem("userMsg")).UID;
-			let data =JSON.parse(sessionStorage.getItem("selfQuery")).selfQuery
+import { useRoute } from "vue-router";
+import { toRefs, reactive } from "vue";
+export default {
+	name: "reChargePage",
+	setup() {
+		let route = useRoute();
+		let UID = JSON.parse(localStorage.getItem("userMsg")).UID;
+		let data = JSON.parse(sessionStorage.getItem("selfQuery")).selfQuery
 
-			return {
-				//本地存储的UID
-				UID,
-				route,
-				//请求数据
-				...toRefs(data.items[route.query.index]
-				)
-			};
-		}
-	};
+		return {
+			//本地存储的UID
+			UID,
+			route,
+			//请求数据
+			...toRefs(reactive(data.items[route.query.index]
+			))
+		};
+	}
+};
 </script>
 
 <style lang="scss" scoped></style>

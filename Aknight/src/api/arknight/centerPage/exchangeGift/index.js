@@ -1,7 +1,7 @@
 import url from "@/api/url";
 import { Request } from "@/hooks/request";
 import store from "@/store";
-import { reactive } from "vue";
+import { reactive, toRef } from "vue";
 
 //获取兑换码
 export function getRedemptionCode() {
@@ -9,7 +9,7 @@ export function getRedemptionCode() {
 		datas: []
 	});
 	Request.getData(url.centerPage.exchangeGift.datas).then((res) => {
-		dataList.datas = { ...res.data.exchangeGift };
+		dataList.datas = toRef({ ...res.data.exchangeGift });
 
 		// 将兑换码存入仓库以及本地
 		store.commit("personalCenter/changeContexts", res.data.context);

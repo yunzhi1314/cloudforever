@@ -1,6 +1,6 @@
 import { Request } from "@/hooks/request";
 import url from "@/api/url";
-import { reactive } from "vue";
+import { reactive, toRef } from "vue";
 
 //获取个人信息清单信息(personalList跳转页面后请求)
 export function getInfo(name) {
@@ -8,7 +8,7 @@ export function getInfo(name) {
         datas: [],
     });
     Request.getData(url.centerPage.personalList[name]).then((res) => {
-        dataList.datas = { ...res.data[name] };
+        dataList.datas = toRef({ ...res.data[name] });
     });
     return dataList;
 }    

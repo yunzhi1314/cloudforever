@@ -319,7 +319,7 @@ export default {
 			toTab,
 			toPage,
 			removeTab,
-			...toRefs(JSON.parse(sessionStorage.getItem("menus"))),
+			...toRefs(reactive(JSON.parse(sessionStorage.getItem("menus")))),
 			...controlObj
 		};
 	},

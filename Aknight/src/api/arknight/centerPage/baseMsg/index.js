@@ -1,6 +1,6 @@
 import { Request } from "@/hooks/request";
 import url from "@/api/url";
-import { reactive } from "vue";
+import { reactive, toRef } from "vue";
 import store from "@/store";
 
 //获取个人信息页面信息
@@ -9,7 +9,7 @@ export function getBaseMsg(data) {
         datas: []
     })
     Request.postData(url.centerPage.baseMsg.getBaseMsg, data).then(res => {
-        datalist.datas = { ...res.data.users }
+        datalist.datas = toRef({ ...res.data.users })
         //存baseMsg
         store.commit("personalCenter/changeBaseMsg", datalist.datas)
         store.commit("changeStore", "isBaseMsg")

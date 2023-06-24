@@ -23,9 +23,9 @@
 			<el-table-column label="操纵">
 				<!-- scope为 -->
 				<template #default="scope">
-					<el-button type="text" size="small " style="font-size: 12px; margin: 0 0.5vw; width: 30%"
+					<el-button link size="small " style="font-size: 12px; margin: 0 0.5vw; width: 30%;color:#409eff;"
 						@click="setMsg(scope.row)">修改</el-button>
-					<el-button type="text" size="small " style="font-size: 12px; margin: 0 0.5vw; width: 30%"
+					<el-button link size="small " style="font-size: 12px; margin: 0 0.5vw; width: 30%;color:#409eff;"
 						@click="delMsg(scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -278,7 +278,7 @@ export default {
 		let isSetMsg = ref(false);
 		// 新增菜单按钮
 		function addTable() {
-			controlObj.isDialog.isRoleAddMenu = true;
+			controlObj.isDialog.isAddMenu = true;
 			// 打开新增的表单时，清空所有遮罩层的内容
 			Reflect.ownKeys(addMsg).forEach((key) => {
 				Reflect.set(addMsg, key, "");
@@ -289,7 +289,7 @@ export default {
 			// 将遮罩层变成修改内容，开启修改开关
 			isSetMsg.value = true;
 			// 开启遮罩层
-			controlObj.isDialog.isRoleAddMenu = true;
+			controlObj.isDialog.isAddMenu = true;
 			// 将修改内容渲染到修改表格中
 			Reflect.ownKeys(addMsg).forEach((key) => {
 				Reflect.set(addMsg, key, item[key]);
@@ -351,7 +351,7 @@ export default {
 			if (!formEl) return;
 			await formEl.validate((valid, fields) => {
 				if (valid) {
-					controlObj.isDialog.isRoleAddMenu = false;
+					controlObj.isDialog.isAddMenu = false;
 
 					// 根据修改的开关来决定是递交修改请求还是新增内容的请求
 					isSetMsg.value ? setMenu(addMsg) : addMenu(addMsg);
@@ -363,8 +363,13 @@ export default {
 				}
 			});
 		};
+		// 取消遮罩层
+		function cancel() {
+			controlObj.isDialog.isAddMenu = false;
+			isSetMsg.value = false;
+		}
 
-		provide("controlDialog", "isRoleAddMenu");
+		provide("controlDialog", "isAddMenu");
 
 		return {
 			menuPage,
@@ -386,7 +391,8 @@ export default {
 			addTable,
 			setMsg,
 			delMsg,
-			submitForm
+			submitForm,
+			cancel
 		};
 	}
 };

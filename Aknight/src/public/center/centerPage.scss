@@ -68,7 +68,7 @@ body {
 		/* 正确 */
 		#inputRes {
 			background: linear-gradient(to right, #158fc5, #158fc5) no-repeat left bottom;
-			background-size: 0 2px;
+			background-size: 0 0.5px;
 			transition: background-size 0.3s ease-out;
 		}
 
@@ -79,7 +79,7 @@ body {
 		/* 错误 */
 		#inputRej {
 			background: linear-gradient(to right, #fe1610, #fe1610) no-repeat left bottom;
-			background-size: 0 2px;
+			background-size: 0 1px;
 			transition: background-size 0.3s ease-out;
 		}
 

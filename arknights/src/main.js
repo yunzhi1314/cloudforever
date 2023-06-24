@@ -19,6 +19,9 @@ for(const [key,component] of Object.entries(ElementPlusIconsVue)){
     app.component(key,component)
 }
 
+
+
+
 app.use(ElementPlus).component('dialogPage',dialogPage).component('messagePage',messagePage).
 use(store).use(router).mount('#app')
 

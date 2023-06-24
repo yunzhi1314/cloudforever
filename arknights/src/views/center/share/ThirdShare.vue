@@ -28,7 +28,7 @@
       </section>
       <section >
         <span>第三方隐私协议政策或官网链接</span>
-        <a href="item.URL"> {{ item.URL }}</a>
+        <a href="item.URL" style="word-wrap: break-word;width: 22.5vw;"> {{ item.URL }}</a>
       </section>
     </div>
   </div>

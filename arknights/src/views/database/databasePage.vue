@@ -50,7 +50,7 @@
           </el-menu>
         </el-aside>
         <!-- 主要内容 -->
-        <router-link :to="{ name: '', query }"></router-link>
+       <router-view></router-view>
         <el-container>
           <!-- 头部 -->
           <el-header style="height: 11.5vh; grid-template-columns: 1fr">
@@ -92,7 +92,7 @@
               </el-menu-item>
               <el-sub-menu index="3">
                 <template #title>
-                  <span>{{ baseMsg[1].inputs[0].inputItem }}</span>
+                  <!-- <span>{{ baseMsg[1].inputs[0].inputItem }}</span> -->
                 </template>
                 <el-menu-item index="3-1">item one</el-menu-item>
                 <el-menu-item index="3-2">item two</el-menu-item>

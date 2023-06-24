@@ -87,9 +87,10 @@
 
 <script>
 import centerSCSS from "@/public/center.scss";
-import { centerImg } from "@/api/centerPage";
-import { toRefs, computed, reactive } from "vue";
+import { centerImg } from "@/api/personalCenter/centerPage";
+import { toRefs, computed, reactive ,provide} from "vue";
 import { useRoute,useRouter } from "vue-router";
+import controlObj from "@/hooks/personalCenter/control";
 
 export default {
   name: "centerPage",

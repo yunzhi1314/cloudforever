@@ -25,20 +25,23 @@
       <el-table-column label="治疗方式" prop="medical_treatment"></el-table-column>
       <el-table-column label="区域" prop="medical_area"></el-table-column>
       <el-table-column label="操纵">
-        <el-button type="text" style="font-size: 12px" @click="add">新增</el-button>
-        <el-button type="text" style="font-size: 12px" @click="change">修改</el-button>
-        <el-button type="text" style="font-size: 12px" @click="delet">删除</el-button>
+        <template #default="scope">
+          <el-button type="text" style="font-size: 12px" @click="add">新增</el-button>
+          <el-button type="text" style="font-size: 12px" @click="change(scope.row)">修改</el-button>
+          <el-button type="text" style="font-size: 12px" @click="delet">删除</el-button>
+        </template>
       </el-table-column>
     </el-table>
 
     <!-- 遮罩层 新增菜单的内容 -->
     <dialogPage>
       <div class="dialog" @click.stop>
-        <section style="margin: 2vw;">
-          <span>新增菜单</span>
+        <section style="margin: 2vw;display: flex;justify-content: space-between;">
+          <span>{{isSetMsg ? "修改菜单": "新增菜单"}}</span>
+          <el-icon @click="controlObj.isDialog.isAddmenu = false"><Close/></el-icon>
         </section>
         <!-- 表单 -->
-        <el-form style="margin: 0 3vw;" :model="ruleForm"  :rules="rules" >
+        <el-form style="margin: 0 3vw;" :model="ruleForm"  :rules="rules" ref="ruleMenu">
           <el-form-item label="所属公司" >
             <el-select placeholder="请选择所属公司" v-model="ruleForm.medical_company">
               <el-option v-for="(item,index) in company"
@@ -73,7 +76,7 @@
           <el-form-item style="display: flex;justify-content: flex-end;">
             <div style="flex: 1"></div>
             <el-button @click="cancel"> 取消</el-button>
-            <el-button type="primary" @click="submit"> 新增 </el-button>
+            <el-button type="primary" @click="submitForm(ruleMenu)">{{isSetMsg ? "修改": "新增"}}</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -83,10 +86,11 @@
 </template>
 
 <script>
-import { toRefs, ref, provide, reactive } from "vue";
+import { toRefs, ref, provide, reactive } from "vue"
 import menuPageCss from "@/public/menuPage.scss"
 import { dealTree } from "@/hooks/database/menuPage"
 import controlObj from "@/hooks/personalCenter/control"
+import { addMenu,setMsg } from "@/api/database/menu"
 
 export default {
   name: "menuPage",
@@ -161,26 +165,52 @@ export default {
         trigger: "blur",
       },
     })
+    // 验证表单
+    let ruleMenu = ref();
 
-    // 新增菜单显示遮罩层样式
+    // 新增菜单内容
     function add() {
       controlObj.isDialog.isAddmenu = true
+      // 打开新增的表单时，清空所有遮罩层的内容
+      Reflect.ownKeys(ruleForm).forEach((key)=>{
+        Reflect.set(ruleForm,key,'')
+      })
     }
     // 表单取消按钮
     function cancel(){
       controlObj.isDialog.isAddmenu = false
     }
-    // 表单新增按钮
-    function submit() {
-        // this.$refs[formName].validate((valid) => {
-        //   if (valid) {
-        //     alert('submit!')
-        //   } else {
-        //     console.log('error submit!!')
-        //     return false
-        //   }
-        // })
-      }
+    
+
+    // 控制新增菜单还是修改菜单的开关
+    let isSetMsg = ref(false)
+    // 修改表单内容
+    function change(item){
+      controlObj.isDialog.isAddmenu = true
+      isSetMsg.value = true
+      Reflect.ownKeys(ruleForm).forEach((key)=>{
+        Reflect.set(ruleForm,key,item[key])
+      })
+      // console.log(item);
+    }
+    
+    // 删除表单内容
+    function delet(){
+
+    }
+    // 提交表单
+    const submitForm = async (formEl) => {
+      if(!formEl) return ;
+      await formEl.validate((valid,fields)=>{
+        if(valid){
+          controlObj.isDialog.isAddmenu = false
+          isSetMsg.value ?  setMsg(ruleForm) : addMenu(ruleForm)
+          isSetMsg.value = false
+        }else{
+          console.log("error submit!", fields);
+        }
+      })
+    }
     // 传参接收遮罩层
     provide("controlDialog", "isAddmenu");
 
@@ -193,13 +223,20 @@ export default {
       ...toRefs(dealTree()),
       isSearch,
       searchData,
+      // 表单查询
       query,
+      // 新增表单内容
       add,
       cancel,
       ruleForm,
       rules,
-      submit,
-
+      ruleMenu,
+      submitForm,
+      // 修改表单内容
+      change,
+      // 删除表单内容
+      delet,
+      isSetMsg,
     }
   }
 }

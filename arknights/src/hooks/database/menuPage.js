@@ -1,9 +1,9 @@
 export function dealTree(){
     let data = JSON.parse(sessionStorage.getItem("basicMedical")).basicMedical
-    console.log(data);
+    // console.log(data);
     // 便利数据返回每一项的公司名称
     let company = [...new Set(data.map(item => item.medical_company))]
-    console.log(company);
+    // console.log(company);
     let newData = []
 
     // 处理不同公司显示的药物数量
@@ -42,7 +42,7 @@ export function dealTree(){
               })
         }
     }
-    console.log(newData);
+    // console.log(newData);
     return {newData,company}
 
 }

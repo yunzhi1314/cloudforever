@@ -64,7 +64,7 @@ export async function basicMedical(dom) {
             emphasis:{
                 label:{
                     show:true,
-                    fontSize:"1.25rem",
+                    fontSize:"1.2rem",
                     fontWeight:"bold",
                 }
             },

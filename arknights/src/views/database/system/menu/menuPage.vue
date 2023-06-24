@@ -73,7 +73,7 @@
           <el-form-item style="display: flex;justify-content: flex-end;">
             <div style="flex: 1"></div>
             <el-button @click="cancel"> 取消</el-button>
-            <el-button type="primary"> 新增 </el-button>
+            <el-button type="primary" @click="submit"> 新增 </el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -161,7 +161,8 @@ export default {
         trigger: "blur",
       },
     })
-    // 新增菜单
+
+    // 新增菜单显示遮罩层样式
     function add() {
       controlObj.isDialog.isAddmenu = true
     }
@@ -170,9 +171,19 @@ export default {
       controlObj.isDialog.isAddmenu = false
     }
     // 表单新增按钮
-
+    function submit(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!')
+          } else {
+            console.log('error submit!!')
+            return false
+          }
+        })
+      }
     // 传参接收遮罩层
     provide("controlDialog", "isAddmenu");
+
     return {
       menuPageCss,
       controlObj,
@@ -187,6 +198,7 @@ export default {
       cancel,
       ruleForm,
       rules,
+      submit,
 
     }
   }

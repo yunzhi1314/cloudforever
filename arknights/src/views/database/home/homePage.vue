@@ -61,8 +61,8 @@ export default {
 
     return {
       homePageCss,
+      ...toRefs(message()),//订单信息
       ...toRefs(navTools()), //导航工具栏
-      ...toRefs(message())
     }
   }
 }

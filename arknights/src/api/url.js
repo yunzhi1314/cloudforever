@@ -52,6 +52,7 @@ export default{
        navTools:"/database/home/navTools",
        naweiCompany:"/database/home/naweiCompany",
    },
+   
    menu:{
       addMenu:"/database/menu/addMedical",
       setMenu:"/database/menu/setMedical",

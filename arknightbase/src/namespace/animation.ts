@@ -9,6 +9,14 @@ export namespace URL {
 
   export interface NavLis{
     item:string;
-    isEnter:boolean
+    isEnter:boolean;
+    top:string;
+    name:string;
+  }
+
+  export interface Ball{
+    left:string;
+    bottom:number;
+    isBallPlay:boolean;
   }
 }

@@ -5,7 +5,11 @@ import type { Ref } from 'vue'
 import { mouseFollow } from '@/hooks/mouseEvent'
 import { onMounted } from 'vue'
 import type { URL } from '@/namespace/animation'
-import {RouterView} from "vue-router"
+import {useRouter} from "vue-router"
+
+// 页面路由
+const router = useRouter()
+
 
 // 调整进度条数字
 let proNum: Ref<number> = ref(0)
@@ -33,37 +37,32 @@ let navData: Array<URL.NavLis> = reactive([
   {
     item: '首页',
     top: '0vh',
-    name: '',
+    name: 'home',
     isEnter: false,
-    isRoll: false
   },
   {
     item: '情报',
     top: '100vh',
-    name: '',
+    name: 'information',
     isEnter: false,
-    isRoll: false
   },
   {
     item: '干员',
     top: '200vh',
-    name: '',
+    name: 'staff',
     isEnter: false,
-    isRoll: false
   },
   {
     item: '设定',
     top: '300vh',
-    name: '',
+    name: 'world',
     isEnter: false,
-    isRoll: false
   },
   {
     item: '档案',
     top: '400vh',
-    name: '',
+    name: 'media',
     isEnter: false,
-    isRoll: false
   }
 ])
 
@@ -98,50 +97,45 @@ function toCenter() {
   window.open('http://192.168.2.17:8080/')
 }
 
-// 背景随机光球
-let ball: Ref<Array<object>> = ref([])
-
+// 动画关键帧控制背景随机光球
+let ball: Ref<Array<URL.Ball>> = ref([])
+  let left:Ref<number> = ref(0)
+  let bottom:Ref<number> = ref(0)
 // 球出现
 setInterval(() => {
-  let left:number = Math.random() * 100
-  let bottom:number = Math.random() * 50
-  ball.value.length <= 30 ?
+  left.value= Math.random() * 100
+  bottom.value = Math.random() * 50
   ball.value.push({
-    left: `${left}vw`,
-    bottom: bottom,
+    left: `${left.value}vw`,
+    bottom: bottom.value,
     // 控制光球动画
-    isBallPlay:false
-  }) : ""
+    isBallPlay:false,
+  })
 
-
+  
 // 延时控制该次生成的光球的动画开关
-  setTimeout(() => {
+setTimeout(() => {
     ball.value[ball.value.length-1].isBallPlay = true
   }, 50);
+}, 1500)
 
-}, 2500)
+
 
 // 球消失
 setInterval(()=>{
-    ball.value.shift()
-},(Math.random()+3000)*1.35)
+    ball.value = ball.value.filter(item => !(item.bottom >= item.bottom +20))
+},5050)
 
 
 // 页面滚动
-// 页面滚动距离
-let height:Ref<number> = ref(0)
 
 // 页面滚动函数
 function toPage(index:number){
-  // 寻找到对应的对象
-  let res = navData.find((item,index2) =>index == index2 )
+    router.push({
+    name:navData[index].name
+  })
 
-  // 计算滚动高度
-  height.value = 100 * index
-  // 开启滚动
-  res.isRoll = true
 }
-
 
 // 请求图片数据
 let { img } = await getIndexDatas('images')
@@ -185,8 +179,12 @@ let shows = await getIndexDatas('shows')
       cursor: `url(${img.points.image1}),auto`
     }"
   >
-    <div>
-        <router-view></router-view>
+    <div class="scrollBox" id="scrollBox">
+        <router-view name="Home"></router-view>
+        <router-view name="Information"></router-view>
+        <router-view name="Staff"></router-view>
+        <router-view name="World"></router-view>
+        <router-view name="Media"></router-view>
     </div>
     <div>
       <section class="user">
@@ -202,11 +200,9 @@ let shows = await getIndexDatas('shows')
           @mouseenter="liControl(index, true)"
           @mouseleave="liControl(index)"
           @click="toPage(index)"
-          :style="{
-            color: isEnter && item.isEnter ? '#2595C7' : '',
-            animation: item.isRoll ? "roll 1s 0.15s 1 ease-in forwards" : "",
-            top: item.isRoll ? height +"vh" : (100*index) + "vh"
-          }"
+          :style='{
+            color: isEnter && item.isEnter ? "#2595C7" : "",
+          }'
         >
           {{ item.item }}
         </li>
@@ -236,13 +232,16 @@ let shows = await getIndexDatas('shows')
     <div v-for="(item,index) in ball"
     :key="index"
     class="ball"
+    id="ball"
     :style='{
       left:item.left,
       bottom:item.bottom + "vh",
       opacity:"1",
       bottom:item.isBallPlay? `${item.bottom +20}vh` : item.bottom + "vh",
-      opacity:item.isBallPlay? "0" : "1"
+      opacity:item.isBallPlay? `0` : "1",
+      transition:item.isBallPlay? "bottom 3.5s 0s linear,opacity 3.5s 0s linear" : ""
     }'></div>
+
 </template>
 
 <style scoped>

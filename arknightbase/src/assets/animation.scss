@@ -114,3 +114,15 @@
     filter: opacity(0);
   }
 }
+
+.scrollBox{
+  overflow: auto;
+  height: 100vh;
+}
+
+#home,#information,#media,#staff,#world{
+  width: 100vw; 
+  height: 100vh;
+  position: absolute;
+  transition:all 0.25s 0s linear;
+}

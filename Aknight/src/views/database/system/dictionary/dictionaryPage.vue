@@ -25,7 +25,7 @@
 			</el-table-column>
 		</el-table>
 		<!-- 分页栏 -->
-		<div style="display: flex; justify-content: center; margin-top: 3vh">
+		<div style="display: flex; justify-content: center; height:5vh;">
 			<el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[3, 5, 8]"
 				:small="false" layout="total, sizes, prev, pager, next, jumper"
 				:total="isSearch ? searchData.length : dataList.length" @size-change="handleSizeChange"

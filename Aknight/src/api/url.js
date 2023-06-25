@@ -7,7 +7,7 @@ export default {
 		telCode: "api/user/telCode",//发送短信
 		register: "api/user/register",//注册请求
 		login: "api/user/login",//密码登录请求
-		codeLogin:"api/user/codeLogin",//短信登录请求
+		codeLogin: "api/user/codeLogin",//短信登录请求
 		centerRoutes: "person/home",//个人中心主页图片及路由信息
 		baseMsg: {//个人信息页面
 			getBaseMsg: "person/baseMsg/userBasic",//获取页面信息
@@ -45,7 +45,7 @@ export default {
 			expMedicals: "/database/home/expMedicals",//靶向药实验数据,用于复合折线统计图
 			basicMedical: "/database/home/basicMedical",//各公司所持有的靶向药数据，用于环状图
 			naweiCompany: "/database/home/naweiCompany",//纳微公司的营销利润与增长率，用于折柱复合统计图
-			naweiCompany2:'/database/home/naweiCompany2',
+			naweiCompany2: '/database/home/naweiCompany2',
 			navTools: "/database/home/navTools",//首页左下工具栏
 		},
 		menu: {//菜单管理
@@ -62,6 +62,16 @@ export default {
 			addMenu: "/database/user/addMedical",//添加
 			delMenu: "/database/user/delMedical",//修改
 			setMenu: "/database/user/setMedical",//删除
+		},
+		department: {//部门管理
+			addMenu: "/database/department/addMedical",//添加
+			delMenu: "/database/department/delMedical",//修改
+			setMenu: "/database/department/setMedical",//删除
+		},
+		dictionary: {//字典管理
+			addMenu: "/database/dictionary/addMedical",//添加
+			delMenu: "/database/dictionary/delMedical",//修改
+			setMenu: "/database/dictionary/setMedical",//删除
 		},
 	},
 };

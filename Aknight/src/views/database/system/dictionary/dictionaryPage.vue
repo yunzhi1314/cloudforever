@@ -80,10 +80,11 @@
 import { ref, reactive, watch, provide, h } from "vue";
 import menuPage from "@/public/database/menu/menuPage.scss";
 import controlObj from "@/hooks/personalCenter/controlObj";
-import { addMenu, setMenu, delMenu } from "@/api/arknight/database/role";
-import { ElMessage, ElMessageBox } from "element-plus";
-
+import { addMenu, setMenu, delMenu } from "@/api/arknight/database/menu";
 // 导入弹框，删除时使用
+import { ElMessage, ElMessageBox } from "element-plus";
+import url from "@/api/url"
+
 export default {
 	name: "dictionaryPage",
 	setup() {
@@ -244,7 +245,7 @@ export default {
 						instance.confirmButtonLoading = true;
 						instance.confirmButtonText = "Loading...";
 						// 在结束提示框之前去进行请求
-						delMenu(item.id);
+						delMenu(url.database.dictionary.delMenu, item.id);
 						setTimeout(() => {
 							// 结束提示框的行为并关闭提示框
 							done();
@@ -275,7 +276,7 @@ export default {
 					controlObj.isDialog.isAddMenu = false;
 
 					// 根据修改的开关来决定是递交修改请求还是新增内容的请求
-					isSetMsg.value ? setMenu(addMsg) : addMenu(addMsg);
+					isSetMsg.value ? setMenu(url.database.dictionary.setMenu, addMsg) : addMenu(url.database.dictionary.addMenu, addMsg);
 
 					// 将修改的开关关闭
 					isSetMsg.value = false;
@@ -323,7 +324,7 @@ export default {
 			{ immediate: true }
 		);
 
-		provide("controlDialog", "isRoleAddMenu");
+		provide("controlDialog", "isAddMenu");
 		return {
 			menuPage,
 			search,

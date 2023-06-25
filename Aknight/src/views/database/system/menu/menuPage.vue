@@ -112,7 +112,7 @@ import { dealTree } from "@/hooks/database/menuPage"
 import controlObj from '@/hooks/personalCenter/controlObj'
 import { addMenu, setMenu, delMenu } from "@/api/arknight/database/menu"
 import { ElMessage, ElMessageBox } from "element-plus";
-
+import url from "@/api/url"
 export default {
   name: "menuPage",
   setup() {
@@ -234,7 +234,7 @@ export default {
             instance.confirmButtonText = "Loading...";
 
             // 在结束提示框之前去进行请求
-            delMenu(item.id)
+            delMenu(url.database.menu.delMenu, item.id)
             setTimeout(() => {
               // 结束提示框的行为并关闭提示框
               done();
@@ -262,7 +262,7 @@ export default {
         if (valid) {
           controlObj.isDialog.isAddMenu = false
           /* 判断修改按钮的是否开启 来使用对应请求 */
-          isSetMenu.value ? setMenu(addLab) : addMenu(addLab)
+          isSetMenu.value ? setMenu(url.database.menu.setMenu, addLab) : addMenu(url.database.menu.addMenu, addLab)
           /* 关闭修改按钮 */
           isSetMenu.value = false
         } else {

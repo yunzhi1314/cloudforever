@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import controlObj from '@/hooks/personalCenter/controlObj'
+import controlObj from '@/hooks/controlObj'
 import { reactive } from 'vue'
 export default {
     name: "messagePage",
     setup() {
         //获取存储的msg
-        let {msg} = reactive(JSON.parse(sessionStorage.getItem("msg")))
+        let { msg } = reactive(JSON.parse(sessionStorage.getItem("msg")))
         return {
             //按钮集合
             controlObj,
@@ -41,3 +41,4 @@ export default {
 
 }
 </style>
+@/hooks/controlObj

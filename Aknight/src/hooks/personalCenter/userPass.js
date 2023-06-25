@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import controlObj from "./controlObj";
+import controlObj from "../controlObj";
 import store from "@/store";
 import { toest } from "../toset";
 import { user } from "@/api/arknight/centerPage/code";

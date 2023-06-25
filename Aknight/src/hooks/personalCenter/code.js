@@ -1,6 +1,6 @@
 import { mathCode } from "@/api/arknight/centerPage/code";
 import { reactive, ref } from "vue";
-import controlObj from "@/hooks/personalCenter/controlObj";
+import controlObj from "@/hooks/controlObj";
 import { toest } from "../toset";
 import store from "@/store/index";
 import { user } from "@/api/arknight/centerPage/code";

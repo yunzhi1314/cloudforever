@@ -74,7 +74,7 @@ import { useRoute } from 'vue-router'
 import { observer } from "@/hooks/personalCenter/watcher";
 import { getMathCode, setCountDown, changeSvg, cancel } from "@/hooks/personalCenter/code";
 import dialogCss from "@/public/dialog/dialogPage.scss";
-import controlObj from "@/hooks/personalCenter/controlObj";
+import controlObj from "@/hooks/controlObj";
 import svg from "@/hooks/personalCenter/code";
 import { setMsg } from '@/api/arknight/centerPage/baseMsg';
 import url from "@/api/url";

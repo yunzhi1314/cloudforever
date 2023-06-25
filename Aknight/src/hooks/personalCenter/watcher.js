@@ -1,6 +1,6 @@
 // 导入监听函数
 import { watch } from "vue";
-import controlObj from "./controlObj";
+import controlObj from "../controlObj";
 
 // 封装监听函数
 //arr为要监听是数组，   index 为密码的下标

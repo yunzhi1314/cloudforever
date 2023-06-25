@@ -139,7 +139,7 @@ import databaseScss from "@/public/database/dataBase.scss";
 import { ref, reactive, toRefs, onUpdated, provide, onBeforeMount } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { getMedical } from "@/api/arknight/database/home";
-import controlObj from "@/hooks/personalCenter/controlObj";
+import controlObj from "@/hooks/controlObj";
 import router from "@/router";
 export default {
 	name: "databasePage",
@@ -303,22 +303,37 @@ export default {
 		provide("controlDialog", "isLoginOut");
 
 		return {
+			/* 样式 */
 			dialogCss,
 			centerPagescss,
 			databaseScss,
+			/* 控制面包屑动画 */
 			isPlay,
+			/* 路由 */
 			route,
+			/* 控制刚进页面面包屑显隐 */
 			isbreadcrumb,
+			/* 控制菜单栏折叠 */
 			isCollapse,
+			/* 路由传参userId */
 			userId,
+			/* 控制面包屑内容 */
 			metaName,
+			/* 控制页眉的值 */
 			title,
+			/* 控制面包屑的内容展示 */
 			tabs,
+			/* 点击遮罩层确认按钮 */
 			confirm,
+			/* 点击页眉跳转 */
 			toTab,
+			/* 跳转页面 */
 			toPage,
+			/* 点击删除页眉 */
 			removeTab,
+			/* 存储数据 */
 			...toRefs(reactive(JSON.parse(sessionStorage.getItem("menus")))),
+			/* 按钮集合 */
 			...controlObj
 		};
 	},

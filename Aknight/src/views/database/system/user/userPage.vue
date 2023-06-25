@@ -44,7 +44,7 @@ export default {
   name: "userPage",
   setup() {
 
-    provide("controlDialog", "isUserAddMenu");
+    provide("controlDialog", "isAddMenu");
     let ruleMenu = ref();
     // 表单的内容
     let addTab = reactive({

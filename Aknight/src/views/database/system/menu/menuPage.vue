@@ -1,6 +1,6 @@
 <template>
   <div class="wirpper" style="display:block;padding:1vw; background-color: white;">
-
+    <!-- 添加查询按钮 -->
     <el-row>
       <el-col :span="7">
         <el-row class="nav" justify="space-around" style="flex-wrap: nowrap;">
@@ -10,7 +10,7 @@
         </el-row>
       </el-col>
     </el-row>
-
+    <!-- 通过搜索控制展示的数据是搜索内容还是初始数据 -->
     <el-table :data="isSearch ? searchData : newData" height="530" style="margin-top: 3vh" row-key="id">
       <el-table-column fixed label="药物名称" prop="medical_name"></el-table-column>
       <el-table-column label="所属公司" prop="medical_company"></el-table-column>
@@ -30,86 +30,83 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <dialogPage>
-      <!-- 头部区 -->
-      <div style=" width: 40vw;
-        height:45vh;
-        background-color: #fff;
-        padding:1vw;
-        border-radius: 1vw;" @click.stop>
-        <section style="display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 3.5vh;">
-          <span>{{ isSetMenu ? "修改菜单" : "新增菜单" }}</span>
-          <el-icon color="#666" style="cursor: pointer;" @click="controlObj.isDialog.isAddMenu = false">
-            <Close></Close>
-          </el-icon>
-        </section>
-        <!-- 表单区 -->
-        <el-form :model="addLab" :rules="rules" ref="ruleMenu">
-          <el-form-item label="* 所属公司">
-            <el-select style="width: 100%" v-model="addLab.medical_company" placeholder="请选择所属公司">
-              <el-option v-for="(item, index) in companys" :key="index" :label="item" :value="item"></el-option>
-            </el-select>
-          </el-form-item>
-
-          <div style="display: flex; justify-content: space-between">
-            <el-form-item label="药物名称" prop="medical_name" style="flex: 3">
-              <el-input v-model="addLab.medical_name" placeholder=""></el-input>
-            </el-form-item>
-
-            <div style="flex: 0.5"></div>
-            <el-form-item label="靶向" prop="medical_target" style="flex: 3">
-              <el-input v-model="addLab.medical_target" placeholder=""></el-input>
-            </el-form-item>
-
-          </div>
-
-          <div style="display: flex; justify-content: space-between;">
-            <el-form-item label="线数" prop="medical_indications" style="flex: 2.5">
-              <el-input v-model="addLab.medical_indications" placeholder=""></el-input>
-            </el-form-item>
-
-            <div style="flex: 0.7"></div>
-
-            <el-form-item label="治疗方式" prop="medical_treatment" style="flex: 3.25">
-              <el-input v-model="addLab.medical_treatment" placeholder="">
-              </el-input>
-            </el-form-item>
-          </div>
-
-          <el-form-item label="*区域">
-            <el-radio-group v-model="addLab.medical_area">
-              <el-radio label="中国" />
-              <el-radio label="国际" />
-            </el-radio-group>
-          </el-form-item>
-
-          <el-form-item>
-            <div>
-              <div style="flex: 1;"></div>
-              <el-button style="width:60px" @click="cancel">取消</el-button>
-              <el-button style="width:60px" @click="submitForm(ruleMenu)" type="primary">
-                {{ isSetMenu ? "修改" : "新增" }}
-              </el-button>
-            </div>
-          </el-form-item>
-        </el-form>
-
-      </div>
-    </dialogPage>
-
-
   </div>
+  <!-- 新增/修改菜单的遮罩层 -->
+  <dialogPage>
+    <div style=" width: 40vw;
+      height:45vh;
+      background-color: #fff;
+      padding:1vw;
+      border-radius: 1vw;" @click.stop>
+      <section style="display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3.5vh;">
+        <span>{{ isSetMenu ? "修改菜单" : "新增菜单" }}</span>
+        <el-icon color="#666" style="cursor: pointer;" @click="controlObj.isDialog.isAddMenu = false">
+          <Close></Close>
+        </el-icon>
+      </section>
+      <!-- 表单区 -->
+      <el-form :model="addLab" :rules="rules" ref="ruleMenu">
+        <el-form-item label="* 所属公司">
+          <el-select style="width: 100%" v-model="addLab.medical_company" placeholder="请选择所属公司">
+            <el-option v-for="(item, index) in companys" :key="index" :label="item" :value="item"></el-option>
+          </el-select>
+        </el-form-item>
+
+        <div style="display: flex; justify-content: space-between">
+          <el-form-item label="药物名称" prop="medical_name" style="flex: 3">
+            <el-input v-model="addLab.medical_name" placeholder=""></el-input>
+          </el-form-item>
+
+          <div style="flex: 0.5"></div>
+          <el-form-item label="靶向" prop="medical_target" style="flex: 3">
+            <el-input v-model="addLab.medical_target" placeholder=""></el-input>
+          </el-form-item>
+
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+          <el-form-item label="线数" prop="medical_indications" style="flex: 2.5">
+            <el-input v-model="addLab.medical_indications" placeholder=""></el-input>
+          </el-form-item>
+
+          <div style="flex: 0.7"></div>
+
+          <el-form-item label="治疗方式" prop="medical_treatment" style="flex: 3.25">
+            <el-input v-model="addLab.medical_treatment" placeholder="">
+            </el-input>
+          </el-form-item>
+        </div>
+
+        <el-form-item label="*区域">
+          <el-radio-group v-model="addLab.medical_area">
+            <el-radio label="中国" />
+            <el-radio label="国际" />
+          </el-radio-group>
+        </el-form-item>
+
+        <el-form-item>
+          <div>
+            <div style="flex: 1;"></div>
+            <el-button style="width:60px" @click="cancel">取消</el-button>
+            <el-button style="width:60px" @click="submitForm(ruleMenu)" type="primary">
+              {{ isSetMenu ? "修改" : "新增" }}
+            </el-button>
+          </div>
+        </el-form-item>
+      </el-form>
+
+    </div>
+  </dialogPage>
 </template>
 
 <script>
 import { provide, reactive, ref, toRefs, h } from "vue"
 import menuPage from "@/public/database/menu/menuPage.scss"
 import { dealTree } from "@/hooks/database/menuPage"
-import controlObj from '@/hooks/personalCenter/controlObj'
+import controlObj from '@/hooks/controlObj'
 import { addMenu, setMenu, delMenu } from "@/api/arknight/database/menu"
 import { ElMessage, ElMessageBox } from "element-plus";
 import url from "@/api/url"
@@ -125,7 +122,7 @@ export default {
     /* 搜索框输入时筛选的数据内容 */
     let searchData = ref('')
 
-    /* 点击搜索按钮 */
+    /* 点击查询按钮 */
     function searchBtn() {
       isSearch.value = true;
       searchData.value = Datalist.value.filter((item) =>
@@ -143,6 +140,7 @@ export default {
     }
     /* 遮罩层所需参数 */
     provide("controlDialog", "isAddMenu")
+    /* 验证表单 */
     let ruleMenu = ref("")
     /* 表单输入内容 */
     let addLab = reactive({
@@ -258,6 +256,7 @@ export default {
     /* 表单内提交按钮 */
     const submitForm = async (forElement) => {
       if (!forElement) return;
+      /* 调用表单的验证方法 */
       await forElement.validate((valid, fields) => {
         if (valid) {
           controlObj.isDialog.isAddMenu = false
@@ -278,23 +277,37 @@ export default {
     }
 
     return {
+      /* 样式 */
       menuPage,
-      Datalist,
       /* 处理菜单数据结构 */
       ...toRefs(dealTree()),
+      /* 搜索框内容 */
       search,
+      /* 判断是否开始搜索 */
       isSearch,
+      /* 搜索框输入时筛选的数据内容 */
       searchData,
+      /* 点击查询按钮 */
       searchBtn,
+      /* 按钮集合 */
       controlObj,
+      /* 新增按钮的事件 */
       addTabMenu,
+      /* 表单输入内容 */
       addLab,
+      /* 表单规则 */
       rules,
+      /* 表单内提交按钮 */
       submitForm,
+      /* 表单内按钮取消 撤销遮罩层 */
       cancel,
+      /* 验证表单 */
       ruleMenu,
+      /* 是否是修改内容的按钮 */
       isSetMenu,
+      /* 修改按钮事件 */
       setTabMenu,
+      /* 删除按钮事件 */
       delTabMenu,
     }
   }

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import controlObj from '@/hooks/personalCenter/controlObj';
+import controlObj from '@/hooks/controlObj';
 import { inject } from 'vue';
 export default {
     name: "dialogPage",
@@ -45,4 +45,4 @@ export default {
     left: 0;
     z-index: 9;
 }
-</style>
+</style>@/hooks/controlObj

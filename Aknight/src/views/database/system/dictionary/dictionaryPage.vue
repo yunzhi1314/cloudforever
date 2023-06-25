@@ -1,6 +1,6 @@
 <template>
 	<div class="wirpper" style="padding: 0">
-		<!-- 添加查询按钮 -->
+		<!-- 查询按钮 -->
 		<el-row>
 			<el-col :span="7" style="padding: 1vh 0 0 1vh">
 				<el-row class="nav">
@@ -32,7 +32,7 @@
 				@current-change="handleCurrentChange" />
 		</div>
 	</div>
-	<!-- 新增菜单的遮罩层 -->
+	<!-- 新增/修改菜单的遮罩层 -->
 	<dialogPage>
 		<div class="dialogMenu" @click.stop>
 			<section style="display: flex; justify-content: space-between">
@@ -79,7 +79,7 @@
 <script>
 import { ref, reactive, watch, provide, h } from "vue";
 import menuPage from "@/public/database/menu/menuPage.scss";
-import controlObj from "@/hooks/personalCenter/controlObj";
+import controlObj from "@/hooks/controlObj";
 import { addMenu, setMenu, delMenu } from "@/api/arknight/database/menu";
 // 导入弹框，删除时使用
 import { ElMessage, ElMessageBox } from "element-plus";
@@ -135,6 +135,7 @@ export default {
 		propArr.unshift(item);
 		// 表单验证规则
 		let rules = reactive({});
+		// 标头
 		let nameArr = [
 			"市销率（TTM）",
 			"市净率（MRQ）",
@@ -326,28 +327,51 @@ export default {
 
 		provide("controlDialog", "isAddMenu");
 		return {
-			menuPage,
-			search,
-			isSearch,
-			isSetMsg,
-			searchData,
-			dataList,
-			ruleMenu,
-			addMsg,
-			currentPage,
-			pageSize,
+			/* 标头 */
 			nameArr,
-			pageArr,
 			propArr,
+			/* 样式 */
+			menuPage,
+			/* 搜索框内容 */
+			search,
+			/* 判断是否开始搜索 */
+			isSearch,
+			/* 修改的开关 */
+			isSetMsg,
+			/* 搜索框输入时筛选的数据内容 */
+			searchData,
+			/* 元数据 */
+			dataList,
+			/* 验证表单 */
+			ruleMenu,
+			/* 表单的内容 */
+			addMsg,
+			/* 表单验证规则 */
+			rules,
+			/* 当前页 */
+			currentPage,
+			/* 当前页所展示的数量 */
+			pageSize,
+			/* 分页数组 */
+			pageArr,
+			/* 按钮集合 */
 			controlObj,
+			/* 查询 */
 			query,
+			/* 修改分页数量 */
 			handleSizeChange,
+			/* 修改当前页数 */
 			handleCurrentChange,
+			/* 修改当前页数 */
 			addTable,
+			/* 修改按钮 */
 			setMsg,
+			/* 删除按钮 */
+			delMsg,
+			/* 提交表单 */
 			submitForm,
-			cancel,
-			delMsg
+			/* 取消按钮 */
+			cancel
 		};
 	}
 };

@@ -92,6 +92,7 @@
               <el-menu-item index="3-3"></el-menu-item> -->
             </el-sub-menu>
           </el-menu>
+          <!-- 点击左边菜单增加的页眉 -->
           <el-tabs 
           v-model="title" 
           @tab-click="toTab" 

@@ -20,7 +20,6 @@ export default {
 
     // 接收controlDialog参数，控制遮罩层的开启与关闭
     let controlDialog = inject('controlDialog')
-    console.log(controlDialog);
     // 点击父遮罩层取消遮罩层
     function cancel(){
          Reflect.set(controlObj.isDialog,controlDialog,false)

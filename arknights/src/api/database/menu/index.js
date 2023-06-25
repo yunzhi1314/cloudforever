@@ -26,7 +26,26 @@ export function setMsg(data){
   Request.putData(url.dataBase.menu.setMenu,data)
   .then(res=>{
     dataList.data = toRef({...res.data})
-    console.log(dataList.data);
+    console.log(res.data);
+  })
+
+  return dataList
+}
+
+// 删除表单
+export function delMsg(data){
+  let dataList = reactive({
+    data:[]
+  })
+
+  Request.delData(url.dataBase.menu.delMenu,{
+    params:{
+      id:data
+    }
+  })
+  .then(res=>{
+    dataList.data = toRef({...res.data})
+    console.log(res.data);
   })
 
   return dataList

@@ -11,4 +11,7 @@ export class Request{
      static async putData(url,data){
            return await req.put(url,data)
      }
+     static async delData(url,config){
+            return await req.delete(url,config)
+     }
 }

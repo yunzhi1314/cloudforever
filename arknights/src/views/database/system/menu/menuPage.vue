@@ -28,7 +28,7 @@
         <template #default="scope">
           <el-button type="text" style="font-size: 12px" @click="add">新增</el-button>
           <el-button type="text" style="font-size: 12px" @click="change(scope.row)">修改</el-button>
-          <el-button type="text" style="font-size: 12px" @click="delet">删除</el-button>
+          <el-button type="text" style="font-size: 12px" @click="open(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -86,15 +86,17 @@
 </template>
 
 <script>
-import { toRefs, ref, provide, reactive } from "vue"
+import { toRefs, ref, provide, reactive, h } from "vue"
 import menuPageCss from "@/public/menuPage.scss"
 import { dealTree } from "@/hooks/database/menuPage"
 import controlObj from "@/hooks/personalCenter/control"
-import { addMenu,setMsg } from "@/api/database/menu"
+import { addMenu,setMsg, delMsg } from "@/api/database/menu"
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 export default {
   name: "menuPage",
   setup() {
+
     // 搜索框绑定的输入值
     let search = ref("")
     // 是否开启搜索
@@ -179,15 +181,20 @@ export default {
     // 表单取消按钮
     function cancel(){
       controlObj.isDialog.isAddmenu = false
+      // 点击取消关闭开关
+      isSetMsg.value = false
     }
     
-
     // 控制新增菜单还是修改菜单的开关
     let isSetMsg = ref(false)
+
     // 修改表单内容
     function change(item){
+      // 开启遮罩层
       controlObj.isDialog.isAddmenu = true
+      // 开启修改开关
       isSetMsg.value = true
+
       Reflect.ownKeys(ruleForm).forEach((key)=>{
         Reflect.set(ruleForm,key,item[key])
       })
@@ -195,9 +202,37 @@ export default {
     }
     
     // 删除表单内容
-    function delet(){
-
-    }
+    const open = (item) => {
+      ElMessageBox({
+        title: '删除信息',
+        message: h('p', null, [
+          h('span', null, ' 你确定删除这项内容吗？ '),
+        ]),
+        showCancelButton: true,
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            instance.confirmButtonLoading = true
+            instance.confirmButtonText = 'Loading...';
+            delMsg(item.id)
+            setTimeout(() => {
+              done()
+              setTimeout(() => {
+                instance.confirmButtonLoading = false
+              }, 300)
+            }, 3000)
+          } else {
+            done()
+          }
+        },
+      }).then(() => {
+        ElMessage({
+          type: 'info',
+          message: `删除成功`,
+        })
+      }).catch(err => console.log(err))
+  }
     // 提交表单
     const submitForm = async (formEl) => {
       if(!formEl) return ;
@@ -235,8 +270,9 @@ export default {
       // 修改表单内容
       change,
       // 删除表单内容
-      delet,
-      isSetMsg,
+      open,
+      // 控制新增菜单还是修改菜单的开关
+      isSetMsg
     }
   }
 }

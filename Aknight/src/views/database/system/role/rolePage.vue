@@ -3,17 +3,32 @@
 		<el-row>
 			<el-col :span="7" style="padding: 1vh 0 0 1vh">
 				<el-row class="nav">
-					<el-input v-model="search" placeholder="请输入查询内容" style="width: 60vw" />
-					<el-button @click="query" icon="search" type="primary" style="margin-left: 1vw">查询</el-button>
-					<el-button @click="addTable" icon="FolderAdd" type="success">新增菜单</el-button>
+					<el-input
+						v-model="search"
+						placeholder="请输入查询内容"
+						style="width: 60vw" />
+					<el-button
+						@click="query"
+						icon="search"
+						type="primary"
+						style="margin-left: 1vw"
+						>查询</el-button
+					>
+					<el-button @click="addTable" icon="FolderAdd" type="success"
+						>新增菜单</el-button
+					>
 				</el-row>
 			</el-col>
 		</el-row>
 		<el-table :data="pageArr" style="margin-top: 1vh; height: 71.5vh">
 			<el-table-column label="药物名称" prop="medical_name"></el-table-column>
 			<el-table-column label="所属公司" prop="company"></el-table-column>
-			<el-table-column label="应对癌症" prop="medical_indications"></el-table-column>
-			<el-table-column label="入组人数" prop="medical_enrollees_population"></el-table-column>
+			<el-table-column
+				label="应对癌症"
+				prop="medical_indications"></el-table-column>
+			<el-table-column
+				label="入组人数"
+				prop="medical_enrollees_population"></el-table-column>
 			<el-table-column label="ORR" prop="medical_ORR"></el-table-column>
 			<el-table-column label="OS" prop="medical_OS"></el-table-column>
 			<el-table-column label="PFS" prop="medical_PFS"></el-table-column>
@@ -32,10 +47,17 @@
 		</el-table>
 
 		<!-- 分页 -->
-		<div class="demo-pagination-block" style="display: flex; justify-content: center; height: 5vh">
-			<el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[5, 10, 15, 20]"
-				:small="false" layout="sizes, prev, pager,next,jumper,total"
-				:total="isSearch ? searchData.length : dataList.length" @size-change="handleSizeChange"
+		<div
+			class="demo-pagination-block"
+			style="display: flex; justify-content: center; height: 5vh">
+			<el-pagination
+				v-model:current-page="currentPage"
+				v-model:page-size="pageSize"
+				:page-sizes="[5, 10, 15, 20]"
+				:small="false"
+				layout="sizes, prev, pager,next,jumper,total"
+				:total="isSearch ? searchData.length : dataList.length"
+				@size-change="handleSizeChange"
 				@current-change="handleCurrentChange" />
 		</div>
 	</div>
@@ -43,44 +65,52 @@
 	<!-- 新增菜单的遮罩层 -->
 	<dialogPage>
 		<div class="addMenu" @click.stop>
-			<section style="
+			<section
+				style="
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
 					margin-bottom: 3.5vh;
 				">
 				<span>{{ isSetMsg ? "修改菜单" : "新增菜单" }}</span>
-				<el-icon color="#aaa" style="cursor: pointer" @click="controlObj.isDialog.isAddMenu = false">
+				<el-icon
+					color="#aaa"
+					style="cursor: pointer"
+					@click="controlObj.isDialog.isRoleAddMenu = false">
 					<Close />
 				</el-icon>
 			</section>
 			<!-- 表单 -->
 			<el-form :model="addMsg" :rules="rules" ref="ruleMenu">
 				<el-form-item label="*所属公司">
-					<!-- <el-select
-						style="width: 100%"
+					<el-input
 						v-model="addMsg.company"
-						placeholder="请选择所属公司">
-						<el-option
-							v-for="(item, index) in companies"
-							:key="index"
-							:label="item"
-							:value="item"></el-option>
-					</el-select> -->
-					<el-input v-model="addMsg.company" placeholder="请选择所属公司"></el-input>
+						placeholder="请选择所属公司"></el-input>
 				</el-form-item>
 				<div style="display: flex; justify-content: space-between">
 					<el-form-item label="药物名称" prop="medical_name" style="flex: 3">
-						<el-input v-model="addMsg.medical_name" placeholder="请填写药物名称"></el-input>
+						<el-input
+							v-model="addMsg.medical_name"
+							placeholder="请填写药物名称"></el-input>
 					</el-form-item>
 					<div style="flex: 0.5"></div>
-					<el-form-item label="应对癌症" prop="medical_indications" style="flex: 3">
-						<el-input v-model="addMsg.medical_indications" placeholder="请填写应对癌症"></el-input>
+					<el-form-item
+						label="应对癌症"
+						prop="medical_indications"
+						style="flex: 3">
+						<el-input
+							v-model="addMsg.medical_indications"
+							placeholder="请填写应对癌症"></el-input>
 					</el-form-item>
 				</div>
 				<div style="display: flex; justify-content: space-between">
-					<el-form-item label="入组人数" prop="medical_enrollees_population" style="flex: 2.5">
-						<el-input v-model="addMsg.medical_enrollees_population" placeholder=""></el-input>
+					<el-form-item
+						label="入组人数"
+						prop="medical_enrollees_population"
+						style="flex: 2.5">
+						<el-input
+							v-model="addMsg.medical_enrollees_population"
+							placeholder=""></el-input>
 					</el-form-item>
 					<div style="flex: 0.5"></div>
 					<el-form-item label="ORR" prop="medical_ORR" style="flex: 3.25">
@@ -114,11 +144,16 @@
 					</el-radio-group>
 				</el-form-item>
 				<el-form-item style="padding: 0 3vw">
-					<el-button type="primary" @click="submitForm(ruleMenu)" style="margin: 0; width: 45%">
-						{{ isSetMsg ? "修改" : "新增" }}</el-button>
+					<el-button
+						type="primary"
+						@click="submitForm(ruleMenu)"
+						style="margin: 0; width: 45%">
+						{{ isSetMsg ? "修改" : "新增" }}</el-button
+					>
 					<div style="flex: 1"></div>
 					<el-button @click="cancel" style="margin: 0; width: 45%">
-						取消</el-button>
+						取消</el-button
+					>
 				</el-form-item>
 			</el-form>
 		</div>
@@ -126,136 +161,137 @@
 </template>
 
 <script>
-import { ref, reactive, watch, provide, h } from "vue";
-import menuPage from "@/public/database/menu/menuPage.scss";
-import controlObj from "@/hooks/personalCenter/controlObj";
-import { addMenu, setMenu, delMenu } from "@/api/arknight/database/role";
-// 导入弹框，删除时使用
-import { ElMessage, ElMessageBox } from 'element-plus'
-export default {
-	name: "rolePage",
-	setup() {
-		// 用户搜索的内容
-		let search = ref("");
-		// 是否开启了搜索
-		let isSearch = ref(false);
-		// 搜索内容展示
-		let searchData = ref("");
-		// 元数据
-		let dataList = ref(JSON.parse(sessionStorage.getItem("medical")).expMedicals);
-		// 查询
-		function query() {
-			// 开启搜索
-			isSearch.value = true;
+	import { ref, reactive, watch, provide, h } from "vue";
+	import menuPage from "@/public/database/menu/menuPage.scss";
+	import controlObj from "@/hooks/personalCenter/controlObj";
+	import { addMenu, setMenu, delMenu } from "@/api/arknight/database/role";
+	// 导入弹框，删除时使用
+	import { ElMessage, ElMessageBox } from "element-plus";
+	export default {
+		name: "rolePage",
+		setup() {
+			// 用户搜索的内容
+			let search = ref("");
+			// 是否开启了搜索
+			let isSearch = ref(false);
+			// 搜索内容展示
+			let searchData = ref("");
+			// 元数据
+			let dataList = ref(JSON.parse(sessionStorage.getItem("medical")).expMedicals);
+			// 查询
+			function query() {
+				// 开启搜索
+				isSearch.value = true;
 
-			// 过滤符合条件的搜索内容
-			searchData.value = dataList.value.filter(
-				(item) =>
-					item.company == search.value ||
-					item.medical_ORR == search.value ||
-					item.medical_OS == search.value ||
-					item.medical_PFS == search.value ||
-					item.medical_TREE == search.value ||
-					item.medical_enrollees_population == search.value ||
-					item.medical_indications == search.value ||
-					item.medical_line == search.value ||
-					item.medical_name == search.value ||
-					item.medical_status == search.value ||
-					search.value == ""
+				// 过滤符合条件的搜索内容
+				searchData.value = dataList.value.filter(
+					(item) =>
+						item.company == search.value ||
+						item.medical_ORR == search.value ||
+						item.medical_OS == search.value ||
+						item.medical_PFS == search.value ||
+						item.medical_TREE == search.value ||
+						item.medical_enrollees_population == search.value ||
+						item.medical_indications == search.value ||
+						item.medical_line == search.value ||
+						item.medical_name == search.value ||
+						item.medical_status == search.value ||
+						search.value == ""
+				);
+				// 如果用户未输入搜索内容，内容展示为初始树数据
+				if (search.value == "") {
+					isSearch.value = false;
+				}
+			}
+			// 表单验证规则
+			let rules = reactive({
+				company: {
+					required: true,
+					message: "请输入药品信息",
+					trigger: "blur"
+				},
+				medical_ORR: {
+					required: true,
+					message: "请选择公司信息",
+					trigger: "blur"
+				},
+				medical_OS: {
+					required: true,
+					message: "请输入靶向信息",
+					trigger: "blur"
+				},
+				medical_PFS: {
+					required: true,
+					message: "请输入线数信息",
+					trigger: "blur"
+				},
+				medical_TREE: {
+					required: true,
+					message: "请输入治疗方式信息",
+					trigger: "blur"
+				},
+				medical_enrollees_population: {
+					required: true,
+					message: "请选择地区信息",
+					trigger: "blur"
+				},
+				medical_indications: {
+					required: true,
+					message: "请选择地区信息",
+					trigger: "blur"
+				},
+				medical_line: {
+					required: true,
+					message: "请选择地区信息",
+					trigger: "blur"
+				},
+				medical_name: {
+					required: true,
+					message: "请选择地区信息",
+					trigger: "blur"
+				},
+				medical_status: {
+					required: true,
+					message: "请选择地区信息",
+					trigger: "blur"
+				}
+			});
+			// 分页
+			let currentPage = ref(2);
+			// 单页数量
+			let pageSize = ref(10);
+			// 分页数组
+			let pageArr = ref([]);
+			// 修改分页数量
+			const handleSizeChange = () => {
+				pageArr.value.splice(0, pageArr.value.length);
+			};
+			const handleCurrentChange = () => {
+				pageArr.value.splice(0, pageArr.value.length);
+			};
+
+			// 监视 currentPage(当前页) 和 pageSize(当前页所展示的数量)
+			// 去截取对应位置的数组
+			// 去渲染该数组
+			watch(
+				[currentPage, pageSize, isSearch],
+				(newValue) => {
+					// 是否搜索？// 如果搜索的话，就分页搜索的结果
+					newValue[2]
+						? pageArr.value.push(
+								...searchData.value.slice(
+									(newValue[0] - 1) * newValue[1],
+									newValue[0] * newValue[1]
+								)) // 如果没有搜索，就分页元数据
+						: pageArr.value.push(
+								...dataList.value.slice(
+									(newValue[0] - 1) * newValue[1],
+									newValue[0] * newValue[1]
+								));
+					console.log(pageArr);
+				},
+				{ immediate: true }
 			);
-			// 如果用户未输入搜索内容，内容展示为初始树数据
-			if (search.value == "") {
-				isSearch.value = false;
-			}
-		}
-		// 表单验证规则
-		let rules = reactive({
-			company: {
-				required: true,
-				message: "请输入药品信息",
-				trigger: "blur"
-			},
-			medical_ORR: {
-				required: true,
-				message: "请选择公司信息",
-				trigger: "blur"
-			},
-			medical_OS: {
-				required: true,
-				message: "请输入靶向信息",
-				trigger: "blur"
-			},
-			medical_PFS: {
-				required: true,
-				message: "请输入线数信息",
-				trigger: "blur"
-			},
-			medical_TREE: {
-				required: true,
-				message: "请输入治疗方式信息",
-				trigger: "blur"
-			},
-			medical_enrollees_population: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			},
-			medical_indications: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			},
-			medical_line: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			},
-			medical_name: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			},
-			medical_status: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			}
-		});
-		// 分页
-		let currentPage = ref(2);
-		// 单页数量
-		let pageSize = ref(10);
-		// 分页数组
-		let pageArr = ref([]);
-		// 修改分页数量
-		const handleSizeChange = () => {
-			pageArr.value.splice(0, pageArr.value.length);
-		};
-		const handleCurrentChange = () => {
-			pageArr.value.splice(0, pageArr.value.length);
-		};
-
-		// 监视 currentPage(当前页) 和 pageSize(当前页所展示的数量)
-		// 去截取对应位置的数组
-		// 去渲染该数组
-		watch(
-			[currentPage, pageSize, isSearch],
-			(newValue) => {
-				// 是否搜索？// 如果搜索的话，就分页搜索的结果
-				newValue[2]
-					? pageArr.value.push(
-						...searchData.value.slice(
-							(newValue[0] - 1) * newValue[1],
-							newValue[0] * newValue[1]
-						)) // 如果没有搜索，就分页元数据
-					: pageArr.value.push(
-						...dataList.value.slice(
-							(newValue[0] - 1) * newValue[1],
-							newValue[0] * newValue[1]
-						));
-			},
-			{ immediate: true }
-		);
 
 		// 验证表单
 		let ruleMenu = ref();
@@ -353,8 +389,8 @@ export default {
 				if (valid) {
 					controlObj.isDialog.isAddMenu = false;
 
-					// 根据修改的开关来决定是递交修改请求还是新增内容的请求
-					isSetMsg.value ? setMenu(addMsg) : addMenu(addMsg);
+						// 根据修改的开关来决定是递交修改请求还是新增内容的请求
+						isSetMsg.value ? setMenu(addMsg) : addMenu(addMsg);
 
 					// 将修改的开关关闭
 					isSetMsg.value = false;

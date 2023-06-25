@@ -11,28 +11,18 @@
 			</el-col>
 		</el-row>
 		<!-- 通过搜索控制展示的数据是搜索内容还是初始数据 -->
-		<el-table :data="pageArr" style="margin-top: 3vh" height="60vh">
+		<el-table :data="pageArr" style="margin-top: 3vh" height="69vh">
 			<el-table-column v-for="(item, index) in propArr" :label="nameArr[index]" :prop="item" :key="index"
 				:fixed="index == 0">
 			</el-table-column>
-			<!-- <el-table-column label="操纵">
+			<el-table-column label="操纵">
 				<template #default="scope">
-					<el-button
-						type="text"
-						size="mini"
-						style="margin: 0; width: 45%"
-						@click="setMsg(scope.row)"
-						>修改</el-button
-					>
-					<el-button
-						type="text"
-						size="mini"
-						style="margin: 0; width: 45%"
-						@click="delMsg(scope.row)"
-						>删除</el-button
-					>
+					<el-button link size="small" style="margin: 0; width: 45%; color: #409eff;"
+						@click="setMsg(scope.row)">修改</el-button>
+					<el-button link size="small" style="margin: 0; width: 45%; color: #409eff;"
+						@click="delMsg(scope.row)">删除</el-button>
 				</template>
-			</el-table-column> -->
+			</el-table-column>
 		</el-table>
 		<!-- 分页栏 -->
 		<div style="display: flex; justify-content: center; margin-top: 3vh">
@@ -194,8 +184,6 @@ export default {
 				trigger: "blur"
 			});
 		});
-		// console.log(propArr)
-		// console.log(nameArr[0])
 
 		// 新增内容
 		function addTable() {
@@ -299,39 +287,43 @@ export default {
 
 		// 分页
 		let currentPage = ref(1);
+		// 单页数量
 		let pageSize = ref(3);
 		// 分页数组
 		let pageArr = ref([]);
-
+		// 修改分页数量
 		const handleSizeChange = () => {
 			pageArr.value.splice(0, pageArr.value.length);
 		};
 		const handleCurrentChange = () => {
 			pageArr.value.splice(0, pageArr.value.length);
+			console.log(pageArr.value)
 		};
+
 		// 监视 currentPage(当前页) 和 pageSize(当前页所展示的数量)
 		// 去截取对应位置的数组
 		// 去渲染该数组
 		watch(
 			[currentPage, pageSize, isSearch],
 			(newValue) => {
-				// 是否搜索？
-				newValue[2] // 如果搜索的话，就分页搜索的结果
+				// 是否搜索？// 如果搜索的话，就分页搜索的结果
+				newValue[2]
 					? pageArr.value.push(
 						...searchData.value.slice(
 							(newValue[0] - 1) * newValue[1],
 							newValue[0] * newValue[1]
-						))
-					: // 如果没有搜索，就分页元数据
-					pageArr.value.push(
+						)) // 如果没有搜索，就分页元数据
+					: pageArr.value.push(
 						...dataList.value.slice(
-							(newValue[0] - 1) * newValue[1],
-							newValue[0] * newValue[1]
-						));
+							(newValue[0] - 1) * newValue[1], newValue[0] * newValue[1]));
+				console.log((newValue[0] - 1) * newValue[1]);
+				console.log(newValue[0] * newValue[1]);
+
 			},
 			{ immediate: true }
 		);
-		provide("controlDialog", "isAddMenu");
+
+		provide("controlDialog", "isRoleAddMenu");
 		return {
 			menuPage,
 			search,
@@ -343,9 +335,9 @@ export default {
 			addMsg,
 			currentPage,
 			pageSize,
+			nameArr,
 			pageArr,
 			propArr,
-			nameArr,
 			controlObj,
 			query,
 			handleSizeChange,

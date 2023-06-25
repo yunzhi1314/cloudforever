@@ -13,6 +13,20 @@
     align-items: center;
     height: 5vh;
   }
+
+  .el-table__inner-wrapper {
+
+    .el-table__header-wrapper,
+    .el-table__body-wrapper {
+
+      th,
+      td {
+        left: auto;
+        text-align: center;
+      }
+
+    }
+  }
 }
 
 .wirpper:hover {

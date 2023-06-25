@@ -1,6 +1,6 @@
 <template>
     <div class="infoBox">
-    <div style="height: 4%;"></div>
+    <div style="height: 2%;"></div>
     <div class="share"  v-for="(item,index) in data" :key="index">
       <section style="border-bottom: 1px solid #E3E3E3;  padding: 0.7vw 0;
           font-weight: bold; font-size: 15px;">

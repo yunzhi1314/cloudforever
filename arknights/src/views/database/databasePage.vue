@@ -107,9 +107,9 @@
           v-for="item in tabs" :key="item.name">
           </el-tab-pane>
         </el-tabs>
-      </el-header>
+            </el-header>
               <!-- 主体 -->
-              <el-main style="background-color: #fff;">
+              <el-main style=" background-color: #F8F8F8;">
                   <router-view></router-view>
               </el-main>
           </el-container>

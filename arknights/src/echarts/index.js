@@ -4,9 +4,6 @@ import url from "@/api/url";
 import store from "@/store";
 import { reactive } from "vue";
 
-
-
-
 // 折线图
 export async function expMedicals(dom) {
   let msg = await Request.getData(url.dataBase.home.expMedicals);
@@ -194,6 +191,7 @@ export async function basicMedical(dom){
       legend:{
           orient:"vertical",
           right:10,
+          top:"center",
       },
       title:{
           text:"各医疗公司所持有的靶向药数量市场占比"

@@ -149,7 +149,9 @@ export default {
 				getMedical("expMedicals"),
 				getMedical("basicMedical"),
 				getMedical("naweiCompany"),
-				getMedical("naweiCompany2")])
+				getMedical("naweiCompany2"),
+				getMedical("expMedical")])
+
 		})
 		let router = useRouter();
 		let route = useRoute();

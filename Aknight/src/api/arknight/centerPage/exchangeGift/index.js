@@ -29,7 +29,6 @@ export function getGift(data) {
 		res.data.status == 0
 			? store.commit("changeMsg", { message: "兑换成功", status: res.data.status })
 			: store.commit("changeMsg", res.data);
-		store.commit("changeStore", "isMsg")
 		// 将兑换内容存入本地
 		store.commit("personalCenter/changeContexts", {
 			items: res.data.items,

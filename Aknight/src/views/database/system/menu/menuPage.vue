@@ -49,7 +49,7 @@
       </section>
       <!-- 表单区 -->
       <el-form :model="addLab" :rules="rules" ref="ruleMenu">
-        <el-form-item label="* 所属公司">
+        <el-form-item label="所属公司">
           <el-select style="width: 100%" v-model="addLab.medical_company" placeholder="请选择所属公司">
             <el-option v-for="(item, index) in companys" :key="index" :label="item" :value="item"></el-option>
           </el-select>
@@ -57,30 +57,30 @@
 
         <div style="display: flex; justify-content: space-between">
           <el-form-item label="药物名称" prop="medical_name" style="flex: 3">
-            <el-input v-model="addLab.medical_name" placeholder=""></el-input>
+            <el-input v-model="addLab.medical_name" placeholder="请选择药物名称"></el-input>
           </el-form-item>
 
           <div style="flex: 0.5"></div>
           <el-form-item label="靶向" prop="medical_target" style="flex: 3">
-            <el-input v-model="addLab.medical_target" placeholder=""></el-input>
+            <el-input v-model="addLab.medical_target" placeholder="请选择靶向"></el-input>
           </el-form-item>
 
         </div>
 
         <div style="display: flex; justify-content: space-between;">
           <el-form-item label="线数" prop="medical_indications" style="flex: 2.5">
-            <el-input v-model="addLab.medical_indications" placeholder=""></el-input>
+            <el-input v-model="addLab.medical_indications" placeholder="请选择线数"></el-input>
           </el-form-item>
 
           <div style="flex: 0.7"></div>
 
           <el-form-item label="治疗方式" prop="medical_treatment" style="flex: 3.25">
-            <el-input v-model="addLab.medical_treatment" placeholder="">
+            <el-input v-model="addLab.medical_treatment" placeholder="请选择治疗方式">
             </el-input>
           </el-form-item>
         </div>
 
-        <el-form-item label="*区域">
+        <el-form-item label="区域">
           <el-radio-group v-model="addLab.medical_area">
             <el-radio label="中国" />
             <el-radio label="国际" />

@@ -24,6 +24,9 @@ export function getMedical(key) {
             case "naweiCompany2":
                 store.commit("dataBase/changeNaweiCompany2", res.data.datas)
                 break;
+            case "expMedical":
+                store.commit("dataBase/changeExpMedical", res.data.datas)
+                break;
         }
         store.commit("changeStore", "isMedical")
     });

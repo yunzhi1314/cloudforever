@@ -45,6 +45,7 @@ export default {
 			expMedicals: "/database/home/expMedicals",//靶向药实验数据,用于复合折线统计图
 			basicMedical: "/database/home/basicMedical",//各公司所持有的靶向药数据，用于环状图
 			naweiCompany: "/database/home/naweiCompany",//纳微公司的营销利润与增长率，用于折柱复合统计图
+			expMedical: "database/home/expMedical",//研发药物信息
 			naweiCompany2: '/database/home/naweiCompany2',
 			navTools: "/database/home/navTools",//首页左下工具栏
 		},

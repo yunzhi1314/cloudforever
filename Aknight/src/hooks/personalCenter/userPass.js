@@ -67,7 +67,6 @@ export function userPass(arr, urlName, methodName, fn) {
 		} else {
 			// 未勾选
 			isPass = false;
-			store.commit("changeStore", "isMsg")
 			store.commit("changeMsg", {
 				msg: "未同意《鹰角网络用户注册协议》",
 				status: 1

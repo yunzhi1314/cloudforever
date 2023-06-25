@@ -27,14 +27,13 @@ export function user(url, data, fn, isStore) {
     });
     Request.postData(url, data).then((res) => {
         dataList.datas = toRef({ ...res.data });
+        store.commit("changeMsg", res.data)
         if (fn) {//代表存在调用的是子仓库函数
             //开启存储开关(登录注册需要)
             store.commit("changeStore", isStore)
             //改变指向
-            fn.bind({ $store: store })(dataList.datas)
+            fn.bind({ $store: store })(res.data)
             //调用吐丝
-            store.commit("changeStore", "isMsg")
-            store.commit("changeMsg", dataList.datas)
             if (isStore == "isLogin") {
                 //存手机号(带*)
                 store.commit("changeTel", dataList.datas.telephone);
@@ -50,7 +49,6 @@ export function user(url, data, fn, isStore) {
         } else {
             //发送短信
             //调用吐丝
-            // store.commit("changeStore", "isMsg")
             store.commit("changeMsg", dataList.datas)
         }
     });

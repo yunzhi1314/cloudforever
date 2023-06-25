@@ -51,13 +51,13 @@
 					margin-bottom: 3.5vh;
 				">
 				<span>{{ isSetMsg ? "修改菜单" : "新增菜单" }}</span>
-				<el-icon color="#aaa" style="cursor: pointer" @click="controlObj.isDialog.isRoleAddMenu = false">
+				<el-icon color="#aaa" style="cursor: pointer" @click="controlObj.isDialog.isAddMenu = false">
 					<Close />
 				</el-icon>
 			</section>
 			<!-- 表单 -->
 			<el-form :model="addMsg" :rules="rules" ref="ruleMenu">
-				<el-form-item label="*所属公司">
+				<el-form-item label="所属公司">
 					<el-input v-model="addMsg.company" placeholder="请选择所属公司"></el-input>
 				</el-form-item>
 				<div style="display: flex; justify-content: space-between">
@@ -71,32 +71,32 @@
 				</div>
 				<div style="display: flex; justify-content: space-between">
 					<el-form-item label="入组人数" prop="medical_enrollees_population" style="flex: 2.5">
-						<el-input v-model="addMsg.medical_enrollees_population" placeholder=""></el-input>
+						<el-input v-model="addMsg.medical_enrollees_population" placeholder="请填写入组人数"></el-input>
 					</el-form-item>
 					<div style="flex: 0.5"></div>
 					<el-form-item label="ORR" prop="medical_ORR" style="flex: 3.25">
-						<el-input v-model="addMsg.medical_ORR" placeholder=""></el-input>
+						<el-input v-model="addMsg.medical_ORR" placeholder="请填写ORR"></el-input>
 					</el-form-item>
 				</div>
 				<div style="display: flex; justify-content: space-between">
 					<el-form-item label="OS" prop="medical_OS" style="flex: 2.5">
-						<el-input v-model="addMsg.medical_OS" placeholder=""></el-input>
+						<el-input v-model="addMsg.medical_OS" placeholder="请填写OS"></el-input>
 					</el-form-item>
 					<div style="flex: 0.5"></div>
 					<el-form-item label="PFS" prop="medical_PFS" style="flex: 3.25">
-						<el-input v-model="addMsg.medical_PFS" placeholder=""></el-input>
+						<el-input v-model="addMsg.medical_PFS" placeholder="请填写PFS"></el-input>
 					</el-form-item>
 				</div>
 				<div style="display: flex; justify-content: space-between">
 					<el-form-item label="TREE" prop="medical_TREE" style="flex: 2.5">
-						<el-input v-model="addMsg.medical_TREE" placeholder=""></el-input>
+						<el-input v-model="addMsg.medical_TREE" placeholder="请填写TREE"></el-input>
 					</el-form-item>
 					<div style="flex: 0.5"></div>
-					<el-form-item label="line" prop="medical_line" style="flex: 3.25">
-						<el-input v-model="addMsg.medical_line" placeholder=""></el-input>
+					<el-form-item label="线数" prop="medical_line" style="flex: 3.25">
+						<el-input v-model="addMsg.medical_line" placeholder="请填写线数"></el-input>
 					</el-form-item>
 				</div>
-				<el-form-item label="*研发管线">
+				<el-form-item label="研发管线">
 					<el-radio-group v-model="addMsg.medical_status">
 						<el-radio label="I" />
 						<el-radio label="II" />

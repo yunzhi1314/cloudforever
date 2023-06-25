@@ -191,7 +191,7 @@ export default {
       Reflect.ownKeys(ruleForm).forEach((key)=>{
         Reflect.set(ruleForm,key,item[key])
       })
-      // console.log(item);
+      console.log(item);
     }
     
     // 删除表单内容

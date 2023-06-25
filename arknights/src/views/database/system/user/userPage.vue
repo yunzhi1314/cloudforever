@@ -1,17 +1,24 @@
 <template>
-                <h1>userPage组件</h1>
-            </template>
+   <el-table :data="message">
+   <el-table-column label="公司"></el-table-column>
+   </el-table>
+</template>
 
-            <script>
+<script>
+import { reactive } from 'vue'
+export default {
+  name: "userPage",
+  setup() {
+    let message  = reactive( JSON.parse(sessionStorage.getItem('expMedicals'))).expMedicals
+    console.log(message)  
 
-            export default {
-              name:"userPage",
-                setup() {
-                    return {
-                    }
-                }
-            }
-            </script>
+      return {
+         message
+      }
+  }
+}
+</script>
 
-            <style lang="scss" scoped>
-            </style>
+<style lang="scss" scoped>
+
+</style>

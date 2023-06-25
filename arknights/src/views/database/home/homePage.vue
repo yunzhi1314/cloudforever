@@ -12,13 +12,9 @@
     </div>
     <div class="two">
       <!-- 折线图 -->
-      <div id="expMedicals">
-           
-      </div>
+      <div id="expMedicals"></div>
       <!-- 环状图 -->
-      <div id="basicMedical">
-
-      </div>
+      <div id="basicMedical"> </div>
     </div>
     <div class="three">
       <!-- 快捷工具 -->
@@ -42,7 +38,7 @@
 <script>
 import homePageCss from "@/public/homePage.scss"
 import { onMounted } from "vue";
-import { basicMedical,expMedicals } from "@/echarts"
+import { basicMedical,expMedicals,naweiCompany } from "@/echarts"
 import { toRefs } from "vue";
 import { navTools,message } from "@/api/database/home"
 
@@ -55,7 +51,8 @@ export default {
       // 折线图
       expMedicals(document.querySelector("#expMedicals"))  
 
-
+     // 营销利润与增长率 折柱图
+     naweiCompany(document.querySelector('#naweiCompany'))
 
     })
 

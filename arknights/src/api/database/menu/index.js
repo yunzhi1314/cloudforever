@@ -11,7 +11,7 @@ export function addMenu(data) {
     Request.postData(url.dataBase.menu.addMenu,data)
     .then((res) => {
         dataList.data = toRef({...res.data})
-        // console.log(dataList.data);
+        console.log(dataList.data);
     });
 
     return dataList;

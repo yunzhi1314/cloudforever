@@ -4,31 +4,10 @@ import url from "@/api/url";
 import store from "@/store";
 import { reactive } from "vue";
 
-export async function basicMedical(dom) {
-  let datas = await Request.getData(url.dataBase.home.basicMedical);
-  let source = datas.data.datas;
-  // 存储
-  store.commit("database/changeBasicMedical", source);
-  store.commit("changeStore", "isBasicMedical");
 
-  let newData = reactive([]);
 
-  // 绘制图表
-  let basic = echarts.init(dom);
-  let option = {
-    legend: {},
-    title: {
-      text: "各医疗公司所持有的靶向药数量市场占比",
-    },
-    series: {
-      type: "pie",
-      label: {},
-      data: newData,
-    },
-  };
-  basic.setOption(option);
-}
 
+// 折线图
 export async function expMedicals(dom) {
   let msg = await Request.getData(url.dataBase.home.expMedicals);
   let source = msg.data.datas;
@@ -170,4 +149,158 @@ export async function expMedicals(dom) {
   };
 
   myecharts.setOption(option);
+}
+
+// 环状图
+export async function basicMedical(dom){
+  let datas = await Request.getData(url.dataBase.home.basicMedical)
+  let source = datas.data.datas
+  // 存储
+  store.commit("database/changeBasicMedical",source)
+  store.commit("changeStore","isBasicMedical")
+
+  // 便利数据返回每一项的公司名称
+  let company = [...new Set(source.map(item => item.medical_company))]
+  let newData = reactive([])
+
+  // 处理需要显示数据
+  function dealData(item,index){
+      if(newData[index] == undefined){
+          newData.push({
+              name:item.medical_company,
+              value:0,
+              label:{
+                  formatter:`{b}:{c}款，占市场的{d}%`
+              },
+          })
+      }
+      newData[index].value++
+  }
+
+  // 处理不同公司显示的药物数量
+  source.forEach(item => {
+      company.forEach((item2,index2) =>{
+          switch (item.medical_company){
+              case item2:
+                  dealData(item,index2);
+                  break;
+          }
+      });
+  });
+
+  // 绘制图表
+  let basic = echarts.init(dom)
+  let option = {
+      legend:{
+          orient:"vertical",
+          right:10,
+      },
+      title:{
+          text:"各医疗公司所持有的靶向药数量市场占比"
+      },
+      series:{
+          type:"pie",
+          left:-100,
+          radius:["70%","80%"],
+          avoidLabelOverlap:false,
+          label:{
+              position:"center",
+              show:false,
+          },
+          // 高亮显示
+          emphasis:{
+              label:{
+                  show:true,
+                  fontSize:"1.2rem",
+                  fontWeight:"bold",
+              }
+          },
+          data:newData
+      }
+      
+  }
+  basic.setOption(option)
+
+}
+
+
+// 纳薇公司营销利润与增长率 折柱图
+export async function naweiCompany(dom) {
+  //请求
+  let sources = await Request.getData(url.dataBase.home.naweiCompany)
+  // 便历拿到的数据的营业利润
+  let source = sources.data.datas.map(
+      // 营业利润转化为数字
+      (item) => item.Profit_from_operations.replace(",", "") * 1
+  )
+  // 便历拿到的数据的增长率  增长率转化为数字
+  let source2 = sources.data.datas.map((item) => item.growth_rate01 * 1)
+
+  let naweiCompany = echarts.init(dom)
+
+  let option = {
+      legend: {
+          right: 10
+      },
+      tooltip: {
+          // 指针轴
+          axisPointer: {
+              // 类型为穿过
+              type: "cross",
+          }
+      },
+      title: {
+          text: "2019年6月至2023年6月，纳薇公司的营销利润与增长率半年财务报表"
+      },
+      xAxis: {
+          type: "category",
+          data: [
+              "2019年12月",
+              "2020年06月",
+              "2020年12月",
+              "2021年06月",
+              "2021年12月",
+              "2022年06月",
+              "2022年12月",
+              "2023年06月",
+          ],
+      },
+      yAxis:[
+          {
+              type:"value",
+              // 这个是根据具体的营业利润来配置
+              max:47500,
+              min:1000
+          },
+          {
+              type:"value",
+              // 这个是根据具体的营业利润增长率来配置
+              max:200,
+              min:0,
+          }
+      ],
+      series:[
+          {
+              type:"bar",
+              name:"营销利润",
+              yAxisIndex:0,
+              tooltip:{
+                  formatter:`{a}{b}{c}`
+              },
+              data:source       
+          },
+          {
+              type:"line",
+              name:"增长率",
+              smooth:true,
+              yAxisIndex:1,
+              tooltip:{
+                  formatter:`{a}{b}{c}`
+              },
+              data:source2       
+          }
+      ]
+  }
+  naweiCompany.setOption(option)
+
 }

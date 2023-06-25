@@ -54,19 +54,7 @@ const routes = [
   {
     path: "/database",
     name: "databasePage",
-    component: () => import("@/views/database/databasePage.vue"),
-    children:[
-      {
-        path: "/database/home",
-        name: "homePage",
-        component: () => import("@/views/database/home/homePage.vue"),
-      },
-      {
-        path: "/database/menu",
-        name: "menuPage",
-        component: () => import("@/views/database/system/menu/menuPage.vue"),
-      },
-    ]
+    component: () => import("@/views/database/databasePage.vue")
   }
 ];
 

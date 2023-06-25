@@ -199,7 +199,7 @@ export async function basicMedical(dom){
       series:{
           type:"pie",
           left:-100,
-          radius:["50%","60%"],
+          radius:["70%","80%"],
           avoidLabelOverlap:false,
           label:{
               position:"center",
@@ -211,8 +211,6 @@ export async function basicMedical(dom){
                   show:true,
                   fontSize:"1rem",
                   fontWeight:"bold",
-                  lineHeight:20,
-                  backgroundColor:"red"
               }
           },
           data:newData

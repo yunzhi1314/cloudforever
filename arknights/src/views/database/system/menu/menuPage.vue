@@ -17,7 +17,7 @@
     </el-row>
 
     <!-- 数据显示区 -->
-    <el-table :data="isSearch ? searchData : newData" height="80vh" row-key="id">
+    <el-table :data="isSearch ? searchData : newData" height="75vh" row-key="id">
       <el-table-column label="药物名称" prop="medical_name"></el-table-column>
       <el-table-column label="所属公司" prop="medical_company"></el-table-column>
       <el-table-column label="靶向" prop="medical_target"></el-table-column>
@@ -132,7 +132,8 @@ export default {
       medical_target: '',
       medical_treatment: '',
       medical_indications: '',
-      medical_area:''
+      medical_area:'',
+      id:''
     })
     // 表单验证规则
     let rules = reactive({
@@ -221,7 +222,7 @@ export default {
               setTimeout(() => {
                 instance.confirmButtonLoading = false
               }, 300)
-            }, 3000)
+            }, 1000)
           } else {
             done()
           }

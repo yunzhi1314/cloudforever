@@ -15,7 +15,7 @@
                     :collapse="isCollapse">
                     <!-- 一级菜单 -->
                     <el-menu-item
-                    v-for="(item, index) in menuRoutes" :key="index"
+                    v-for="(item, index) in menuList" :key="index"
                     :index="index.toString()"
                     v-show="!item.meta.isIframe"
                     @click="toPage(index)">
@@ -27,7 +27,7 @@
                     </el-menu-item>
                     <!-- 二级菜单 -->
                     <el-sub-menu                    
-                        v-for="(item, index) in menuRoutes" 
+                        v-for="(item, index) in menuList" 
                         :key="index"
                         :index="index.toString()"
                         v-show="item.meta.isIframe">
@@ -107,7 +107,7 @@
           </el-tabs>
         </el-header>
                 <!-- 主体 -->
-                <el-main style="background-color: blue;">
+                <el-main style="background-color: #fff;">
                     <router-view></router-view>
                 </el-main>
             </el-container>
@@ -176,7 +176,7 @@ export default {
         // 菜单栏是否折叠
         let isCollapse = ref(false);
         // 渲染标题
-        let pages = reactive(JSON.parse(sessionStorage.getItem("databaseMenu"))).menuRoutes
+        let pages = reactive(JSON.parse(sessionStorage.getItem("databaseMenu"))).menuList
         // 前往不同页面不同的路由参数
         let userId = reactive(JSON.parse(localStorage.getItem("users"))).userId
         //动画开关
@@ -213,7 +213,7 @@ export default {
             isPlay.value = true;
             // 去往不同页面
             tabs.value.forEach(item =>{
-                if(item.value ==targetName.paneName)
+                if(item.title ==targetName.paneName)
                 router.push({
                     name:item.routeName,
                     params:{

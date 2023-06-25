@@ -25,6 +25,12 @@
         text-align: center;
       }
 
+      tr>td:nth-child(1),
+      tr>th:nth-child(1) {
+        left: auto;
+        text-align: start;
+      }
+
     }
   }
 }

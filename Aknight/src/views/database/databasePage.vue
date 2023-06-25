@@ -30,7 +30,6 @@
 				</el-menu>
 			</el-aside>
 			<!-- 主要内容 -->
-			<router-link :to="{ name: '', query }"></router-link>
 			<el-container>
 				<!-- 头部 -->
 				<el-header style="height: 11.5vh ; grid-template-columns:repeat:1fr;padding:0;">

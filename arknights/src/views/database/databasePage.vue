@@ -50,7 +50,7 @@
           </el-aside>
           <el-container>
               <!-- 头部 -->
-              <el-header style="height: 13.6vh; grid-template-columns: 1fr;" >
+              <el-header style="height: 13.6vh; grid-template-columns: 1fr;display: flex;flex-direction: column;" >
               <el-menu text-color="#aaa" mode="horizontal" :ellipsis="false">
                   <el-menu-item index="0">
                       <el-icon @click="isCollapse = !isCollapse">

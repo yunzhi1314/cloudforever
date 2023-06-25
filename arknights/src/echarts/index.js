@@ -194,12 +194,12 @@ export async function basicMedical(dom){
           top:"center",
       },
       title:{
-          text:"各医疗公司所持有的靶向药数量市场占比"
+          text:"各医疗公司所持有的靶向药数量市场占比",
       },
       series:{
           type:"pie",
           left:-100,
-          radius:["70%","80%"],
+          radius:["50%","60%"],
           avoidLabelOverlap:false,
           label:{
               position:"center",
@@ -209,8 +209,10 @@ export async function basicMedical(dom){
           emphasis:{
               label:{
                   show:true,
-                  fontSize:"1.2rem",
+                  fontSize:"1rem",
                   fontWeight:"bold",
+                  lineHeight:20,
+                  backgroundColor:"red"
               }
           },
           data:newData

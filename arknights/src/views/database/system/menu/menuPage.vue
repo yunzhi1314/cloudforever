@@ -17,7 +17,7 @@
     </el-row>
 
     <!-- 数据显示区 -->
-    <el-table :data="isSearch ? searchData : newData" height="90vh" row-key="id">
+    <el-table :data="isSearch ? searchData : newData" height="80vh" row-key="id">
       <el-table-column label="药物名称" prop="medical_name"></el-table-column>
       <el-table-column label="所属公司" prop="medical_company"></el-table-column>
       <el-table-column label="靶向" prop="medical_target"></el-table-column>

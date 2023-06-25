@@ -7,7 +7,6 @@ import { reactive } from "vue";
 export async function basicMedical(dom) {
   let datas = await Request.getData(url.dataBase.home.basicMedical);
   let source = datas.data.datas;
-  console.log(source);
   // 存储
   store.commit("database/changeBasicMedical", source);
   store.commit("changeStore", "isBasicMedical");
@@ -57,7 +56,6 @@ export async function expMedicals(dom) {
     id: item.id,
   }));
 
-  console.log(arrs);
 
   //绘制图标
   let myecharts = echarts.init(dom);

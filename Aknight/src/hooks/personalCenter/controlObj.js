@@ -10,7 +10,7 @@ let controlObj = reactive({
 		isLoginIn: false, //登录注册的倒计时遮罩层
 		isLoginOut: false, //登出状态的遮罩层
 		isChangeInfo: false, //更改数据页面的遮罩层
-		isRoleAddMenu: false// 控制角色的新增菜单遮罩层
+		isAddMenu: false,//控制各管理页面的新增/修改菜单遮罩层
 	},
 	isRegister: true, // 是否能够注册
 	isLogin: true, // 是否能够登录

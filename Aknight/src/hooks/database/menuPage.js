@@ -1,3 +1,4 @@
+import { reactive } from 'vue'
 export function dealTree() {
     let datalist = JSON.parse(sessionStorage.getItem('medical')).basicMedical
     /* 所有公司名字 */
@@ -43,7 +44,7 @@ export function dealTree() {
         }
     }
 
-    return { newData, companys }
+    return reactive({ newData, companys })
 
 }
 

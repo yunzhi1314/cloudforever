@@ -3,9 +3,9 @@
 
     <el-row>
       <el-col :span="7">
-        <el-row class="nav" justify="space-around" style="flex-wrap: nowrap">
+        <el-row class="nav" justify="space-around" style="flex-wrap: nowrap;">
           <el-input v-model="search" placeholder="请输入查询内容" style="width: 60vw;" />
-          <el-button icon="search" @click="query" type="primary" style="margin-left:1vw">查询</el-button>
+          <el-button icon="search" @click="searchBtn" type="primary" style="margin-left:1vw">查询</el-button>
           <el-button icon="FolderAdd" type="success" @click="addTabMenu">新增菜单</el-button>
         </el-row>
       </el-col>
@@ -21,11 +21,11 @@
       <el-table-column label="区域" prop="medical_area" width="140"></el-table-column>
       <el-table-column label="操纵">
         <template #default="scope">
-          <el-button type="text" size="mini" style="font-size: 12px;margin:0; width:28%;"
+          <el-button link size="small" style="font-size: 12px;margin:0; width:28%;color:#409eff;"
             @click="addTabMenu">新增</el-button>
-          <el-button type="text" size="mini" style="font-size: 12px;margin:0;width:28%;"
+          <el-button link size="small" style="font-size: 12px;margin:0;width:28%;color:#409eff;"
             @click="setTabMenu(scope.row)">修改</el-button>
-          <el-button type="text" size="mini" style="font-size: 12px;margin:0;width:28%;"
+          <el-button link size="small" style="font-size: 12px;margin:0;width:28%;color:#409eff;"
             @click="delTabMenu(scope.row)">删除</el-button>
         </template>
       </el-table-column>
@@ -126,7 +126,7 @@ export default {
     let searchData = ref('')
 
     /* 点击搜索按钮 */
-    function query() {
+    function searchBtn() {
       isSearch.value = true;
       searchData.value = Datalist.value.filter((item) =>
         item.medical_area == search.value ||
@@ -285,7 +285,7 @@ export default {
       search,
       isSearch,
       searchData,
-      query,
+      searchBtn,
       controlObj,
       addTabMenu,
       addLab,

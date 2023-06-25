@@ -38,30 +38,10 @@
 			<el-table-column label="操纵">
 				<!-- scope为 -->
 				<template #default="scope">
-					<el-button
-						link
-						size="small "
-						style="
-							font-size: 12px;
-							margin: 0 0.5vw;
-							width: 30%;
-							color: #409eff;
-						"
-						@click="setMsg(scope.row)"
-						>修改</el-button
-					>
-					<el-button
-						link
-						size="small "
-						style="
-							font-size: 12px;
-							margin: 0 0.5vw;
-							width: 30%;
-							color: #409eff;
-						"
-						@click="delMsg(scope.row)"
-						>删除</el-button
-					>
+					<el-button link size="small " style="font-size: 12px; margin: 0 0.5vw; width: 30%;color:#409eff;"
+						@click="setMsg(scope.row)">修改</el-button>
+					<el-button link size="small " style="font-size: 12px; margin: 0 0.5vw; width: 30%;color:#409eff;"
+						@click="delMsg(scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -313,143 +293,145 @@
 				{ immediate: true }
 			);
 
-			// 验证表单
-			let ruleMenu = ref();
-			// 表单的内容
-			let addMsg = reactive({
-				company: "",
-				id: "",
-				medical_ORR: "",
-				medical_OS: "",
-				medical_PFS: "",
-				medical_TREE: "",
-				medical_enrollees_population: "",
-				medical_indications: "",
-				medical_line: "",
-				medical_name: "",
-				medical_status: ""
+		// 验证表单
+		let ruleMenu = ref();
+		// 表单的内容
+		let addMsg = reactive({
+			company: "",
+			id: "",
+			medical_ORR: "",
+			medical_OS: "",
+			medical_PFS: "",
+			medical_TREE: "",
+			medical_enrollees_population: "",
+			medical_indications: "",
+			medical_line: "",
+			medical_name: "",
+			medical_status: ""
+		});
+		// 修改内容
+		// 声明一个修改的开关
+		let isSetMsg = ref(false);
+		// 新增菜单按钮
+		function addTable() {
+			controlObj.isDialog.isAddMenu = true;
+			// 打开新增的表单时，清空所有遮罩层的内容
+			Reflect.ownKeys(addMsg).forEach((key) => {
+				Reflect.set(addMsg, key, "");
 			});
-			// 修改内容
-			// 声明一个修改的开关
-			let isSetMsg = ref(false);
-			// 新增菜单按钮
-			function addTable() {
-				controlObj.isDialog.isRoleAddMenu = true;
-				// 打开新增的表单时，清空所有遮罩层的内容
-				Reflect.ownKeys(addMsg).forEach((key) => {
-					Reflect.set(addMsg, key, "");
-				});
-			}
-			// 修改按钮
-			function setMsg(item) {
-				// 将遮罩层变成修改内容，开启修改开关
-				isSetMsg.value = true;
-				// 开启遮罩层
-				controlObj.isDialog.isRoleAddMenu = true;
-				// 将修改内容渲染到修改表格中
-				Reflect.ownKeys(addMsg).forEach((key) => {
-					Reflect.set(addMsg, key, item[key]);
-				});
-			}
-			// 删除按钮
-			function delMsg(item) {
-				// 这个函数本质上返回的是promise函数
-				ElMessageBox({
-					// 提示框标题
-					title: "删除信息",
-					// 提示框渲染的信息，用h函数渲染
-					// h(HTMLCollaption:string,CSS:object,html内容:array | string):htmlTag
-					message: h(
-						"p",
-						{ style: "font-size:19px;font-weight:bold;" },
-						"你确认删除这项信息吗？"
-					),
-					// 显示取消按钮
-					showCancelButton: true,
-					// 确认按钮的文本
-					confirmButtonText: "确认",
-					// 取消按钮的文本
-					cancelButtonText: "取消",
-					customClass: "MSGBOX",
-					confirmButtonClass: "OKCSS",
-					cancelButtonClass: "OKCSS",
-					// 在关闭之前的钩子函数
-					// action是指用户的行为：用户点击了哪一个按钮
-					// instance 点击确认按钮后，提示框结束之前的加载动画
-					// done() 确认提示框的行为有无完成的标志
-					beforeClose: (action, instance, done) => {
-						if (action === "confirm") {
-							// 开启提示框确认按钮的加载动画
-							instance.confirmButtonLoading = true;
-							instance.confirmButtonText = "Loading...";
-							// 在结束提示框之前去进行请求
-							delMenu(item.id);
-							setTimeout(() => {
-								// 结束提示框的行为并关闭提示框
-								done();
-								setTimeout(() => {
-									// 结束提示框确认按钮的加载动画
-									instance.confirmButtonLoading = false;
-								}, 300);
-							}, 3000);
-						} else {
+		}
+		// 修改按钮
+		function setMsg(item) {
+			// 将遮罩层变成修改内容，开启修改开关
+			isSetMsg.value = true;
+			// 开启遮罩层
+			controlObj.isDialog.isAddMenu = true;
+			// 将修改内容渲染到修改表格中
+			Reflect.ownKeys(addMsg).forEach((key) => {
+				Reflect.set(addMsg, key, item[key]);
+			});
+		}
+		// 删除按钮
+		function delMsg(item) {
+			// 这个函数本质上返回的是promise函数
+			ElMessageBox({
+				// 提示框标题
+				title: "删除信息",
+				// 提示框渲染的信息，用h函数渲染
+				// h(HTMLCollaption:string,CSS:object,html内容:array | string):htmlTag
+				message: h("p", { style: "font-size:19px;font-weight:bold;" }, "你确认删除这项信息吗？"),
+				// 显示取消按钮
+				showCancelButton: true,
+				// 确认按钮的文本
+				confirmButtonText: "确认",
+				// 取消按钮的文本
+				cancelButtonText: "取消",
+				customClass: "MSGBOX",
+				confirmButtonClass: "OKCSS",
+				cancelButtonClass: "OKCSS",
+				// 在关闭之前的钩子函数
+				// action是指用户的行为：用户点击了哪一个按钮
+				// instance 点击确认按钮后，提示框结束之前的加载动画
+				// done() 确认提示框的行为有无完成的标志
+				beforeClose: (action, instance, done) => {
+					if (action === "confirm") {
+						// 开启提示框确认按钮的加载动画
+						instance.confirmButtonLoading = true;
+						instance.confirmButtonText = "Loading...";
+						// 在结束提示框之前去进行请求
+						delMenu(item.id);
+						setTimeout(() => {
+							// 结束提示框的行为并关闭提示框
 							done();
-						}
+							setTimeout(() => {
+								// 结束提示框确认按钮的加载动画
+								instance.confirmButtonLoading = false;
+							}, 300);
+						}, 3000);
+					} else {
+						done();
 					}
+				}
+			})
+				.then(() => {
+					ElMessage({
+						type: "info",
+						message: `删除成功`
+					});
 				})
-					.then(() => {
-						ElMessage({
-							type: "info",
-							message: `删除成功`
-						});
-					})
-					.catch((err) => console.log(err));
-			}
-			// 遮罩层确定按钮  -- 新增或修改
-			// 提交表单
-			const submitForm = async (formEl) => {
-				if (!formEl) return;
-				await formEl.validate((valid, fields) => {
-					if (valid) {
-						controlObj.isDialog.isRoleAddMenu = false;
+				.catch((err) => console.log(err));
+		}
+		// 遮罩层确定按钮  -- 新增或修改
+		// 提交表单
+		const submitForm = async (formEl) => {
+			if (!formEl) return;
+			await formEl.validate((valid, fields) => {
+				if (valid) {
+					controlObj.isDialog.isAddMenu = false;
 
 						// 根据修改的开关来决定是递交修改请求还是新增内容的请求
 						isSetMsg.value ? setMenu(addMsg) : addMenu(addMsg);
 
-						// 将修改的开关关闭
-						isSetMsg.value = false;
-					} else {
-						console.log("error submit!", fields);
-					}
-				});
-			};
-
-			provide("controlDialog", "isRoleAddMenu");
-
-			return {
-				menuPage,
-				search,
-				isSearch,
-				isSetMsg,
-				searchData,
-				dataList,
-				ruleMenu,
-				addMsg,
-				rules,
-				currentPage,
-				pageSize,
-				pageArr,
-				controlObj,
-				query,
-				handleSizeChange,
-				handleCurrentChange,
-				addTable,
-				setMsg,
-				delMsg,
-				submitForm
-			};
+					// 将修改的开关关闭
+					isSetMsg.value = false;
+				} else {
+					console.log("error submit!", fields);
+				}
+			});
+		};
+		// 取消遮罩层
+		function cancel() {
+			controlObj.isDialog.isAddMenu = false;
+			isSetMsg.value = false;
 		}
-	};
+
+		provide("controlDialog", "isAddMenu");
+
+		return {
+			menuPage,
+			search,
+			isSearch,
+			isSetMsg,
+			searchData,
+			dataList,
+			ruleMenu,
+			addMsg,
+			rules,
+			currentPage,
+			pageSize,
+			pageArr,
+			controlObj,
+			query,
+			handleSizeChange,
+			handleCurrentChange,
+			addTable,
+			setMsg,
+			delMsg,
+			submitForm,
+			cancel
+		};
+	}
+};
 </script>
 
 <style lang="scss" scoped></style>

@@ -23,13 +23,15 @@
       <el-table-column label="美国CTR认证" prop="medical_area" width="140"></el-table-column>
       <el-table-column label="操纵">
         <template #default="scope">
-          <el-button type="text" size="mini" style="font-size: 12px;margin:0;width:28%;" @click="setTabMenu(scope.row)" >修改</el-button>
-          <el-button type="text" size="mini" style="font-size: 12px;margin:0;width:28%;" @click="delTabMenu(scope.row)">删除</el-button>
+          <el-button link size="small" style="font-size: 12px;margin:0;width:28%;color:#409eff;"
+            @click="setTabMenu(scope.row)">修改</el-button>
+          <el-button link size="small" style="font-size: 12px;margin:0;width:28%;color:#409eff;"
+            @click="delTabMenu(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-   
+
 
 
   </div>
@@ -37,7 +39,7 @@
 
 <script>
 import menuPage from "@/public/database/menu/menuPage.scss";
-import {provide,ref,reactive} from "vue";
+import { provide, ref, reactive } from "vue";
 export default {
   name: "userPage",
   setup() {

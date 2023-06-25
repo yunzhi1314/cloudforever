@@ -1,6 +1,6 @@
 import url from "@/api/url";
 import { Request } from "@/hooks/request";
-import { reactive } from "vue";
+import { reactive, toRef } from "vue";
 
 //第三方共享页面渲染数据
 export function getShare() {
@@ -9,7 +9,7 @@ export function getShare() {
     });
 
     Request.getData(url.centerPage.thirdShare).then((res) => {
-        dataList.datas = { ...res.data.shareList };
+        dataList.datas = toRef({ ...res.data.shareList });
     });
     return dataList;
 }

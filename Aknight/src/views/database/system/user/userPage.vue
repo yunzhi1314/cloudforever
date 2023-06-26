@@ -93,14 +93,11 @@
 </template>
 
 <script>
-import { provide, ref, reactive, watch, h, toRefs } from "vue";
+import { provide, ref, reactive, toRefs } from "vue";
 import { dealUser } from '@/hooks/database/userPage.js'
 import menuPage from "@/public/database/menu/menuPage.scss";
 import controlObj from "@/hooks/controlObj";
-import { addMenu, setMenu, delMenu } from "@/api/arknight/database/menu";
-// 导入弹框，删除时使用
-import { ElMessage, ElMessageBox } from "element-plus";
-import url from "@/api/url"
+import { getPage, changePage, diaPage } from '@/hooks/database/page'
 export default {
   name: "userPage",
   setup() {
@@ -139,178 +136,27 @@ export default {
     let nameArr = ["药物名称", "研发进度", "中国入组人数", "国际入组人数", "首次公开日期", "中国FPI注册", "美国CTR认证"]
     //进度名称 最开始下拉框选择第一个
     let process = reactive(processList.value[0])
-    // 表单验证规则
-    let rules = reactive({})
-    Reflect.ownKeys(addMsg).forEach((item, index) => {
-      Reflect.set(rules, item, {
-        required: true,
-        message: `请输入${nameArr[index]}`,
-        trigger: "blur"
-      });
-    });
-
     // 当前页
     let currentPage = ref(2);
     // 单页数量
     let pageSize = ref(10);
     // 分页数组
     let pageArr = ref([]);
-    // 修改分页数量
-    const handleSizeChange = () => {
-      pageArr.value.splice(0, pageArr.value.length);
-    };
-    //修改当前页数
-    const handleCurrentChange = () => {
-      pageArr.value.splice(0, pageArr.value.length);
-    };
+    //表单验证规则 rules
+    //修改分页数量 handleSizeChange
+    //修改当前页数 handleCurrentChange
+    const { rules, handleSizeChange, handleCurrentChange } = getPage(addMsg, nameArr, pageArr, currentPage, pageSize, isSearch, searchData, dataList)
 
-    // 监视 currentPage(当前页) 和 pageSize(当前页所展示的数量)
-    // 去截取对应位置的数组
-    // 去渲染该数组
-    watch(
-      [currentPage, pageSize, isSearch],
-      (newValue) => {
-        pageArr.value.splice(0, pageArr.value.length)
-        // 是否搜索？// 如果搜索的话，就分页搜索的结果
-        newValue[2]
-          ? pageArr.value.push(
-            ...searchData.value.slice(
-              (newValue[0] - 1) * newValue[1],
-              newValue[0] * newValue[1]
-            )) // 如果没有搜索，就分页元数据
-          : pageArr.value.push(
-            ...dataList.value.slice(
-              (newValue[0] - 1) * newValue[1],
-              newValue[0] * newValue[1]
-            ));
-      },
-      { immediate: true }
-    );
-
-    // 修改内容
     // 声明一个修改的开关
     let isSetMsg = ref(false);
-    // 新增菜单按钮
-    function addTable() {
-      controlObj.isDialog.isAddMenu = true;
-      // 打开新增的表单时，清空所有遮罩层的内容
-      Reflect.ownKeys(addMsg).forEach((key) => {
-        Reflect.set(addMsg, key, "");
-      });
-    }
-    // 修改按钮
-    function setMsg(item) {
-      // 将遮罩层变成修改内容，开启修改开关
-      isSetMsg.value = true;
-      // 开启遮罩层
-      controlObj.isDialog.isAddMenu = true;
-      // 将修改内容渲染到修改表格中
-      Reflect.ownKeys(addMsg).forEach((key) => {
-        Reflect.set(addMsg, key, item[key]);
-      });
-      //进度百分比转义成研发名称
-      switch (addMsg.process) {
-        case "":
-          addMsg.process = ref("");
-          break;
-        case 20:
-          addMsg.process = ref("Ia");
-          break;
-        case 40:
-          addMsg.process = ref("Ib_II");
-          break;
-        case 60:
-          addMsg.process = ref("III");
-          break;
-        case 80:
-          addMsg.process = ref("NDA");
-          break;
-        case 100:
-          addMsg.process = ref("market");
-          break;
-      }
-    }
-    // 删除按钮
-    function delMsg(item) {
-      // 这个函数本质上返回的是promise函数
-      ElMessageBox({
-        // 提示框标题
-        title: "删除信息",
-        // 提示框渲染的信息，用h函数渲染
-        // h(HTMLCollaption:string,CSS:object,html内容:array | string):htmlTag
-        message: h("p", { style: "font-size:19px;font-weight:bold;" }, "你确认删除这项信息吗？"),
-        // 显示取消按钮
-        showCancelButton: true,
-        // 确认按钮的文本
-        confirmButtonText: "确认",
-        // 取消按钮的文本
-        cancelButtonText: "取消",
-        customClass: "MSGBOX",
-        confirmButtonClass: "OKCSS",
-        cancelButtonClass: "OKCSS",
-        // 在关闭之前的钩子函数
-        // action是指用户的行为：用户点击了哪一个按钮
-        // instance 点击确认按钮后，提示框结束之前的加载动画
-        // done() 确认提示框的行为有无完成的标志
-        beforeClose: (action, instance, done) => {
-          if (action === "confirm") {
-            // 开启提示框确认按钮的加载动画
-            instance.confirmButtonLoading = true;
-            instance.confirmButtonText = "Loading...";
-            // 在结束提示框之前去进行请求
-            delMenu(url.database.user.delMenu, item.id);
-            setTimeout(() => {
-              // 结束提示框的行为并关闭提示框
-              done();
-              setTimeout(() => {
-                // 结束提示框确认按钮的加载动画
-                instance.confirmButtonLoading = false;
-              }, 300);
-            }, 3000);
-          } else {
-            done();
-          }
-        }
-      })
-        .then(() => {
-          ElMessage({
-            type: "info",
-            message: `删除成功`
-          });
-        })
-        .catch((err) => console.log(err));
-    }
-    // 遮罩层确定按钮  -- 新增或修改
-    // 提交表单
-    const submitForm = async (formEl) => {
-      if (!formEl) return;
-      await formEl.validate((valid, fields) => {
-        if (valid) {
-          controlObj.isDialog.isAddMenu = false;
-          //研发名称转义成研发百分比
-          process.forEach((item, index) => {
-            switch (addMsg.process) {
-              case item:
-                //根据顺序 阶段*20累加
-                addMsg.process = ref((index + 1) * 20)
-                break
-            }
-          })
-
-          // 根据修改的开关来决定是递交修改请求还是新增内容的请求
-          isSetMsg.value ? setMenu(url.database.user.setMenu, addMsg) : addMenu(url.database.user.addMenu, addMsg);
-          // 将修改的开关关闭
-          isSetMsg.value = false;
-        } else {
-          console.log("error submit!", fields);
-        }
-      });
-    };
-    // 取消遮罩层
-    function cancel() {
-      controlObj.isDialog.isAddMenu = false;
-      isSetMsg.value = false;
-    }
+    //新增菜单按钮 addTable
+    //修改按钮 setMsg
+    //删除按钮 delMsg
+    const { addTable, setMsg, delMsg } = changePage(addMsg, isSetMsg, escape)
+    // 遮罩层按钮事件
+    //提交表单 submitForm
+    //取消遮罩层 cancel
+    const { submitForm, cancel } = diaPage(isSetMsg, process, addMsg)
 
 
     return {

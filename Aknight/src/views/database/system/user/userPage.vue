@@ -1,5 +1,5 @@
 <template>
-  <div class="wirpper" style="width:80vw; height:80vh;display:block;padding:1vw; background-color: white;">
+  <div class="wirpper" style="width:83vw; height:86vh;display:block;padding:1vw; background-color: white;">
     <!-- 添加查询按钮 -->
     <el-row>
       <el-col :span="7">
@@ -12,7 +12,7 @@
     </el-row>
 
     <!-- 通过搜索控制展示的数据是搜索内容还是初始数据 -->
-    <el-table :data="pageArr" style="margin-top: 1vh; height: 71.5vh">
+    <el-table :data="pageArr" style="margin-top: 1vh; height: 71vh">
       <el-table-column :label="nameArr[0]" :prop="propArr[0]"></el-table-column>
       <el-table-column :label="nameArr[1]">
         <template #default="scope">
@@ -31,7 +31,7 @@
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <div class="demo-pagination-block" style="display: flex; justify-content: center; height: 5vh">
+    <div class="demo-pagination-block" style="display: flex; justify-content: center;height:5.5vh;">
       <el-pagination v-model:current-page="currentPage" v-model:page-size="pageSize" :page-sizes="[5, 10, 15, 20]"
         :small="false" layout="sizes, prev, pager,next,jumper,total"
         :total="isSearch ? searchData.length : dataList.length" @size-change="handleSizeChange"
@@ -59,13 +59,13 @@
       grid-template-columns: 1fr 1fr;
       column-gap: 2vw;">
         <el-form-item :label="nameArr[1]" style="grid-column: span 2;">
-          <el-select style="width:41vw;" v-model="addMsg.process" placeholder="请选择对应的研发进度">
+          <el-select style="width:41vw;" v-model="addMsg[propArr[1]]" :placeholder="`请选择对应的${nameArr[1]}`">
             <el-option v-for="(item, index) in process" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-form-item>
         <div>
           <el-form-item :label="nameArr[0]" :prop="propArr[0]">
-            <el-input style="width:16vw;" v-model="addMsg.medical_name" :placeholder="`请填写${nameArr[0]}`"></el-input>
+            <el-input style="width:16vw;" v-model="addMsg[propArr[0]]" :placeholder="`请填写${nameArr[0]}`"></el-input>
           </el-form-item>
         </div>
         <div v-for="(item, index) in propArr.slice(2, 4)" :key="index">
@@ -82,7 +82,7 @@
         </div>
         <div>
           <el-form-item :label="nameArr[6]" :prop="propArr[6]">
-            <el-input style="width:16vw;" v-model="addMsg.medical_name" :placeholder="`请填写${nameArr[6]}`"></el-input>
+            <el-input style="width:16vw;" v-model="addMsg[propArr[6]]" :placeholder="`请填写${nameArr[6]}`"></el-input>
           </el-form-item>
         </div>
         <div></div>
@@ -144,7 +144,7 @@ export default {
     //标头(汉字)
     let nameArr = ["药物名称", "研发进度", "中国入组人数", "国际入组人数", "首次公开日期", "中国FPI注册", "美国CTR认证"]
     //进度名称 最开始下拉框选择第一个
-    let process = processList.value[0]
+    let process = reactive(processList.value[0])
     // 表单验证规则
     let rules = reactive({})
     Reflect.ownKeys(addMsg).forEach((item, index) => {

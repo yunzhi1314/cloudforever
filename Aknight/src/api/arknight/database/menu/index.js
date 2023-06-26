@@ -17,6 +17,7 @@ export function addMenu(url, data) {
 
 // 修改表单内容
 export function setMenu(url, data) {
+    console.log(url, data);
     let dataList = reactive({
         datas: []
     })
@@ -24,7 +25,6 @@ export function setMenu(url, data) {
     Request.putData(url, data)
         .then(res => {
             dataList.datas = toRef({ ...res.data })
-            console.log(res.data)
         })
 
     return dataList
@@ -36,14 +36,13 @@ export function delMenu(url, data) {
         datas: []
     })
 
-    Request.delData(url.delMenu, {
+    Request.delData(url, {
         params: {
             id: data
         }
     })
         .then(res => {
             dataList.datas = toRef({ ...res.data })
-            console.log(res.data)
         })
 
     return dataList

@@ -56,23 +56,23 @@ export default {
 		},
 		role: {//角色管理
 			addMenu: "/database/role/addMedical",//添加
-			delMenu: "/database/role/delMedical",//修改
-			setMenu: "/database/role/setMedical",//删除
+			setMenu: "/database/role/setMedical",//修改
+			delMenu: "/database/role/delMedical",//删除
 		},
 		user: {//用户管理
 			addMenu: "/database/user/addMedical",//添加
-			delMenu: "/database/user/delMedical",//修改
-			setMenu: "/database/user/setMedical",//删除
+			setMenu: "/database/user/setMedical",//修改
+			delMenu: "/database/user/delMedical",//删除
 		},
 		department: {//部门管理
 			addMenu: "/database/department/addMedical",//添加
-			delMenu: "/database/department/delMedical",//修改
-			setMenu: "/database/department/setMedical",//删除
+			setMenu: "/database/department/setMedical",//修改
+			delMenu: "/database/department/delMedical",//删除
 		},
 		dictionary: {//字典管理
 			addMenu: "/database/dictionary/addMedical",//添加
-			delMenu: "/database/dictionary/delMedical",//修改
-			setMenu: "/database/dictionary/setMedical",//删除
+			setMenu: "/database/dictionary/setMedical",//修改
+			delMenu: "/database/dictionary/delMedical",//删除
 		},
 	},
 };

@@ -53,9 +53,7 @@
 								</el-breadcrumb-item>
 								<!-- 三级面包屑 -->
 								<el-breadcrumb-item :style="{
-									animation: isPlay
-										? 'flyIn 0.25s 0s 1 linear forwards'
-										: ''
+									animation: isPlay ? 'flyIn 0.25s 0s 1 linear forwards' : ''
 								}" v-if="isbreadcrumb ? route.meta.isHide : ''">
 									{{ route.meta.title }}
 								</el-breadcrumb-item>
@@ -100,7 +98,7 @@
 							<el-menu-item index="8-1">首页</el-menu-item>
 							<el-menu-item index="8-2">代码仓库</el-menu-item>
 							<el-menu-item index="8-3">个人中心</el-menu-item>
-							<el-menu-item index="8-4" @click="isDialog.isLoginOut = true">退出</el-menu-item>
+							<el-menu-item index="8-4" @click="controlObj.isDialog.isLoginOut = true">退出</el-menu-item>
 						</el-sub-menu>
 					</el-menu>
 					<!-- tag标签,页眉标签 -->
@@ -124,7 +122,7 @@
 				<section>确定要退出吗?</section>
 				<section>
 					<button @click="confirm">确认</button>
-					<button @click="isDialog.isLoginOut = false">取消</button>
+					<button @click="controlObj.isDialog.isLoginOut = false">取消</button>
 				</section>
 			</div>
 		</div>
@@ -188,6 +186,7 @@ export default {
 			// 关闭面包屑动画
 			setTimeout(() => {
 				isPlay.value = false;
+				console.log(isPlay)
 			}, 250);
 
 			// 判断当前页面的路径，显示面包屑的内容
@@ -202,8 +201,6 @@ export default {
 				case "pages":
 					metaName.value = "页面";
 					break;
-				case "5312023,23459P":
-					metaName.value = "菜单嵌套";
 			}
 
 			// 添加页眉
@@ -227,6 +224,7 @@ export default {
 			route.meta.isHide = false;
 			// 打开面包屑动画开关
 			isPlay.value = true;
+			console.log(isPlay)
 			if (index2 == undefined) {
 				// 调往首页
 				router.push({
@@ -335,8 +333,7 @@ export default {
 			removeTab,
 			/* 存储数据 */
 			...toRefs(reactive(JSON.parse(sessionStorage.getItem("menus")))),
-			/* 按钮集合 */
-			...controlObj
+			controlObj
 		};
 	},
 	// 组件内守卫：进入该组件路由之前。目的：知道从哪个页面进来的

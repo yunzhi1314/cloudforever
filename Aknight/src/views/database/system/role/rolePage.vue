@@ -71,29 +71,29 @@
 				</div>
 				<div style="display: flex; justify-content: space-between">
 					<el-form-item label="入组人数" prop="medical_enrollees_population" style="flex: 2.5">
-						<el-input v-model="addMsg.medical_enrollees_population" placeholder="请填写入组人数"></el-input>
+						<el-input v-model="addMsg.medical_enrollees_population" placeholder="请输入入组人数"></el-input>
 					</el-form-item>
 					<div style="flex: 0.5"></div>
 					<el-form-item label="ORR" prop="medical_ORR" style="flex: 3.25">
-						<el-input v-model="addMsg.medical_ORR" placeholder="请填写ORR"></el-input>
+						<el-input v-model="addMsg.medical_ORR" placeholder="请输入ORR信息"></el-input>
 					</el-form-item>
 				</div>
 				<div style="display: flex; justify-content: space-between">
 					<el-form-item label="OS" prop="medical_OS" style="flex: 2.5">
-						<el-input v-model="addMsg.medical_OS" placeholder="请填写OS"></el-input>
+						<el-input v-model="addMsg.medical_OS" placeholder="请输入OS信息"></el-input>
 					</el-form-item>
 					<div style="flex: 0.5"></div>
 					<el-form-item label="PFS" prop="medical_PFS" style="flex: 3.25">
-						<el-input v-model="addMsg.medical_PFS" placeholder="请填写PFS"></el-input>
+						<el-input v-model="addMsg.medical_PFS" placeholder="请输入PFS信息"></el-input>
 					</el-form-item>
 				</div>
 				<div style="display: flex; justify-content: space-between">
 					<el-form-item label="TREE" prop="medical_TREE" style="flex: 2.5">
-						<el-input v-model="addMsg.medical_TREE" placeholder="请填写TREE"></el-input>
+						<el-input v-model="addMsg.medical_TREE" placeholder="请输入TREE信息"></el-input>
 					</el-form-item>
 					<div style="flex: 0.5"></div>
-					<el-form-item label="线数" prop="medical_line" style="flex: 3.25">
-						<el-input v-model="addMsg.medical_line" placeholder="请填写线数"></el-input>
+					<el-form-item label="line" prop="medical_line" style="flex: 3.25">
+						<el-input v-model="addMsg.medical_line" placeholder="请输入line信息"></el-input>
 					</el-form-item>
 				</div>
 				<el-form-item label="研发管线">
@@ -160,60 +160,44 @@ export default {
 				isSearch.value = false;
 			}
 		}
-		// 表单验证规则
-		let rules = reactive({
-			company: {
-				required: true,
-				message: "请输入药品信息",
-				trigger: "blur"
-			},
-			medical_ORR: {
-				required: true,
-				message: "请选择公司信息",
-				trigger: "blur"
-			},
-			medical_OS: {
-				required: true,
-				message: "请输入靶向信息",
-				trigger: "blur"
-			},
-			medical_PFS: {
-				required: true,
-				message: "请输入线数信息",
-				trigger: "blur"
-			},
-			medical_TREE: {
-				required: true,
-				message: "请输入治疗方式信息",
-				trigger: "blur"
-			},
-			medical_enrollees_population: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			},
-			medical_indications: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			},
-			medical_line: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			},
-			medical_name: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			},
-			medical_status: {
-				required: true,
-				message: "请选择地区信息",
-				trigger: "blur"
-			}
+
+		// 表单的内容
+		let addMsg = reactive({
+			company: "",
+			medical_ORR: "",
+			medical_OS: "",
+			medical_PFS: "",
+			medical_TREE: "",
+			medical_enrollees_population: "",
+			medical_indications: "",
+			medical_line: "",
+			medical_name: "",
+			medical_status: "",
+			id: "",
 		});
-		// 当前页
+		// 表单验证规则
+		let rules = reactive({});
+		let nameArr = [
+			"公司信息",
+			"ORR信息",
+			"OS信息",
+			"PFS信息",
+			"TREE信息",
+			"入组人数信息",
+			"应对癌症信息",
+			"线数信息",
+			"药品信息",
+			"研发管线信息"
+		];
+		Reflect.ownKeys(addMsg).forEach((item, index) => {
+			Reflect.set(rules, item, {
+				required: true,
+				message: `请输入${nameArr[index]}`,
+				trigger: "blur"
+			});
+		});
+
+		// 分页
 		let currentPage = ref(2);
 		// 单页数量
 		let pageSize = ref(10);
@@ -246,27 +230,13 @@ export default {
 							(newValue[0] - 1) * newValue[1],
 							newValue[0] * newValue[1]
 						));
-				console.log(pageArr);
 			},
 			{ immediate: true }
 		);
 
 		// 验证表单
 		let ruleMenu = ref();
-		// 表单的内容
-		let addMsg = reactive({
-			company: "",
-			id: "",
-			medical_ORR: "",
-			medical_OS: "",
-			medical_PFS: "",
-			medical_TREE: "",
-			medical_enrollees_population: "",
-			medical_indications: "",
-			medical_line: "",
-			medical_name: "",
-			medical_status: ""
-		});
+
 		// 修改内容
 		// 声明一个修改的开关
 		let isSetMsg = ref(false);
@@ -297,7 +267,11 @@ export default {
 				title: "删除信息",
 				// 提示框渲染的信息，用h函数渲染
 				// h(HTMLCollaption:string,CSS:object,html内容:array | string):htmlTag
-				message: h("p", { style: "font-size:19px;font-weight:bold;" }, "你确认删除这项信息吗？"),
+				message: h(
+					"p",
+					{ style: "font-size:19px;font-weight:bold;" },
+					"你确认删除这项信息吗？"
+				),
 				// 显示取消按钮
 				showCancelButton: true,
 				// 确认按钮的文本
@@ -317,7 +291,7 @@ export default {
 						instance.confirmButtonLoading = true;
 						instance.confirmButtonText = "Loading...";
 						// 在结束提示框之前去进行请求
-						delMenu(url.database.role.delMenu, item.id);
+						delMenu(item.id);
 						setTimeout(() => {
 							// 结束提示框的行为并关闭提示框
 							done();

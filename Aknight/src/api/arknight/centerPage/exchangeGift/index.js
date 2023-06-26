@@ -2,7 +2,8 @@ import url from "@/api/url";
 import { Request } from "@/hooks/request";
 import store from "@/store";
 import { reactive, toRef } from "vue";
-
+import { toest } from "@/hooks/toset";
+import controlObj from "@/hooks/controlObj";
 //获取兑换码
 export function getRedemptionCode() {
 	let dataList = reactive({
@@ -29,6 +30,10 @@ export function getGift(data) {
 		res.data.status == 0
 			? store.commit("changeMsg", { message: "兑换成功", status: res.data.status })
 			: store.commit("changeMsg", res.data);
+
+		// 调用吐丝
+		toest(controlObj);
+
 		// 将兑换内容存入本地
 		store.commit("personalCenter/changeContexts", {
 			items: res.data.items,

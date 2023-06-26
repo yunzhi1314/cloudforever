@@ -24,9 +24,9 @@
 			<el-table-column label="研发管线" prop="medical_status"></el-table-column>
 			<el-table-column label="操纵">
 				<template #default="scope">
-					<el-button link size="small " style="font-size: 12px; margin: 0 0.5vw; width: 30%;color:#409eff;"
+					<el-button link size="small" style="font-size: 12px; margin: 0 0.5vw; width: 30%;color:#409eff;"
 						@click="setMsg(scope.row)">修改</el-button>
-					<el-button link size="small " style="font-size: 12px; margin: 0 0.5vw; width: 30%;color:#409eff;"
+					<el-button link size="small" style="font-size: 12px; margin: 0 0.5vw; width: 30%;color:#409eff;"
 						@click="delMsg(scope.row)">删除</el-button>
 				</template>
 			</el-table-column>

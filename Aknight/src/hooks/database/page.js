@@ -25,29 +25,31 @@ export function getPage(addMsg, nameArr, pageArr, currentPage, pageSize, isSearc
     const handleCurrentChange = () => {
         pageArr.value.splice(0, pageArr.value.length);
     };
+    if (pageArr) {
+        // 监视 currentPage(当前页) 和 pageSize(当前页所展示的数量)
+        // 去截取对应位置的数组
+        // 去渲染该数组
+        watch(
+            [currentPage, pageSize, isSearch],
+            (newValue) => {
+                pageArr.value.splice(0, pageArr.value.length)
+                // 是否搜索？// 如果搜索的话，就分页搜索的结果
+                newValue[2]
+                    ? pageArr.value.push(
+                        ...searchData.value.slice(
+                            (newValue[0] - 1) * newValue[1],
+                            newValue[0] * newValue[1]
+                        )) // 如果没有搜索，就分页元数据
+                    : pageArr.value.push(
+                        ...dataList.value.slice(
+                            (newValue[0] - 1) * newValue[1],
+                            newValue[0] * newValue[1]
+                        ));
+            },
+            { immediate: true }
+        );
+    }
 
-    // 监视 currentPage(当前页) 和 pageSize(当前页所展示的数量)
-    // 去截取对应位置的数组
-    // 去渲染该数组
-    watch(
-        [currentPage, pageSize, isSearch],
-        (newValue) => {
-            pageArr.value.splice(0, pageArr.value.length)
-            // 是否搜索？// 如果搜索的话，就分页搜索的结果
-            newValue[2]
-                ? pageArr.value.push(
-                    ...searchData.value.slice(
-                        (newValue[0] - 1) * newValue[1],
-                        newValue[0] * newValue[1]
-                    )) // 如果没有搜索，就分页元数据
-                : pageArr.value.push(
-                    ...dataList.value.slice(
-                        (newValue[0] - 1) * newValue[1],
-                        newValue[0] * newValue[1]
-                    ));
-        },
-        { immediate: true }
-    );
     return {
         rules,
         handleSizeChange,
@@ -57,14 +59,30 @@ export function getPage(addMsg, nameArr, pageArr, currentPage, pageSize, isSearc
 
 // 修改内容
 //userPageu页面需要转义传个标识escape用于区分
-export function changePage(addMsg, isSetMsg, escape) {
+export function changePage(addMsg, isSetMsg, name, escape) {
+    //通用的清空表单事件
+    function clearForm() {
+        Reflect.ownKeys(addMsg).forEach((key) => {
+            Reflect.set(addMsg, key, "");
+        });
+    }
+    //转义process
+    function convertProcessValue(value) {
+        const processDeal = {
+            20: "Ia",
+            40: "Ib_II",
+            60: "III",
+            80: "NDA",
+            100: "market"
+        };
+
+        return processDeal[value] || "";
+    }
     // 新增菜单按钮
     function addTable() {
         controlObj.isDialog.isAddMenu = true;
         // 打开新增的表单时，清空所有遮罩层的内容
-        Reflect.ownKeys(addMsg).forEach((key) => {
-            Reflect.set(addMsg, key, "");
-        });
+        clearForm()
     }
     // 修改按钮
     function setMsg(item) {
@@ -78,26 +96,7 @@ export function changePage(addMsg, isSetMsg, escape) {
         });
         if (escape) {
             //进度百分比转义成研发名称
-            switch (addMsg.process) {
-                case "":
-                    addMsg.process = ref("");
-                    break;
-                case 20:
-                    addMsg.process = ref("Ia");
-                    break;
-                case 40:
-                    addMsg.process = ref("Ib_II");
-                    break;
-                case 60:
-                    addMsg.process = ref("III");
-                    break;
-                case 80:
-                    addMsg.process = ref("NDA");
-                    break;
-                case 100:
-                    addMsg.process = ref("market");
-                    break;
-            }
+            addMsg.process = convertProcessValue(addMsg.process);
         }
 
     }
@@ -129,7 +128,7 @@ export function changePage(addMsg, isSetMsg, escape) {
                     instance.confirmButtonLoading = true;
                     instance.confirmButtonText = "Loading...";
                     // 在结束提示框之前去进行请求
-                    delMenu(url.database.user.delMenu, item.id);
+                    delMenu(url.database[name].delMenu, item.id)
                     setTimeout(() => {
                         // 结束提示框的行为并关闭提示框
                         done();
@@ -161,7 +160,7 @@ export function changePage(addMsg, isSetMsg, escape) {
 
 //遮罩层事件
 //userPage页面需要转义用到process, addMsg,别的页面不用传
-export function diaPage(isSetMsg, process, addMsg) {
+export function diaPage(isSetMsg, name, addMsg, process = []) {
     // 遮罩层确定按钮  -- 新增或修改
     // 提交表单
     const submitForm = async (formEl) => {
@@ -169,7 +168,7 @@ export function diaPage(isSetMsg, process, addMsg) {
         await formEl.validate((valid, fields) => {
             if (valid) {
                 controlObj.isDialog.isAddMenu = false;
-                if (process) {
+                if (process.length > 0) {
                     //研发名称转义成研发百分比
                     process.forEach((item, index) => {
                         switch (addMsg.process) {
@@ -180,9 +179,8 @@ export function diaPage(isSetMsg, process, addMsg) {
                         }
                     })
                 }
-
                 // 根据修改的开关来决定是递交修改请求还是新增内容的请求
-                isSetMsg.value ? setMenu(url.database.user.setMenu, addMsg) : addMenu(url.database.user.addMenu, addMsg);
+                isSetMsg.value ? setMenu(url.database[name].setMenu, addMsg) : addMenu(url.database[name].addMenu, addMsg)
                 // 将修改的开关关闭
                 isSetMsg.value = false;
             } else {

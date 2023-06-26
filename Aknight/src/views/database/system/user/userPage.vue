@@ -12,7 +12,7 @@
     </el-row>
 
     <!-- 通过搜索控制展示的数据是搜索内容还是初始数据 -->
-    <el-table :data="pageArr" style="margin-top: 1vh; height: 71vh">
+    <el-table :data="pageArr" style="margin-top: 1vh; height: 71vh" row-key="id">
       <el-table-column :label="nameArr[0]" :prop="propArr[0]"></el-table-column>
       <el-table-column :label="nameArr[1]">
         <template #default="scope">
@@ -57,26 +57,15 @@
             <el-option v-for="(item, index) in process" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-form-item>
-        <div>
-          <el-form-item :label="nameArr[0]" :prop="propArr[0]">
-            <el-input style="width:16vw;" v-model="addMsg[propArr[0]]" :placeholder="`请填写${nameArr[0]}`"></el-input>
-          </el-form-item>
-        </div>
-        <div v-for="(item, index) in propArr.slice(2, 4)" :key="index">
-          <el-form-item :label="nameArr.slice(2, 4)[index]" :prop="item">
-            <el-input style="width:16vw;" v-model="addMsg[item]"
-              :placeholder="`请填写${nameArr.slice(2, 4)[index]}`"></el-input>
+        <div v-for="(item, index) in newArr" :key="index">
+          <el-form-item :label="newName[index]" :prop="item">
+            <el-input style="width:16vw;" v-model="addMsg[item]" :placeholder="`请填写${newName[index]}`"></el-input>
           </el-form-item>
         </div>
         <div v-for="(item, index) in propArr.slice(4, 6)" :key="index">
           <el-form-item :label="nameArr.slice(4, 6)[index]" :prop="item">
             <el-date-picker style="width:16vw;" v-model="addMsg[item]" type="date"
               :placeholder="`请填写${nameArr.slice(4, 6)[index]}`" />
-          </el-form-item>
-        </div>
-        <div>
-          <el-form-item :label="nameArr[6]" :prop="propArr[6]">
-            <el-input style="width:16vw;" v-model="addMsg[propArr[6]]" :placeholder="`请填写${nameArr[6]}`"></el-input>
           </el-form-item>
         </div>
         <div></div>
@@ -135,6 +124,10 @@ export default {
     });
     //标头(汉字)
     let nameArr = ["药物名称", "研发进度", "中国入组人数", "国际入组人数", "首次公开日期", "中国FPI注册", "美国CTR认证"]
+    let number = [0, 2, 3, 6]
+    //文字输入框
+    let newArr = propArr.filter((_, index) => number.includes(index));
+    let newName = nameArr.filter((_, index) => number.includes(index))
     //进度名称 最开始下拉框选择第一个
     let process = reactive(processList.value[0])
     // 当前页
@@ -153,11 +146,11 @@ export default {
     //新增菜单按钮 addTable
     //修改按钮 setMsg
     //删除按钮 delMsg
-    const { addTable, setMsg, delMsg } = changePage(addMsg, isSetMsg, escape)
+    const { addTable, setMsg, delMsg } = changePage(addMsg, isSetMsg, "user", escape)
     // 遮罩层按钮事件
     //提交表单 submitForm
     //取消遮罩层 cancel
-    const { submitForm, cancel } = diaPage(isSetMsg, process, addMsg)
+    const { submitForm, cancel } = diaPage(isSetMsg, "user", addMsg, process)
 
 
     return {
@@ -175,8 +168,10 @@ export default {
       dataList,
       /* 中文 */
       nameArr,
+      newName,
       /* 英文 */
       propArr,
+      newArr,
       /* 验证表单 */
       ruleMenu,
       /* 表单的内容 */
@@ -199,7 +194,7 @@ export default {
       handleSizeChange,
       /* 修改当前页数 */
       handleCurrentChange,
-      /* 修改当前页数 */
+      /* 新增按钮 */
       addTable,
       /* 修改按钮 */
       setMsg,

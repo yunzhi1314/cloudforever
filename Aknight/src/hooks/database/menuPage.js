@@ -43,7 +43,6 @@ export function dealTree() {
             })
         }
     }
-
     return reactive({ newData, companys })
 
 }

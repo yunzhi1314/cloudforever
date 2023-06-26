@@ -38,26 +38,20 @@
         @current-change="handleCurrentChange" />
     </div>
   </div>
+  <!-- 吐丝 -->
+  <messagePage v-if="controlObj.isTusi"></messagePage>
   <!-- 新增/修改菜单的遮罩层 -->
   <dialogPage>
     <div class="addMenu" @click.stop>
-      <section style="
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-					margin-bottom: 3.5vh;
-				">
+      <section style="display: flex;justify-content: space-between;align-items: center;margin-bottom: 3.5vh;">
         <span>{{ isSetMsg ? "修改菜单" : "新增菜单" }}</span>
         <el-icon color="#aaa" style="cursor: pointer" @click="controlObj.isDialog.isAddMenu = false">
           <Close />
         </el-icon>
       </section>
       <!-- 表单 -->
-      <el-form :model="addMsg" :rules="rules" ref="ruleMenu" style="
-      width: 45vw;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 2vw;">
+      <el-form :model="addMsg" :rules="rules" ref="ruleMenu"
+        style="width: 45vw;display: grid;grid-template-columns: 1fr 1fr;column-gap: 2vw;">
         <el-form-item :label="nameArr[1]" style="grid-column: span 2;">
           <el-select style="width:41vw;" v-model="addMsg[propArr[1]]" :placeholder="`请选择对应的${nameArr[1]}`">
             <el-option v-for="(item, index) in process" :key="index" :label="item" :value="item"></el-option>
@@ -305,7 +299,6 @@ export default {
 
           // 根据修改的开关来决定是递交修改请求还是新增内容的请求
           isSetMsg.value ? setMenu(url.database.user.setMenu, addMsg) : addMenu(url.database.user.addMenu, addMsg);
-
           // 将修改的开关关闭
           isSetMsg.value = false;
         } else {

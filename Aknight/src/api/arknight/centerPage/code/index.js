@@ -3,6 +3,8 @@ import { Request } from "@/hooks/request";
 import { reactive, toRef } from "vue";
 import store from "@/store";
 import router from "@/router";
+import { toest } from "@/hooks/toset";
+import controlObj from "@/hooks/controlObj";
 //获取图形验证码
 export function mathCode() {
     let dataList = reactive({
@@ -28,6 +30,7 @@ export function user(url, data, fn, isStore) {
     Request.postData(url, data).then((res) => {
         dataList.datas = toRef({ ...res.data });
         store.commit("changeMsg", res.data)
+        toest(controlObj)
         if (fn) {//代表存在调用的是子仓库函数
             //开启存储开关(登录注册需要)
             store.commit("changeStore", isStore)
@@ -46,10 +49,6 @@ export function user(url, data, fn, isStore) {
                     })
                 }
             }
-        } else {
-            //发送短信
-            //调用吐丝
-            store.commit("changeMsg", dataList.datas)
         }
     });
 

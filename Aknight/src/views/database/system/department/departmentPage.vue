@@ -182,12 +182,12 @@ export default {
     let isSetMsg = ref(false);
     /* 修改菜单 */
     function setTabMenu(item) {
-      console.log(item);
       isSetMsg.value = true;
       console.log(item);
       Reflect.ownKeys(addTab).forEach((key) => {
         Reflect.set(addTab, key, item[key]);
       });
+      console.log(addTab.time);
       controlObj.isDialog.isAddMenu = true;
     }
 

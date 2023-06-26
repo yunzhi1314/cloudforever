@@ -40,13 +40,13 @@
         align-items: center;
         margin-bottom: 3.5vh;">
         <span>{{ isSetMsg ? "修改菜单" : "新增菜单" }}</span>
-        <el-icon color="#666" style="cursor: pointer;" @click="controlObj.isDialog.isAddMenu = false">
+        <el-icon color="#666" style="cursor: pointer;" @click="cancel">
           <Close></Close>
         </el-icon>
       </section>
       <!-- 表单区 -->
       <el-form :model="addMsg" :rules="rules" ref="ruleMenu"
-        style="width: 45vw;display: grid;grid-template-columns: 1fr 1fr;column-gap: 2vw;">
+        style="width: 45vw;display: grid;grid-template-columns: 1fr 1fr;column-gap: 2vw;" status-icon>
         <el-form-item :label="nameArr[1]" style="grid-column: span 2;">
           <el-select style="width:41vw;" v-model="addMsg[propArr[1]]" :placeholder="`请选择对应的${nameArr[1]}`">
             <el-option v-for="(item, index) in companys" :key="index" :label="item" :value="item"></el-option>

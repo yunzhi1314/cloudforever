@@ -24,7 +24,6 @@ export default {
     onBeforeRouteLeave(() => {
       layoutRoutes()
     })
-    
     return {
       confirm,
     };

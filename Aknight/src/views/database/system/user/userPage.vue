@@ -110,6 +110,7 @@ export default {
     // 搜索内容展示
     let searchData = ref("");
     // 查询
+    //考虑到响应式问题,放在vue文件比较好
     function query() {
       // 开启搜索
       isSearch.value = true;

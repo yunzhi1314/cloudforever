@@ -125,8 +125,9 @@
 <script>
 import { ref, reactive, watch, provide, h } from "vue";
 import menuPage from "@/public/database/menu/menuPage.scss";
-import controlObj from "@/hooks/personalCenter/controlObj";
-import { addMenu, setMenu, delMenu } from "@/api/arknight/database/role";
+import dialogScss from "@/public/dialog/dialogPage.scss";
+import controlObj from "@/hooks/controlObj";
+import { addMenu, setMenu, delMenu } from "@/api/arknight/database/menu";
 // 导入弹框，删除时使用
 import { ElMessage, ElMessageBox } from "element-plus";
 import url from "@/api/url"
@@ -299,7 +300,7 @@ import url from "@/api/url"
 			await formEl.validate((valid, fields) => {
 				if (valid) {
 					controlObj.isDialog.isAddMenu = false;
-
+					console.log(addMsg)
 					// 根据修改的开关来决定是递交修改请求还是新增内容的请求
 					isSetMsg.value ? setMenu(url.database.dictionary.setMenu, addMsg) : addMenu(url.database.dictionary.addMenu, addMsg);
 

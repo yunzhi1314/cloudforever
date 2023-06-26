@@ -9,7 +9,7 @@ export function addMenu(data){
         datas:[]
     })
 
-    Request.post(url.database.menu.addMenu,data)
+    Request.post(url.database.role.addMenu,data)
     .then(res=>{
         dataList.datas = toRef({...res.data})
         console.log(res.data)
@@ -24,7 +24,7 @@ export function setMenu(data){
         datas:[]
     })
 
-    Request.put(url.database.menu.setMenu,data)
+    Request.put(url.database.role.setMenu,data)
     .then(res=>{
         dataList.datas = toRef({...res.data})
         console.log(res.data)
@@ -43,10 +43,6 @@ export function delMenu(data){
        params:{
         id:data 
        } 
-    })
-    .then(res =>{
-        dataList.datas = toRef({...res.data})
-        console.log(res.data)
     })
   
     return dataList

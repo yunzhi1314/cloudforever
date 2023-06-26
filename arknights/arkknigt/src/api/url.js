@@ -24,12 +24,13 @@ export default {
         },
         menu: {
             addMenu: "/database/menu/addMedical",
-            setMenu: "/database/menu/setMedical",
+            setMenu:"/database/menu/setMedical",
             delMenu: "/database/menu/delMedical"
         },
         role: {
             addMenu: "/database/role/addMedical",
-            delMenu: "/database/role/delMedical"
+            delMenu: "/database/role/delMedical",
+            setMenu:"/database/role/setMedical",
         },
         user: {
             queryMedicals: "database/home/expMedical"

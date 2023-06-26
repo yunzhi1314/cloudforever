@@ -1,6 +1,6 @@
 <template>
 	<div class="wirpper" style="padding: 0">
-		<!-- 添加查询按钮 -->
+		<!-- 查询按钮 -->
 		<el-row>
 			<el-col :span="7" style="padding: 1vh 0 0 1vh">
 				<el-row class="nav">
@@ -61,7 +61,7 @@
 				@current-change="handleCurrentChange" />
 		</div>
 	</div>
-	<!-- 新增菜单的遮罩层 -->
+	<!-- 新增/修改菜单的遮罩层 -->
 	<dialogPage>
 		<div class="dialogMenu" @click.stop>
 			<section style="display: flex; justify-content: space-between">
@@ -123,12 +123,13 @@
 </template>
 
 <script>
-	import { ref, reactive, watch, provide, h } from "vue";
-	import menuPage from "@/public/database/menu/menuPage.scss";
-	import dialogScss from "@/public/dialog/dialogPage.scss";
-	import controlObj from "@/hooks/personalCenter/controlObj";
-	import { addMenu, setMenu, delMenu } from "@/api/arknight/database/role";
-	import { ElMessage, ElMessageBox } from "element-plus";
+import { ref, reactive, watch, provide, h } from "vue";
+import menuPage from "@/public/database/menu/menuPage.scss";
+import controlObj from "@/hooks/personalCenter/controlObj";
+import { addMenu, setMenu, delMenu } from "@/api/arknight/database/role";
+// 导入弹框，删除时使用
+import { ElMessage, ElMessageBox } from "element-plus";
+import url from "@/api/url"
 
 	// 导入弹框，删除时使用
 	export default {
@@ -244,70 +245,71 @@
 				isSetMsg.value = false;
 			}
 
-			// 删除提示框
-			const delMsg = (item) => {
-				// 这个函数本质上返回的是promise函数
-				ElMessageBox({
-					// 提示框标题
-					title: "删除信息",
-					// 提示框渲染的信息，用h函数渲染
-					// h(HTMLCollaption:string,CSS:object,html内容:array | string):htmlTag
-					message: h("p", null, [h("span", null, "你确认删除这项信息吗？")]),
-					// 显示取消按钮
-					showCancelButton: true,
-					// 确认按钮的文本
-					confirmButtonText: "确认",
-					// 取消按钮的文本
-					cancelButtonText: "取消",
-					// 在关闭之前的钩子函数
-					// action是指用户的行为：用户点击了哪一个按钮
-					// instance 点击确认按钮后，提示框结束之前的加载动画
-					// done() 确认提示框的行为有无完成的标志
-					beforeClose: (action, instance, done) => {
-						if (action === "confirm") {
-							// 开启提示框确认按钮的加载动画
-							instance.confirmButtonLoading = true;
-							instance.confirmButtonText = "Loading...";
-							// 在结束提示框之前去进行请求
-							delMenu(item.id);
-							setTimeout(() => {
-								// 结束提示框的行为并关闭提示框
-								done();
-								setTimeout(() => {
-									// 结束提示框确认按钮的加载动画
-									instance.confirmButtonLoading = false;
-								}, 300);
-							}, 3000);
-						} else {
+		// 删除提示框
+		const delMsg = (item) => {
+			// 这个函数本质上返回的是promise函数
+			ElMessageBox({
+				// 提示框标题
+				title: "删除信息",
+				// 提示框渲染的信息，用h函数渲染
+				// h(HTMLCollaption:string,CSS:object,html内容:array | string):htmlTag
+				message: h("p", null, [h("span", null, "你确认删除这项信息吗？")]),
+				// 显示取消按钮
+				showCancelButton: true,
+				// 确认按钮的文本
+				confirmButtonText: "确认",
+				// 取消按钮的文本
+				cancelButtonText: "取消",
+				// 在关闭之前的钩子函数
+				// action是指用户的行为：用户点击了哪一个按钮
+				// instance 点击确认按钮后，提示框结束之前的加载动画
+				// done() 确认提示框的行为有无完成的标志
+				beforeClose: (action, instance, done) => {
+					if (action === "confirm") {
+						// 开启提示框确认按钮的加载动画
+						instance.confirmButtonLoading = true;
+						instance.confirmButtonText = "Loading...";
+						// 在结束提示框之前去进行请求
+						delMenu(url.database.dictionary.delMenu, item.id);
+						setTimeout(() => {
+							// 结束提示框的行为并关闭提示框
 							done();
-						}
-					}
-				})
-					.then(() => {
-						ElMessage({
-							type: "info",
-							message: `删除成功`
-						});
-					})
-					.catch((err) => console.log(err));
-			};
-
-			// 提交表单
-			const submitForm = async (formEl) => {
-				if (!formEl) return;
-				await formEl.validate((valid, fields) => {
-					if (valid) {
-						controlObj.isDialog.isAddMenu = false;
-						// 根据修改的开关来决定是递交修改请求还是新增内容的请求
-						console.log(addMsg)
-						isSetMsg.value ? setMenu(addMsg) : addMenu(addMsg);
-						// 将修改的开关关闭
-						isSetMsg.value = false;
+							setTimeout(() => {
+								// 结束提示框确认按钮的加载动画
+								instance.confirmButtonLoading = false;
+							}, 300);
+						}, 3000);
 					} else {
-						console.log("error submit!", fields);
+						done();
 					}
-				});
-			};
+				}
+			})
+				.then(() => {
+					ElMessage({
+						type: "info",
+						message: `删除成功`
+					});
+				})
+				.catch((err) => console.log(err));
+		};
+
+		// 提交表单
+		const submitForm = async (formEl) => {
+			if (!formEl) return;
+			await formEl.validate((valid, fields) => {
+				if (valid) {
+					controlObj.isDialog.isAddMenu = false;
+
+					// 根据修改的开关来决定是递交修改请求还是新增内容的请求
+					isSetMsg.value ? setMenu(url.database.dictionary.setMenu, addMsg) : addMenu(url.database.dictionary.addMenu, addMsg);
+
+					// 将修改的开关关闭
+					isSetMsg.value = false;
+				} else {
+					console.log("error submit!", fields);
+				}
+			});
+		};
 
 			// 分页
 			let currentPage = ref(1);

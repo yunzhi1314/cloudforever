@@ -1,7 +1,6 @@
 import { mathCode } from "@/api/arknight/centerPage/code";
 import { reactive, ref } from "vue";
-import controlObj from "@/hooks/personalCenter/controlObj";
-import { toest } from "../toset";
+import controlObj from "@/hooks/controlObj";
 import store from "@/store/index";
 import { user } from "@/api/arknight/centerPage/code";
 import url from "@/api/url";
@@ -64,8 +63,6 @@ export function setCountDown(name, arr) {
 		timerSeparate(timeName);
 		//关闭遮罩层
 		controlObj.isDialog[name] = false;
-		//打开吐丝
-		toest(controlObj);
 	};
 	//定时器分离,根据定时器名字实现定时器分离
 	const timerSeparate = (timeName) => {

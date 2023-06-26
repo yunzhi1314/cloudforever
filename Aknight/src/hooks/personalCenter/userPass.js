@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import controlObj from "./controlObj";
+import controlObj from "../controlObj";
 import store from "@/store";
 import { toest } from "../toset";
 import { user } from "@/api/arknight/centerPage/code";
@@ -67,7 +67,6 @@ export function userPass(arr, urlName, methodName, fn) {
 		} else {
 			// 未勾选
 			isPass = false;
-			store.commit("changeStore", "isMsg")
 			store.commit("changeMsg", {
 				msg: "未同意《鹰角网络用户注册协议》",
 				status: 1
@@ -90,8 +89,6 @@ export function userPass(arr, urlName, methodName, fn) {
 		let method = fn([methodName])[methodName]
 
 		user(url.centerPage[urlName], target, method, isstore);
-		// 调用吐丝
-		toest(controlObj);
 
 	}
 }

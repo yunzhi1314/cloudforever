@@ -1,51 +1,77 @@
 import { Request } from "@/hooks/request"
-import { reactive,toRef } from "vue"
-import url from "@/api/url"
-
+import { reactive, toRef } from "vue"
+import store from "@/store"
+import { toest } from "@/hooks/toset";
+import controlObj from "@/hooks/controlObj";
 // 新增表单内容
-export function addMenu(data){
+export function addMenu(url, data) {
     let dataList = reactive({
-        datas:[]
+        datas: [],
+        loading: false
     })
 
-    Request.postData(url.database.menu.addMenu,data)
-    .then(res =>{
-         dataList.datas = toRef({...res.data})
-    })
+    dataList.loading = true
 
-    return dataList
+    Request.postData(url, data)
+        .then(res => {
+            dataList.datas = toRef({ ...res.data })
+            store.commit("changeMsg", res.data)
+            toest(controlObj)
+        })
+        .catch(error => {
+            console.error("添加时发生错误：", error)
+        })
+        .finally(() => {
+            dataList.loading = false
+        })
 }
 
 // 修改表单内容
-export function setMenu(data){
+export function setMenu(url, data) {
     let dataList = reactive({
-        datas:[]
+        datas: [],
+        loading: false
     })
 
-    Request.putData(url.database.menu.setMenu,data)
-    .then(res =>{
-         dataList.datas = toRef({...res.data})
-         console.log(res.data)
-    })
+    dataList.loading = true
 
+    Request.putData(url, data)
+        .then(res => {
+            dataList.datas = toRef({ ...res.data })
+            store.commit("changeMsg", res.data)
+            toest(controlObj)
+        })
+        .catch(error => {
+            console.error("修改时发生错误：", error)
+        })
+        .finally(() => {
+            dataList.loading = false
+        })
     return dataList
 }
 
 // 删除表单内容
-export function delMenu(data){
+export function delMenu(url, data) {
     let dataList = reactive({
-        datas:[]
+        datas: [],
+        loading: false
     })
 
-    Request.delData(url.database.menu.delMenu,{
-        params:{
-            id:data
+    dataList.loading = true
+
+    Request.delData(url, {
+        params: {
+            id: data
         }
     })
-    .then(res =>{
-         dataList.datas = toRef({...res.data})
-         console.log(res.data)
-    })
-
+        .then(res => {
+            dataList.datas = toRef({ ...res.data })
+        })
+        .catch(error => {
+            console.error("删除时发生错误：", error)
+        })
+        .finally(() => {
+            dataList.loading = false
+        })
     return dataList
 }

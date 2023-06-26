@@ -9,6 +9,7 @@ export default ({
             basicMedical: null,///各公司所持有的靶向药数据
             naweiCompany: null,//纳微公司的营销利润与增长率
             naweiCompany2: null,
+            expMedical: null,//研发药物信息
         }
     },
     mutations: {
@@ -28,6 +29,9 @@ export default ({
         },
         changeNaweiCompany2(state, data) {
             state.naweiCompany2 = data
+        },
+        changeExpMedical(state, data) {
+            state.expMedical = data
         }
     }
 })

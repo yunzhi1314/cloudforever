@@ -82,7 +82,7 @@ import dialogCss from "@/public/dialog/dialogPage.scss";
 import { centerImg } from "@/api/arknight/centerPage/center";
 import { toRefs, ref, provide } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import controlObj from "@/hooks/personalCenter/controlObj";
+import controlObj from "@/hooks/controlObj";
 export default {
 	name: "centerPage",
 	setup() {

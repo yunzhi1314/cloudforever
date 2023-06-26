@@ -23,10 +23,6 @@ export default createStore({
 		createPersistedState({
 			storage: window.sessionStorage,
 			reducer(state) {
-				// let msgObj = {
-				// 	msg: state.msg,
-				// };
-				// return isStore(state, "msg", "isMsg", msgObj, sessionStorage);
 				return { msg: state.msg }
 			},
 			key: "msg",
@@ -111,7 +107,8 @@ export default createStore({
 					expMedicals: state.dataBase.expMedicals,
 					basicMedical: state.dataBase.basicMedical,
 					naweiCompany: state.dataBase.naweiCompany,
-					naweiCompany2: state.dataBase.naweiCompany2
+					naweiCompany2: state.dataBase.naweiCompany2,
+					expMedical: state.dataBase.expMedical
 				};
 				return isStore(state, "medical", "isMedical", medicalObj, sessionStorage);
 			},
@@ -127,7 +124,6 @@ export default createStore({
 			// vuex,控制存储条件集合
 			isRegister: false, //注册条件，
 			isLogin: false,//登录条件
-			isMsg: false,//吐丝
 			isMenu: false,//buffer页面触发
 			isBaseMsg: false,//baseMsg页面触发
 			isContext: false,//exChangeGift页面触发

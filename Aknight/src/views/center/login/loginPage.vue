@@ -93,7 +93,7 @@
 
 <script>
 import { provide, reactive } from "vue";
-import controlObj from "@/hooks/personalCenter/controlObj";
+import controlObj from "@/hooks/controlObj";
 import { observer } from "@/hooks/personalCenter/watcher";
 import { loginMethod } from "@/hooks/personalCenter/loginMethod";
 import { changeBoard } from "@/hooks/personalCenter/changeBoard";
@@ -173,11 +173,11 @@ export default {
 		// 登录和注册
 		function registerOrLogin() {
 			//判断是注册还是登录
-			controlObj.isChange ? 
-			//注册
-			userPass(loginArr, "register", "changeUserMsg", mapMutations) :
-			//登录=>同时要区分是密码登录/短信登录
-			userPass(loginArr,(controlObj.isCode ? "codeLogin" : "login"), "changeToken", mapMutations)
+			controlObj.isChange ?
+				//注册
+				userPass(loginArr, "register", "changeUserMsg", mapMutations) :
+				//登录=>同时要区分是密码登录/短信登录
+				userPass(loginArr, (controlObj.isCode ? "codeLogin" : "login"), "changeToken", mapMutations)
 		}
 
 		return {

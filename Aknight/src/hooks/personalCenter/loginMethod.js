@@ -1,4 +1,4 @@
-import controlObj from "./controlObj"
+import controlObj from "../controlObj"
 import { observer } from "./watcher"
 //切换登录方式
 export const loginMethod = (arr, addArr) => {

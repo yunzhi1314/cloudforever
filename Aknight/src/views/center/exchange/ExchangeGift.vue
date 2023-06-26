@@ -40,7 +40,7 @@ import { ref, reactive, toRefs, onUpdated } from "vue";
 import exchangeGiftScss from "@/public/personalCenter/exchange/exchangeGift.scss";
 import { getRedemptionCode, getGift } from "@/api/arknight/centerPage/exchangeGift";
 import { toest } from "@/hooks/toset";
-import controlObj from "@/hooks/personalCenter/controlObj";
+import controlObj from "@/hooks/controlObj";
 export default {
 	name: "ExchangeGift",
 	setup() {

@@ -36,7 +36,7 @@ import baseCss from '@/public/personalCenter/baseMsg/baseMsg.scss'
 import { reactive } from 'vue'
 import { observer } from "@/hooks/personalCenter/watcher";
 import { getCode, setMsg } from '@/api/arknight/centerPage/resetPsw';
-import controlObj from "@/hooks/personalCenter/controlObj";
+import controlObj from "@/hooks/controlObj";
 import { toest } from "@/hooks/toset";
 
 export default {

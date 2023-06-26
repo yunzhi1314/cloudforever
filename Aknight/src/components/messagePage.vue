@@ -2,27 +2,33 @@
 <template>
     <div>
         <section class="tusi" :style='{
-            backgroundColor: status == 1 ? "#FE1610" : "#0CB751"
+            backgroundColor: tusi.status == 1 ? "#FE1610" : "#0CB751"
         }'>
-            {{ status == 1 ? msg : message }}
+            {{ tusi.status == 1 ? tusi.msg : tusi.message }}
         </section>
 
     </div>
 </template>
 
 <script>
-import controlObj from '@/hooks/personalCenter/controlObj'
-import { reactive } from 'vue'
+import controlObj from '@/hooks/controlObj'
+import { reactive, watch } from 'vue'
 export default {
     name: "messagePage",
     setup() {
-        //获取存储的msg
-        let {msg} = reactive(JSON.parse(sessionStorage.getItem("msg")))
+        let tusi = reactive({});
+        const storedMsg = JSON.parse(sessionStorage.getItem('msg')).msg;
+        // 监听 controlObj.isTusi 的变化
+        watch(() => controlObj.isTusi, (newVal) => {
+            if (newVal) {
+                Object.assign(tusi, storedMsg || {});
+                setTimeout(() => {
+                    controlObj.isTusi = false;
+                }, 2000);
+            }
+        }, { immediate: true })
         return {
-            //按钮集合
-            controlObj,
-            //扩展msg
-            ...msg
+            tusi
         }
     }
 }

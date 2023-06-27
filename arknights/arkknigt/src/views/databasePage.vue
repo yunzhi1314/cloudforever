@@ -131,8 +131,7 @@ export default {
             title.value = route.meta.title;
 
         })
-
-
+        
         //点击菜单跳转路由
         function toPage(i, j) {
             route.meta.isHide = false // 面包屑的显示与隐藏

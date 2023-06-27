@@ -8,7 +8,7 @@ let controlObj = reactive({
     isDialog: {
         isMathCode: false,//点击获取验证码控制遮罩层的显示
         isAddMenu:false, //控制新增菜单的遮罩层  *yzy*
-     
+        isRoleAddMenu:false, //控制角色新增菜单的遮罩层  *yzy*
     },
     isCode: false,
     isRegister: false, //是否是注册

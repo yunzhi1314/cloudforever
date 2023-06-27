@@ -43,7 +43,7 @@
 <div class="addmenu" @click.stop>
     <section class="menusection">
         <span> {{ isSetMsg? "修改菜单":"新增菜单" }}</span>
-        <el-icon color="#aaa"><Close /></el-icon>
+        <el-icon color="#aaa" @click="cancel"><Close /></el-icon>
     </section>
     <!--  表单  -->
     <el-form  :model="addMsg" :rules="rules" ref="ruleMenu">
@@ -108,7 +108,6 @@ import homePageCss from "@/public/database/homePage.scss"
 import {dealTree} from "@/hook/database/menuPage"
 import {addMenu,setMenu,delMenu} from "@/api/user/index"
 import { ElMessage, ElMessageBox } from "element-plus";
-// import {delMenu} from "@/api/database/menu/index"
 
 
 export default {

@@ -1,5 +1,5 @@
 <template>
-    <div class="plans" style="background-color: red;">
+    <div class="plans">
     <!-- 查询新增按纽栏 -->
   <el-row>
     <el-col :span="7">
@@ -16,9 +16,9 @@
 
     </el-col>
   </el-row>
-  <!-- 通过开关控制 展示的数据是搜索内容还是初始内容  -->
+  <!-- 通过开关控制 展示的数据是搜索内容还是初始内容-->
   <el-table 
-  :data="dataLister" 
+  :data="isSearch ?  searchdata:dataLister" 
   style="margin-top: 3vh" height="70vh" row-key="id">
     <el-table-column prop="medical_name" label="药物名称" width="140" />
     <el-table-column prop="company" label="所属公司" width="140" />
@@ -46,7 +46,7 @@
 <div class="addmenu" @click.stop>
     <section class="menusection">
         <span> 新增菜单</span>
-        <el-icon color="#aaa"><Close /></el-icon>
+        <el-icon color="#aaa" @click="cancel"><Close/></el-icon>
     </section>
     <!--  表单  -->
     <el-form  :model="addMsg" :rules="rules" ref="ruleMenu">
@@ -157,7 +157,7 @@ export default {
         let searchdata = ref("")
 
     
-  // 查询
+ 
 function query(){
 // 是否展开搜索
 isSearch.value = true

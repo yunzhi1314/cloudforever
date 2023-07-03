@@ -120,6 +120,9 @@ export default createStore({
     // 改变存储函数的开关为true
     changeStore(state, name) {
       Reflect.set(state.control, name, true)
+      setTimeout(()=>{
+        Reflect.set(state.control,name,false)
+      },1000)
     },
     // 储存提示框信息
     changeMsg(state, message) {

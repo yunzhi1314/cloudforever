@@ -86,15 +86,13 @@
                         </el-menu-item>
                         <el-sub-menu index="3">
                             <template #title>
-                                <img src="https://p8.itc.cn/q_70/images03/20201209/bd6dcb25dfc7470681d120b06c5d6bfd.jpeg"
-                                    style="width: 2vw;border-radius: 10px;">
+                                <img  style="width: 2vw;border-radius: 10px;">
                                 <!-- <span>{{ baseMsg[1].inputs[0].inputItem }}</span> -->
                             </template>
                             <!-- <el-menu-item index="3-1"></el-menu-item>
-            <el-menu-item index="3-2"></el-menu-item>
-            <el-menu-item index="3-3"></el-menu-item> -->
+                            <el-menu-item index="3-2"></el-menu-item>
+                            <el-menu-item index="3-3"></el-menu-item> -->
                         </el-sub-menu>
-
                     </el-menu>
                     <el-tabs v-model="title" @tab-click="toTab" closable class="demo-tabs" type="card"
                         @tab-remove="removeTab">
@@ -115,7 +113,6 @@
 import { reactive, ref, toRefs, onUpdated } from "vue"
 import { useRoute, useRouter } from "vue-router"
 
-
 export default {
     name: "databasePage",
     setup() {
@@ -125,14 +122,9 @@ export default {
         // 面包屑展示
         let tabs = ref([]);
         let metaName = ref("");
-        console.log("metaName",metaName)
+
         // 标签页绑定值
         let title = ref(route.meta.title);
-        tabs.value.push({
-            title: route.meta.title,
-            name: route.meta.title,
-            routeName: route.name
-        })
 
         onUpdated(() => {
             // 异步处理播放完整动画 避免更新后动画直接消失
@@ -143,10 +135,7 @@ export default {
             // 识别哪一级菜单 单独拿出 原先、database/home/userId
             // 处理完之后单独拿出中间的 例如home
             let newStr = route.fullPath.slice(10);
-            console.log(route.fullPath);
-            console.log("newStr",newStr);
             let newStr2 = newStr.slice(0, newStr.indexOf("/"));
-            console.log("newStr2",newStr2);
             switch (newStr2) {
                 case "system":
                     metaName.value = "系统管理";
@@ -172,7 +161,6 @@ export default {
             // 高亮当前页标题
             title.value = route.meta.title
         });
-
 
 
         // 菜单栏是否折叠

@@ -57,7 +57,7 @@
 
                         </div>
                         <el-breadcrumb separator="/">
-                            <el-breadcrumb-item :to="{ path: '/database/home' }" closable="false">首页</el-breadcrumb-item>
+                            <el-breadcrumb-item :to="{ path: '/home' }" closable="false">首页</el-breadcrumb-item>
                             <el-breadcrumb-item v-for="(item, index) in breadcrumb" :key="index">{{ item
                             }}</el-breadcrumb-item>
                         </el-breadcrumb>

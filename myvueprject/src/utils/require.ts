@@ -19,7 +19,7 @@ export class Request{
     protected delete(url:string){
        return req.delete(url)
     }
-}
+} 
 
 interface DataList {
     datas: any
@@ -52,7 +52,7 @@ export class Public extends Request{
     }
 }
 
-// 
+
 export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:string){
    let dataList = reactive<DataList>({
     datas:"",

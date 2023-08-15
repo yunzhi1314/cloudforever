@@ -1,9 +1,15 @@
 import { createRouter, createWebHistory,RouteRecordRaw } from "vue-router";
 
-const routes:Array<RouteRecordRaw> = [];
+const routes:Array<RouteRecordRaw> = [
+  {
+    path:'/',
+    name:'database',
+    component:()=>import("@/Projects/database/home.vue")
+  }
+];
 
 const router = createRouter({
-  history: createWebHistory('<对应路径>'),
+  history: createWebHistory("/database/"),
   routes,
 });
 

@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+console.log(1221);
 
 </script>
 

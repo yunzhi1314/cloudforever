@@ -15,48 +15,48 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       //首页内容
       {
-        path: '/index',
+        path: 'index',
         name: 'index',
         component: () => import('@/Projects/geshin/index/index.vue')
       },
       //新闻
       {
-        path: '/news',
+        path: 'news',
         name: 'news',
         component: () => import('@/Projects/geshin/news/index.vue')
       },
       //角色
       {
-        path: '/role',
+        path: 'role',
         name: 'role',
         component: () => import('@/Projects/geshin/role/index.vue')
       },
       //世界
       {
-        path: '/world',
+        path: 'world',
         name: 'world',
         component: () => import('@/Projects/geshin/world/index.vue')
       },
       //漫画
       {
-        path: '/comic',
+        path: 'comic',
         name: 'comic',
         component: () => import('@/Projects/geshin/comic/index.vue')
       },
-      //社区
-      {
-        path: '/spots',
-        name: 'spots',
-        component: () => import('@/Projects/geshin/spots/index.vue')
-      },
       //赛事
       {
-        path: '/compotation',
+        path: 'compotation',
         name: 'compotation',
         component: () => import('@/Projects/geshin/compotation/index.vue')
       }
     ]
-  }
+  },
+        //社区
+    {
+          path: '/spots',
+          name: 'spots',
+          component: () => import('@/Projects/geshin/spots/index.vue')
+      },
 ]
 
 const router = createRouter({

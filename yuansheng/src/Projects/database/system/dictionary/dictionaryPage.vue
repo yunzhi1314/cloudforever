@@ -1,15 +1,13 @@
 <template>
-    <div style="padding-left: 10px;">
-        111
+    <div>
+
     </div>
 </template>
 
 <script setup lang="ts">
 
-
-
-
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+
 </style>

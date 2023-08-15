@@ -1,7 +1,7 @@
 
     <template>
         <div>
-          <h1>index</h1>
+          <h1>新闻界面</h1>
         </div>
     </template>
 

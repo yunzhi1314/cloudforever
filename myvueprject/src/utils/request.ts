@@ -8,6 +8,8 @@ const service = axios.create({
     timeout: 10000
 })
 
+
+
 // 配置请求拦截器
 // 此处config 即为 请求体
 service.interceptors.request.use(

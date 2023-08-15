@@ -6,6 +6,7 @@ import axios, {
   import qs from "qs";
   import router from "@/router";
   
+  
   const service = axios.create({
     baseURL: "http://8.134.179.237:8085",
     timeout: 10000,

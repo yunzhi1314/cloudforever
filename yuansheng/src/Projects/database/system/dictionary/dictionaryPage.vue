@@ -12,7 +12,7 @@
             </el-tol>
         </el-row>
             <!--中间信息内容-->
-            <el-table :data="tableData" height="100%" style="width: 100%" class="body">
+            <el-table :data="tableData2" height="100%" style="width: 100%" class="body">
                 <el-table-column prop="date" label="税前利润" width="210" />
                 <el-table-column prop="name" label="息税前利润" width="190" />
                 <el-table-column prop="address" label="企业估值" width="180" />
@@ -30,10 +30,7 @@
             @current-change="handleCurrentChange"
             v-model:current-page="currentPage4"
             v-model:page-size="pageSize4"
-            :page-sizes="[3,5,8]"
-            :small="small"
-            :disabled="disabled"
-            :background="background"
+            :page-sizes="[3,2]"
             layout="total, sizes, prev, pager, next, jumper"
             :total="8"
             />
@@ -43,39 +40,10 @@
 <script setup lang="ts">
 import { ref,reactive } from 'vue'
 import type { Ref } from 'vue';
-import { useRouter} from 'vue-router'
 
-const router = useRouter()
+const input = ref('')
 
-const currentPage4 = ref(1)
-const pageSize4 : Ref<number> = ref(3)
-const small = ref(false)
-const background = ref(false)
-const disabled = ref(false)
-const state = reactive({
-  pape: 1,
-  limit: 3,
-})
-
-
-const handleSizeChange = (val: number) => {
-  console.log(`${val} items per page`)
-  state.pape = val
-}
-const handleCurrentChange = (val: number) => {
-  console.log(`current page: ${val}`)
-}
-
-interface TitleNav{
-    date:string,
-    name:string,
-    address:string,
-    up:string,
-    dowm:string,
-    momny:string
-  }
-
-let tableData:Array<TitleNav>=reactive([
+const tableData=[
   {
     date: '47,053.11',
     name: '44,100.00',
@@ -140,10 +108,38 @@ let tableData:Array<TitleNav>=reactive([
     dowm:'',
     momny:'1,331.71',
   },
-])
+]
 
+let arr2 = Reflect.ownKeys(tableData[0]) as Array<string>
+console.log(arr2)
+let arr = [
+  '税前利润',
+  '息税前利润',
+  '企业估值',
+  '上半年增长',
+  '下半年增长',
+  '经营利润',
+]
 
+// 下方分页
+const currentPage4 = ref(1)
+const pageSize4: Ref<number> = ref(3)
 
+const handleSizeChange = () => {
+  fun()
+}
+const handleCurrentChange = () => {
+  fun()
+}
+// 切换页面
+let tableData2: any[] = reactive([])
+function fun() {
+  tableData2 = tableData.slice(
+    (currentPage4.value - 1) * pageSize4.value,
+    pageSize4.value * currentPage4.value
+  )
+}
+fun()
 </script>
 
 <style scoped>

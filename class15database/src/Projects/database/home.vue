@@ -32,7 +32,7 @@
                         <el-icon>
                             <location />
                         </el-icon>
-                        <span>系统设置</span>
+                        <span>权限管理</span>
                     </template>
                     <el-menu-item index="3-1">菜单管理</el-menu-item>
                     <el-menu-item index="3-2">角色管理</el-menu-item>
@@ -45,7 +45,7 @@
                         <el-icon>
                             <location />
                         </el-icon>
-                        <span>系统设置</span>
+                        <span>菜单嵌套</span>
                     </template>
                     <el-menu-item index="4-1">菜单管理</el-menu-item>
                     <el-menu-item index="4-2">角色管理</el-menu-item>
@@ -58,13 +58,26 @@
                         <el-icon>
                             <location />
                         </el-icon>
-                        <span>系统设置</span>
+                        <span>功能</span>
                     </template>
                     <el-menu-item index="5-1">菜单管理</el-menu-item>
                     <el-menu-item index="5-2">角色管理</el-menu-item>
                     <el-menu-item index="5-3">item three</el-menu-item>
                     <el-menu-item index="5-4">item three</el-menu-item>
                     <el-menu-item index="5-5">item three</el-menu-item>
+                </el-sub-menu>
+                <el-sub-menu index="6" disabled>
+                    <template #title>
+                        <el-icon>
+                            <location />
+                        </el-icon>
+                        <span>页面</span>
+                    </template>
+                    <el-menu-item index="6-1">菜单管理</el-menu-item>
+                    <el-menu-item index="6-2">角色管理</el-menu-item>
+                    <el-menu-item index="6-3">item three</el-menu-item>
+                    <el-menu-item index="6-4">item three</el-menu-item>
+                    <el-menu-item index="6-5">item three</el-menu-item>
                 </el-sub-menu>
 <!--<div v-for="(item,index) in metaArr" :key="index">
         第一层一级菜单 
@@ -202,10 +215,12 @@ import req from "@/utils/request"
 import { getDataObj } from '@/utils/route'
 
 // // 暂时性请求数据
-// getDataObj('/database/layout/menu','databaseRoutes')
+getDataObj('/database/layout/menu','databaseRoutes')
 
 // // 从sessionStorage里提取出数据
-// let routes = JSON.parse(sessionStorage.getItem('databaseRoutes') as string).menu
+let routes = JSON.parse(sessionStorage.getItem('databaseRoutes') as string).menu
+console.log(routes);
+
 
 // // 路由的遍历展开
 // function dealDeepRoutes(arr: any): any[] {
@@ -244,6 +259,17 @@ import { getDataObj } from '@/utils/route'
 // // 渲染的数组
 // let metaArr = reactive<any[]>(findMeta(routes))
 
+
+req.post('/api/geshin/user/login',{
+    telephone:"19153195422",
+    password:"12345678"
+}).then((res:any) => {
+    if(res.data.token){
+        localStorage.setItem('token',res.data.token)
+        localStorage.setItem('userId',res.data.userId)
+        localStorage.setItem('telephone',res.data.telephone)
+    }
+})
 
 
 let metaArr = [

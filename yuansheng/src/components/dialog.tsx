@@ -43,7 +43,7 @@ export default function DialogFun(arr: fun) {
                                     prop="input85105"
                                     style="width=`100px`"
                                 >
-                                    <el-input type="text" v-model={fromData[arr.arrpase[index]]} clearable></el-input>
+                                    <el-input type="text" v-model={fromData[arr.arrpase[index]]} ></el-input>
                                 </el-form-item>
 
                             )

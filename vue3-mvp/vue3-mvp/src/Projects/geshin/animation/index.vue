@@ -16,6 +16,9 @@
         height: 100vh;
         background: rgba(0,0,0,.4);
         text-align: center;
+        position: fixed;
+        top: 0;
+        z-index: 999;
         
     }
 

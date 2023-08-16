@@ -1,5 +1,6 @@
 
 import axios,{InternalAxiosRequestConfig,AxiosRequestHeaders,AxiosResponse} from "axios";
+import qs from "qs"
 import router from "@/router";
 
 // 响应时间
@@ -14,6 +15,7 @@ const service = axios.create({
 service.interceptors.request.use(
     (config: InternalAxiosRequestConfig<any>) =>{
     // 请求头
+    config.data = qs.parse(config.data)
       config.headers = {
         "Content-Type":"application/json;chatset=utf-8"
       } as AxiosRequestHeaders

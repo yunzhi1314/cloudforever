@@ -25,8 +25,11 @@
 
     <script setup lang="ts">
 import { reactive } from "vue";
+// import {Public} from "@/utils/require"
+//  let  da = new Public
+//  da.getDataObj("/api/geshin/public","get",{})
 
-    
+
     const textcontent = reactive([
       {
         licontent:"最新"

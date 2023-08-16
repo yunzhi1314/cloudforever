@@ -9,10 +9,8 @@
         :icon="Search"
         >查询</el-button
       >
-      <el-button type="success" style="width: 7vw; height: 4vh"
-        ><el-icon>
-          <FolderAdd /> </el-icon
-        >新增菜单</el-button
+      <el-button type="success" style="width: 7vw; height: 4vh" @click="conObj.conDialog=true"
+        ><el-icon> <FolderAdd /> </el-icon>新增菜单</el-button
       >
     </div>
     <!-- 表格 -->
@@ -70,8 +68,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { Ref } from 'vue'
-import  DialogFun  from "@/components/dialog"
-
+import DialogFun from '@/components/dialog'
+import { conObj } from '@/utils/controls'
 import {
   Check,
   Delete,

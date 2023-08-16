@@ -56,6 +56,7 @@ const handleCurrentChange = (val: number) => {
   console.log(`current page: ${val}`)
 }
 
+const a=1;
 const tableData = [
   {
     date: '47,053.11',

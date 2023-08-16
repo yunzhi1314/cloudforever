@@ -63,18 +63,20 @@ function switchCVLanguage() {
 .main {
     width: 100vw;
     height: 100vh;
-    position: fixed;
-    top: 0;
+    // position: fixed;
+    // top: 0;
+    position: relative;
+
     .background {
-        width: 100%;
+        width: 100vw;
         height: 100vh;
         background: url(../../../assets/one.png);
         background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-size: 100vw 100vh;
 
         .left-white {
             width: 2px;
-            height: 100%;
+            height: 100vh;
             position: absolute;
             left: 38px;
             background-color: #C0C0C0;

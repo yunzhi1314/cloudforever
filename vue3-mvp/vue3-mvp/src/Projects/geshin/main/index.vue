@@ -1,5 +1,5 @@
 <template>
-<!-- 首页页面 -->
+    <!-- 首页页面 -->
     <div>
         <!-- 动画页面导入 -->
         <animationVue v-show="controlObj.isAnimationShow"></animationVue>
@@ -12,10 +12,10 @@
             </section>
             <!-- 中间 -->
             <div class="middle">
-                <span class="border" :style="{transform: `translate(${transform1}vw)`}"></span>
+                <span class="border" :style="{ transform: `translate(${transform1}vw)` }"></span>
                 <ul class="list">
                     <li v-for="(item) in list" :key="item.id" @click="toTitle(item.id)">
-                        <section :class="item.status ? 'new_section' : ''" >{{ item.title }}</section>
+                        <section :class="item.status ? 'new_section' : ''">{{ item.title }}</section>
                     </li>
                 </ul>
                 <span class="border"></span>
@@ -32,7 +32,7 @@
 
         <!-- 脚步区域 -->
         <footer class="footer">
-            <section class="share">  微博图标     微信图标    QQ图标   分享图标   </section>
+            <section class="share"> 微博图标 微信图标 QQ图标 分享图标 </section>
             <div class="announcement">
                 <section class="left">
                     <img src="" alt="">米哈游logo
@@ -61,246 +61,267 @@
 </template>
 
 <script setup lang="ts">
-    import animationVue from '../animation/index.vue'
-    import mainLoginMaskVue from '../masks/mainLoginMask.vue'
-    import controlObj from '@/utils/controls'
-    import {watch, reactive, ref} from 'vue'
-    import type {Ref} from 'vue'
-    import {useRouter} from 'vue-router'
+import animationVue from '../animation/index.vue'
+import mainLoginMaskVue from '../masks/mainLoginMask.vue'
+import controlObj from '@/utils/controls'
+import { watch, reactive, ref } from 'vue'
+import type { Ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 
-    let transform1:Ref<number> = ref(0)
-    let router = useRouter()
+let transform1: Ref<number> = ref(0)
+let router = useRouter()
 
-    // 动画页面消失
-    watch(
-        controlObj,
-        (newVal) => {
-            // 动画播放需要 0.5s，需要播放后再消失
-            setTimeout(() => {
-                newVal.isPlay ? 
-                newVal.isAnimationShow = false:
+// 动画页面消失
+watch(
+    controlObj,
+    (newVal) => {
+        // 动画播放需要 0.5s，需要播放后再消失
+        setTimeout(() => {
+            newVal.isPlay ?
+                newVal.isAnimationShow = false :
                 newVal.isAnimationShow = true
-            },500)
-        }
-    )
-
-
-
-    // 表单接口
-    interface data{
-        id:number
-        title:string
-        status:boolean
-        name:string
+        }, 500)
     }
-    
-    // 表单数据
-    const list:Array<data> = reactive([
-        {
-            id:0,
-            title:'首页',
-            status:true,
-            name:'index'
-        },
-        {
-            id:1,
-            title:'新闻',
-            status:false,
-            name:'news'
-        },
-        {
-            id:2,
-            title:'角色',
-            status:false,
-            name:'roles'
-        },
-        {
-            id:3,
-            title:'世界',
-            status:false,
-            name:'world'
-        },
-        {
-            id:4,
-            title:'漫画',
-            status:false,
-            name:'comic'
-        },
-        {
-            id:5,
-            title:'社区',
-            status:false,
-            name:'community'
-        },
-        {
-            id:6,
-            title:'赛事',
-            status:false,
-            name:'match'
-        },
-
-    ])
+)
 
 
 
-    // 导航栏点击效果与跳转
-    let toTitle = (id:string) => {
-        // 点击时所有高光关闭，并且方块进行偏移
-        list.forEach( item => {
-            item.status = false;
-            transform1.value = 7 * +id
-        })
+// 表单接口
+interface data {
+    id: number
+    title: string
+    status: boolean
+    name: string
+}
 
-        // 点击获得高光
-        list[id].status = true
+// 表单数据
+const list: Array<data> = reactive([
+    {
+        id: 0,
+        title: '首页',
+        status: true,
+        name: 'index'
+    },
+    {
+        id: 1,
+        title: '新闻',
+        status: false,
+        name: 'news'
+    },
+    {
+        id: 2,
+        title: '角色',
+        status: false,
+        name: 'roles'
+    },
+    {
+        id: 3,
+        title: '世界',
+        status: false,
+        name: 'world'
+    },
+    {
+        id: 4,
+        title: '漫画',
+        status: false,
+        name: 'comic'
+    },
+    {
+        id: 5,
+        title: '社区',
+        status: false,
+        name: 'community'
+    },
+    {
+        id: 6,
+        title: '赛事',
+        status: false,
+        name: 'match'
+    },
 
-        // 路由跳转
-        router.push({
-            name:list[id].name
-        })
-    }
+])
 
-    
+
+
+// 导航栏点击效果与跳转
+let toTitle = (id: string) => {
+    // 点击时所有高光关闭，并且方块进行偏移
+    list.forEach(item => {
+        item.status = false;
+        transform1.value = 7 * +id
+    })
+
+    // 点击获得高光
+    list[id].status = true
+
+    // 路由跳转
+    router.push({
+        name: list[id].name
+    })
+}
+
+
 
 </script>
 
 
 <style scoped lang="scss">
-    .header{
-        height: 10vh;
-        width: 100vw;
-        display: flex;
-        box-shadow: 
+.header {
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    box-shadow:
         0 6px 12px rgba(0, 0, 0, .2);
-        color: #fff;
-        background: rgba(0,0,0,.5);
-        position: relative;
-        z-index: 99;
-        .left{
-            flex:1;
+    color: #fff;
+    background: rgba(0, 0, 0, .5);
+
+    position: relative;
+
+    z-index: 99;
+
+    .left {
+        flex: 1;
+        display: flex;
+        align-items: center;
+
+        .musicImg {
+            flex: 1;
             display: flex;
-            align-items: center;
-            .musicImg{
-                flex:1;
-                display: flex;
-                cursor: pointer;
-                transform: translateX(40px);
-            }
-            .logoImg{
-                flex:1;
-                display: flex;
-                cursor: pointer;
-            }
+            cursor: pointer;
+            transform: translateX(40px);
         }
-        .middle{
-            flex:3;
+
+        .logoImg {
+            flex: 1;
             display: flex;
-            flex-direction: column;
-            .border{
-                width: 2.6vw;
+            cursor: pointer;
+        }
+    }
+
+    .middle {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+
+        .border {
+            width: 2.6vw;
+            display: flex;
+            background: #69E0FF;
+            flex: .8;
+        }
+
+        .border:last-child {
+            visibility: hidden;
+        }
+
+        .list {
+            display: flex;
+            flex: 8.4;
+            align-items: center;
+
+            li {
+                width: 7vw;
                 display: flex;
-                background: #69E0FF;
-                flex: .8;
-            }
-            .border:last-child{
-                visibility: hidden;
-            }
-            .list{
-                display: flex;
-                flex:8.4;
-                align-items: center;
-                li{
-                    width: 7vw;
+                justify-content: flex-start;
+                cursor: pointer;
+
+                section {
+                    // 字符的间距
+                    letter-spacing: 0.4vw;
                     display: flex;
-                    justify-content: flex-start;
-                    cursor: pointer;
-                    section{
-                        // 字符的间距
-                        letter-spacing: 0.4vw;
-                        display: flex;
-                        align-items: center;
-                        height: 100%;
-                    }
-                     .new_section{
-                        text-shadow:
+                    align-items: center;
+                    height: 100%;
+                }
+
+                .new_section {
+                    text-shadow:
                         0 0 10px #88e4e4,
                         0 0 15px #00ffff,
                         0 0 20px #00ffff;
-                    }
                 }
             }
-            .list>li:hover section{
-                text-shadow:
+        }
+
+        .list>li:hover section {
+            text-shadow:
                 0 0 10px #88e4e4,
                 0 0 15px #00ffff,
                 0 0 20px #00ffff;
-            }
-        }
-        .middle:hover span{
-            transition: all .4s;
-        }
-        .right{
-            flex:2;
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-            span{
-                img{
-                    vertical-align: middle;
-                    transform: translateX(20px);
-                    height: 30px;
-                }
-            }
-            .loginBtn{
-                cursor: pointer;
-            }
         }
     }
-    .footer{
-        background: #000;
-        height: 60vh;
-        .share{
-            width: 100%;
-            height:10vh;
-            background:#111111;
+
+    .middle:hover span {
+        transition: all .4s;
+    }
+
+    .right {
+        flex: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        span {
+            img {
+                vertical-align: middle;
+                transform: translateX(20px);
+                height: 30px;
+            }
+        }
+
+        .loginBtn {
+            cursor: pointer;
+        }
+    }
+}
+
+.footer {
+    background: #000;
+    height: 60vh;
+
+    .share {
+        width: 100%;
+        height: 10vh;
+        background: #111111;
+        display: flex;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .announcement {
+        height: 50vh;
+        display: flex;
+
+        .left {
+            flex: 3;
             display: flex;
-            color: #fff;
             justify-content: center;
             align-items: center;
+            color: #fff;
         }
-        .announcement{
-            height: 50vh;
+
+        .right {
+            flex: 7;
             display: flex;
-            .left{
-                flex: 3;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color:#fff;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 14px;
+            color: #a1a1a1;
+
+            p {
+                margin-bottom: 5vh;
+                color: #fff;
+                cursor: pointer;
+                word-spacing: .5vw;
             }
-            .right{
-                flex:7;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                font-size:14px;
-                color: #a1a1a1;
-                p{
-                    margin-bottom:5vh;
-                    color:#fff;
-                    cursor: pointer;
-                    word-spacing: .5vw;
-                }
-                ul{
-                    li{
-                        line-height: 3vh;
-                    }
+
+            ul {
+                li {
+                    line-height: 3vh;
                 }
             }
         }
     }
-
-
-
+}
 </style>

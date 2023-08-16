@@ -63,6 +63,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import DialogFun from "@/components/dialog"
 import type { Ref } from 'vue'
 
 import {

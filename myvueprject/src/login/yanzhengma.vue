@@ -38,7 +38,7 @@
   
   <script setup lang="ts">
 //类封装请求；函数封装请求
-import { Numlist, postdata } from '@/utils/require.tsx'
+import { Numlist, postdata } from '@/utils/require'
 import { ref, defineProps } from 'vue'
 //公用文件 开关
 import offno from '@/login/isno'
@@ -88,7 +88,7 @@ async function fun() {
   //关闭遮罩层
   offno.yanzheng = false
   console.log(islist.teb.telephone, value.value)
-  yes.commit('setTusi', '验证码已发送')
+  // yes.commit('setTusi', '验证码已发送')
   value.value = ''
 }
 </script>

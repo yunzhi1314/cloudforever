@@ -229,7 +229,7 @@ let fun = () => {
   }
 
   .box_1 {
-    width: 26vw;
+    width: 37vw;
     height: 69vh;
     background-color: #fff;
     padding: 7vh 8vw;

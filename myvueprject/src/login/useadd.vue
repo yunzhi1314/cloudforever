@@ -45,7 +45,7 @@
           style="
             position: absolute;
             color: rgb(78, 164, 220);
-            margin-left: 20vw;
+          right: 1vw;
             cursor: pointer;
           "
           @click="yanzhen"
@@ -75,7 +75,7 @@ import { useRouter } from 'vue-router'
 //验证码遮罩层开关
 import offno from '@/login/isno'
 //遮罩层组件
-import ZhuceYanZheng from '@/login/yanzhengma.vue'
+// import ZhuceYanZheng from '@/login/yanzhengma.vue'
 
 import { FormRules } from 'element-plus'
 //引入吐司组件
@@ -265,7 +265,7 @@ function login() {
   }
 
   .box_1 {
-    width: 29vw;
+    width: 37vw;
     height: 83vh;
     background-color: #fff;
     padding: 5vh 8vw;

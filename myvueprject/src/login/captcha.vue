@@ -31,10 +31,10 @@
         <span
           v-show="index == 1"
           style="
-            position: absolute;
-            color: rgb(78, 164, 220);
-            margin-left: 20vw;
-            cursor: pointer;
+              position: absolute;
+    color: rgb(78, 164, 220);
+    cursor: pointer;
+    right: 1vw;
           "
           @click="yanzheng"
           >获取验证码</span
@@ -220,7 +220,7 @@ let func = () => {
   }
 
   .box_1 {
-    width: 26vw;
+    width: 37vw;
     height: 69vh;
     background-color: #fff;
     padding: 7vh 8vw;

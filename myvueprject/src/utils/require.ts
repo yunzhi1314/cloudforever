@@ -1,5 +1,5 @@
 import req from "@/utils/request"; //引入了一个请求
-
+import { reactive,onBeforeMount } from "vue";
 
 //接口
 export interface List {
@@ -100,5 +100,5 @@ export function getData(url:string,data:any){
          url == "/geshin/index/page2" ?  dataList.page2  =  res.data:
          url == " /getCode"  ? dataList.getCode = res.data  :""
     })
-    return datalist
+    return dataList
 }

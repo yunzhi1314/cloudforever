@@ -83,8 +83,146 @@
 </template>
 
 <script setup lang="ts">
+import type { Ref } from "vue"
+import { ref } from "vue"
 import { useRouter } from "vue-router"
 const router = useRouter()
+let isCollapse = ref(false)
+const handleOpen = (key: string, keyPath: string[]) => {
+    console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+    console.log(key, keyPath)
+}
+// 数据
+let namearr = [{
+    meta: {
+        title: "首页"
+    },
+    name: "home",
+
+},
+{
+    meta: {
+        title: "系统设置"
+    },
+    name: "",
+    children: [
+        {
+            meta: {
+                title: "菜单管理"
+            },
+            name: "menu",
+        },
+        {
+            meta: {
+                title: "角色管理"
+            },
+            name: "role",
+        },
+        {
+            meta: {
+                title: "用户管理"
+            },
+            name: "user",
+        },
+        {
+            meta: {
+                title: "部门管理"
+            },
+            name: "department",
+        },
+        {
+            meta: {
+                title: "字典管理"
+            },
+            name: "dictionary",
+        },
+    ]
+
+},
+{
+    meta: {
+        title: "权限管理"
+    },
+    name: "",
+    children: [
+        {
+            meta: {
+                title: "菜单管理"
+            },
+            name: "",
+            children: [
+                {
+                    meta: {
+                        title: "菜单管理"
+                    },
+                    name: "",
+                },
+            ]
+        },
+    ]
+},
+{
+    meta: {
+        title: "菜单嵌套"
+    },
+    name: ""
+},
+{
+    meta: {
+        title: "功能"
+    },
+    name: ""
+},
+{
+    meta: {
+        title: "页面"
+    },
+    name: ""
+},
+]
+// 面包屑
+let breadcrumb: Ref<Array<string | undefined>> = ref([])
+// 切换路由
+function gopage(name: string, title?: string, title1?: string, title2?: string) {
+    breadcrumb.value = []
+    router.push({
+        name: name
+    })
+    if (title) {
+        breadcrumb.value.push(title)
+    } else {
+        return
+    }
+    if (title1) {
+        breadcrumb.value.push(title1)
+    } else {
+        return
+    }
+    if (title2) {
+        breadcrumb.value.push(title2)
+        addTab(title2)
+    } else {
+        addTab(title1)
+        return
+    }
+
+}
+// Tabs标签页
+let Tabs: Ref<any[]> = ref([])
+let tabIndex = ref(0)
+// 
+const addTab = (targetName: string) => {
+    tabIndex.value++
+    Tabs.value.push(targetName)
+}
+
+const removeTab = (targetName: string) => {
+
+    Tabs.value.splice(Number.parseInt(targetName), 1)
+
+}
 
 </script>
 

@@ -13,50 +13,69 @@
         </el-row>
             <!--中间信息内容-->
             <el-table :data="tableData" height="100%" style="width: 100%" class="body">
-                <el-table-column prop="date" label="税前利润" width="180" />
-                <el-table-column prop="name" label="息税前利润" width="170" />
-                <el-table-column prop="address" label="企业估值" width="170" />
-                <el-table-column prop="up" label="上半年增长" width="160" />
-                <el-table-column prop="dowm" label="下半年增长" width="160" />
-                <el-table-column prop="momny" label="经营利润" width="160" />
-                <el-table-column label="操作" width="160">
+                <el-table-column prop="date" label="税前利润" width="210" />
+                <el-table-column prop="name" label="息税前利润" width="190" />
+                <el-table-column prop="address" label="企业估值" width="180" />
+                <el-table-column prop="up" label="上半年增长" width="180" />
+                <el-table-column prop="dowm" label="下半年增长" width="170" />
+                <el-table-column prop="momny" label="经营利润" width="170" />
+                <el-table-column label="操作" width="170">
                     <el-button type="text">修改</el-button>
                     <el-button type="text">删除</el-button>
                 </el-table-column>
             </el-table>
               <!--分页器-->
             <el-pagination
-            :current-page="currentPage4"
-            :page-size="pageSize4"
-            :page-sizes="[3,2]"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            v-model:current-page="currentPage4"
+            v-model:page-size="pageSize4"
+            :page-sizes="[3,5,8]"
             :small="small"
             :disabled="disabled"
             :background="background"
             layout="total, sizes, prev, pager, next, jumper"
             :total="8"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
             />
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref,reactive } from 'vue'
+import type { Ref } from 'vue';
+import { useRouter} from 'vue-router'
+
+const router = useRouter()
 
 const currentPage4 = ref(1)
-const pageSize4 = ref(3)
+const pageSize4 : Ref<number> = ref(3)
 const small = ref(false)
 const background = ref(false)
 const disabled = ref(false)
+const state = reactive({
+  pape: 1,
+  limit: 3,
+})
+
 
 const handleSizeChange = (val: number) => {
   console.log(`${val} items per page`)
+  state.pape = val
 }
 const handleCurrentChange = (val: number) => {
   console.log(`current page: ${val}`)
 }
 
-const tableData = [
+interface TitleNav{
+    date:string,
+    name:string,
+    address:string,
+    up:string,
+    dowm:string,
+    momny:string
+  }
+
+let tableData:Array<TitleNav>=reactive([
   {
     date: '47,053.11',
     name: '44,100.00',
@@ -121,30 +140,30 @@ const tableData = [
     dowm:'',
     momny:'1,331.71',
   },
-]
+])
+
+
+
 </script>
 
 <style scoped>
 .wai{
-    width: 78vw;
-    height: 85vh;
-    margin-left: 17vw;
-    margin-top: 10vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-.wai:hover{
     border: 3px solid #8f8888;
+    border-radius: 5px 5px 5px 5px;
 }
 .head{
 flex: 0.5;
 display: flex;
 align-items: center;
 width: 100%;
+margin-left: 10px;
 }
 .body{
-    /* background-color: brown; */
     flex: 5;
     width: 100%;
 }

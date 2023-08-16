@@ -5,8 +5,8 @@
       <!--  -->
       <div>
         <section>
-          <img :src="data.datas.header.musicImg" alt="" style="width: 2.5vw;" v-show="controlObj.isImg == false" @click="controlObj.isImg = true">
-          <img :src="data.datas.header.musicDisabledImg" alt="" style="width: 2.5vw;" v-show="controlObj.isImg == true" @click="controlObj.isImg = false">
+          <img :src="data.datas.header.musicImg" alt="" style="width: 2.5vw;" v-show="controlObj.isImg == true"  @click="controlObj.isImg = false">
+          <img :src="data.datas.header.musicDisabledImg" alt="" style="width: 2.5vw;" v-show="controlObj.isImg == false" @click="controlObj.isImg = true">
         </section>
 
         <section>
@@ -46,7 +46,7 @@
     <footer>
       <!-- 底部上边 -->
       <div>
-        
+        <span v-for="(item,index) in data.datas.bottom.icons" :key="index" v-html="item"></span>
       </div>
       
       <!-- 底部中间 -->
@@ -71,7 +71,7 @@
 
           <!--  -->
           <div>
-            
+            <p v-for="(item,index) in publicValues" :key="index">{{ item }}</p>
           </div>
 
           <!--  -->
@@ -83,22 +83,40 @@
       
       <!-- 底部底边 -->
       <div></div>
+
+
     </footer>
+
+    <audio ref="audioPlayer" :src="data.datas.header.bgMusic" id="music" loop></audio>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive,ref } from "vue";
+import { reactive,ref,onBeforeUpdate,watchEffect } from "vue";
 import { useRouter } from 'vue-router';
 import { DOMDataObj } from '@/utils/require';
 // import { getData } from "@/utils/require";
 import type{ Ref } from "vue";
+
+import req from "@/utils/request";
+
 import controlObj from '@/utils/controls';
 
 const router = useRouter();
 
 let data = DOMDataObj("api/geshin/public","get",{},"dataList")
-console.log(data)
+
+// 请求
+let Wd = reactive({
+  public:""
+})
+    // public:"",
+// )
+
+req.get("api/geshin/public").then((res:any) =>{
+  Wd.public = res.data.dataList.bottom.words
+})
+// console.log(Wd);
 
 interface TitleNav{
   title:string;
@@ -176,9 +194,25 @@ let toTitle = (index:number) =>{
     })
 }
 
-// let arr:Array<string> = Object.values(data.datas.bottom.words);
-// console.log(arr);
+// 点击播放音乐
+onBeforeUpdate(() => {
+  let music = document.querySelector("#music") as HTMLAudioElement;
 
+  if(controlObj.isImg == true){
+    music.play();
+  }else{
+    music.pause();
+  }
+
+})
+
+let publicValues: Ref<string[]> = ref([]);
+
+watchEffect(() => {
+  publicValues.value = Object.values(Wd.public);
+});
+
+console.log(publicValues);
 
 </script>
 
@@ -277,10 +311,17 @@ footer{
   background-color: #000;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 4fr 1fr;
+  grid-template-rows: 0.8fr 4fr 0.8fr;
 
   > div:nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #111111;
+    
+    > span{
+      margin-right: 1vw;
+    }
   }
   
   > div:nth-child(2){
@@ -319,15 +360,22 @@ footer{
       > section:nth-child(1){
         display: flex;
         align-items: center;
-
+        
         > a{
           color: #fff;
           margin-right: 1vw;
           text-decoration: none;
         }
       }
-
+      > div:nth-child(2){
+        > p{
+          color: #fff;
+          font-size: 0.8rem;
+        }
+      }
       > section:nth-child(3){
+        display: flex;
+        align-items: center;
         > img{
           margin-right: 1vw;
         }

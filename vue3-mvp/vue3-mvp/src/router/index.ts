@@ -74,7 +74,23 @@ const routes: Array<RouteRecordRaw> = [
         name:"match",
         component:() =>import('@/Projects/geshin/match/match.vue')
       },
+      
     ]
+  },
+  {
+    path:"/register",
+    name:"register",
+    component:() =>import('@/Projects/geshin/register/register.vue')
+  },
+  {
+    path:"/login/captcha",
+    name:"captcha",
+    component:()=>import('@/Projects/geshin/login/captcha.vue')
+  },
+  {
+    path:"/login/password",
+    name:"password",
+    component:()=>import('@/Projects/geshin/login/password.vue')
   }
 ];
 

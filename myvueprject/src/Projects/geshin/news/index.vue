@@ -11,10 +11,7 @@
          <!-- 分割线 以下内容为中间部分 -->
          <div class="main-box" >
          <section class="main-sectionbox">
-         <li>最新</li>
-         <li>新闻</li>
-         <li>公告</li>
-         <li>活动</li>
+         <li v-for="(item,index) in textcontent" :key="index">{{ item.licontent }}</li>
         </section>
         <!-- 分割线 -->
         <main>
@@ -27,6 +24,24 @@
     </template>
 
     <script setup lang="ts">
+import { reactive } from "vue";
+
+    
+    const textcontent = reactive([
+      {
+        licontent:"最新"
+      },
+      {
+        licontent:"新闻"
+      },
+      {
+        licontent:"公告"
+      },
+      {
+        licontent:"活动"
+      }
+    ])
+
 
     </script>
     

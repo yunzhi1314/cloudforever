@@ -1,12 +1,12 @@
-import req from "@/utils/request";
+import req from "@/utils/request"; //引入了一个请求
 
 import { reactive,onBeforeMount} from 'vue';
 
-interface Data{
+interface Data{  
     [propName:string]: string
 }
 
-export class Request{
+export class Request{  //公共方法
     protected get(url:string){
         return req.get(url)
     }
@@ -39,7 +39,8 @@ export class Public extends Request{
         super()
         this.dataList = reactive({
             datas: "",
-            msg:""
+            msg:"",
+        
         })
     }
     public getDataObj(this:Public,url:string,method:keyof Method,data:Data){
@@ -53,10 +54,11 @@ export class Public extends Request{
 }
 
 
+
 export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:string){
    let dataList = reactive<DataList>({
     datas:"",
-    msg:""
+    msg:"",
    })
 
    req[method](url,data).then((res:any) =>{

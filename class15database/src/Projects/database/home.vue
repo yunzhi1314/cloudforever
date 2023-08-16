@@ -130,8 +130,8 @@
                 :ellipsis="false"
                 >
                     <el-radio-group v-model="isCollapse" style="margin-left:20px">
-                        <el-radio-button :label="true"><el-icon><Expand /></el-icon></el-radio-button>
-                        <el-radio-button :label="false"><el-icon><Fold /></el-icon></el-radio-button>
+                        <el-radio-button :label="true" v-show="istu==false"  @click="istu=true"><el-icon ><Expand /></el-icon></el-radio-button>
+                        <el-radio-button :label="false" v-show="istu==true"  @click="istu=false"><el-icon ><Fold /></el-icon></el-radio-button>
                     </el-radio-group>
                     <el-breadcrumb separator="/" style="height: 59px;line-height: 59px;margin-left: 10px;">
                         <el-breadcrumb-item :to="{ path: '/database/home' }">首页</el-breadcrumb-item>
@@ -244,6 +244,9 @@ import { getDataObj } from '@/utils/route'
 // // 渲染的数组
 // let metaArr = reactive<any[]>(findMeta(routes))
 
+// 缩进图标
+let istu=ref(false)
+console.log(istu);
 
 
 let metaArr = [

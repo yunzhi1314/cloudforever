@@ -15,19 +15,19 @@
                         <span>  {{item.name}}</span>
                        
                     <el-input  
-                     v-model="item.value" :placeholder="`请填写${item}`" clearable />
+                     v-model="item.value" :placeholder="`请填写${item.name}`" clearable />
                     </label>
                     <label v-if =" index!==0 && index!==5 "> 
                         <span>  {{item.name}}</span>
                         <el-input 
                         
-                        v-model="item.value" :placeholder="`请填写${item}`" clearable />
+                        v-model="item.value" :placeholder="`请填写${item.name}`" clearable />
                     </label>
                     <label v-if =" index==5 "   class="span-2"> 
                         <span>  {{item.name}}</span>
                        
                     <el-input  
-                     v-model="item.value" :placeholder="`请填写${item}`" clearable />
+                     v-model="item.value" :placeholder="`请填写${item.name}`" clearable />
                     </label>
                </template>
             </main>
@@ -92,12 +92,11 @@ const props = defineProps({
             value:''
         },
     ]
-
+        
     // 关闭盒子
     const changFun=()=>{
         controlObj.menuAddFlag = false
         console.log(  controlObj.menuAddFlag);
-        
     }
        </script>
 

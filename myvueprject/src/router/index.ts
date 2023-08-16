@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
   // 神之眼页面
   {
-    path: '/footflder',
+    path: '/',
     name: 'footflder',
     component: () => import('@/Projects/rootFolder.vue')
   },
@@ -59,7 +59,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   //验证码登录
   {
-    path: '/',
+    path: '/telphone',
     name: 'telphone',
     component: () => import('@/login/telphone.vue')
   },

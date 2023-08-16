@@ -6,7 +6,31 @@
            <div class="div"><span class="title">新增菜单</span>
 
             <el-icon  @click="changFun"><CloseBold /></el-icon>
+
             <!-- <h3>你确定删除这项信息吗？</h3> -->
+            <main >  
+
+                <template v-for="(item, index) in inputArray"  :key="index"  >
+                    <label v-if =" index==0 "   class="span-2"> 
+                        <span>  {{item.name}}</span>
+                       
+                    <el-input  
+                     v-model="item.value" :placeholder="`请填写${item}`" clearable />
+                    </label>
+                    <label v-if =" index!==0 && index!==5 "> 
+                        <span>  {{item.name}}</span>
+                        <el-input 
+                        
+                        v-model="item.value" :placeholder="`请填写${item}`" clearable />
+                    </label>
+                    <label v-if =" index==5 "   class="span-2"> 
+                        <span>  {{item.name}}</span>
+                       
+                    <el-input  
+                     v-model="item.value" :placeholder="`请填写${item}`" clearable />
+                    </label>
+               </template>
+            </main>
                 <section class="foot" >
                 <span class="dialog-footer">
                     <el-button size="large" @click="changFun">取消</el-button>
@@ -48,7 +72,28 @@ const props = defineProps({
       props.List.splice(props.index,1)
     }
 
+    let  inputArray=[
+        {name:"所属公司",
+                value:''
+        },
+        {name:"药物名称",
+            value:''
+        },
+        {name:"靶向",
+            value:''
+        },
+        {name:"线数",
+            value:''
+        },
+        {name:"治疗方式",
+            value:''
+        },
+        {name:"区域",
+            value:''
+        },
+    ]
 
+    // 关闭盒子
     const changFun=()=>{
         controlObj.menuAddFlag = false
         console.log(  controlObj.menuAddFlag);
@@ -80,10 +125,31 @@ const props = defineProps({
                 position: relative;
                 padding: 20px;
                 .title{
+                    display: inline-block;
+                    margin: 20px 10px 20px 12px;
                     font-size: 18px;
-                    font-weight: 600;
+                    // font-weight: 640;
                 }
-             
+                main{
+                    display: grid;
+                    grid-gap: 20px;
+                    grid-template-columns: 1fr 1fr;
+                    .span-2{
+                        grid-column-start:span 2;
+                        .el-input{
+                            width: 560px;
+                        }
+                    }
+                    label{
+                        display: flex;
+                        >span{
+                            margin: 0 10px;
+                        }
+                        .el-input{
+                            width: 240px;
+                        }
+                    }
+                }
                 .el-icon{
                     position: absolute;
                     right: 20px;

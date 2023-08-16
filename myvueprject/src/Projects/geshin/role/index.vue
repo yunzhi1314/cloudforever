@@ -26,12 +26,12 @@
             <span></span>
           </div>
           <!-- 开关 -->
-          <el-switch
+          <!-- <el-switch
             v-model="value3"
             inline-prompt
             active-text="中"
             inactive-text="日"
-          />
+          /> -->
         </div>
         <!-- 文本框 -->
         <section></section>
@@ -47,7 +47,11 @@
   </div>
 </template>
 
-    <script setup lang="ts">
+<script setup lang="ts">
+// import {getData} from "@/utils/require"
+// getData("api/geshin/index/page2",{})
+
+
 import { ref } from 'vue';
  let value3 = ref(true)   
 let arrnav = ['蒙德城', '璃月港', '稻妻城', '须婗城', '敬请期待']

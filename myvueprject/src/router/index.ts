@@ -43,20 +43,20 @@ const routes: Array<RouteRecordRaw> = [
         name: 'comic',
         component: () => import('@/Projects/geshin/comic/index.vue')
       },
-      //社区
-      {
-        path: 'spots',
-        name: 'spots',
-        component: () => import('@/Projects/geshin/spots/index.vue')
-      },
       //赛事
       {
-        path: '/compotation',
+        path: 'compotation',
         name: 'compotation',
         component: () => import('@/Projects/geshin/compotation/index.vue')
       }
     ]
-  }
+  },
+        //社区
+    {
+          path: '/spots',
+          name: 'spots',
+          component: () => import('@/Projects/geshin/spots/index.vue')
+      },
 ]
 
 const router = createRouter({

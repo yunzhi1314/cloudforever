@@ -69,7 +69,7 @@ export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:str
 }
 
 // 自己添加的get 请求   
-export function getData(url:string,method:string,data:any){
+export function getData(url:string,data:any){
     let dataList = reactive({
         animation:"",  //动画界面
         public:"",

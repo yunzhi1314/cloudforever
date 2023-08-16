@@ -6,7 +6,7 @@ interface Data{
     [propName:string]: string
 }
 
-export class Request{
+export class Request{  //公共方法
     protected get(url:string){
         return req.get(url)
     }
@@ -49,12 +49,9 @@ export class Public extends Request{
             typeof res.data == 'string' ? 
             (this.dataList.datas = res.data) : (this.dataList.datas)
          })
-         console.log(this.dataList);
        })
     }
 }
-
-
 
 export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:string){
    let dataList = reactive<DataList>({
@@ -63,6 +60,8 @@ export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:str
    })
 
    req[method](url,data).then((res:any) =>{
+    console.log(res)
+    // console.log(res.data.dataList.header.musicImg)
     typeof res.data == "string" ? (dataList.datas == res.data) : (dataList.datas = {...res.data[propName]})
    })
 
@@ -78,7 +77,9 @@ export function getData(url:string,data:any){
         page2:"",
         getCode:"", //图形验证码
     })
+
     req.get(url,data).then((res:any)=>{
+      console.log(res)
       url == "/geshin/animation" ? dataList.animation =  res.data :
         url == "/geshin/public" ? dataList.public =  res.data : 
          url == "/geshin/index/page1" ? dataList.page1 =  res.data: 

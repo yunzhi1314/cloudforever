@@ -9,8 +9,6 @@
 // import main from "@/Projects/geshin/main/index.vue"
 </script>
 
-
-
 <style scoped>
 
 </style>

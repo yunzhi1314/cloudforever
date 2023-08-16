@@ -3,10 +3,16 @@
     <!-- 头部 -->
     <header>
       <!--  -->
-      <section>
-        <img src="" alt="">
-        <img src="" alt="">
-      </section>
+      <div>
+        <section>
+          <img :src="data.datas.header.musicImg" alt="" style="width: 2.5vw;" v-show="controlObj.isImg == false" @click="controlObj.isImg = true">
+          <img :src="data.datas.header.musicDisabledImg" alt="" style="width: 2.5vw;" v-show="controlObj.isImg == true" @click="controlObj.isImg = false">
+        </section>
+
+        <section>
+          <img :src="data.datas.header.logo" alt="" style="width: 8vw;">
+        </section>
+      </div>
       
       <!--  -->
       <div @mouseleave="toleft2">
@@ -22,11 +28,11 @@
       <div>
         <section>
             <span>成长关爱系统</span>
-            <img src="" alt="">
+            <img :src="data.datas.header.growSystemImg" alt="">
         </section>
         <section>
             <span>登录</span>
-            <img src="" alt="">
+            <img :src="data.datas.header.userNickImg" alt="">
         </section>
       </div>
     </header>
@@ -37,25 +43,67 @@
     </main>
     
     <!-- 底部 -->
-    <footer></footer>
+    <footer>
+      <!-- 底部上边 -->
+      <div>
+        
+      </div>
+      
+      <!-- 底部中间 -->
+      <div>
+        <!--  -->
+        <div>
+          <section>
+            <img :src="data.datas.bottom.leftImg.MIHOYO" alt="">
+          </section>
+          <section></section>
+          <section>
+            <img :src="data.datas.bottom.leftImg.LOGO" alt="">
+          </section>
+        </div>
+        <!--  -->
+        <div>
+          <!--  -->
+          <section>
+            <a v-for="(item,index) in data.datas.bottom.aboutMeWebs" :key="index"
+            :href="item.url">{{ item.title }}</a>
+          </section>
+
+          <!--  -->
+          <div>
+            
+          </div>
+
+          <!--  -->
+          <section>
+            <img :src="item" alt="" v-for="(item,index) in data.datas.bottom.bottomImgs" :key="index">
+          </section>
+        </div>
+      </div>
+      
+      <!-- 底部底边 -->
+      <div></div>
+    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive,ref } from "vue";
 import { useRouter } from 'vue-router';
-// import { Public } from "@/utils/require";
+import { DOMDataObj } from '@/utils/require';
+// import { getData } from "@/utils/require";
 import type{ Ref } from "vue";
+import controlObj from '@/utils/controls';
 
 const router = useRouter();
 
-// let data = new Public();
-// console.log(data.getDataObj('api/geshin/public',"get",{}))
+let data = DOMDataObj("api/geshin/public","get",{},"dataList")
+console.log(data)
 
 interface TitleNav{
-    title:string;
-    isClick:boolean;
-    name:string;
+  title:string;
+  isClick:boolean;
+  name:string;
 }
 
 let titleNaw:Array<TitleNav> = reactive([
@@ -96,7 +144,7 @@ let titleNaw:Array<TitleNav> = reactive([
   },
 ])
 
-let left:Ref<string> = ref("left:1px");
+let left:Ref<string> = ref("left:13px");
 
 let titleIndex:Ref<number> = ref(0);
 
@@ -128,6 +176,10 @@ let toTitle = (index:number) =>{
     })
 }
 
+// let arr:Array<string> = Object.values(data.datas.bottom.words);
+// console.log(arr);
+
+
 </script>
 
 <style scoped>
@@ -136,7 +188,7 @@ let toTitle = (index:number) =>{
   height: 200vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 7fr 2fr;
+  grid-template-rows: 5fr 2fr;
 }
 
 header{
@@ -148,6 +200,22 @@ header{
   display: grid;
   grid-template-columns: 1fr 2fr 1.5fr;
   grid-template-rows: 1fr;
+  
+  > div:nth-child(1){
+    position: relative;
+
+    > section:nth-child(1){
+      position: absolute;
+      top: 2.5vh;
+      left: 3vw;
+    }
+
+    > section:nth-child(2){
+      position: absolute;
+      top: -1vh;
+      left: 7vw;
+    }
+  }
 
   > div:nth-child(2){
     position: relative;
@@ -184,8 +252,16 @@ header{
       align-items: center;
       color: #fff;
 
-      > section:nth-child(1){
+      > section{
+        height: 7vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-right: 2vw;
+
+        > span{
+          margin-right: 1vw;
+        }
       }
 
       > section{
@@ -196,10 +272,71 @@ header{
     }
 }
 
-main{
-}
 
 footer{
   background-color: #000;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 4fr 1fr;
+
+  > div:nth-child(1){
+    background-color: #111111;
+  }
+  
+  > div:nth-child(2){
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    grid-template-rows: 1fr;
+
+    > div:nth-child(1){
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      > section:nth-child(1){
+        > img{
+          width: 9vw;
+        }
+      }
+
+      > section:nth-child(2){
+        height: 8vh;
+        margin-left: 1vw;
+        border-left: 2px solid #666666;
+      }
+
+      > section:nth-child(3){
+        > img{
+          width: 9vw;
+        }
+      }
+    }
+
+    > div:nth-child(2){
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1.5fr 5fr 1.5fr;
+
+      > section:nth-child(1){
+        display: flex;
+        align-items: center;
+
+        > a{
+          color: #fff;
+          margin-right: 1vw;
+          text-decoration: none;
+        }
+      }
+
+      > section:nth-child(3){
+        > img{
+          margin-right: 1vw;
+        }
+      }
+    }
+  }
+
+  > div:nth-child(3){
+    background-color: #111111;
+  }
 }
 </style>

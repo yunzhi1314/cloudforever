@@ -1,8 +1,4 @@
-//类封装共有方法 
-import { onBeforeMount, reactive, onMounted } from "vue";
-import req from "./request";
-// import { List } from "@element-plus/icons-vue/dist/types";
-
+import req from "@/utils/request"; //引入了一个请求
 
 
 //接口
@@ -75,23 +71,34 @@ export class Numlist extends Use {
     }
 }
 
+export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:string){
+   let dataList = reactive<DataList>({
+    datas:"",
+    msg:"",
+   })
 
+   req[method](url,data).then((res:any) =>{
+    typeof res.data == "string" ? (dataList.datas == res.data) : (dataList.datas = {...res.data[propName]})
+   })
 
-//函数组件
-export async function postdata(
-    url: string,
-    method: keyof Method,
-    data: List,
-    propName: string) {
-    let datalist = reactive({
-        datas: '',
-        msg: ''
+   return dataList
+}
+
+// 自己添加的get 请求   
+export function getData(url:string,data:any){
+    let dataList = reactive({
+        animation:"",  //动画界面
+        public:"",
+        page1:"",  
+        page2:"",
+        getCode:"", //图形验证码
     })
-
-    req[method](url, data).then((res: any) => {
-        typeof res.data == 'string' ?
-            (datalist.datas = res.data) :
-            (datalist.datas = { ...res.data[propName] })
+    req.get(url,data).then((res:any)=>{
+      url == "/geshin/animation" ? dataList.animation =  res.data :
+        url == "/geshin/public" ? dataList.public =  res.data : 
+         url == "/geshin/index/page1" ? dataList.page1 =  res.data: 
+         url == "/geshin/index/page2" ?  dataList.page2  =  res.data:
+         url == " /getCode"  ? dataList.getCode = res.data  :""
     })
     return datalist
 }

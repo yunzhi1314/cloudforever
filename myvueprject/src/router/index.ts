@@ -51,13 +51,13 @@ const routes: Array<RouteRecordRaw> = [
       }
     ]
   },
-  //社区
-  {
-    path: '/spots',
-    name: 'spots',
-    component: () => import('@/Projects/geshin/spots/index.vue')
-  },
-  //验证码登录
+        //社区
+    {
+          path: '/spots',
+          name: 'spots',
+          component: () => import('@/Projects/geshin/spots/index.vue')
+      },
+      //验证码登录
   {
     path: '/telphone',
     name: 'telphone',

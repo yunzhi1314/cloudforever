@@ -2,67 +2,44 @@
   <div class="div01">
     <!-- 查询输入框 -->
     <div>
-      <el-input class="input1" v-model="input" placeholder="请输入查询内容" />
-      <el-button
-        type="primary"
-        style="width: 5vw; height: 4vh; margin-left: 1vw"
-        :icon="Search"
-        >查询</el-button
-      >
-      <el-button type="success" style="width: 7vw; height: 4vh" @click="conObj.conDialog=true"
-        ><el-icon> <FolderAdd /> </el-icon>新增菜单</el-button
-      >
+    <el-input class="input1" v-model="input" placeholder="请输入查询内容"/>
+    <el-button type="primary" style="width: 5vw;height: 4vh;margin-left: 1vw;" :icon="Search">查询</el-button>
+    <el-button type="success" style="width: 7vw;height: 4vh;"><el-icon><FolderAdd /></el-icon>新增菜单</el-button>
     </div>
     <!-- 表格 -->
-    <el-table
-      :data="tableData2"
-      height="380"
-      style="width: 100%; margin: 0 auto"
-    >
-      <el-table-column
-        v-for="(item, index) in arr"
-        :key="index"
-        :prop="arr2[index]"
-        :label="item"
-        align="center"
-        :width="index == 0 ? `110` : ``"
-      />
-      <!-- <el-table-column prop="date" label="药物名称" width="110"/>
+    <el-table :data="tableData" height="380" style="width: 100%;margin: 0 auto;">
+        <el-table-column prop="date" label="药物名称" width="110"/>
         <el-table-column prop="name" label="所属公司"  />
         <el-table-column prop="address" label="应对癌症" />
         <el-table-column prop="people" label="入组人数"  />
         <el-table-column prop="ORR" label="ORR" />
         <el-table-column prop="OS" label="OS" />
         <el-table-column prop="PFS" label="PFS" />
-        <el-table-column prop="TREE" label="TREE"  />
+        <el-table-column prop="TREE" label="TREE" />
         <el-table-column prop="much" label="线数" />
-        <el-table-column prop="wuyu" label="研发管线" align="center" /> -->
-      <el-table-column
-        prop="manipulate"
-        label="操纵"
-        width="100"
-        align="center"
-      >
-        <template #default>
-          <el-button link type="primary" size="small">修改</el-button>
-          <el-button link type="primary" size="small">删除</el-button>
-        </template>
-      </el-table-column>
+        <el-table-column prop="wuyu" label="研发管线"  />
+        <el-table-column prop="manipulate" label="操纵" style="display: flex;" width="100">
+          <template #default>
+        <el-button link type="primary" size="small"
+          >修改</el-button
+        >
+        <el-button link type="primary" size="small">删除</el-button>
+      </template>
+        </el-table-column>
     </el-table>
-    <!-- 尾部分页栏 -->
-    <div class="demo-pagination-block">
-      <el-pagination
-        v-model:current-page="currentPage4"
-        v-model:page-size="pageSize4"
-        :page-sizes="[5, 10, 15, 20]"
-        layout="sizes, prev, pager, next, jumper,total"
-        :total="tableData.length"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      />
-    </div>
-    <DialogFun :arrname="arr" :arrpase="arr2"></DialogFun>
+<!-- 尾部分页栏 -->
+  <div class="demo-pagination-block">
+    <el-pagination
+      v-model:current-page="currentPage4"
+      v-model:page-size="pageSize4"
+      :page-sizes="[5, 10, 15, 20]"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="19"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
   </div>
+</div>
 </template>
 
 <script setup lang="ts">

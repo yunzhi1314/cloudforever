@@ -223,6 +223,7 @@ const removeTab = (targetName: string) => {
     Tabs.value.splice(Number.parseInt(targetName), 1)
 
 }
+
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped></style>

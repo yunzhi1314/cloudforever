@@ -7,11 +7,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/Projects/database/index.vue'),
     children: [
       {
-        path: "home",
-        name: "home",
-        component: () => import('@/Projects/database/home/index.vue'),
-      },
-      {
         path: "user",
         name: "user",
         component: () => import('@/Projects/database/system/user/userPage.vue'),

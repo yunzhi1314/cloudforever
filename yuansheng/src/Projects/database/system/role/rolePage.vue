@@ -7,7 +7,7 @@
         type="primary"
         style="width: 5vw; height: 4vh; margin-left: 1vw"
         :icon="Search">查询</el-button>
-      <el-button type="success" style="width: 7vw; height: 4vh" ><el-icon><FolderAdd /></el-icon>新增菜单</el-button>
+      <el-button type="success" style="width: 7vw; height: 4vh"><el-icon><FolderAdd /></el-icon>新增菜单</el-button>
     </div>
     <!-- 表格 -->
     <el-table
@@ -64,7 +64,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { Ref } from 'vue'
-import  DialogFun  from "@/components/dialog"
 
 import {
   Check,
@@ -240,12 +239,12 @@ let tableData2: any[] = reactive([])
 function fun() {
   tableData2 = tableData.slice(
     (currentPage4.value - 1) * pageSize4.value,
-    pageSize4.value*currentPage4.value
+    pageSize4.value * currentPage4.value
   )
 }
 fun()
 </script>
- 
+
 <style scoped>
 .div01 {
   width: 100%;
@@ -265,6 +264,7 @@ fun()
   width: 12vw;
   height: 4vh;
 }
+
 .demo-pagination-block {
   margin: 0 auto;
 }

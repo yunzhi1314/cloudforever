@@ -1,13 +1,67 @@
 <template>
+<div class="div01">
+    <!-- 查询输入框 -->
     <div>
 
-    </div>
+</div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import {Check,Delete,Edit,Message,Search,Star} from '@element-plus/icons-vue'
+// 输入框
+const input = ref('')
+// 表格
+const tableData = [
+  {
+    date:"AK105+化疗",
+    name:"康方生物",
+    address:"鳞癌",
+    people:"350",
+    ORR:"70%",
+    OS:"/",
+    PFS:"7",
+    TREE:"67%",
+    much:"1",
+    wuyu:"I",
+  }
+  
+]
+// 下方分页
+const currentPage4 = ref(4)
+const pageSize4 = ref(5)
 
+const handleSizeChange = (val: number) => {
+  console.log(`${val} items per page`)
+}
+const handleCurrentChange = (val: number) => {
+  console.log(`current page: ${val}`)
+}
 </script>
 
 <style scoped>
+.div01{
+    width: 70vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid #e4e7ed;
+    margin: 0 auto;
+}
 
+.div01:hover {
+  box-shadow:
+    0px 0px 2.5px #6b6b6b,
+    0px 0px 5px #6b6b6b,
+    0px 0px 7.5px #6b6b6b;
+}
+
+.input1{
+    width: 12vw;
+    height: 4vh;
+}
+.demo-pagination-block{
+    margin: 0 auto;
+}
 </style>

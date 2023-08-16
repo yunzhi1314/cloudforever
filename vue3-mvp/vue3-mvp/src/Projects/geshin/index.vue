@@ -1,11 +1,23 @@
 <template>
+<!-- 进入官网页面 -->
     <div>
-        <h1>根路径</h1>
+        <button @click="toMain">跳转进入官网</button>
     </div>
 </template>
 
 <script setup lang="ts">
+    import {useRouter} from 'vue-router'
 
+    const router = useRouter()
+
+    let toMain = () => {
+        router.push({
+            path:'/main'
+        })
+    }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+
+
+</style>

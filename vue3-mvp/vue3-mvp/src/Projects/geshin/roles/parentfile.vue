@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>根路径</h1>
+
     </div>
 </template>
 
@@ -8,4 +8,4 @@
 
 </script>
 
-<style scoped></style>
+<style scoped lang="less"></style>

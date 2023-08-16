@@ -169,11 +169,14 @@
 <style scoped lang="scss">
     .header{
         height: 10vh;
+        width: 100vw;
         display: flex;
         box-shadow: 
         0 6px 12px rgba(0, 0, 0, .2);
         color: #fff;
         background: rgba(0,0,0,.5);
+        position: absolute;
+        z-index: 999;
         .left{
             flex:1;
             display: flex;

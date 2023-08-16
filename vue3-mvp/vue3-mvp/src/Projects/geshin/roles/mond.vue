@@ -57,11 +57,12 @@ function switchCVLanguage() {
 }
 </script>
   
-<style scoped lang="less">
+<style scoped lang="scss">
 .main {
     width: 100%;
     height: 100%;
     position: relative;
+    top:-10vh;
 
     .background {
         width: 100%;

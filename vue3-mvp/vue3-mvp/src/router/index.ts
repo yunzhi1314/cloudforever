@@ -3,10 +3,9 @@ import { createRouter, createWebHistory,RouteRecordRaw } from "vue-router";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "index",
+    name: "home",
     component: () => import('@/Projects/geshin/index.vue')
   },
-
   {
     path:"/main",
     name:"main",

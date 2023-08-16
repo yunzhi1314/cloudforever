@@ -5,10 +5,10 @@
                 <!--头部搜索提交栏-->
                 <input type="text" placeholder="请输入查询内容" style="margin-right:15px">
                 <el-button size="large" 
-                type="success"
-                style="background-color: #409EFF;" 
+                type="Search"
+                style="background-color: #409EFF;"
                 >查询</el-button>
-                <el-button type="primary" style="background-color: #67C23A;">新增菜单</el-button>
+                <el-button type="FolderAdd" style="background-color: #67C23A;">新增菜单</el-button>
             </el-tol>
         </el-row>
             <!--中间信息内容-->
@@ -30,7 +30,7 @@
             @current-change="handleCurrentChange"
             v-model:current-page="currentPage4"
             v-model:page-size="pageSize4"
-            :page-sizes="[3,2]"
+            :page-sizes="[3]"
             layout="total, sizes, prev, pager, next, jumper"
             :total="8"
             />

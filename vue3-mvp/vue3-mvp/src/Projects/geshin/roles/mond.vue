@@ -63,10 +63,13 @@ function switchCVLanguage() {
 .main {
     width: 100vw;
     height: 100vh;
+<<<<<<< HEAD
     // position: fixed;
     // top: 0;
     position: relative;
 
+=======
+>>>>>>> 30fec4ab7044d7880ebc86e34d883975f08945e6
     .background {
         width: 100vw;
         height: 100vh;

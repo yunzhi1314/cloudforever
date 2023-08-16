@@ -1,16 +1,14 @@
+<template>
+    <div>
+      <h1>database\system\department\departmentPage</h1>
+    </div>
+</template>
 
-    
-    <template>
-        <div>
-          <h1>database\system\department\departmentPage</h1>
-        </div>
-    </template>
+<script setup lang="ts">
 
-    <script setup lang="ts">
+</script>
 
-    </script>
 
-    
-    <style scoped>
-    
-    </style>
+<style scoped>
+
+</style>

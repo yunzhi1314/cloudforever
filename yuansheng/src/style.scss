@@ -4,3 +4,20 @@
   box-sizing: border-box;
   list-style: none;
 }
+.dialog {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  z-index: 100;
+  .from {
+    width: 50vw;
+    height: 54vh;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+}

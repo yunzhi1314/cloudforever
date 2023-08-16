@@ -1,5 +1,5 @@
+
 import axios,{InternalAxiosRequestConfig,AxiosRequestHeaders,AxiosResponse} from "axios";
-import qs from "qs";
 import router from "@/router";
 
 // 响应时间
@@ -114,3 +114,4 @@ service.interceptors.response.use(
 )
 
 export default service;
+

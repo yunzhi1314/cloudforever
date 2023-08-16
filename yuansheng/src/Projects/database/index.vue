@@ -5,7 +5,7 @@
             <router-link to="/role">2</router-link>
             <router-link to="/department">3</router-link>
             <router-link to="/menu">4</router-link>
-            <router-link to="/menu">dictionary</router-link>
+            <router-link to="/dictionary">dictionary</router-link>
         </ul>
         <div><router-view></router-view></div>
     </div>

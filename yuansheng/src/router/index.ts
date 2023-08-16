@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "role",
         name: "role",
-        component: () => import('@/Projects/database/system/role/rolePage.vue)'),
+        component: () => import('@/Projects/database/system/role/rolePage.vue'),
       },
       {
         path: "menu",

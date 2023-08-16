@@ -52,9 +52,12 @@
             </el-aside>
             <el-container class="move">
                 <el-header style=" padding-top: 5px;">
-                    <el-row>
+                    <el-row style="height: 30px;">
                         <div :style="isCollapse ? 'transform:rotateZ(`180deg`);' : ''" @click="isCollapse = !isCollapse">
-
+                            <el-icon style="width: 50px">
+                                <Fold  v-show="!isCollapse" />
+                                <Expand v-show="isCollapse" />
+                            </el-icon>
                         </div>
                         <el-breadcrumb separator="/">
                             <el-breadcrumb-item :to="{ path: '/home' }" closable="false">首页</el-breadcrumb-item>

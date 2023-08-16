@@ -56,7 +56,9 @@
 
 <!-- 第三版 -->
 <template>
+  
       <div class="User">
+        <div></div>
         <!-- 增查输入框 -->
         <div class="header" style="margin-left:10px">
             <el-input v-model="input" placeholder="请输入查询内容" class="input" />

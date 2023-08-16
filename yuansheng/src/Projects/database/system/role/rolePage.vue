@@ -63,13 +63,15 @@
         @current-change="handleCurrentChange"
       />
     </div>
+    <DialogFun :arrname="arr" :arrpase="arr2"></DialogFun>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { Ref } from 'vue'
-import { dialog } from '@/components/dialog'
+import  DialogFun  from "@/components/dialog"
+
 import {
   Check,
   Delete,
@@ -215,7 +217,7 @@ const tableData = [
     wuyu: 'I'
   }
 ]
-let arr2 = Reflect.ownKeys(tableData[0])
+let arr2 = Reflect.ownKeys(tableData[0]) as Array<string>
 console.log(arr2)
 let arr = [
   '药物名称',

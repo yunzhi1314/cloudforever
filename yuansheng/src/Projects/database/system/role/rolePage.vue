@@ -7,7 +7,7 @@
         type="primary"
         style="width: 5vw; height: 4vh; margin-left: 1vw"
         :icon="Search">查询</el-button>
-      <el-button type="success" style="width: 7vw; height: 4vh"><el-icon><FolderAdd /></el-icon>新增菜单</el-button>
+      <el-button type="success" style="width: 7vw; height: 4vh" ><el-icon><FolderAdd /></el-icon>新增菜单</el-button>
     </div>
     <!-- 表格 -->
     <el-table

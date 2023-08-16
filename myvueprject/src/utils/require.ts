@@ -6,6 +6,7 @@ interface Data{
     [propName:string]: string
 }
 
+
 export class Request{
     protected get(url:string){
         return req.get(url)

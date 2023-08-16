@@ -40,7 +40,6 @@ export class Public extends Request{
         this.dataList = reactive({
             datas: "",
             msg:"",
-        
         })
     }
     public getDataObj(this:Public,url:string,method:keyof Method,data:Data){
@@ -76,12 +75,34 @@ export function getData(url:string,data:any){
         page1:"",  
         page2:"",
         getCode:"", //图形验证码
+        roles:"",//角色界面
     })
+    
     req.get(url,data).then((res:any)=>{
+        console.log("res",res);
+        
       url == "/geshin/animation" ? dataList.animation =  res.data :
         url == "/geshin/public" ? dataList.public =  res.data : 
          url == "/geshin/index/page1" ? dataList.page1 =  res.data: 
          url == "/geshin/index/page2" ?  dataList.page2  =  res.data:
+         url == "api/geshin/roles" ? dataList.roles = res.data :
          url == " /getCode"  ? dataList.getCode = res.data  :""
     })
+    
+} 
+
+//roles 
+export class Roules extends Request{
+    public dataRo :any
+    constructor(){
+        super()
+        this.dataRo = ""
+    }
+
+    public Rolesfun(url:string){
+      req.get(url).then((res)=>{
+        console.log(res);
+        
+      })
+    }
 }

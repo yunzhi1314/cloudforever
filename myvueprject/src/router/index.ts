@@ -57,6 +57,27 @@ const routes: Array<RouteRecordRaw> = [
           name: 'spots',
           component: () => import('@/Projects/geshin/spots/index.vue')
       },
+            //验证码登录
+  {
+    path: '/telphone',
+    name: 'telphone',
+    component: () => import('@/login/telphone.vue')
+  },
+  {
+    path: '/useadd',
+    name: 'useadd',
+    component: () => import('@/login/useadd.vue')
+  },
+  {
+    path: '/captcha',
+    name: 'captcha',
+    component: () => import('@/login/captcha.vue')
+  },
+  {
+    path: '/password',
+    name: 'password',
+    component: () => import('@/login/password.vue')
+  }
 ]
 
 const router = createRouter({

@@ -3,12 +3,12 @@
         <el-row class="head">
             <el-tol>
                 <!--头部搜索提交栏-->
-                <input type="text" placeholder="请输入查询内容" style="margin-right:15px" v-model="searchItem">
+                <input type="text" placeholder="请输入查询内容" style="margin-right:15px">
                 <el-button size="large" 
-                :icon= "Search"
+                type="success"
                 style="background-color: #409EFF;" 
                 >查询</el-button>
-                <el-button :icon="FolderAdd" style="background-color: #67C23A;">新增菜单</el-button>
+                <el-button type="primary" style="background-color: #67C23A;">新增菜单</el-button>
             </el-tol>
         </el-row>
             <!--中间信息内容-->
@@ -26,8 +26,8 @@
             </el-table>
               <!--分页器-->
             <el-pagination
-            v-model:current-page="currentPage4"
-            v-model:page-size="pageSize4"
+            :current-page="currentPage4"
+            :page-size="pageSize4"
             :page-sizes="[3,2]"
             :small="small"
             :disabled="disabled"

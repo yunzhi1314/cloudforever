@@ -1,7 +1,7 @@
 <template>
 <!-- 漫画页面 -->
     <div>
-        <!-- 漫画 -->
+        漫画
     </div>
 </template>
 

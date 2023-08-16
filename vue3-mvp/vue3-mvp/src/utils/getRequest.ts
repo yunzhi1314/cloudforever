@@ -37,7 +37,8 @@ export class Public extends Request {
   constructor() {
     super()
     this.dataList = reactive({
-      datas: ''
+      datas: '',
+      msg:''
     })
   }
   public getDataObj(

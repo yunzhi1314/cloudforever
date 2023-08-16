@@ -39,6 +39,7 @@ import req from '@/utils/request'
 
 const checked = ref(true)
 
+
 let data = new Public()
 data.getDataObj('/api/geshin/user/getCode', 'get', {})
 

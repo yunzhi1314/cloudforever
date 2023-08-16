@@ -175,8 +175,8 @@
         0 6px 12px rgba(0, 0, 0, .2);
         color: #fff;
         background: rgba(0,0,0,.5);
-        position: absolute;
-        z-index: 999;
+        position: relative;
+        z-index: 99;
         .left{
             flex:1;
             display: flex;

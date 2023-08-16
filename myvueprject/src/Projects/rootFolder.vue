@@ -1,18 +1,13 @@
+
 <template>
     <div>
-      <h1>神之眼</h1>
-      <main></main>
+      <h1>geshin.vue</h1>
+
     </div>
-
-
-
+ 
 </template>
 
 <script setup lang="ts">
-import  main from "@/Projects/geshin/main/index.vue"
-
-
-
 
 </script>
 

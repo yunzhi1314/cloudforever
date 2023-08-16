@@ -49,6 +49,7 @@ export class Public extends Request{
             typeof res.data == 'string' ? 
             (this.dataList.datas = res.data) : (this.dataList.datas)
          })
+         console.log(this.dataList);
        })
     }
 }

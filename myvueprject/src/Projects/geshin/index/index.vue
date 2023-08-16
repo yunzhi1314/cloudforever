@@ -1,14 +1,13 @@
+<template>
+  <div>
+          
+  </div>
+</template>
 
-    <template>
-        <div>
-          <h1>index</h1>
-        </div>
-    </template>
+<script setup lang="ts">
 
-    <script setup lang="ts">
-
-    </script>
+</script>
     
-    <style scoped>
+<style scoped>
     
-    </style>
+</style>

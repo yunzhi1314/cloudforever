@@ -3,7 +3,7 @@
         <div class="background">
             <span class="left-white"></span>
             <ul>
-                <li @click="redirect('mond')">蒙德城</li>
+                <li @click="redirect('mond')" class="active">蒙德城</li>
                 <li @click="redirect('liyue')">璃月港</li>
                 <li @click="redirect('ricewife')">稻妻城</li>
                 <li @click="redirect('sumeru')">须弥城</li>
@@ -40,7 +40,9 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+
 const router = useRouter()
+
 
 function redirect(routeName: any) {
     router.replace({ name: routeName })
@@ -57,7 +59,7 @@ function switchCVLanguage() {
 }
 </script>
   
-<style scoped lang="less">
+<style scoped lang="scss">
 .main {
     width: 100%;
     height: 100%;
@@ -86,11 +88,15 @@ function switchCVLanguage() {
             line-height: 54px;
 
             li {
-                background: url(../../../assets/下载.png);
                 background-repeat: no-repeat;
                 width: 370px;
                 height: 54px;
                 padding-left: 70px;
+                background-repeat: no-repeat;
+            }
+
+            .active {
+                background: url(../../../assets/下载.png);
             }
         }
 

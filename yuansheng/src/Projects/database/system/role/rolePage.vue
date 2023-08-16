@@ -18,11 +18,13 @@
         <el-table-column prop="TREE" label="TREE" />
         <el-table-column prop="much" label="线数" />
         <el-table-column prop="wuyu" label="研发管线"  />
-        <el-table-column prop="manipulate" label="操纵" width="110" >
-          <el-button link size="small">修改
-          </el-button>
-          <el-button>删除
-          </el-button>
+        <el-table-column prop="manipulate" label="操纵" style="display: flex;" width="100">
+          <template #default>
+        <el-button link type="primary" size="small"
+          >修改</el-button
+        >
+        <el-button link type="primary" size="small">删除</el-button>
+      </template>
         </el-table-column>
     </el-table>
 <!-- 尾部分页栏 -->

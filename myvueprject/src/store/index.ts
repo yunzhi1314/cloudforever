@@ -1,6 +1,6 @@
 import { createStore } from "vuex"
 import { RouteRecordRaw } from "vue-router"
-
+import childrenStor from "@/store/childrenStor"
 // 定义类型
 export interface RouteObj {
     icon: string;
@@ -32,6 +32,6 @@ export default createStore({
     },
     // namespaced:true,
     modules: {
-
+        childrenStor
     }
 })

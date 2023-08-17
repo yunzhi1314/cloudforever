@@ -24,11 +24,18 @@
 </template>
 
 <script setup lang="ts">
-import { reactive,onMounted,ref, onBeforeMount} from "vue";
-import {getData} from "@/utils/require"
+import { reactive,ref} from "vue";
+// import {getData} from "@/utils/require"
+import req from "@/utils/request"
+import { useStore } from "vuex";
 
- let data =  getData("/api/geshin/public")
- console.log(data.publicdata)
+let store = useStore()
+let dataV = ref()
+req.get("/api/geshin/public").then(res=>{
+  dataV.value=res.data
+  console.log( dataV.value.dataList.bottom)
+store.commit("childrenStor/getrequestData",dataV.value)
+})
 
 
 

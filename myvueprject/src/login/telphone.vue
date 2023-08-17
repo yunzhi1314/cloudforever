@@ -1,10 +1,10 @@
 <template>
-  <div class="box">
-    <section class="img">
+  <div class="box" @click="controlObj.isshowlogin = false" >
+    <section class="img" >
       <img :src="data.dataList.datas.logo" alt="图片加载失败" />
     </section>
 
-    <div class="box_1">
+    <div class="box_1" @click.stop>
       <div class="heath">
         <section>
           <span @click="offno.useno = false" :class="offno.useno ? '' : 'color'"
@@ -102,6 +102,7 @@ import { message } from '@/utils/tusi'
 //页面跳转判断条件
 import offno from '@/login/isno'
 import { reactive, watch } from 'vue'
+import controlObj from '@/utils/controls'; //开关的文件 
 // import router from '@/router'
 
 //图片

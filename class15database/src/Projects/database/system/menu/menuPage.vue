@@ -6,10 +6,13 @@
             <el-button class="blue-button"
              
               type="danger"
-              @click.prevent="handleAdd(num)"
+              @click.prevent="handleAdd(-1)"
               >新增菜单</el-button>
             </section>
-        <el-table :data="objList" style="width: 100%"   >
+        <el-table :data="objList" style="width: 100%"   
+        lazy
+        :load="load"
+        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
             <el-table-column   
             v-for="(item,index) in titleList" 
             :key="index" 
@@ -24,13 +27,13 @@
                 <span> 操纵</span>
               </template>
               <template #default="scope" class="link-a">
-                <a href="#" @click.prevent="handleAdd(num)">新增</a>
+                <a href="#" @click.prevent="handleAdd(-1)">新增</a>
                 <a href="#"  @click.prevent="handleEdit(scope.$index)">修改</a>
                 <a href="#" @click.prevent="handleDelete(scope.$index)">删除</a>
               </template>
 
             </el-table-column>
-            <addtDialog v-if="controlObj.menuAddEditFlag" :num="num"></addtDialog>
+            <addtDialog v-if="controlObj.menuAddEditFlag" ></addtDialog>
             <deletDialog v-if="controlObj.menuDeletFlag" :index="deleIndex" :List="objList"> 看看</deletDialog> 
             <!-- <deletDialog v-if="controlObj.deletFlag"   :parentProp="parentValue" > 看看</deletDialog> -->
             <!--  v-for="controlObj.deletFlag"-->
@@ -45,18 +48,46 @@ import addtDialog from "./menuAddEditFlag.vue"
     import { ref} from "vue"
     import controlObj from "@/utils/controls"
 
+  // 表格中间列下拉
+  // const load = (
+  // row: User,
+  // treeNode: unknown,
+  // resolve: (date: User[]) => void
+  //       ) => {
+  //         setTimeout(() => {
+  //           resolve([
+  //                 {
+  //                       CompanyName:"Merck",
+  //                       medication: "帕博利珠单抗",
+  //                       Target: 'PD-1',
+  //                       NumberOfLines: "GC1L",
+  //                       TreatmentMethod: "化疗",
+  //                       Area: "国际",
+  //                   },
+  //                   {
+  //                       CompanyName:"基石药业",
+  //                       medication: "舒格利单抗",
+  //                       Target: 'PD-1',
+  //                       NumberOfLines: "GC1L",
+  //                       TreatmentMethod: "化疗",
+  //                       Area: "国际",
+  //                   },
+  //           ])
+  //         }, 1000)
+  //       }
+
     // 新增方法
     const handleAdd=(index)=>{
       // console.log( "scope.$index, scope.row",item1, row1);
       controlObj.menuAddEditFlag=true
-      num.value=index
+      controlObj.menuAddEditnum=index
     }
 
     // 查询按钮
     const handleEdit=(index)=>{
       // console.log( "scope.$index, scope.row",item1, row1);
       controlObj.menuAddEditFlag=true
-      num.value=index
+      controlObj.menuAddEditnum=index
     }
 
     let titleList=Object.values(titleObj )
@@ -78,8 +109,6 @@ import addtDialog from "./menuAddEditFlag.vue"
 
     let search=ref('')
     
-     // 编辑的方法，创建一个变量，看是不是编辑，在数字直接转化，如果是-1就是保存，其他是变量
-     let num=ref(-1)
 
       
 

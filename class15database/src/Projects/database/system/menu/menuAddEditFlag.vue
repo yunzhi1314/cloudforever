@@ -3,7 +3,7 @@
        <teleport to="#app" >
         <dialog >
            <!-- <button > 跳转到学生列表页面</button> -->
-           <div class="div"><span class="title" >{{ props.num==-1?"新增菜单":"修改菜单"}}</span>
+           <div class="div"><span class="title" >{{  controlObj.menuAddEditnum==-1?"新增菜单":"修改菜单"}}</span>
 
             <el-icon  @click="changFun"><CloseBold /></el-icon>
 
@@ -34,8 +34,8 @@
                 <section class="foot" >
                 <span class="dialog-footer">
                     <el-button size="large" @click="changFun">取消</el-button>
-                    <el-button  size="large" type="primary" @click="props.num==-1?handleDelete():handleEdit()">
-                    {{ props.num==-1?"确认":"修改"}}
+                    <el-button  size="large" type="primary" @click=" controlObj.menuAddEditnum==-1?handleDelete():handleEdit()">
+                    {{ controlObj.menuAddEditnum==-1?"确认":"修改"}}
                     </el-button>
                 </span>
                 </section>
@@ -88,18 +88,18 @@
 
 
         // 接收父组件传递的属性（props）
-        const props = defineProps({
+        // const props = defineProps({
             // List: { type:Object, required: true },
-            num: { type: Number, required: true }
-        });
+        //     num: { type: Number, required: true }
+        // });
         
-        console.log(props.num,'numnumnumnum' );
+        // console.log(props.num,'numnumnumnum' );
         
 
-        // 点击修改后会写
-        if(props.num!=-1){
+        // 点击修改后回写
+        if( controlObj.menuAddEditnum!=-1){
             // 获取修改的对象
-            let objNow= objList[props.num]
+            let objNow= objList[ controlObj.menuAddEditnum]
             // 把对象变成数组
             let Valuearr=Object.values(objNow)
             // 遍历，修改输入框的数组
@@ -112,7 +112,8 @@
                 console.log(111,'修改了吗?' );
                 controlObj.menuAddEditFlag=false
                 newObj=newObjFun()
-                objList.splice(props.num,1,newObj )
+                objList.splice( controlObj.menuAddEditnum,1,newObj )
+                controlObj.menuAddEditnum=-1
             }
 
             // 点击添加的确认按钮
@@ -121,6 +122,7 @@
                   console.log('111objList');
                 newObj=newObjFun()
                 objList.push(newObj )
+               
             }
 
             // 获取输入框的值成一个对象

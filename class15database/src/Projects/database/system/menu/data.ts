@@ -8,6 +8,7 @@ interface menuObj{
     NumberOfLines: string;
     TreatmentMethod: string;
     Area: string;
+    children?:any;
 }
 
 export let titleObj=reactive<menuObj>({CompanyName:'所属公司',medication:'药物名称',
@@ -32,6 +33,24 @@ export let objList=reactive<Array< menuObj>>([
                         NumberOfLines: "GC1L",
                         TreatmentMethod: "化疗",
                         Area: "国际",
+                        children:[
+                            {
+                                CompanyName:"基石药业",
+                                medication: "帕博利珠单抗",
+                                Target: 'PD-1',
+                                NumberOfLines: "GC1L",
+                                TreatmentMethod: "化疗",
+                                Area: "国际",
+                            },
+                            {
+                                CompanyName:"基石药业",
+                                medication: "舒格利单抗",
+                                Target: 'PD-1',
+                                NumberOfLines: "GC1L",
+                                TreatmentMethod: "化疗",
+                                Area: "国际",
+                            },
+                        ]
                     },
                     {
                         CompanyName:"方生物",

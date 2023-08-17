@@ -84,6 +84,19 @@ export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:str
    return dataList
 }
 
+export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:string){
+   let dataList = reactive<DataList>({
+    datas:"",
+    msg:"",
+   })
+
+   req[method](url,data).then((res:any) =>{
+    typeof res.data == "string" ? (dataList.datas == res.data) : (dataList.datas = {...res.data[propName]})
+   })
+
+   return dataList
+}
+
 // 自己添加的get 请求   
 export function getData(url:string,data:any){
     let dataList = reactive({
@@ -100,5 +113,4 @@ export function getData(url:string,data:any){
          url == "/geshin/index/page2" ?  dataList.page2  =  res.data:
          url == " /getCode"  ? dataList.getCode = res.data  :""
     })
-    return dataList
 }

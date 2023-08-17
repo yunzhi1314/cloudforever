@@ -11,11 +11,14 @@
 <script setup lang="ts">
 import { reactive } from "vue"
 import { useRouter } from "vue-router";
+import { roleData } from "@/utils/roledata.ts"
+
+roleData()
 
 let $router = useRouter()
 
 let citys = reactive([
-    '蒙德城', '璃月港', '稻妻城', '须弥城', '枫丹延'
+    '蒙德城', '璃月港', '稻妻城', '须弥城'
 ])
 
 function changeRouter(item: string) {

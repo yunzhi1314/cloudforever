@@ -24,9 +24,9 @@
             </div>
             <div class="Carousel">
                 <div class="left"></div>
-                <div>
-
-                    <p></p>
+                <div v-for="(item, index) in charList" :key="index">
+                    <img :src="'../../assets/' + item.avatar" alt="">
+                    <p>{{ item.charName }}</p>
                 </div>
                 <div class="right"></div>
             </div>
@@ -36,6 +36,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import useCharacter from '@/store/modules/Character'
+
+const Character = useCharacter()
+Character.getData()
+const charList = Character.characterList
 
 const cvText = ref('林簌')
 
@@ -58,7 +63,7 @@ function switchCVLanguage() {
         height: 800px;
         background: url(../../../assets/one.png);
         background-repeat: no-repeat;
-        background-size: 100vw 100vh;
+        background-size: 1349px 800px;
 
         .left-white {
             width: 2px;

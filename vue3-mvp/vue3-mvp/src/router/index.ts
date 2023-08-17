@@ -47,11 +47,6 @@ const routes: Array<RouteRecordRaw> = [
             name: '须弥城',
             component: () => import('@/Projects/geshin/roles/layout.vue')
           },
-          {
-            path: '/character/fontaine',
-            name: '枫丹延',
-            component: () => import('@/Projects/geshin/roles/layout.vue')
-          },
         ],
       },
       // {

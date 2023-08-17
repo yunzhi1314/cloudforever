@@ -79,7 +79,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/login/password.vue')
   },
   {
-    path: "/",
+    path: "/database",
     name: "database",
     component: () => import('@/Projects/database/index.vue'),
     children: [

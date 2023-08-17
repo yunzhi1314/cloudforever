@@ -26,6 +26,13 @@ service.interceptors.request.use(
 
     // 检测token权限,检测令牌
     // 设置权限头 Authorization
+    // 检测token权限，设置权限头
+    let token = localStorage.getItem("token")
+    if (token) {
+      config.headers = {
+        "Authorization": token
+      } as AxiosRequestHeaders
+    }
 
     return config;
   },

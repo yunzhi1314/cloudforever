@@ -29,7 +29,7 @@
   "src/**/*.js",
   "src/**/*.d.ts",
   "src/**/*.tsx",
-  "src/**/*.vue", "scripts/generateView.mjs", "scripts/template.mjs", "src/scripts/generateView.mjs", "src/scripts/template.mjs", "scripts/generateComponent.mjs",
+  "src/**/*.vue", "scripts/generateView.mjs", "scripts/template.mjs",
   ],
   "exclude": ["vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }] //每个引用的`path`属性都可以指向到包含`tsconfig.json`文件的目录，或者直接指向到配置文件本身（名字是任意的）

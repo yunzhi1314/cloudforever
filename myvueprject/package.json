@@ -7,9 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
-    "node:comp": "node ./scripts/generateComponent.mjs",
-    "new:view": "node ./scripts/generateView.mjs"
+    "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/"
   },
   "dependencies": {
     "@types/node": "^20.5.0",
@@ -17,21 +15,22 @@
     "chalk": "4.1.2",
     "element-plus": "^2.3.9",
     "qs": "^6.11.2",
-    "sass": "^1.65.1",
-    "sass": "^1.65.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "echarts": "^5.4.3",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-vue": "^9.17.0",
     "prettier": "^3.0.1",
+    "sass": "^1.65.1",
     "stylelint": "^15.10.2",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "^34.0.0",

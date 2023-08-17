@@ -77,7 +77,18 @@ const routes: Array<RouteRecordRaw> = [
     path: '/password',
     name: 'password',
     component: () => import('@/login/password.vue')
-  }
+  },
+  {
+    path: "/",
+    name: "database",
+    component: () => import('@/Projects/database/index.vue'),
+    children: [
+      {
+        path: "home",
+        name: "home",
+        component: () => import('@/Projects/database/home/index.vue'),
+      },]
+    }
 ]
 
 const router = createRouter({

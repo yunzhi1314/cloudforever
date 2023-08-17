@@ -1,6 +1,6 @@
 <template>
-    <div>
-
+    <div class="dialog">
+        <div></div>
     </div>
 </template>
 
@@ -8,6 +8,6 @@
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

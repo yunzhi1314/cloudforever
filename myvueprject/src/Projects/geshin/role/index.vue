@@ -121,7 +121,7 @@ let isNav = ref<boolean>(false)
   // 控制播音开关
 let isback = ref(false)
 // 渲染导航栏的数据
-interface Nav{
+interface Nav{ 
   isNav:boolean
   cty:string
 }

@@ -24,10 +24,15 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
-// import {Public} from "@/utils/require"
-//  let  da = new Public
-//  da.getDataObj("/api/geshin/public","get",{})
+import { reactive,onMounted,ref, onBeforeMount} from "vue";
+import {getData} from "@/utils/require"
+
+ let data =  getData("/api/geshin/public")
+ console.log(data.publicdata)
+
+
+
+
 
 
 const textcontent = reactive([

@@ -51,7 +51,6 @@
               @click="cold"
               >{{ '获取验证码' }}</span
             >
-
             <section
               v-show="(index == 0 || offno.useno) && !item.zz.test(item.value)"
               style="color: red"

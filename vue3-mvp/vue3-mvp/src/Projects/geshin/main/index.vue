@@ -1,5 +1,5 @@
 <template>
-<!-- 首页页面 -->
+    <!-- 首页页面 -->
     <div>
         <!-- 动画页面导入 -->
         <animationVue v-show="controlObj.isAnimationShow"></animationVue>
@@ -14,10 +14,10 @@
             </section>
             <!-- 中间 -->
             <div class="middle">
-                <span class="border" :style="{transform: `translate(${transform1}vw)`}"></span>
+                <span class="border" :style="{ transform: `translate(${transform1}vw)` }"></span>
                 <ul class="list">
                     <li v-for="(item) in list" :key="item.id" @click="toTitle(item.id)">
-                        <section :class="item.status ? 'new_section' : ''" >{{ item.title }}</section>
+                        <section :class="item.status ? 'new_section' : ''">{{ item.title }}</section>
                     </li>
                 </ul>
                 <span class="border"></span>
@@ -100,104 +100,104 @@
     
     console.log(req.dataList);
 
-    // 动画页面消失
-    watch(
-        controlObj,
-        (newVal) => {
-            // 动画播放需要 0.5s，需要播放后再消失
-            setTimeout(() => {
-                newVal.isPlay ? 
-                newVal.isAnimationShow = false:
+// 动画页面消失
+watch(
+    controlObj,
+    (newVal) => {
+        // 动画播放需要 0.5s，需要播放后再消失
+        setTimeout(() => {
+            newVal.isPlay ?
+                newVal.isAnimationShow = false :
                 newVal.isAnimationShow = true
             },5000)
         }
     )
 
 
-    // 表单接口
-    interface data{
-        id:number
-        title:string
-        status:boolean
-        name:string
-    }
-    
-    // 表单数据
-    const list:Array<data> = reactive([
-        {
-            id:0,
-            title:'首页',
-            status:true,
-            name:'index'
-        },
-        {
-            id:1,
-            title:'新闻',
-            status:false,
-            name:'news'
-        },
-        {
-            id:2,
-            title:'角色',
-            status:false,
-            name:'roles'
-        },
-        {
-            id:3,
-            title:'世界',
-            status:false,
-            name:'world'
-        },
-        {
-            id:4,
-            title:'漫画',
-            status:false,
-            name:'comic'
-        },
-        {
-            id:5,
-            title:'社区',
-            status:false,
-            name:'community'
-        },
-        {
-            id:6,
-            title:'赛事',
-            status:false,
-            name:'match'
-        },
+// 表单接口
+interface data {
+    id: number
+    title: string
+    status: boolean
+    name: string
+}
 
-    ])
+// 表单数据
+const list: Array<data> = reactive([
+    {
+        id: 0,
+        title: '首页',
+        status: true,
+        name: 'index'
+    },
+    {
+        id: 1,
+        title: '新闻',
+        status: false,
+        name: 'news'
+    },
+    {
+        id: 2,
+        title: '角色',
+        status: false,
+        name: 'roles'
+    },
+    {
+        id: 3,
+        title: '世界',
+        status: false,
+        name: 'world'
+    },
+    {
+        id: 4,
+        title: '漫画',
+        status: false,
+        name: 'comic'
+    },
+    {
+        id: 5,
+        title: '社区',
+        status: false,
+        name: 'community'
+    },
+    {
+        id: 6,
+        title: '赛事',
+        status: false,
+        name: 'match'
+    },
+
+])
 
 
-    // 导航栏点击效果与跳转
-    let toTitle = (id:string) => {
-        // 点击时所有高光关闭，并且方块进行偏移
-        list.forEach( item => {
-            item.status = false;
-            transform1.value = 7 * +id
-        })
+// 导航栏点击效果与跳转
+let toTitle = (id: string) => {
+    // 点击时所有高光关闭，并且方块进行偏移
+    list.forEach(item => {
+        item.status = false;
+        transform1.value = 7 * +id
+    })
 
-        // 点击获得高光
-        list[id].status = true
+    // 点击获得高光
+    list[id].status = true
 
-        // 路由跳转
-        router.push({
-            name:list[id].name
-        })
-    }
+    // 路由跳转
+    router.push({
+        name: list[id].name
+    })
+}
 
-    
+
 
 </script>
 
 
 <style scoped lang="scss">
-    .header{
-        height: 10vh;
-        width: 100vw;
-        display: flex;
-        box-shadow: 
+.header {
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    box-shadow:
         0 6px 12px rgba(0, 0, 0, .2);
         color: #fff;
         background: rgba(0,0,0,.5);
@@ -255,11 +255,12 @@
                         0 0 10px #88e4e4,
                         0 0 15px #00ffff,
                         0 0 20px #00ffff;
-                    }
                 }
             }
-            .list>li:hover section{
-                text-shadow:
+        }
+
+        .list>li:hover section {
+            text-shadow:
                 0 0 10px #88e4e4,
                 0 0 15px #00ffff,
                 0 0 20px #00ffff;

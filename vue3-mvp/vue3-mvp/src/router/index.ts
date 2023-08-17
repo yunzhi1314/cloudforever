@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory,RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -7,90 +7,85 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/Projects/geshin/index.vue')
   },
   {
-    path:"/main",
-    name:"main",
-    component:() =>import('@/Projects/geshin/main/index.vue'),
-    children:[
+    path: "/main",
+    name: "main",
+    component: () => import('@/Projects/geshin/main/index.vue'),
+    children: [
       {
-        path:"index",
-        name:"index",
-        component:() =>import('@/Projects/geshin/index/index.vue')
+        path: "index",
+        name: "index",
+        component: () => import('@/Projects/geshin/index/index.vue')
       },
       {
-        path:"news",
-        name:"news",
-        component:() =>import('@/Projects/geshin/news/news.vue')
+        path: "news",
+        name: "news",
+        component: () => import('@/Projects/geshin/news/news.vue')
       },
       {
-        path: "/roles",
-        name: "roles",
-        redirect: "/roles/mond",
-        component: () => import("@/Projects/geshin/roles/mond.vue"),
+        path: '/character',
+        name: 'roles',
+        component: () => import('@/Projects/geshin/roles/character.vue'),
+        redirect: '/character/mondstadt',
         children: [
           {
-            path: "/roles/mond",
-            name: "mond",
-            component: () => import("@/Projects/geshin/roles/parentfile.vue")
+            path: '/character/mondstadt',
+            name: '蒙德城',
+            component: () => import('@/Projects/geshin/roles/layout.vue')
           },
           {
-            path: "/roles/liyue",
-            name: "liyue",
-            component: () => import("@/Projects/geshin/roles/parentfile.vue")
+            path: '/character/liyue',
+            name: '璃月港',
+            component: () => import('@/Projects/geshin/roles/layout.vue')
           },
           {
-            path: "/roles/ricewife",
-            name: "ricewife",
-            component: () => import("@/Projects/geshin/roles/parentfile.vue")
+            path: '/character/inazuma',
+            name: '稻妻城',
+            component: () => import('@/Projects/geshin/roles/layout.vue')
           },
           {
-            path: "/roles/sumeru",
-            name: "sumeru",
-            component: () => import("@/Projects/geshin/roles/parentfile.vue")
+            path: '/character/sumeru',
+            name: '须弥城',
+            component: () => import('@/Projects/geshin/roles/layout.vue')
           },
-          {
-            path: "/roles/fengdanyan",
-            name: "fengdanyan",
-            component: () => import("@/Projects/geshin/roles/parentfile.vue")
-          }
-        ]
-        },
+        ],
+      },
       // {
       //   path:"world",
       //   name:"world",
       //   component:() =>import('@/Projects/geshin/world/world.vue')
       // },
       {
-        path:"comic",
-        name:"comic",
-        component:() =>import('@/Projects/geshin/comic/comic.vue')
+        path: "comic",
+        name: "comic",
+        component: () => import('@/Projects/geshin/comic/comic.vue')
       },
       {
-        path:"community",
-        name:"community",
-        component:() =>import('@/Projects/geshin/community/community.vue')
+        path: "community",
+        name: "community",
+        component: () => import('@/Projects/geshin/community/community.vue')
       },
       {
-        path:"match",
-        name:"match",
-        component:() =>import('@/Projects/geshin/match/match.vue')
+        path: "match",
+        name: "match",
+        component: () => import('@/Projects/geshin/match/match.vue')
       },
-      
+
     ]
   },
   {
-    path:"/register",
-    name:"register",
-    component:() =>import('@/Projects/geshin/register/register.vue')
+    path: "/register",
+    name: "register",
+    component: () => import('@/Projects/geshin/register/register.vue')
   },
   {
-    path:"/login/captcha",
-    name:"captcha",
-    component:()=>import('@/Projects/geshin/login/captcha.vue')
+    path: "/login/captcha",
+    name: "captcha",
+    component: () => import('@/Projects/geshin/login/captcha.vue')
   },
   {
-    path:"/login/password",
-    name:"password",
-    component:()=>import('@/Projects/geshin/login/password.vue')
+    path: "/login/password",
+    name: "password",
+    component: () => import('@/Projects/geshin/login/password.vue')
   }
 ];
 

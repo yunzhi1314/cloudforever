@@ -137,10 +137,13 @@ import type { Ref } from 'vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import req from '@/utils/request'
-req.get('/database/layout/menu').then((res) => {
-    console.log(res);
-    
-})
+import { PublicGet } from '@/utils/require'
+
+let database = new PublicGet('/database/layout/menu')
+
+console.log(database)
+console.log(database);
+
 const router = useRouter()
 let isCollapse = ref(false)
 const handleOpen = (key: string, keyPath: string[]) => {

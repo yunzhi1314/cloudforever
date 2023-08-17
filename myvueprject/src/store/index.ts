@@ -32,6 +32,6 @@ export default createStore({
     },
     // namespaced:true,
     modules: {
-        childrenStor
+        childrenStor,
     }
 })

@@ -10,9 +10,16 @@
       <div></div>
       <!-- 侧边导航 -->
       <nav>
-        <li v-for="(item, index) in arrNav" :key="index" 
-        :style="item.isNav? 'background-image: linear-gradient(to left,rgba(0,0,0,0),rgba(0,0,0,0.4),rgba(0,0,0,0.6))' : ''"
-        @click="openNav(index)">
+        <li
+          v-for="(item, index) in arrNav"
+          :key="index"
+          :style="
+            item.isNav
+              ? 'background-image: linear-gradient(to left,rgba(0,0,0,0),rgba(0,0,0,0.4),rgba(0,0,0,0.6))'
+              : ''
+          "
+          @click="openNav(index)"
+        >
           <span class="canvas"></span>
           <span>{{ item.cty }}</span>
         </li>
@@ -92,60 +99,103 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { Roules } from '@/utils/require';
+import { getRolesdata } from '@/utils/RolesData'
+import { useStore } from 'vuex'
 
+//请求角色数据
+getRolesdata()
+interface Date {
+  city: string
+  key: string
+  bg: Array<string>
+  character: Array<Character>
+}
+interface Character {
+  title: string
+  name: string
+  attr: string
+  introduce: string
+  roleImg: string
+  sentence: string
+  cv: Array<Cv>
+}
+interface Cv {
+  audio: Array<string>
+  name: string
+}
 
-//请求数据
-let data = new Roules()
-data.Rolesfun("/api/geshin/roles")
-console.log("角色数据",data);
+let { dataList } = useStore().state.childrenStor.requestData
+let newData = reactive<Date>({
+  city: '',
+  key: '',
+  bg: [''],
+  character: [
+    {
+      title: '',
+      name: '',
+      attr: '',
+      introduce: '',
+      roleImg: '',
+      sentence: '',
+      cv: [
+        {
+          audio: [''],
+          name: ''
+        }
+      ]
+    }
+  ]
+})
+newData = dataList
+// 导航名
+if(dataList[0]){
+  console.log("333",newData);
+  
+}
 
 
 
 
 //点击导航栏
-function openNav(index:number = 0){
-  for(let i = 0 ; i <arrNav.length; i ++){
-    if(i == index){
+function openNav(index: number = 0) {
+  for (let i = 0; i < arrNav.length; i++) {
+    if (i == index) {
       arrNav[i].isNav = true
-    }else{
+    } else {
       arrNav[i].isNav = false
     }
   }
-
-  
-
 }
 
-  //控制角色导航栏开关
+//控制角色导航栏开关
 let isNav = ref<boolean>(false)
-  // 控制播音开关
+// 控制播音开关
 let isback = ref(false)
 // 渲染导航栏的数据
-interface Nav{ 
-  isNav:boolean
-  cty:string
+interface Nav {
+  isNav: boolean
+  cty: string
 }
-let arrNav =reactive<Array<Nav>>([
+let arrNav = reactive<Array<Nav>>([
   {
-     isNav:false,
-     cty: '蒙德城'
+    isNav: false,
+    cty: '蒙德城'
   },
   {
-    isNav:false,
-     cty: '璃月港'
+    isNav: false,
+    cty: '璃月港'
   },
   {
-    isNav:false,
-     cty: '稻妻城'
+    isNav: false,
+    cty: '稻妻城'
   },
   {
-    isNav:false,
-     cty: '须婗城'
+    isNav: false,
+    cty: '须婗城'
   },
   {
-    isNav:false,
-     cty: '敬请期待'
+    isNav: false,
+    cty: '敬请期待'
   }
 ])
 let arrobj = [

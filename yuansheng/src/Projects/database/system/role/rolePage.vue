@@ -2,14 +2,14 @@
   <div class="div01">
     <!-- 查询输入框 -->
     <div>
-      <el-input class="input1" v-model="input" placeholder="请输入查询内容" />
+      <el-input class="input1" v-model="inputs" placeholder="请输入查询内容" />
       <el-button
         type="primary"
         style="width: 5vw; height: 4vh; margin-left: 1vw"
         :icon="Search"
         >查询</el-button
       >
-      <el-button type="success" style="width: 7vw; height: 4vh"
+      <el-button type="success" style="width: 7vw; height: 4vh ;" @click="conObj.conDialog = true"
         ><el-icon>
           <FolderAdd /> </el-icon
         >新增菜单</el-button
@@ -71,12 +71,8 @@
 import { reactive, ref } from 'vue'
 import DialogFun from "@/components/dialog"
 import type { Ref } from 'vue'
-<<<<<<<<< Temporary merge branch 1
-import  DialogFun  from "@/components/dialog"
+import {conObj} from '@/utils/controls'
 
-=========
-import { dialog } from '@/components/dialog'
->>>>>>>>> Temporary merge branch 2
 import {
   Check,
   Delete,
@@ -86,12 +82,12 @@ import {
   Star
 } from '@element-plus/icons-vue'
 // 输入框
-const input = ref('')
+let inputs = ref('')
 // 表格
-const tableData = [
+ let tableData = reactive([
   {
     date: 'AK105+化疗',
-    name: '康方生物',
+    name: 'wjx',
     address: '鳞癌',
     people: '350',
     ORR: '70%',
@@ -103,7 +99,7 @@ const tableData = [
   },
   {
     date: 'AK105+化疗',
-    name: '康方生物',
+    name: 'wt',
     address: '鳞癌',
     people: '350',
     ORR: '70%',
@@ -221,9 +217,10 @@ const tableData = [
     much: '1',
     wuyu: 'I'
   }
-]
+])
+
 let arr2 = Reflect.ownKeys(tableData[0]) as Array<string>
-console.log(arr2)
+
 let arr = [
   '药物名称',
   '所属公司',
@@ -236,6 +233,8 @@ let arr = [
   '线数',
   '研发管线'
 ]
+
+
 // 下方分页
 const currentPage4 = ref(1)
 const pageSize4: Ref<number> = ref(5)
@@ -248,6 +247,7 @@ const handleCurrentChange = () => {
 }
 // 切换页面
 let tableData2: any[] = reactive([])
+
 function fun() {
   tableData2 = tableData.slice(
     (currentPage4.value - 1) * pageSize4.value,
@@ -255,6 +255,8 @@ function fun() {
   )
 }
 fun()
+
+
 </script>
 
 <style scoped>

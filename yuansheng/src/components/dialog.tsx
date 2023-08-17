@@ -12,10 +12,16 @@ export default function DialogFun(arr: fun) {
         fromData[item] = ""
     })
     console.log(fromData);
+
     function add() {
-        console.log(fromData);
+        conObj.conDialog = false
 
     }
+
+    function off(){
+        conObj.conDialog = false
+    }
+
     return (
         <Teleport to="#app">
             <div class="dialog" style={conObj.conDialog ? 'display: flex;' : 'display:none'}>
@@ -24,7 +30,7 @@ export default function DialogFun(arr: fun) {
                         style="display: flex;
                         justify-content: space-between;">
                         <span>新增表单</span>
-                        <span>X</span>
+                        <span onClick={off} style={"cursor: pointer"}>X</span>
                     </section>
                     <el-form
                         label-position="left"
@@ -41,20 +47,20 @@ export default function DialogFun(arr: fun) {
                                 <el-form-item
                                     label={item}
                                     prop="input85105"
-                                    style="width=`100px`"
-                                >
-                                    <el-input type="text" v-model={fromData[arr.arrpase[index]]} clearable></el-input>
+                                    style="width=`100px`">
+                                    <el-input type="text" v-model={fromData[arr.arrpase[index]]}></el-input>
                                 </el-form-item>
-
                             )
                         })}
                     </el-form>
                     <section>
                         <button onClick={add}>添加</button>
-                        <button>取消</button>
+                        <button onClick={off}>取消</button>
                     </section>
                 </div>
             </div>
         </Teleport>
     )
+
+
 }

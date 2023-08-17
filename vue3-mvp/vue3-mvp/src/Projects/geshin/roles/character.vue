@@ -4,18 +4,22 @@
             <li v-for="item in citys" :key="item" @click="changeRouter(item)" class="active">{{ item }}</li>
             <li>敬请期待</li>
         </ul>
-        <router-view></router-view>
+        <!-- 想想这里加key的原因,并且这里一定要加key,很重要 -->
+        <router-view :key="<string>$route.name"></router-view>
     </div>
 </template>
 
 <script setup lang="ts">
 import { reactive } from "vue"
-import { useRouter } from "vue-router";
-import { roleData } from "@/utils/roledata.ts"
+import { useRouter, useRoute } from "vue-router";
 
-roleData()
-
+/* 
+think twice,code once 
+想明白再写,把我写的和你自己写的对比一下,想想为什么要这样写
+*/
 let $router = useRouter()
+let $route = useRoute()
+
 
 let citys = reactive([
     '蒙德城', '璃月港', '稻妻城', '须弥城'
@@ -24,9 +28,10 @@ let citys = reactive([
 function changeRouter(item: string) {
     $router.push({
         name: item,
-        params: {
-            city: item
-        }
+        // 这里不需要带参数
+        // params: {
+        //     city: item
+        // }
     })
 }
 

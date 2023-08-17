@@ -1,81 +1,35 @@
 import { defineStore } from "pinia";
-import type { CharacterType } from './types/CharacterType'
+import type { CharacterStoreType } from './types/CharacterType'
+import { roleData } from "@/utils/roledata";
 
 let useCharacter = defineStore('character', {
-    state(): CharacterType {
+    state(): CharacterStoreType {
         return {
-            characterList: [
-                {
-                    charName: '琴',
-                },
-                {
-                    charName: '安柏'
-                },
-                {
-                    charName: '丽莎'
-                },
-                {
-                    charName: '芭芭拉'
-                },
-                {
-                    charName: '温迪'
-                },
-                {
-                    charName: '可莉'
-                },
-                {
-                    charName: '诺艾尔'
-                },
-                {
-                    charName: '菲谢尔'
-                },
-                {
-                    charName: '砂糖'
-                },
-                {
-                    charName: '莫娜'
-                },
-                {
-                    charName: '迪奥娜'
-                },
-                {
-                    charName: '阿贝多'
-                },
-                {
-                    charName: '罗莎莉亚'
-                },
-                {
-                    charName: '优菈'
-                },
-                {
-                    charName: '米卡'
-                },
-                {
-                    charName: '班尼特'
-                },
-                {
-                    charName: '雷泽'
-                },
-                {
-                    charName: '埃洛伊'
-                },
-                {
-                    charName: '迪卢克'
-                },
-                {
-                    charName: '凯亚'
-                },
-            ],
+            DataList: [],
+            bg: [],
+            city: '',
+            key: '',
+            character: []
         }
     },
     actions: {
-        getData(): void {
-            for (let i = 1; i <= 20; i++) {
-                Object.assign(this.characterList[i - 1], {
-                    'avatar': `src/assets/imgs/avatar/${i}.png`,
-                })
+        async getData(name: string) {
+            if (!this.DataList[0]) this.DataList = (await roleData()).data.dataList
+            let index: number = 0
+            switch (name) {
+                case '蒙德城':
+                    index = 0; break;
+                case '璃月港':
+                    index = 1; break;
+                case '稻妻城':
+                    index = 2; break;
+                case '须弥城':
+                    index = 3; break;
             }
-            console.log(this.characterList);
+            this.city = this.DataList[index].city
+            this.key = this.DataList[index].key
+            this.bg = this.DataList[index].bg
+            this.character = this.DataList[index].character
         }
     }
 })

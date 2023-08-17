@@ -1,13 +1,5 @@
-import { createStore } from "vuex";
-import { RouteRecordRaw } from "vue-router";
+import { createPinia } from "pinia";
 
-export default createStore({
-    state:{
-        codeData:'',
-    },
-    mutations:{
-        setCodeData(state,data:any){
-            this.codeData=data
-        }
-    }
-})
+const pinia = createPinia()
+
+export default pinia

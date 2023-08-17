@@ -1,56 +1,23 @@
 <template>
     <div class="main">
-        <div class="background">
-            <span class="left-white"></span>
-            <div class="main-body">
-                <span></span>
-                <img src="../../../assets/name.png" alt="">
-                <div class="main-body-two">
-                    <div>CV: {{ cvText }}</div>
-                    <div></div>
-                </div>
-                <div class="cv-switch" @click="switchCVLanguage">
-                    <p>中</p>
-                    <p>日</p>
-                </div>
-                <div class="introduce">
-                    <div>
-                        <p>身为西风骑土团的代理团长，琴直忠于职守，为人们带来安宁。虽然并非天赋异票，但通过刻苦训练，如今的她然能够独当一面。
-                            <br>
-                            当风魔龙的威胁开始临近，这位可靠的代理团长早已做好了准备，誓要守护蒙德。
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="Carousel">
-                <div class="left"></div>
-                <div v-for="(item, index) in charList" :key="index">
-                    <img :src="'../../assets/' + item.avatar" alt="">
-                    <p>{{ item.charName }}</p>
-                </div>
-                <div class="right"></div>
-            </div>
-        </div>
+
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import useCharacter from '@/store/modules/Character'
+import { useRoute } from 'vue-router';
 
+let $route = useRoute()
 const Character = useCharacter()
-Character.getData()
-const charList = Character.characterList
-
-const cvText = ref('林簌')
-
-function switchCVLanguage() {
-    if (cvText.value === '林簌') {
-        cvText.value = '斋腾千合'
-    } else {
-        cvText.value = '林簌'
-    }
-}
+let charList, bg;
+Character.getData(<string>$route.name).then(res => {
+    charList = Character.character
+    bg = Character.bg
+    console.log(charList);
+    console.log(bg);
+})
 </script>
   
 <style scoped lang="scss">

@@ -1,0 +1,174 @@
+<template>
+    <el-main>
+        <section  class="top-input" > 
+            <el-input v-model="search" placeholder="请输入查询内容" />
+            <el-button  @click="handleQurie()" >查询</el-button>
+            <!-- <el-button  @click="reqMenuData()" >请求数据</el-button> -->
+            <el-button class="blue-button"
+             
+              type="danger"
+              @click.prevent="handleAdd(-1)"
+              >新增菜单</el-button>
+            </section>
+        <el-table :data="objList" style="width: 100%"   
+        lazy
+        :load="load"
+        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
+            <el-table-column   
+            v-for="(item,index) in titleList" 
+            :key="index" 
+            :label="item" >
+            <template #default="scope">
+              <span> {{scope.row[PorpList[index]]}}</span>
+              </template>
+          </el-table-column>
+            <!--:prop="item"   <el-table-column label="Name" prop="name" /> -->
+            <el-table-column align="right">
+              <template #header>
+                <span> 操纵</span>
+              </template>
+              <template #default="scope" class="link-a">
+                <a href="#" @click.prevent="handleAdd(-1)">新增</a>
+                <a href="#"  @click.prevent="handleEdit(scope.$index)">修改</a>
+                <a href="#" @click.prevent="handleDelete(scope.$index)">删除</a>
+              </template>
+
+            </el-table-column>
+            <addtDialog v-if="controlObj.menuAddEditFlag" ></addtDialog>
+            <deletDialog v-if="controlObj.menuDeletFlag" :index="deleIndex" :List="objList"> 看看</deletDialog> 
+            <!-- <deletDialog v-if="controlObj.deletFlag"   :parentProp="parentValue" > 看看</deletDialog> -->
+            <!--  v-for="controlObj.deletFlag"-->
+          </el-table>
+    </el-main>
+</template>
+
+<script setup lang="ts">
+import deletDialog from "@/components/deletDialog.vue"
+import addtDialog from "./menuAddEditFlag.vue"
+   import{titleObj,objList,reqMenuData}from "./data"
+    import { ref} from "vue"
+    import controlObj from "@/utils/controls"
+
+  // 表格中间列下拉
+  // const load = (
+  // row: User,
+  // treeNode: unknown,
+  // resolve: (date: User[]) => void
+  //       ) => {
+  //         setTimeout(() => {
+  //           resolve([
+  //                 {
+  //                       CompanyName:"Merck",
+  //                       medication: "帕博利珠单抗",
+  //                       Target: 'PD-1',
+  //                       NumberOfLines: "GC1L",
+  //                       TreatmentMethod: "化疗",
+  //                       Area: "国际",
+  //                   },
+  //                   {
+  //                       CompanyName:"基石药业",
+  //                       medication: "舒格利单抗",
+  //                       Target: 'PD-1',
+  //                       NumberOfLines: "GC1L",
+  //                       TreatmentMethod: "化疗",
+  //                       Area: "国际",
+  //                   },
+  //           ])
+  //         }, 1000)
+  //       }
+
+    // 新增方法
+    const handleAdd=(index)=>{
+      // console.log( "scope.$index, scope.row",item1, row1);
+      controlObj.menuAddEditFlag=true
+      controlObj.menuAddEditnum=index
+    }
+
+      let list003=ref(reqMenuData()) 
+      if(list003.value){
+        console.log('list003',list003.value);
+        
+      }
+
+    // 查询按钮
+    const handleEdit=(index)=>{
+      // console.log( "scope.$index, scope.row",item1, row1);
+      controlObj.menuAddEditFlag=true
+      controlObj.menuAddEditnum=index
+    }
+
+    let titleList=Object.values(titleObj )
+    let PorpList=Object.keys(titleObj )
+
+   
+
+
+    // 确定删除的下标，
+    let deleIndex=ref('')
+    
+    // 删除的方法
+    const handleDelete:any=(index:any)=>{
+      controlObj.menuDeletFlag=true
+      console.log( "scope.$index, scope.row",index);
+      deleIndex.value=index
+      // objList.splice(index,1)
+    }
+
+    let search=ref('')
+    
+
+      
+
+    // 查询按钮
+    // const handleEdit=(item1:any, row1:any)=>{
+    //   console.log( "scope.$index, scope.row",item1, row1);
+    // }
+    
+    // 查询 用过滤的方法把
+    let handleQurie=()=>{
+      console.log("index:any,item:any");
+      
+    }
+
+
+</script>
+
+
+<style scoped lang="scss">
+  .el-main{
+    height: 100%;
+      width: 100%;
+    .top-input{
+      margin:0 0 16px 0;
+    }
+    .el-input{
+            width: 200px;
+            margin-right:10px ;
+          }
+          .el-button{
+            color: white;
+            border:none;
+            background-color:#409eff ;
+           
+          }
+          .blue-button{
+            background-color:#67c23a ;
+          }
+          // background-color: #eee;
+          background-color: white;
+          // margin: 30px 0 0 30px;
+          // box-shadow: 10px ;
+          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3),
+          2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .cell{
+          a{
+            color: blue;
+            text-decoration: none;
+            margin: 10px;
+          }
+        }
+        .el-table .el-table__cell{
+          text-align: center;
+        } 
+</style>

@@ -1,8 +1,9 @@
-import {reactive} from "vue"
+import { reactive } from "vue"
 
 const controlObj = reactive({
-  isFilter:false,
-  menuDeletFlag:false
+  isFilter: false,
+  menuDeletFlag: false,
+  menuAddFlag: false
 })
 
 export default controlObj

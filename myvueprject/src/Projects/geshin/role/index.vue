@@ -93,11 +93,13 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { Ref } from 'vue'
+import { Roules } from '@/utils/require';
 
 //请求数据
-// let data = new Roules()
-// data.Rolesfun("geshin/roles")
-// console.log(data);
+let data = new Roules()
+data.Rolesfun("/api/geshin/roles")
+console.log("角色数据",data);
+
 
 
 
@@ -946,12 +948,9 @@ let arrobj = [
     nav {
       list-style: none;
       width: 17vw;
-      width: 17vw;
       height: 50vh;
       transform: translateY(20px);
-      margin-top: 30vh;
-      transform: translateY(20px);
-      margin-top: 30vh;
+      margin-top: 20vh;
       li {
         height: 7vh;
         display: flex;
@@ -967,6 +966,7 @@ let arrobj = [
         }
         > span:nth-child(2) {
           margin-left: 2vw;
+          font-size: 1.2rem;
           color: #fff;
         }
         height: 7vh;
@@ -991,12 +991,9 @@ let arrobj = [
     > div:nth-of-type(3) {
       margin-top: 18vh;
       margin-left: 2vw;
-      margin-top: 18vh;
-      margin-left: 2vw;
 
       > section:nth-child(1) {
         border-top: 5px solid rgb(227, 188, 140);
-        width: 10vw;
         width: 10vw;
         display: flex;
         justify-content: flex-start;
@@ -1014,7 +1011,6 @@ let arrobj = [
         display: flex;
         div:nth-child(1) {
           width: 20vw;
-          height: 7vh;
           height: 7vh;
           color: #fff;
           background-color: rgb(227, 188, 140);

@@ -1,5 +1,5 @@
 import req from "@/utils/request"; //引入了一个请求
-import { reactive,onBeforeMount } from "vue";
+import { reactive, onBeforeMount, onMounted } from "vue";
 //接口
 export interface Data {
     [name: string]: string
@@ -24,7 +24,43 @@ export class Request {
         return req.delete(url)
     }
 }
+// 公共get方法
+export class PublicGet extends Request {
+    public data: any;
+    constructor(url: string) {
+        super()
+        this.data = reactive({
+            datas: ""
+        })
+        onBeforeMount(() => {
+            this.get(url).then(str => {
+                if (typeof str.data == "string") {
+                    this.data.datas = str.data
+                } else {
+                    this.data.datas = { ...str }
+                }
 
+            })
+        })
+    }
+}
+// 公共post方法
+export function postData(url: string, method: keyof Method, data: Data) {
+    let dataList = <DataList>{
+        datas: '',
+        msg: ''
+    }
+
+    onMounted(() => {
+        req[method](url, data).then((res: any) => {
+            typeof res.data == 'string'
+                ? (dataList.datas = res.data)
+                : (dataList.datas = { ...res.data.dataList })
+        })
+    })
+
+    return dataList
+}
 
 interface DataList {
     datas: any
@@ -68,54 +104,54 @@ export class Numlist extends Request {
     }
 }
 
-export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:string){
-   let dataList = reactive<DataList>({
-    datas:"",
-    msg:"",
-   })
+export function DOMDataObj(url: string, method: keyof Method, data: Data, propName: string) {
+    let dataList = reactive<DataList>({
+        datas: "",
+        msg: "",
+    })
 
-   req[method](url,data).then((res:any) =>{
-    typeof res.data == "string" ? (dataList.datas == res.data) : (dataList.datas = {...res.data[propName]})
-   })
+    req[method](url, data).then((res: any) => {
+        typeof res.data == "string" ? (dataList.datas == res.data) : (dataList.datas = { ...res.data[propName] })
+    })
 
-   return dataList
+    return dataList
 }
 
 
 // 自己添加的get 请求   
-export  function getData(url:string){
+export function getData(url: string) {
     let dataList = reactive({
-        animation:"",  //动画界面
-        publicdata:"",
-        page1:"",  
-        page2:"",
-        getCode:"", //图形验证码
+        animation: "",  //动画界面
+        publicdata: "",
+        page1: "",
+        page2: "",
+        getCode: "", //图形验证码
     })
-  
-      req.get(url).then((res:any)=>{
-        console.log(Object.values(res.data) ,"请求的数据 res")
-      url == "/api/geshin/animation" ? dataList.animation =  res.data :
-        url == "/api/geshin/public" ? dataList.publicdata =  res.data : 
-         url == "/api/geshin/index/page1" ? dataList.page1 =  res.data: 
-         url == "/api/geshin/index/page2" ?  dataList.page2  =  res.data:
-         url == " /api/getCode"  ? dataList.getCode = res.data  : ""
+
+    req.get(url).then((res: any) => {
+        console.log(Object.values(res.data), "请求的数据 res")
+        url == "/api/geshin/animation" ? dataList.animation = res.data :
+            url == "/api/geshin/public" ? dataList.publicdata = res.data :
+                url == "/api/geshin/index/page1" ? dataList.page1 = res.data :
+                    url == "/api/geshin/index/page2" ? dataList.page2 = res.data :
+                        url == " /api/getCode" ? dataList.getCode = res.data : ""
     })
     return dataList
 }
 
 
 //roles 
-export class Roules extends Request{
-    public dataRo :any
-    constructor(){
+export class Roules extends Request {
+    public dataRo: any
+    constructor() {
         super()
         this.dataRo = ""
     }
 
-    public Rolesfun(url:string){
-      req.get(url).then((res)=>{
-        console.log(res);
-        
-      })
+    public Rolesfun(url: string) {
+        req.get(url).then((res) => {
+            console.log(res);
+
+        })
     }
 }

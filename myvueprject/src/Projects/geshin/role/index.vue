@@ -582,6 +582,333 @@ let arrobj = [
         title2: '回应我吧'
       }
     ]
+  },
+  {
+    cty: '蒙德城',
+    mengdec: [
+      {
+        img1: '图片1',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片2',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片3',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片4',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片5',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片6',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片7',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片8',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片9',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片10',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片11',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片12',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片13',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      }
+    ]
+  },
+  {
+    cty: '蒙德城',
+    mengdec: [
+      {
+        img1: '图片1',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片2',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片3',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片4',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片5',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片6',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片7',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片8',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片9',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片10',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片11',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片12',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片13',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      }
+    ]
+  },
+  {
+    cty: '蒙德城',
+    mengdec: [
+      {
+        img1: '图片1',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片2',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片3',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片4',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片5',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片6',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片7',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片8',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片9',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片10',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片11',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片12',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      },
+      {
+        img1: '图片13',
+        name: '琴',
+        cv: '林淑',
+        title: '文字',
+        title1: '风啊',
+        title2: '回应我吧'
+      }
+    ]
   }
 ]
 </script>
@@ -602,6 +929,8 @@ let arrobj = [
     transform: skewX(35deg);
     left: 14vw;
     z-index: 1;
+    left: 14vw;
+    z-index: 1;
   }
   .role-top {
     display: flex;
@@ -617,10 +946,29 @@ let arrobj = [
     nav {
       list-style: none;
       width: 17vw;
+      width: 17vw;
       height: 50vh;
       transform: translateY(20px);
       margin-top: 30vh;
+      transform: translateY(20px);
+      margin-top: 30vh;
       li {
+        height: 7vh;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        > span:nth-child(1) {
+          margin-left: 4.8vw;
+          color: #fff;
+          width: 5px;
+          height: 5px;
+          background-color: #fff;
+          transform: rotate(45deg);
+        }
+        > span:nth-child(2) {
+          margin-left: 2vw;
+          color: #fff;
+        }
         height: 7vh;
         display: flex;
         align-items: center;
@@ -643,9 +991,12 @@ let arrobj = [
     > div:nth-of-type(3) {
       margin-top: 18vh;
       margin-left: 2vw;
+      margin-top: 18vh;
+      margin-left: 2vw;
 
       > section:nth-child(1) {
         border-top: 5px solid rgb(227, 188, 140);
+        width: 10vw;
         width: 10vw;
         display: flex;
         justify-content: flex-start;
@@ -664,8 +1015,78 @@ let arrobj = [
         div:nth-child(1) {
           width: 20vw;
           height: 7vh;
+          height: 7vh;
           color: #fff;
           background-color: rgb(227, 188, 140);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: relative;
+          > section:nth-child(1) {
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            border: 10px solid transparent;
+            border-bottom: 10px solid rgba(0, 0, 0, 0.4);
+            transform: rotateZ(-47deg);
+            left: -8.7px;
+            top: -8.5px;
+          }
+          > section:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #000000;
+            transform: rotateZ(45deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 2vw;
+            > span {
+              width: 8px;
+              height: 8px;
+              background-color: #000000;
+            }
+          }
+          > section:nth-child(3) {
+            width: 8vw;
+            transform: translateX(-40px);
+            > span:nth-of-type(1) {
+              margin-left: 2vw;
+            }
+            > span {
+              font-size: 1.5rem;
+              color: #27353d;
+            }
+          }
+          > section:nth-child(4) {
+            width: 3.5vw;
+            height: 7vh;
+            border: 3px solid #9f7b4b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            z-index: 1;
+            fill-opacity: (0.6);
+          }
+          > section:nth-child(4):hover {
+            fill-opacity: (1);
+            background-color: rgba(0, 0, 0, 0.2);
+          }
+        }
+        // 开关
+        .el-switch {
+          height: 4.3vh;
+          margin-left: 3vw;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          color: #9f7b4b;
+          width: 5vw;
+          border-radius: 5vw;
+          margin-top: 1.3vh;
+          background-color: rgba(0, 0, 0, 0.4);
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -778,7 +1199,52 @@ let arrobj = [
               background-color: #fff;
             }
           }
+          cursor: pointer;
+          .off {
+            position: absolute;
+            z-index: 1;
+            width: 23px;
+            height: 23px;
+            border-radius: 50%;
+            background-color: #9f7b4b;
+          }
+          .el-switch__core {
+            width: 5.5vw;
+            height: 4.7vh;
+            border-radius: 2vw;
+          }
         }
+      }
+      // 人物信息 栏
+      .words {
+        width: 28vw;
+        height: 17vh;
+        margin-top: 2vh;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: flex;
+        > section:nth-child(1) {
+          width: 5vw;
+          display: flex;
+          justify-content: center;
+          > span {
+            width: 10px;
+            height: 10px;
+            border: 1px solid #fff;
+            margin-top: 2vh;
+            transform: rotate(45deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            > span {
+              width: 5px;
+              height: 5px;
+              background-color: #fff;
+            }
+          }
+        }
+      }
+      > section:nth-child(2) {
+        font-size: 0.9rem;
       }
       > section:nth-child(2) {
         font-size: 0.9rem;

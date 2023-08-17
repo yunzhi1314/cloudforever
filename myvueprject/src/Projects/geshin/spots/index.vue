@@ -25,7 +25,7 @@
        </div>
         </main>
         </div>
-    </template>
+  </template>
   <div class="spots">
     <!-- 米游社头部 -->
     <header class="spots_header">

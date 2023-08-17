@@ -1,23 +1,22 @@
 import req from "@/utils/request"; //引入了一个请求
 import { reactive,onBeforeMount } from "vue";
-
 //接口
-export interface List {
+export interface Data {
     [name: string]: string
 }
 
 //父类，超类
-export class Use {
+export class Request {
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
     protected get(url: string) {
         return req.get(url)
     }
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
-    protected post(url: string, data: List) {
+    protected post(url: string, data: Data) {
         return req.post(url, data)
     }
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
-    protected put(url: string, data: List) {
+    protected put(url: string, data: Data) {
         return req.put(url, data)
     }
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
@@ -25,6 +24,7 @@ export class Use {
         return req.delete(url)
     }
 }
+
 
 interface DataList {
     datas: any
@@ -40,13 +40,10 @@ export interface Method {
     put: string
     delete: string
 }
-// interface uselist {
-//     state:string,
-//     [name:string]:any
-// }
+
 
 //实例化numlist去使用
-export class Numlist extends Use {
+export class Numlist extends Request {
     public dataList: DataList
     constructor() {
         super()
@@ -59,7 +56,7 @@ export class Numlist extends Use {
         this: Numlist,
         url: string,
         method: keyof Method,
-        data: List
+        data: Data
     ) {
         onBeforeMount(() => {
             this[method](url, data).then((res: any) => {
@@ -84,21 +81,41 @@ export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:str
    return dataList
 }
 
+
 // 自己添加的get 请求   
-export function getData(url:string,data:any){
+export  function getData(url:string){
     let dataList = reactive({
         animation:"",  //动画界面
-        public:"",
+        publicdata:"",
         page1:"",  
         page2:"",
         getCode:"", //图形验证码
     })
-    req.get(url,data).then((res:any)=>{
-      url == "/geshin/animation" ? dataList.animation =  res.data :
-        url == "/geshin/public" ? dataList.public =  res.data : 
-         url == "/geshin/index/page1" ? dataList.page1 =  res.data: 
-         url == "/geshin/index/page2" ?  dataList.page2  =  res.data:
-         url == " /getCode"  ? dataList.getCode = res.data  :""
+  
+      req.get(url).then((res:any)=>{
+        console.log(Object.values(res.data) ,"请求的数据 res")
+      url == "/api/geshin/animation" ? dataList.animation =  res.data :
+        url == "/api/geshin/public" ? dataList.publicdata =  res.data : 
+         url == "/api/geshin/index/page1" ? dataList.page1 =  res.data: 
+         url == "/api/geshin/index/page2" ?  dataList.page2  =  res.data:
+         url == " /api/getCode"  ? dataList.getCode = res.data  : ""
     })
     return dataList
+}
+
+
+//roles 
+export class Roules extends Request{
+    public dataRo :any
+    constructor(){
+        super()
+        this.dataRo = ""
+    }
+
+    public Rolesfun(url:string){
+      req.get(url).then((res)=>{
+        console.log(res);
+        
+      })
+    }
 }

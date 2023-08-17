@@ -21,6 +21,7 @@ const controlObj = reactive({
   isSeacrch:false,
   // 数据库，新增药物的遮罩层是否显示
   isMedicine: false,
+
 })
 
 export default controlObj

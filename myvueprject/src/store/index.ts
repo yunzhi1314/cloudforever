@@ -32,6 +32,7 @@ export default createStore({
     },
     // namespaced:true,
     modules: {
+        
 
     }
 })

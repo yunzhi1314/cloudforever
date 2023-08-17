@@ -1,7 +1,7 @@
 <template>
   <div>
     <section>
-      {{ str.state.tusi }}
+      {{ store.state.tusiMsg }}
     </section>
   </div>
 </template>
@@ -11,9 +11,8 @@
 import { useStore } from 'vuex'
 
 //获取仓库的值
-let str = useStore()
-str.commit('setTusi', '验证码已发送')
-console.log(str.state.tusi)
+let store = useStore()
+
 </script>
 
 <style scoped lang="scss">

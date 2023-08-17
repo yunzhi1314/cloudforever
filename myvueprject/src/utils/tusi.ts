@@ -17,6 +17,11 @@ import router from '@/router'
 
 //吐死函数
 function Toest(fulfilled: string, reject: string, message?: string) {
+
+    //开启吐司
+    offno.tusi = true
+
+
     //提示用户的提示词
     let isno = message
     isno == fulfilled

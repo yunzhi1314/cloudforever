@@ -35,10 +35,9 @@
     </div>
   </div>
 </template>
-  
-  <script setup lang="ts">
+<script setup lang="ts">
 //类封装请求；函数封装请求
-import { Numlist } from '@/utils/require'
+import { Numlist, DOMDataObj } from '@/utils/require'
 import { ref, defineProps } from 'vue'
 //公用文件 开关
 import offno from '@/login/isno'
@@ -62,8 +61,8 @@ let data = new Numlist()
 data.getDataObj('/api/geshin/user/getCode', 'get', {})
 
 //点击切换图形验证码
-async function newuse() {
-  data.dataList.datas = await postdata(
+function newuse() {
+  data.dataList.datas = DOMDataObj(
     '/api/geshin/user/getCode',
     'get',
     {},
@@ -87,7 +86,6 @@ async function fun() {
   offno.tusi = true
   //关闭遮罩层
   offno.yanzheng = false
-  console.log(islist.teb.telephone, value.value)
   // yes.commit('setTusi', '验证码已发送')
   value.value = ''
 }
@@ -115,6 +113,7 @@ async function fun() {
       flex: 1;
 
       > span {
+        margin-left: 9.5vw;
         display: inline-block;
         margin-top: 6vh;
         transform: scale3d(2.78, 3, 2.5);

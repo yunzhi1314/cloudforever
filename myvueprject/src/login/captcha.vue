@@ -31,10 +31,10 @@
         <span
           v-show="index == 1"
           style="
-              position: absolute;
-    color: rgb(78, 164, 220);
-    cursor: pointer;
-    right: 1vw;
+            position: absolute;
+            color: rgb(78, 164, 220);
+            cursor: pointer;
+            right: 1vw;
           "
           @click="yanzheng"
           >获取验证码</span
@@ -44,14 +44,24 @@
         <section class="deng" @click="logage(ruleFormRef)">登录</section>
         <section class="fan">
           <span style="color: rgb">遇到问题？</span>
-          <span style="color: rgb">立即注册</span>
+          <span style="color: rgb" @click="loguse">立即注册</span>
         </section>
       </el-form-item>
       <el-form-item>
         <input type="checkbox" :checked="checked" class="checkbox" />
         <span>已阅读并同意</span>
-        <router-link to="" class="fonsize">《米哈游用户协议》</router-link>
-        <router-link to="" class="fonsize">《米哈游隐私政策》</router-link>
+
+        <a
+          href="https://ys.mihoyo.com/main/company/privacy"
+          style="color: rgb(78, 164, 220); font-size: 1rem"
+          >《米哈游用户协议》</a
+        >
+        <a
+          href="https://ys.mihoyo.com/main/company/privacy"
+          style="color: rgb(78, 164, 220); font-size: 1rem"
+          >《米哈游隐私政策》</a
+        >
+
         <span>，未注册的手机号验证通过将自动注册。</span>
       </el-form-item>
     </el-form>
@@ -76,7 +86,7 @@ import offno from '@/login/isno'
 import { FormRules } from 'element-plus'
 
 //引入仓库
-import { useStore } from 'vuex'
+// import { useStore } from 'vuex'
 
 //请求
 import { Numlist } from '@/utils/require'
@@ -88,9 +98,6 @@ import { message } from '@/utils/tusi'
 import type { FormInstance } from 'element-plus'
 
 let router = useRouter()
-
-//仓库数据
-let store = useStore()
 
 //后台数据
 let data = new Numlist()
@@ -186,7 +193,7 @@ async function logage(formEl: FormInstance | undefined) {
       if (token) {
         //动态路由
         router.push({
-          path: '/indata'
+          path: ''
         })
       }
     } else {
@@ -200,6 +207,13 @@ async function logage(formEl: FormInstance | undefined) {
 let func = () => {
   router.push({
     path: '/password'
+  })
+}
+
+//跳转到注册
+let loguse = () => {
+  router.push({
+    path: '/useadd'
   })
 }
 </script>
@@ -220,8 +234,8 @@ let func = () => {
   }
 
   .box_1 {
-    width: 37vw;
-    height: 69vh;
+    width: 40vw;
+    height: 85vh;
     background-color: #fff;
     padding: 7vh 8vw;
 

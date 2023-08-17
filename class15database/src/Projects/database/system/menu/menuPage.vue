@@ -3,6 +3,7 @@
         <section  class="top-input" > 
             <el-input v-model="search" placeholder="请输入查询内容" />
             <el-button  @click="handleQurie()" >查询</el-button>
+            <!-- <el-button  @click="reqMenuData()" >请求数据</el-button> -->
             <el-button class="blue-button"
              
               type="danger"
@@ -44,7 +45,7 @@
 <script setup lang="ts">
 import deletDialog from "@/components/deletDialog.vue"
 import addtDialog from "./menuAddEditFlag.vue"
-   import{titleObj,objList}from "./data"
+   import{titleObj,objList,reqMenuData}from "./data"
     import { ref} from "vue"
     import controlObj from "@/utils/controls"
 
@@ -82,6 +83,12 @@ import addtDialog from "./menuAddEditFlag.vue"
       controlObj.menuAddEditFlag=true
       controlObj.menuAddEditnum=index
     }
+
+      let list003=ref(reqMenuData()) 
+      if(list003.value){
+        console.log('list003',list003.value);
+        
+      }
 
     // 查询按钮
     const handleEdit=(index)=>{

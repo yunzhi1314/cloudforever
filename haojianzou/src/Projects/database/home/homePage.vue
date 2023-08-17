@@ -43,7 +43,6 @@ getDataObj('/database/home/messages','homeDatas')
 
 // 从sessionStorage里提取出数据
 let homeDatas = JSON.parse(sessionStorage.getItem('homeDatas') as string)
-console.log(homeDatas);
 
 
 onMounted(() => {

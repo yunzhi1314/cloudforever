@@ -28,6 +28,7 @@
     //   const router = useRouter();
     import{objList}from "./data"
     import { defineProps  } from "vue"
+import { number } from "echarts";
           // 进入官网
     //   function enterMain(){
        // console.log( '123')    }
@@ -39,13 +40,16 @@
     // 接收父组件传递的属性（props）
 const props = defineProps({
     List: { type:Object, required: true },
-    index: { type: String, required: true }
+    index:{ type:String, required: true },
+    
 });
        const handleDelete:any=()=>{
       controlObj.menuDeletFlag=false
       console.log(props.List,'objList');
       
       props.List.splice(props.index,1)
+      
+      console.log(props.List,'objList');
     }
 
 

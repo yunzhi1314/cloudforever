@@ -219,7 +219,6 @@ getDataObj('/database/layout/menu','databaseRoutes')
 
 // // 从sessionStorage里提取出数据
 let routes = JSON.parse(sessionStorage.getItem('databaseRoutes') as string).menu
-console.log(routes);
 
 
 // // 路由的遍历展开

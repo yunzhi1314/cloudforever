@@ -102,20 +102,3 @@ export  function getData(url:string){
     })
     return dataList
 }
-
-
-//roles 
-export class Roules extends Request{
-    public dataRo :any
-    constructor(){
-        super()
-        this.dataRo = ""
-    }
-
-    public Rolesfun(url:string){
-      req.get(url).then((res)=>{
-        console.log(res);
-        
-      })
-    }
-}

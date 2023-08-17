@@ -220,10 +220,10 @@ const loginfunction = ()=>{
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .yhbox{
   width: 98.7vw;
-  height: 200vh;
+  /* height: 200vh; */
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 5fr 2fr;
@@ -238,6 +238,7 @@ header{
   display: grid;
   grid-template-columns: 1fr 2fr 1.5fr;
   grid-template-rows: 1fr;
+  z-index: 10;
   
   > div:nth-child(1){
     position: relative;

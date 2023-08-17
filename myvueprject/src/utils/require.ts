@@ -2,7 +2,7 @@ import req from "@/utils/request"; //引入了一个请求
 import { reactive,onBeforeMount } from "vue";
 
 //接口
-export interface List {
+export interface Data {
     [name: string]: string
 }
 
@@ -13,11 +13,11 @@ export class Use {
         return req.get(url)
     }
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
-    protected post(url: string, data: List) {
+    protected post(url: string, data: Data) {
         return req.post(url, data)
     }
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
-    protected put(url: string, data: List) {
+    protected put(url: string, data: Data) {
         return req.put(url, data)
     }
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
@@ -59,10 +59,11 @@ export class Numlist extends Use {
         this: Numlist,
         url: string,
         method: keyof Method,
-        data: List
+        data: Data
     ) {
         onBeforeMount(() => {
             this[method](url, data).then((res: any) => {
+                console.log(res);
                 typeof res.data == 'string'
                     ? (this.dataList.datas = res.data)
                     : (this.dataList.datas = { ...res.data.dataList })

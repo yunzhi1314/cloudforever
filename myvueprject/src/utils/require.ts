@@ -1,9 +1,5 @@
-//类封装共有方法 
-import { onBeforeMount, reactive, onMounted } from "vue";
-import req from "./request";
-// import { List } from "@element-plus/icons-vue/dist/types";
-
-
+import req from "@/utils/request"; //引入了一个请求
+import { reactive,onBeforeMount } from "vue";
 
 //接口
 export interface List {
@@ -75,8 +71,6 @@ export class Numlist extends Use {
     }
 }
 
-
-
 export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:string){
    let dataList = reactive<DataList>({
     datas:"",
@@ -106,4 +100,5 @@ export function getData(url:string,data:any){
          url == "/geshin/index/page2" ?  dataList.page2  =  res.data:
          url == " /getCode"  ? dataList.getCode = res.data  :""
     })
+    return dataList
 }

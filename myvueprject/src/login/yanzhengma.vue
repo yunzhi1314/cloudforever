@@ -38,7 +38,7 @@
   
   <script setup lang="ts">
 //类封装请求；函数封装请求
-import { Numlist, postdata } from '@/utils/require'
+import { Numlist } from '@/utils/require'
 import { ref, defineProps } from 'vue'
 //公用文件 开关
 import offno from '@/login/isno'

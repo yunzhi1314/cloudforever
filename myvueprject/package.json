@@ -12,7 +12,6 @@
     "new:view": "node ./scripts/generateView.mjs"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.1.0",
     "@types/node": "^20.5.0",
     "axios": "^1.4.0",
     "chalk": "4.1.2",

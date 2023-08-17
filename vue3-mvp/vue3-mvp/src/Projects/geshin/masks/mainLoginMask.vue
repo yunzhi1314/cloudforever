@@ -69,7 +69,7 @@
     // 跳转短信登录
     let codeLogin = () => {
         controlObj.isChange = false
-        list[1].userCode=''
+        list[0].userCode=''
 
     }
 

@@ -3,7 +3,7 @@ import { RouteRecordRaw } from "vue-router";
 
 export default createStore({
     state:{
-        codeData:'',
+        codeData:123,
     },
     mutations:{
         setCodeData(state,data:any){

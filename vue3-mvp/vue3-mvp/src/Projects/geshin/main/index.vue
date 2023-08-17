@@ -68,6 +68,12 @@
     import type {Ref} from 'vue'
     import {useRouter} from 'vue-router'
 
+// import {useStore} from 'vuex'
+// const store = useStore()
+// console.log(store);
+// import store from '@/store'
+// console.log(store.state.codeData);
+
 
     let transform1:Ref<number> = ref(0)
     let router = useRouter()
@@ -146,6 +152,8 @@
 
     // 导航栏点击效果与跳转
     let toTitle = (id:string) => {
+        // console.log(id);
+        
         // 点击时所有高光关闭，并且方块进行偏移
         list.forEach( item => {
             item.status = false;
@@ -156,9 +164,18 @@
         list[id].status = true
 
         // 路由跳转
-        router.push({
-            name:list[id].name
-        })
+        if(id == '5'){
+            setTimeout(() => {
+                router.push({
+                    name:list[id].name
+                })
+            }, 500);
+        }else{
+            router.push({
+                name:list[id].name
+            })
+        }
+        
     }
 
     

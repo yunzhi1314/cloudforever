@@ -93,12 +93,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { Ref } from 'vue'
-import { Roules } from '@/utils/require';
 
 //请求数据
-let data = new Roules()
-data.Rolesfun("geshin/roles")
-console.log(data);
+// let data = new Roules()
+// data.Rolesfun("geshin/roles")
+// console.log(data);
 
 
 

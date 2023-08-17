@@ -8,7 +8,7 @@ export default {
     },
     mutations:{  //
         getrequestData(state:any,data:any){
-     state.requestData,data = data
+            data = data
      console.log(state.requestData,data)
         }
     }

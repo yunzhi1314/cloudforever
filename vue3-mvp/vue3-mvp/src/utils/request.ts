@@ -54,6 +54,7 @@ service.interceptors.response.use(
   },
   (error: any) => {
     if (error.response.status) {
+      
       switch (error.response.status) {
         case 400:
           console.error(

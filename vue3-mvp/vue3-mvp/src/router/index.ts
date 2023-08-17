@@ -60,14 +60,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/Projects/geshin/comic/comic.vue')
       },
       {
-        path: "community",
-        name: "community",
-        component: () => import('@/Projects/geshin/community/community.vue')
-      },
-      {
-        path: "match",
-        name: "match",
-        component: () => import('@/Projects/geshin/match/match.vue')
+        path:"match",
+        name:"match",
+        component:() =>import('@/Projects/geshin/match/match.vue')
       },
 
     ]
@@ -83,10 +78,15 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/Projects/geshin/login/captcha.vue')
   },
   {
-    path: "/login/password",
-    name: "password",
-    component: () => import('@/Projects/geshin/login/password.vue')
-  }
+    path:"/login/password",
+    name:"password",
+    component:()=>import('@/Projects/geshin/login/password.vue')
+  },
+  {
+    path:"/community",
+    name:"community",
+    component:() =>import('@/Projects/geshin/community/community.vue')
+  },
 ];
 
 const router = createRouter({

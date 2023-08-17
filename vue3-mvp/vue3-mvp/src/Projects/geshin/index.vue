@@ -17,6 +17,9 @@
     const router = useRouter()
 
     let toMain = () => {
+        // router.afterEach(() =>{
+        //      store.commit("setCodeData",num)
+        // })
         router.push({
             path:'/main'
         })

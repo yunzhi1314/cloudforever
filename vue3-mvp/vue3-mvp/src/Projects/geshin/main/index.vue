@@ -82,6 +82,12 @@
     import {useStore} from 'vuex'
 
 
+// import {useStore} from 'vuex'
+// const store = useStore()
+// console.log(store);
+// import store from '@/store'
+// console.log(store.state.codeData);
+
 
     let transform1:Ref<number> = ref(0)
     let router = useRouter()
@@ -170,24 +176,24 @@ const list: Array<data> = reactive([
 ])
 
 
-// 导航栏点击效果与跳转
-let toTitle = (id: string) => {
-    // 点击时所有高光关闭，并且方块进行偏移
-    list.forEach(item => {
-        item.status = false;
-        transform1.value = 7 * +id
-    })
+    // 导航栏点击效果与跳转
+    let toTitle = (id:string) => {
+        // 点击时所有高光关闭，并且方块进行偏移
+        list.forEach( item => {
+            item.status = false;
+            transform1.value = 7 * +id
+        })
 
     // 点击获得高光
     list[id].status = true
 
-    // 路由跳转
-    router.push({
-        name: list[id].name
-    })
-}
+        // 路由跳转
+        router.push({
+            name:list[id].name
+        })
+    }
 
-
+    
 
 </script>
 

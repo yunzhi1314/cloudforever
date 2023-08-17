@@ -87,7 +87,7 @@
 
     </footer>
 
-    <audio ref="audioPlayer" :src="data.datas.header.bgMusic" id="music" loop></audio>
+    <audio ref="audioPlayer" :src="data.datas.header.bgMusic2" id="music" loop></audio>
   </div>
 </template>
 

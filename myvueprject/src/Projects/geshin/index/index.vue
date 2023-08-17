@@ -1,11 +1,24 @@
+<template>
+    <div>
+      <!-- 中间顶部 -->
+      <div>
+        
+      </div>
 
-    <template>
-        <div>
-          <h1>index</h1>
-        </div>
-    </template>
+      <!-- 中间底部 -->
+      <div>
+         
+      </div>
+
+      <video></video>
+    </div>
+</template>
 
 <script setup lang="ts">
+import { Numlist } from "@/utils/require";
+
+req.get().then
+
 
 </script>
     

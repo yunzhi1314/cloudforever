@@ -43,19 +43,41 @@ const routes: Array<RouteRecordRaw> = [
         name: 'comic',
         component: () => import('@/Projects/geshin/comic/index.vue')
       },
-      {
-        path: '/spots',
-        name: 'spots',
-        component: () => import('@/Projects/geshin/spots/index.vue')
-      },
       //赛事
       {
-        path: 'compotation',
+        path: '/compotation',
         name: 'compotation',
         component: () => import('@/Projects/geshin/compotation/index.vue')
       }
     ]
   },
+        //社区
+    {
+          path: '/spots',
+          name: 'spots',
+          component: () => import('@/Projects/geshin/spots/index.vue')
+      },
+            //验证码登录
+  {
+    path: '/telphone',
+    name: 'telphone',
+    component: () => import('@/login/telphone.vue')
+  },
+  {
+    path: '/useadd',
+    name: 'useadd',
+    component: () => import('@/login/useadd.vue')
+  },
+  {
+    path: '/captcha',
+    name: 'captcha',
+    component: () => import('@/login/captcha.vue')
+  },
+  {
+    path: '/password',
+    name: 'password',
+    component: () => import('@/login/password.vue')
+  }
 ]
 
 const router = createRouter({

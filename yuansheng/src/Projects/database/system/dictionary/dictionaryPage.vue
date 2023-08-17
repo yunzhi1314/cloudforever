@@ -1,28 +1,28 @@
 <template>
     <div class="wai">
+      <!--头部搜索提交栏-->
         <el-row class="head">
             <el-tol>
-                <!--头部搜索提交栏-->
-                <input type="text" placeholder="请输入查询内容" style="margin-right:15px">
+                <input type="text" placeholder="请输入查询内容" style="margin-right:15px" v-model="searchItem">
                 <el-button size="large" 
-                type="Search"
-                style="background-color: #409EFF;"
-                >查询</el-button>
-                <el-button type="FolderAdd" style="background-color: #67C23A;">新增菜单</el-button>
+                  type="primary"
+                  style="background-color: #409EFF;">
+                  <el-icon><Search /></el-icon>查询
+                </el-button>
+                <el-button type="FolderAdd" 
+                  style="background-color: #67C23A;">
+                  <el-icon><FolderAdd /></el-icon>新增菜单
+                </el-button>
             </el-tol>
         </el-row>
             <!--中间信息内容-->
             <el-table :data="tableData2" height="100%" style="width: 100%" class="body">
-                <el-table-column prop="date" label="税前利润" width="210" />
-                <el-table-column prop="name" label="息税前利润" width="190" />
-                <el-table-column prop="address" label="企业估值" width="180" />
-                <el-table-column prop="up" label="上半年增长" width="180" />
-                <el-table-column prop="dowm" label="下半年增长" width="170" />
-                <el-table-column prop="momny" label="经营利润" width="170" />
-                <el-table-column label="操作" width="170">
-                    <el-button type="text">修改</el-button>
-                    <el-button type="text">删除</el-button>
-                </el-table-column>
+              <el-table-column v-for="(item, index) in arr" :key="index" :prop="arr2[index]" :label="item" >
+              </el-table-column>
+              <el-table-column label="操作" width="170">
+                  <el-button type="text">修改</el-button>
+                  <el-button type="text">删除</el-button>
+              </el-table-column>
             </el-table>
               <!--分页器-->
             <el-pagination
@@ -40,10 +40,21 @@
 <script setup lang="ts">
 import { ref,reactive } from 'vue'
 import type { Ref } from 'vue';
+import { useStore } from 'vuex';
 
 const input = ref('')
 
-const tableData=[
+//头部渲染
+let arr = [
+  '税前利润',
+  '息税前利润',
+  '企业估值',
+  '上半年增长',
+  '下半年增长',
+  '经营利润',
+]
+
+const tableData=reactive([
   {
     date: '47,053.11',
     name: '44,100.00',
@@ -108,18 +119,12 @@ const tableData=[
     dowm:'',
     momny:'1,331.71',
   },
-]
+])
 
 let arr2 = Reflect.ownKeys(tableData[0]) as Array<string>
 console.log(arr2)
-let arr = [
-  '税前利润',
-  '息税前利润',
-  '企业估值',
-  '上半年增长',
-  '下半年增长',
-  '经营利润',
-]
+
+
 
 // 下方分页
 const currentPage4 = ref(1)
@@ -140,6 +145,25 @@ function fun() {
   )
 }
 fun()
+
+
+
+// 搜索表格数据
+let searchItem = ref("")
+
+let hanshu=()=>{
+    return tableData.filter((item,index)=>{
+      item.date ==input.value ||
+      item.name ==input.value ||
+      item.up ==input.value ||
+      item.dowm == input.value ||
+      item.momny == input.value ||
+      item.address == input.value ||
+      "" == input.value
+    })
+}
+
+
 </script>
 
 <style scoped>

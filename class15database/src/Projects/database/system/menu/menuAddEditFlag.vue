@@ -3,7 +3,7 @@
        <teleport to="#app" >
         <dialog >
            <!-- <button > 跳转到学生列表页面</button> -->
-           <div class="div"><span class="title">新增菜单</span>
+           <div class="div"><span class="title" >{{ props.num==-1?"新增菜单":"修改菜单"}}</span>
 
             <el-icon  @click="changFun"><CloseBold /></el-icon>
 
@@ -34,8 +34,8 @@
                 <section class="foot" >
                 <span class="dialog-footer">
                     <el-button size="large" @click="changFun">取消</el-button>
-                    <el-button  size="large" type="primary" @click="handleDelete">
-                    确认
+                    <el-button  size="large" type="primary" @click="props.num==-1?handleDelete():handleEdit()">
+                    {{ props.num==-1?"确认":"修改"}}
                     </el-button>
                 </span>
                 </section>
@@ -51,28 +51,13 @@
     import controlObj from "@/utils/controls"
     //   const router = useRouter();
     import{objList}from "./data"
-    import { defineProps  } from "vue"
+    import { defineProps, reactive  } from "vue"
           // 进入官网
-    //   function enterMain(){
-       // console.log( '123')    }
 
-    //    let deleIndex=defineProps(['deleIndex'])
-    //    let index=defineProps(['index'])
-    //    let objList=defineProps(['objList'])
-        // console.log('deleIndex', deleIndex);
-    // 接收父组件传递的属性（props）
-const props = defineProps({
-    List: { type:Object, required: true },
-    index: { type: String, required: true }
-});
-       const handleDelete:any=()=>{
-      controlObj.menuAddFlag=false
-      console.log(props.List,'objList');
-      
-      props.List.splice(props.index,1)
-    }
 
-    let  inputArray=[
+
+        // 渲染所有输入框
+    let  inputArray=reactive([
         {name:"所属公司",
                 value:''
         },
@@ -91,13 +76,77 @@ const props = defineProps({
         {name:"区域",
             value:''
         },
-    ]
+    ])
         
+        // 新增数据
+       let  newObj= reactive({    CompanyName:"",
+                        medication: "",
+                        Target: '',
+                        NumberOfLines: "",
+                        TreatmentMethod: "",
+                        Area: "", } )
+
+
+        // 接收父组件传递的属性（props）
+        const props = defineProps({
+            // List: { type:Object, required: true },
+            num: { type: Number, required: true }
+        });
+        
+        console.log(props.num,'numnumnumnum' );
+        
+
+        // 点击修改后会写
+        if(props.num!=-1){
+            // 获取修改的对象
+            let objNow= objList[props.num]
+            // 把对象变成数组
+            let Valuearr=Object.values(objNow)
+            // 遍历，修改输入框的数组
+            inputArray.forEach((item,index)=>item.value=Valuearr[index] )            
+        }
+
+
+            // 点击修改按钮
+            const handleEdit:any=()=>{
+                console.log(111,'修改了吗?' );
+                controlObj.menuAddEditFlag=false
+                newObj=newObjFun()
+                objList.splice(props.num,1,newObj )
+            }
+
+            // 点击添加的确认按钮
+            const handleDelete:any=()=>{
+                controlObj.menuAddEditFlag=false
+                  console.log('111objList');
+                newObj=newObjFun()
+                objList.push(newObj )
+            }
+
+            // 获取输入框的值成一个对象
+            const newObjFun=()=>{
+               return   { CompanyName:inputArray[0].value,
+                        medication: inputArray[1].value,
+                        Target: inputArray[2].value,
+                        NumberOfLines: inputArray[3].value,
+                        TreatmentMethod: inputArray[4].value,
+                        Area: inputArray[5].value, } 
+            }
+
     // 关闭盒子
     const changFun=()=>{
-        controlObj.menuAddFlag = false
-        console.log(  controlObj.menuAddFlag);
+        controlObj.menuAddEditFlag = false
+        console.log(  controlObj.menuAddEditFlag);
     }
+
+    // 父给子传值，修改list的值，添加内容，直接对list修改，
+    // 获取list
+
+    // const 
+    
+
+
+
        </script>
 
        <style  scoped lang="scss">
@@ -125,9 +174,9 @@ const props = defineProps({
                 padding: 20px;
                 .title{
                     display: inline-block;
-                    margin: 20px 10px 20px 12px;
+                    margin: 10px 10px 20px 12px;
                     font-size: 18px;
-                    // font-weight: 640;
+                    font-weight: 640;
                 }
                 main{
                     display: grid;

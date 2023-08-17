@@ -26,7 +26,6 @@
     //   import {useRouter} from "vue-router"
     import controlObj from "@/utils/controls"
     //   const router = useRouter();
-    import{objList}from "./data"
     import { defineProps  } from "vue"
           // 进入官网
     //   function enterMain(){

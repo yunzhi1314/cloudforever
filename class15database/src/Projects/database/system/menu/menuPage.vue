@@ -1,12 +1,12 @@
 <template>
     <el-main>
         <section  class="top-input" > 
-            <el-input v-model="search"  placeholder="Type to search" />
-            <el-button  @click="handleEdit(scope.$index, scope.row)">查询</el-button>
+            <el-input v-model="search" placeholder="请输入查询内容" />
+            <el-button  @click="handleQurie()" >查询</el-button>
             <el-button class="blue-button"
              
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)"
+              @click.prevent="handleAdd(num)"
               >新增菜单</el-button>
             </section>
         <el-table :data="objList" style="width: 100%"   >
@@ -24,14 +24,14 @@
                 <span> 操纵</span>
               </template>
               <template #default="scope" class="link-a">
-                <a href="#" @click.prevent="handleAdd(scope.$index)">新增</a>
-                <a href="#">修改</a>
+                <a href="#" @click.prevent="handleAdd(num)">新增</a>
+                <a href="#"  @click.prevent="handleEdit(scope.$index)">修改</a>
                 <a href="#" @click.prevent="handleDelete(scope.$index)">删除</a>
               </template>
 
             </el-table-column>
-            <addtDialog v-if="controlObj.menuAddFlag"></addtDialog>
-            <deletDialog v-if="controlObj.menuDeletFlag" :List="objList" :index="deleIndex" > 看看</deletDialog> 
+            <addtDialog v-if="controlObj.menuAddEditFlag" :num="num"></addtDialog>
+            <deletDialog v-if="controlObj.menuDeletFlag" :index="deleIndex" :List="objList"> 看看</deletDialog> 
             <!-- <deletDialog v-if="controlObj.deletFlag"   :parentProp="parentValue" > 看看</deletDialog> -->
             <!--  v-for="controlObj.deletFlag"-->
           </el-table>
@@ -40,24 +40,29 @@
 
 <script setup lang="ts">
 import deletDialog from "@/components/deletDialog.vue"
-import addtDialog from "./addtDialog.vue"
+import addtDialog from "./menuAddEditFlag.vue"
    import{titleObj,objList}from "./data"
     import { ref} from "vue"
     import controlObj from "@/utils/controls"
 
     // 新增方法
-    const handleAdd=()=>{
+    const handleAdd=(index)=>{
       // console.log( "scope.$index, scope.row",item1, row1);
-      controlObj.menuAddFlag=true
+      controlObj.menuAddEditFlag=true
+      num.value=index
+    }
+
+    // 查询按钮
+    const handleEdit=(index)=>{
+      // console.log( "scope.$index, scope.row",item1, row1);
+      controlObj.menuAddEditFlag=true
+      num.value=index
     }
 
     let titleList=Object.values(titleObj )
     let PorpList=Object.keys(titleObj )
 
-    // 编辑的方法
-    const handleEdit=(item1:any, row1:any)=>{
-      console.log( "scope.$index, scope.row",item1, row1);
-    }
+   
 
 
     // 确定删除的下标，
@@ -72,6 +77,22 @@ import addtDialog from "./addtDialog.vue"
     }
 
     let search=ref('')
+    
+     // 编辑的方法，创建一个变量，看是不是编辑，在数字直接转化，如果是-1就是保存，其他是变量
+     let num=ref(-1)
+
+      
+
+    // 查询按钮
+    // const handleEdit=(item1:any, row1:any)=>{
+    //   console.log( "scope.$index, scope.row",item1, row1);
+    // }
+    
+    // 查询 用过滤的方法把
+    let handleQurie=()=>{
+      console.log("index:any,item:any");
+      
+    }
 
 
 </script>

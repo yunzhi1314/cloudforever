@@ -7,7 +7,7 @@
         <header class="header">
             <!-- 左边 -->
             <section class="left">
-                <img src="" alt="音乐" class="musicImg">
+                <img :src="req.dataList.datas.header.musicImg" alt="" class="musicImg">
                 <img src="" alt="logo" class="logoImg">
             </section>
             <!-- 中间 -->
@@ -67,10 +67,16 @@
     import {watch, reactive, ref} from 'vue'
     import type {Ref} from 'vue'
     import {useRouter} from 'vue-router'
+    import {Public} from '@/utils/getRequest'
 
 
     let transform1:Ref<number> = ref(0)
     let router = useRouter()
+    let req = new Public()
+
+    req.getDataObj('/api/geshin/public','get',{})
+    
+    console.log(req);
 
     // 动画页面消失
     watch(
@@ -84,7 +90,6 @@
             },500)
         }
     )
-
 
 
     // 表单接口
@@ -141,7 +146,6 @@
         },
 
     ])
-
 
 
     // 导航栏点击效果与跳转

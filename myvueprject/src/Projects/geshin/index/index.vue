@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { Numlist } from "@/utils/require";
 
-req.get().then
+// req.get().then
 
 
 </script>

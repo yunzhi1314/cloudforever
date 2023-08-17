@@ -7,8 +7,10 @@
         <header class="header">
             <!-- 左边 -->
             <section class="left">
-                <img :src="req.dataList.datas.header.musicImg" alt="" class="musicImg">
-                <img src="" alt="logo" class="logoImg">
+                <img :src="controlObj.isMusic ? req.dataList.datas.header.musicImg: req.dataList.datas.header.musicDisabledImg" 
+                @click="musicImgClick"
+                class="musicImg">
+                <img :src="req.dataList.datas.header.logo" alt="logo" class="logoImg">
             </section>
             <!-- 中间 -->
             <div class="middle">
@@ -22,8 +24,8 @@
             </div>
             <!-- 右边 -->
             <section class="right">
-                <span>成长关爱系统<img src="" alt=""></span>
-                <span class="loginBtn" @click="controlObj.isLoginShow = true">登录<img src="" alt=""></span>
+                <span>成长关爱系统<img :src="req.dataList.datas.header.growSystemImg"></span>
+                <span class="loginBtn" @click="controlObj.isLoginShow = true">登录<img :src="req.dataList.datas.header.userNickImg"></span>
             </section>
         </header>
 
@@ -32,14 +34,19 @@
 
         <!-- 脚步区域 -->
         <footer class="footer">
-            <section class="share">  微博图标     微信图标    QQ图标   分享图标   </section>
+            <section class="share" >
+                <span v-for="(item,index) in req.dataList.datas.bottom.icons" :key="index" v-html="item"></span>
+            </section>
             <div class="announcement">
                 <section class="left">
-                    <img src="" alt="">米哈游logo
-                    <img src="" alt="">原神logo
+                    <img :src="req.dataList.datas.bottom.leftImg.LOGO" style="transform: scale(.7);">
+                    <div style="width:1px;height:12vh;border:1px solid;transform: scale(.5) "></div>
+                    <img :src="req.dataList.datas.bottom.leftImg.MIHOYO " style="transform: scale(.7)">
                 </section>
                 <section class="right">
-                    <p>用户协议 | 隐私政策 | 儿童隐私政策 | 自律公约 | 成长关爱 | 关于我们 | 联系我们 | 加入我们</p>
+                    <div class="pBox">
+                        <p v-for="(item,index) in req.dataList.datas.bottom.aboutMeWebs" :key="index">{{item.title}} |</p>
+                    </div>
                     <ul>
                         <li>健康游戏忠告：抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。</li>
                         <li>沪公网安备31010402001113号 | 增值电信业务经营许可证：沪B2-20190555</li>
@@ -50,7 +57,11 @@
                         <li>© 2020 米哈游版权所有 | 上海米哈游影铁科技有限公司 客服电话：400-666-6312</li>
                     </ul>
                     <br />
-                    <div>6张图片 ````````````````````````</div>
+                    <div class="bottomImgs">
+                        <div v-for="(item,index) in req.dataList.datas.bottom.bottomImgs" :key="index" style="margin-right:15px">
+                            <img :src="item">
+                            </div>
+                    </div>
                 </section>
             </div>
         </footer>
@@ -68,15 +79,26 @@
     import type {Ref} from 'vue'
     import {useRouter} from 'vue-router'
     import {Public} from '@/utils/getRequest'
+    import {useStore} from 'vuex'
+
 
 
     let transform1:Ref<number> = ref(0)
     let router = useRouter()
     let req = new Public()
 
+    let store =  useStore()
+
+    
+
+    // 音乐按钮点击切换
+    let musicImgClick = () => {
+        controlObj.isMusic = !(controlObj.isMusic)
+    }
+
     req.getDataObj('/api/geshin/public','get',{})
     
-    console.log(req);
+    console.log(req.dataList);
 
     // 动画页面消失
     watch(
@@ -87,7 +109,7 @@
                 newVal.isPlay ? 
                 newVal.isAnimationShow = false:
                 newVal.isAnimationShow = true
-            },500)
+            },5000)
         }
     )
 
@@ -190,12 +212,13 @@
                 flex:1;
                 display: flex;
                 cursor: pointer;
-                transform: translateX(40px);
+                transform: translatex(20px) scale(.6);
             }
             .logoImg{
                 flex:1;
                 display: flex;
                 cursor: pointer;
+                transform: scale(.6);
             }
         }
         .middle{
@@ -273,6 +296,10 @@
             color: #fff;
             justify-content: center;
             align-items: center;
+            span{
+                margin: 0 1.5vw;
+                cursor: pointer;
+            }
         }
         .announcement{
             height: 50vh;
@@ -291,21 +318,28 @@
                 justify-content: center;
                 font-size:14px;
                 color: #a1a1a1;
-                p{
-                    margin-bottom:5vh;
-                    color:#fff;
-                    cursor: pointer;
-                    word-spacing: .5vw;
+                .pBox{
+                    display: flex;
+                    p{
+                        margin-bottom:5vh;
+                        color:#fff;
+                        cursor: pointer;
+                        margin-right: 7px;
+                    }
                 }
                 ul{
                     li{
                         line-height: 3vh;
                     }
                 }
+                .bottomImgs{
+                    display: flex;
+                    div{
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }
-
-
 
 </style>

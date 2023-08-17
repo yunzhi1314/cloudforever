@@ -7,6 +7,12 @@
 
 <script setup lang="ts">
     import {useRouter} from 'vue-router'
+    import createStore from '@/store/index'
+    import {Public} from '@/utils/getRequest'
+
+    let req = new Public()
+    req.getDataObj('/api/geshin/public','get',{})
+
 
     const router = useRouter()
 
@@ -14,7 +20,17 @@
         router.push({
             path:'/main'
         })
+
+        // createStore.commit('setMainPublic',req.dataList)
     }
+
+
+    
+    console.log(req);
+
+    
+
+
 </script>
 
 <style scoped lang="scss">

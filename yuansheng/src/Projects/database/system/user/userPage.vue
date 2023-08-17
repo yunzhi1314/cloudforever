@@ -5,13 +5,13 @@
     <!-- 增查输入框 -->
     <div class="header" style="margin-left:10px">
         <el-input v-model="input" placeholder="请输入查询内容" class="input" />
-        <el-button type="primary" style="margin-left:10px" ><el-icon><Search /></el-icon>查询</el-button>
+        <el-button type="primary" style="margin-left:10px" @click="tableData2()"><el-icon><Search /></el-icon>查询</el-button>
         <el-button type="success"><el-icon><FolderAdd /></el-icon>新建菜单</el-button>
     </div>
 
 <!-- 表格 -->
-<el-table :data="tableData()" height="510" >
-  <el-table-column v-for="(item, index) in arr" :key="index" :prop="arr2[index]" :label="item" >
+<el-table :data="tableData2()" height="490" style="margin-top: 1rem;" >
+  <el-table-column v-for="(item, index) in arr" :key="index" :prop="arr2[index]" :label="item" align="center">
         <template #default="scope" >
            <el-progress :text-inside="true" :stroke-width="26" :percentage="scope.row.schedule" v-if = "index == 1"/>
         </template>
@@ -43,7 +43,7 @@
 // 第三版
 import {  reactive, ref } from "vue";
 
-let input = ref("")
+let input:any = ref("")
 
 interface data {
 name: string,
@@ -67,10 +67,73 @@ let arr = [
 ]
 
 //表格的全数据（这里是自定义的列表，要看分页效果自行往此数组内加数据）
-let allTableData = reactive([
+let allTableData:Array<data> = reactive([
 {
 name: '卡瑞立柱单抗',
 schedule: '100',
+china: '550',
+int:'/',
+deta:'202-04-21',
+register:'2020-09-21',
+aut:'CTR20200708',
+},
+{
+name: '卡瑞立柱单抗',
+schedule: '50',
+china: '550',
+int:'/',
+deta:'202-04-21',
+register:'2020-09-21',
+aut:'CTR20200708',
+},
+{
+name: '卡瑞立柱单抗',
+schedule: '60',
+china: '550',
+int:'/',
+deta:'202-04-21',
+register:'2020-09-21',
+aut:'CTR20200708',
+},
+{
+name: '卡瑞立柱单抗',
+schedule: '80',
+china: '550',
+int:'/',
+deta:'202-04-21',
+register:'2020-09-21',
+aut:'CTR20200708',
+},
+{
+name: '卡瑞立柱单抗',
+schedule: '20',
+china: '550',
+int:'/',
+deta:'202-04-21',
+register:'2020-09-21',
+aut:'CTR20200708',
+},
+{
+name: '卡瑞立柱单抗',
+schedule: '70',
+china: '550',
+int:'/',
+deta:'202-04-21',
+register:'2020-09-21',
+aut:'CTR20200708',
+},
+{
+name: '卡瑞立柱单抗',
+schedule: '10',
+china: '550',
+int:'/',
+deta:'202-04-21',
+register:'2020-09-21',
+aut:'CTR20200708',
+},
+{
+name: '卡瑞立柱单抗',
+schedule: '50',
 china: '550',
 int:'/',
 deta:'202-04-21',
@@ -211,11 +274,12 @@ let state = reactive({
 let tableData = () => {
   return allTableData.filter(
     (item, index) =>
+      // 分页
       index < state.page * state.limit &&
       index >= state.limit * (state.page - 1),
   );
+
 };
-tableData()
 
 //改变页码
 let handleCurrentChange = (val:any) => {
@@ -235,6 +299,23 @@ let handleDelete = (index: number, row: data) => {
 allTableData.splice(index,1)
 console.log(index, row)
 }
+
+// 表格的查找
+let tableData2 = () => {
+  return tableData().filter(
+    (item,index) => 
+        // 查询
+      item.name == input.value || 
+      item.schedule == input.value || 
+      item.china == input.value || 
+      item.int == input.value || 
+      item.deta == input.value || 
+      item.register == input.value || 
+      item.aut == input.value || 
+      input.value == "",
+  )
+}
+
 
 </script>
 

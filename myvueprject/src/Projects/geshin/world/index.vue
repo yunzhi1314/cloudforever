@@ -1,14 +1,13 @@
+<template>
+  <div>
+    <!-- <div></div> -->
+  </div>
+</template>
 
-    <template>
-        <div>
-          <h1>world.vue</h1>
-        </div>
-    </template>
-
-    <script setup lang="ts">
-
-    </script>
+<script setup lang="ts">
+// import {  } from "@/utils/require"
+</script>
     
-    <style scoped>
+<style scoped>
     
-    </style>
+</style>

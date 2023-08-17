@@ -234,6 +234,7 @@ header{
   display: grid;
   grid-template-columns: 1fr 2fr 1.5fr;
   grid-template-rows: 1fr;
+  z-index: 10;
   
   > div:nth-child(1){
     position: relative;

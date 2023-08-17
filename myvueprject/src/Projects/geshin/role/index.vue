@@ -589,7 +589,7 @@ let arrobj = [
     <style scoped lang="scss">
 .role_box {
   width: 100vw;
-  height: 110vh;
+  height: 122vh;
   background-color: rosybrown;
   position: relative;
 
@@ -597,7 +597,7 @@ let arrobj = [
   .dash_area {
     position: absolute;
     width: 40vw;
-    height: 110vh;
+    height: 122vh;
     background-color: rgba(0, 0, 0, 0.4);
     transform: skewX(35deg);
     left: 14vw;
@@ -605,12 +605,12 @@ let arrobj = [
   }
   .role-top {
     display: flex;
-    height: 80vh;
+    height: 90vh;
     // 分割线
     > div:nth-of-type(2) {
       position: relative;
       left: 5vw;
-      height: 110vh;
+      height: 122vh;
       border-left: 1px solid rgba(255, 255, 255, 0.7);
     }
     // 导航
@@ -789,7 +789,7 @@ let arrobj = [
 //轮播
 .role_footer {
   width: 100%;
-  height: 30vh;
+  height: 32vh;
   background-color: rgba(255, 255, 255, 0.4);
 }
 </style>

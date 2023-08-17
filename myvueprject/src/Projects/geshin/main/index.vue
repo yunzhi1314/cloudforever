@@ -216,7 +216,7 @@ console.log(publicValues);
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .yhbox{
   width: 98.7vw;
   /* height: 200vh; */

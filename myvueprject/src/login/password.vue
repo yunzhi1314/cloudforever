@@ -34,15 +34,24 @@
         <section class="deng" @click="login(ruleFormRef)">登录</section>
         <section class="fan">
           <span>遇到问题？</span>
-          <span>立即注册</span>
+          <span @click="logadd">立即注册</span>
         </section>
       </el-form-item>
 
       <el-form-item>
         <input type="checkbox" :checked="checked" class="checkbox" />
         <span>已阅读并同意</span>
-        <router-link to="" class="fonsize">《米哈游用户协议》</router-link>
-        <router-link to="" class="fonsize">《米哈游隐私政策》</router-link>
+        <a
+          href="https://ys.mihoyo.com/main/company/privacy"
+          style="color: rgb(78, 164, 220); font-size: 1rem"
+          >《米哈游用户协议》</a
+        >
+        <a
+          href="https://ys.mihoyo.com/main/company/privacy"
+          style="color: rgb(78, 164, 220); font-size: 1rem"
+          >《米哈游隐私政策》</a
+        >
+
         <span>，未注册的手机号验证通过将自动注册。</span>
       </el-form-item>
     </el-form>
@@ -182,10 +191,16 @@ async function login(formEl: FormInstance | undefined) {
   await formEl.validate((valid) => {
     if (valid) {
       //发送表单数据到后台
-      message('登录成功', '登录失败', '/api/geshin/user/login', 'post', {
-        telephone: tel.telephone,
-        password: tel.password
-      })
+      message(
+        '登录成功!请稍候...',
+        '登录失败',
+        '/api/geshin/user/login',
+        'post',
+        {
+          telephone: tel.telephone,
+          password: tel.password
+        }
+      )
 
       //用token判断有没有登录成功
       let token = localStorage.getItem('token')
@@ -209,6 +224,12 @@ let fun = () => {
     path: '/captcha'
   })
 }
+//跳转到注册
+let logadd = () => {
+  router.push({
+    path: '/useadd'
+  })
+}
 </script>
     
     
@@ -229,8 +250,8 @@ let fun = () => {
   }
 
   .box_1 {
-    width: 26vw;
-    height: 69vh;
+    width: 40vw;
+    height: 85vh;
     background-color: #fff;
     padding: 7vh 8vw;
 

@@ -45,7 +45,7 @@
           style="
             position: absolute;
             color: rgb(78, 164, 220);
-            margin-left: 20vw;
+            right: 1vw;
             cursor: pointer;
           "
           @click="yanzhen"
@@ -65,8 +65,10 @@
       :style="{ display: offno.tusi ? 'flex' : 'none' }"
       :class="offno.tusi ? 'tusi' : ''"
     ></TusiVue>
+
+    <Foold :list="data.dataList.datas"></Foold>
   </div>
-</template>
+</template> 
   
   <script setup lang="ts">
 //引入路由
@@ -92,6 +94,9 @@ import { reactive, ref, watch } from 'vue'
 import { message } from '@/utils/tusi'
 
 import type { FormInstance } from 'element-plus'
+
+//底部组件
+import Foold from '@/login/foold.vue'
 
 let router = useRouter()
 
@@ -156,10 +161,10 @@ let tel = reactive<Table>({
 //点击获取验证码，打开这遮罩层
 let yanzhen = () => {
   let zz = /^1[3-9]\d{9}$/
+  offno.yanzheng = true
   if (zz.test(tel.telephone)) {
     message('请填写正确的手机号', '验证码已发送')
     //动态管理器vuex
-    offno.yanzheng = true
   } else {
     message('验证码已发送', '请填写正确的手机号')
   }
@@ -229,11 +234,17 @@ async function loguse(formEl: FormInstance | undefined) {
   formEl.validate((valid) => {
     if (valid) {
       //发送表单数据到后台
-      message('注册成功', '注册失败', '/api/geshin/user/register', 'post', {
-        telephone: tel.telephone,
-        password: tel.password,
-        code: tel.code
-      })
+      message(
+        '账号注册成功！...',
+        '注册失败',
+        '/api/geshin/user/register',
+        'post',
+        {
+          telephone: tel.telephone,
+          password: tel.password,
+          code: tel.code
+        }
+      )
     } else {
       console.log('error submit!')
       return false
@@ -252,7 +263,7 @@ function login() {
 <style scoped lang="scss">
 .box {
   background-color: rgb(234, 234, 234);
-  height: 200vh;
+  height: 173vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -265,7 +276,7 @@ function login() {
   }
 
   .box_1 {
-    width: 29vw;
+    width: 37vw;
     height: 83vh;
     background-color: #fff;
     padding: 5vh 8vw;

@@ -45,19 +45,19 @@ const routes: Array<RouteRecordRaw> = [
       },
       //赛事
       {
-        path: 'compotation',
+        path: '/compotation',
         name: 'compotation',
         component: () => import('@/Projects/geshin/compotation/index.vue')
       }
     ]
   },
-  //社区
-  {
-    path: '/spots',
-    name: 'spots',
-    component: () => import('@/Projects/geshin/spots/index.vue')
-  },
-  //验证码登录
+        //社区
+    {
+          path: '/spots',
+          name: 'spots',
+          component: () => import('@/Projects/geshin/spots/index.vue')
+      },
+            //验证码登录
   {
     path: '/telphone',
     name: 'telphone',

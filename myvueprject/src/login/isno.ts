@@ -11,8 +11,6 @@ let offno = reactive(
         yanzheng: false,
         //吐司显示状态
         tusi: false,
-         //注册框获取验证码开关
-        yanzheng:false
     }
 
 )

@@ -1,7 +1,7 @@
 
 <template>
     <div>
-      <h1>geshin.vue</h1>
+      <h1>神之眼</h1>
     </div>
 </template>
 

@@ -2,10 +2,12 @@ import req from "@/utils/request"; //引入了一个请求
 import { reactive,onBeforeMount } from "vue";
 //接口
 export interface Data {
+export interface Data {
     [name: string]: string
 }
 
 //父类，超类
+export class Request {
 export class Request {
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
     protected get(url: string) {
@@ -13,9 +15,11 @@ export class Request {
     }
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
     protected post(url: string, data: Data) {
+    protected post(url: string, data: Data) {
         return req.post(url, data)
     }
     //受保护类型，仅可以在类里面使用；他们的继承的方法可以到再生类里面使用
+    protected put(url: string, data: Data) {
     protected put(url: string, data: Data) {
         return req.put(url, data)
     }
@@ -24,6 +28,7 @@ export class Request {
         return req.delete(url)
     }
 }
+
 
 
 interface DataList {
@@ -42,7 +47,9 @@ export interface Method {
 }
 
 
+
 //实例化numlist去使用
+export class Numlist extends Request {
 export class Numlist extends Request {
     public dataList: DataList
     constructor() {
@@ -57,6 +64,7 @@ export class Numlist extends Request {
         url: string,
         method: keyof Method,
         data: Data
+        data: Data
     ) {
         onBeforeMount(() => {
             this[method](url, data).then((res: any) => {
@@ -68,6 +76,10 @@ export class Numlist extends Request {
     }
 }
 
+export function DOMDataObj(url: string, method: keyof Method, data: Data, propName: string) {
+    let dataList = reactive<DataList>({
+        datas: "",
+        msg: "",
 export function DOMDataObj(url: string, method: keyof Method, data: Data, propName: string) {
     let dataList = reactive<DataList>({
         datas: "",

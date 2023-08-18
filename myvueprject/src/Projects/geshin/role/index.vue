@@ -96,6 +96,71 @@
     </div>
   </div>
 </template>
+          <div>
+            <section></section>
+            <section>
+              <span></span>
+            </section>
+            <section>
+              <span>cv:</span>
+              <span>琴</span>
+            </section>
+            <section>
+              <svg
+                t="1692172280691"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="5586"
+                width="30"
+                height="30"
+              >
+                <path
+                  d="M515.041727 670.617766c91.584167 0 166.095647-74.504255 166.095647-166.095646V229.350568c0-91.584167-74.51148-166.095647-166.095647-166.095647-91.598617 0-166.102872 74.51148-166.102871 166.095647V504.52212c0 91.591392 74.504255 166.095647 166.102871 166.095646z"
+                  fill="#ffffff"
+                  p-id="5587"
+                ></path>
+                <path
+                  d="M801.643237 874.001665H558.391759v-45.423608c161.507768-21.313766 286.60151-159.788217 286.60151-327.01819a43.350032 43.350032 0 0 0-86.700064 0c0 134.124998-109.12648 243.251478-243.258703 243.251479-134.124998 0-243.244253-109.12648-243.244253-243.251479a43.350032 43.350032 0 0 0-86.700063 0c0 167.229972 125.100967 305.711649 286.601509 327.01819v45.423608H228.440217a43.350032 43.350032 0 0 0 0 86.700064h573.20302a43.350032 43.350032 0 0 0 0-86.700064z"
+                  fill="#ffffff"
+                  p-id="5588"
+                ></path>
+              </svg>
+            </section>
+          </div>
+          <!-- 开关 -->
+          <section class="el-switch">
+            <span
+              class="off"
+              @click="isback = !isback"
+              :style="isback ? 'left:3px' : 'left:50px '"
+            ></span>
+            <span>中</span><span>日</span>
+          </section>
+        </div>
+        <!-- 文本框 -->
+        <div class="words">
+          <section>
+            <span>
+              <span></span>
+            </span>
+          </section>
+          <section>
+            <span>文本</span>
+          </section>
+        </div>
+      </div>
+    </div>
+    <!-- 底部轮播 -->
+    <div class="role_footer">
+      <img src="" alt="" />
+      <!-- 轮播图 -->
+      <div></div>
+      <img src="" alt="" />
+    </div>
+  </div>
+</template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'

@@ -1,6 +1,24 @@
     <template>
         <div class="bg-div">
-         <header></header>
+         <header>
+          <!-- 左边部分 -->
+          <div></div>
+
+          <div>
+            <span>米游社</span>
+             <span>&nbsp; | &nbsp;</span>
+            <span>米游社.原神</span>
+          </div>
+          <!-- 中间文字部分 -->
+          <div class="reader-div">
+          <span v-for="(item,index) in headertext" :key="index">{{ item }}</span>
+        </div>
+        <!-- 右边部分 -->
+         <div class="render-div-right">
+          <input type="text">
+          <section></section>
+         </div>
+      </header>
          <!-- 分割线 -->
         <main>
         <div style="display: flex;background-color: aquamarine;justify-content: center;">
@@ -27,10 +45,13 @@
         </div>
   </template>
 
+
     <script setup lang="ts">
 import { reactive } from "vue";
 
-
+   const headertext = reactive([
+    "首页","酒馆","攻略","官方","观测枢","米游铺","更多"
+  ])
     const textcontent =reactive(["","","" ])
 
 </script>
@@ -47,6 +68,72 @@ import { reactive } from "vue";
       header{
         grid-area: header;
         background-color: #1F2233;
+        color: #fff;
+        display: grid;
+        grid-template-columns: 1fr 0.8fr 1fr 2.5fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: "null-left  img-and-text  content-text null-right";
+        div:nth-child(1){  //空的div
+          grid-area:null-left;
+        }
+        div:nth-child(2){  
+          grid-area:img-and-text;
+          display: flex;
+          align-items: center;
+         >span:nth-child(1){
+          font-size: 1.5rem;
+        }
+        >span:nth-child(2)::after{
+          content: "/";
+          position: absolute;
+          left: 28.6vw;
+          transform: rotate(35deg);
+          top: 2.8vh;
+        }
+        >span:nth-child(3)::after{
+          content:"/";
+          position: absolute;
+          left: 28vw;
+          transform: rotate(110deg);
+           top: 2.8vh;
+        }
+        }
+        .reader-div{  //文字导航栏部分 
+          grid-area: content-text;
+          width: 25.05vw;
+          display: flex;
+        *{
+          flex: 1;
+          height: 100%;
+          display: flex;
+          align-items:center;
+          justify-content: center;
+           cursor: pointer; 
+          &:hover{
+            background-color: #474A58;
+          }
+        }
+        }
+        .render-div-right{  //右侧部分
+            grid-area: null-right;
+            display: flex;
+           align-items: center;
+           justify-content: center;
+          >input{
+            width: 5.20vw;
+            border-radius: 5vw;
+            height: 3.40vh;
+            border: none;
+            background-color: #505360;
+          }
+          >section{
+            background-color: red;
+            width: 2vw;
+            height: 4vh;
+            border-radius: 50%;
+            margin-left: 2vw;
+          }
+          }
       }
       main{
         grid-area: main;

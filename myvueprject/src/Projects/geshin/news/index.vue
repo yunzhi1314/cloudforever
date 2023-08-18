@@ -24,22 +24,18 @@
 </template>
 
 <script setup lang="ts">
-import { reactive,ref} from "vue";
-// import {getData} from "@/utils/require"
-import req from "@/utils/request"
-import { useStore } from "vuex";
+import { reactive} from "vue";
+// import req from "@/utils/request"
+// import { useStore } from "vuex";
 
-let store = useStore()
-let dataV = ref()
-req.get("/api/geshin/public").then(res=>{
-  dataV.value=res.data
-  console.log( dataV.value.dataList.bottom)
-store.commit("childrenStor/getrequestData",dataV.value)
-})
+// let store = useStore()
 
+// req.get("/api/geshin/index/page2").then(res=>{
+// store.commit("childrenStor/getcopydata",{name:"copydata",data:res.data})
+// })
+// let { dataList } = useStore().state.childrenStor.copydata
 
-
-
+// console.log("数据测试",dataList)
 
 
 const textcontent = reactive([

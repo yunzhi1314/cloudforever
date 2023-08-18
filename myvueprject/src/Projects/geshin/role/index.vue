@@ -102,13 +102,13 @@ import { reactive, ref } from 'vue'
 import { getRolesdata } from '@/utils/RolesData'
 import { useStore } from 'vuex'
 // import {Date} from "@/utils/RolesData"
-import { Date, newData } from '@/utils/RolesData'
+import {Date,newData} from "@/utils/RolesData"
 
-let copy = new newData() //测试数据 可修改
+let copy = new newData  //测试数据 可修改
 //请求角色数据
 getRolesdata()
 
-console.log(copy.data.key) //相应值显示
+console.log(copy.data.key)  //相应值显示 
 
 let { dataList } = useStore().state.childrenStor.requestData
 
@@ -138,8 +138,11 @@ let { dataList } = useStore().state.childrenStor.requestData
 // 导航名
 // if(dataList[0]){
 //   console.log("333",newData);
-
+  
 // }
+
+
+
 
 //点击导航栏
 function openNav(index: number = 0) {
@@ -1287,12 +1290,6 @@ let arrobj = [
 .role_footer {
   width: 100%;
   height: 32vh;
-  background-color: rgba(255, 255, 255, 0.4);
-}
-//轮播
-.role_footer {
-  width: 100%;
-  height: 30vh;
   background-color: rgba(255, 255, 255, 0.4);
 }
 </style>

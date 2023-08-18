@@ -26,7 +26,6 @@ export class Request {
 }
 
 
-
 interface DataList {
     datas: any
     msg: any
@@ -83,7 +82,6 @@ export function DOMDataObj(url: string, method: keyof Method, data: Data, propNa
 }
 
 
-
 // 自己添加的get 请求   
 // export  function getData(url:string){
 //     let dataList = reactive({
@@ -104,20 +102,3 @@ export function DOMDataObj(url: string, method: keyof Method, data: Data, propNa
 //     })
 //     return dataList
 // }
-
-
-//roles 
-export class Roules extends Request{
-    public dataRo :any
-    constructor(){
-        super()
-        this.dataRo = ""
-    }
-
-    public Rolesfun(url:string){
-      req.get(url).then((res)=>{
-        console.log(res);
-        
-      })
-    }
-}

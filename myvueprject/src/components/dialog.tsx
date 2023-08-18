@@ -1,6 +1,6 @@
 
 import { Teleport, reactive } from 'vue'
-import { conObj } from '@/utils/controls'
+import  conObj  from '@/utils/controls'
 interface fun {
     arrname: Array<string>
     arrpase: Array<string>

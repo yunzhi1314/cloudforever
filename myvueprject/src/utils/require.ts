@@ -1,5 +1,8 @@
 import req from "@/utils/request"; //引入了一个请求
+import { log } from "console";
 import { reactive, onBeforeMount, onMounted } from "vue";
+import store from "@/store/index";
+
 //接口
 export interface Data {
     [name: string]: string
@@ -26,23 +29,22 @@ export class Request {
 }
 // 公共get方法
 export class PublicGet extends Request {
-    public data: any;
-    constructor(url: string) {
+    constructor(url: string, setName: string) {
         super()
-        this.data = reactive({
-            datas: ""
+        this.get(url).then(str => {
+            store.commit(setName, str.data)
         })
-        onBeforeMount(() => {
-            this.get(url).then(str => {
-                if (typeof str.data == "string") {
-                    this.data.datas = str.data
-                } else {
-                    this.data.datas = { ...str }
-                }
 
-            })
-        })
     }
+}
+export const getdatabase = (url: string, setName: string):any => {
+    let data
+    req.get(url).then(str => {
+        data = store.commit(setName, str.data)
+        localStorage.setItem("router",JSON.stringify(str.data))
+        return data
+    })
+    return data
 }
 // 公共post方法
 export function postData(url: string, method: keyof Method, data: Data) {

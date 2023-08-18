@@ -19,6 +19,8 @@ export default createStore({
         tusiMsg: "",
         // 保存个人中心动态路由
         centerRoutes: <Routes>{},
+        // 后台数据动态路由数据
+        databaseIndex: <Routes>{},
     },
     mutations: {
         // 修改吐丝内容
@@ -28,6 +30,9 @@ export default createStore({
         // 修改仓库中个人中心路由
         setRoutes(state, dataList: Routes) {
             state.centerRoutes = dataList
+        },
+        setDatabaseIndex(state, data: any) {
+            state.databaseIndex = data
         }
     },
     // namespaced:true,
@@ -35,3 +40,10 @@ export default createStore({
         childrenStor
     }
 })
+
+import { getdatabase } from '@/utils/require'
+import { onMounted } from 'vue'
+onMounted(() => {
+  getdatabase('/database/layout/menu', 'setDatabaseIndex')
+})
+console.log(11);

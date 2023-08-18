@@ -19,7 +19,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Search } from '@element-plus/icons-vue'
+import { getdatabase } from '@/utils/require';
 let search = ref("")
+
 
 </script>
 

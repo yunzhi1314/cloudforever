@@ -34,7 +34,6 @@ import { reactive} from "vue";
 // store.commit("childrenStor/getcopydata",{name:"copydata",data:res.data})
 // })
 // let { dataList } = useStore().state.childrenStor.copydata
-
 // console.log("数据测试",dataList)
 
 

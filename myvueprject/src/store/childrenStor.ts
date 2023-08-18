@@ -15,7 +15,8 @@ export default {
   state() {
     return {
       requestData: [], //一个空数据的Array
-      copydata:[] //测试的方法 可修改  
+      copydata:[], //测试的方法 可修改  
+      Bgkound:[]
     }
   },
   mutations: {
@@ -30,8 +31,12 @@ export default {
     setRoles(state:Roledata, data: any) {
       state[data.name] = data.data
       console.log("请求数据11",data);
-      
+    },
+    Bgvdeo(state:any,data:any){
+      state.Bgkound = data
+      console.log(state.Bgkound);
     }
+    
   }
 }
  

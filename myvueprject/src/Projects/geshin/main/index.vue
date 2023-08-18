@@ -87,7 +87,7 @@
 
     </footer>
 
-    <audio ref="audioPlayer" :src="data.datas.header.bgMusic" id="music" loop></audio>
+    <audio ref="audioPlayer" :src="data.datas.header.bgMusic2" id="music" loop></audio>
     <telphone v-show="controlObj.isshowlogin"></telphone>
   </div>
 </template>
@@ -111,8 +111,6 @@ let data = DOMDataObj("api/geshin/public","get",{},"dataList")
 let Wd = reactive({
   public:""
 })
-    // public:"",
-// )
 
 req.get("api/geshin/public").then((res:any) =>{
   Wd.public = res.data.dataList.bottom.words
@@ -213,17 +211,17 @@ watchEffect(() => {
   publicValues.value = Object.values(Wd.public);
 });
 
-console.log(publicValues);
+// console.log(publicValues);
 
 const loginfunction = ()=>{
   controlObj.isshowlogin = true
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .yhbox{
   width: 98.7vw;
-  /* height: 200vh; */
+  height: 200vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 5fr 2fr;

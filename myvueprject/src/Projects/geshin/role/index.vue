@@ -124,36 +124,33 @@ interface Cv {
   name: string
 }
 
-let { dataList } = useStore().state.childrenStor.requestData
-let newData = reactive<Date>({
-  city: '',
-  key: '',
-  bg: [''],
-  character: [
-    {
-      title: '',
-      name: '',
-      attr: '',
-      introduce: '',
-      roleImg: '',
-      sentence: '',
-      cv: [
-        {
-          audio: [''],
-          name: ''
-        }
-      ]
-    }
-  ]
-})
-newData = dataList
+let datalist = reactive(useStore().state.childrenStor.requestData.dataList)
+console.log("222",typeof datalist);
+
+// let { dataList } = useStore().state.childrenStor.requestData
+// let newData = reactive<Date>({
+//   city: '',
+//   key: '',
+//   bg: [''],
+//   character: [
+//     {
+//       title: '',
+//       name: '',
+//       attr: '',
+//       introduce: '',
+//       roleImg: '',
+//       sentence: '',
+//       cv: [
+//         {
+//           audio: [''],
+//           name: ''
+//         }
+//       ]
+//     }
+//   ]
+// })
+// newData = dataList
 // 导航名
-if(dataList[0]){
-  console.log("333",newData);
-  
-}
-
-
 
 
 //点击导航栏

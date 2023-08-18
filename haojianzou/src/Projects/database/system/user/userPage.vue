@@ -5,9 +5,8 @@
           <el-input
           v-model="input1"
           class="w-50 m-2"
-          size="default"
           placeholder="请输入查询内容"
-          :suffix-icon="Search"/>
+          />
           <!-- 查询按钮 -->
           <el-button 
           type="primary" 
@@ -16,10 +15,10 @@
           @click="search">查询</el-button>
           <!-- 新增按钮 -->
           <el-button 
-          type="primary" 
+          type="success" 
           :icon="Search" 
           style="background-color: green;border-color: green;"
-          @click="search">新增菜单</el-button>
+          @click="handleAdd(1)">新增菜单</el-button>
         </el-col>
       </el-row>
       <el-table
@@ -38,10 +37,12 @@
           </el-table-column>
           <el-table-column prop="config" label="操作" align="center">
             <template #default="scope">
-              <el-button link>修改</el-button>
+              <el-button link @click="handleAdd(0,scope.$index)">修改</el-button>
               <el-button link @click="handleDelete(scope.$index)">删除</el-button>
             </template>
           </el-table-column>
+          <FormData v-if="controlObj.isBasicMsg" :addData="controlObj.ChangeOrAdd == 0 ? newName : addData" :labelArr="labelArr" :index='deleIndex'></FormData>
+          <deletDialog v-if="controlObj.menuDeletFlag" :List="newName" :index="deleIndex" > 看看</deletDialog> 
       </el-table>
       <el-row class="paginationOne">
         <el-col :span='8'>
@@ -59,7 +60,7 @@
           />
         </el-col>
       </el-row>
-      <deletDialog v-if="controlObj.menuDeletFlag" :List="newName" :index="deleIndex" > 看看</deletDialog> 
+      
     </div>
 </template>
 
@@ -67,12 +68,16 @@
 import { Search } from '@element-plus/icons-vue' 
 import { computed, reactive, ref, watch,onMounted } from 'vue'
 import req from '@/utils/request'
-import { getDataObj } from '@/utils/route'
+import { getRoutes } from '@/utils/route'
 import  controlObj  from '@/utils/controls'
 import deletDialog from "@/components/deletDialog.vue"
+import FormData from '@/utils/dealFormData'
+import { useStore } from 'vuex'
+import { getFormData } from '@/utils/dealFormData'
+
 
 // 请求医药实验基本数据并储存
-getDataObj('/database/home/expMedical','expMedical')
+getRoutes('/database/home/expMedical','expMedical')
 
 // 从sessionStorage里提取出医药实验基本数据
 let expMedical = JSON.parse(sessionStorage.getItem('expMedical') as string).datas
@@ -80,6 +85,8 @@ console.log(expMedical);
 
 let newName = ref(expMedical);
 let total = ref(expMedical.length);
+
+getFormData("expMedical")
 
 // 定义标题接口
 interface AddMenu{
@@ -169,8 +176,45 @@ const handleDelete:any=(index:any)=>{
 watch(newName.value,(newVal) => {
   total.value = newVal.length
 })
-</script>
 
+
+// 新增方法
+const handleAdd=(witch:number,index?:any)=>{
+  controlObj.isBasicMsg = true
+  if(index){
+    controlObj.ChangeOrAdd = 0
+    deleIndex.value = index
+  }
+}
+
+interface State {
+  centerRoutes: any
+  formData: {
+    basicMedical: Array<any>
+  }
+  tusiMsg: string
+}
+
+const state = useStore().state as State
+
+console.log("userstate",state.formData);
+
+// 添加表单数据 
+let addData = reactive<User>({
+  medical_name: "",
+  medical_enrollees_population_china:"",
+  medical_enrollees_population_internal:"",
+  medical_first_publication: "",
+  FPIchina:"",
+  medical_CTR: "",
+  III:"",
+  Ia:"",
+  Ib_II:'',
+  NDA:"",
+  id: 0,
+  market:"",
+})
+</script>
 
 <style scoped lang="scss">
 .el-row{
@@ -203,6 +247,12 @@ watch(newName.value,(newVal) => {
   margin-bottom: 15px;
   width:5vw;
 }
+.el-table__inner-wrapper::before {
+    content: "";
+    position: absolute;
+    background-color:black;
+    z-index: 1;
+  }
 .demo-pagination-block + .demo-pagination-block {
   margin-top: 10px;
 }
@@ -213,6 +263,5 @@ watch(newName.value,(newVal) => {
   position: absolute;
   left:30%;
   bottom: 10px;
-  
 }
 </style>

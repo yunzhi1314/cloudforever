@@ -9,130 +9,55 @@
             text-color="#fff"
             :collapse="isCollapse"
             >
-                <el-menu-item 
-                index="1" 
-                @click="addTab(metaArr[0].title,metaArr[0].path)">
-                    <el-icon>
-                        <location />
-                    </el-icon>
-                    <span>{{ metaArr[0].title }}</span>
+                <el-menu-item
+                v-for="(item, index) in metaArr"
+                :key="index"
+                v-show="!item.children"
+                :index="index + ''"
+                @click="addTab(item.meta.title, item.path)"
+                >
+                    <span v-html="item.meta.icon"></span>
+                    <span>{{ item.meta.title }}</span>
                 </el-menu-item>
-                <el-sub-menu index="2" >
+                <el-sub-menu
+                v-for="(item, index) in metaArr"
+                :key="index"
+                v-show="item.children"
+                :index="index + ''"
+                >
                     <template #title>
-                        <el-icon>
-                            <location />
-                        </el-icon>
-                        <span>系统设置</span>
+                        <el-icon><location /></el-icon>
+                        <span>{{ item.meta.title }}</span>
                     </template>
-                    <!-- 没请求到数据前先用自制数组遍历，后期请求到数据要求用请求数据渲染 -->
-                    <el-menu-item v-for="(item,index) in metaArr" :key="index" v-show="index > 0" :index="`2-${index}`"  @click="addTab(item.title,item.path)">{{item.title}}</el-menu-item>
+                    <el-menu-item
+                    v-for="(item2, index2) in item.children"
+                    :key="index2"
+                    :index="`${index}-${index2}`"
+                    v-show="index > 0 && !item.children.children"
+                    @click="addTab(item2.meta.title, item2.path)"
+                    >
+                        {{ item2.meta.title }}
+                    </el-menu-item>
+                    <el-sub-menu
+                    v-for="(item2, index2) in item.children"
+                    :key="index2"
+                    :index="`${index}-${index2}`"
+                    v-show="index > 0 && item.children.children"
+                    >
+                        <template #title>
+                            <el-icon><location /></el-icon>
+                            <span>{{ item2.meta.title }}</span>
+                        </template>
+                        <el-sub-menu
+                        v-for="(item3, index3) in item2.children"
+                        :key="index3"
+                        :index="`${index}-${index2}-${index3}`"
+                        v-show="(index === 2 || index === 3) && item2.children"
+                        >
+                            <span>{{ item3.meta.title }}</span>
+                        </el-sub-menu>
+                    </el-sub-menu>
                 </el-sub-menu>
-                <el-sub-menu index="3" disabled>
-                    <template #title>
-                        <el-icon>
-                            <location />
-                        </el-icon>
-                        <span>权限管理</span>
-                    </template>
-                    <el-menu-item index="3-1">菜单管理</el-menu-item>
-                    <el-menu-item index="3-2">角色管理</el-menu-item>
-                    <el-menu-item index="3-3">item three</el-menu-item>
-                    <el-menu-item index="3-4">item three</el-menu-item>
-                    <el-menu-item index="3-5">item three</el-menu-item>
-                </el-sub-menu>
-                <el-sub-menu index="4" disabled>
-                    <template #title>
-                        <el-icon>
-                            <location />
-                        </el-icon>
-                        <span>菜单嵌套</span>
-                    </template>
-                    <el-menu-item index="4-1">菜单管理</el-menu-item>
-                    <el-menu-item index="4-2">角色管理</el-menu-item>
-                    <el-menu-item index="4-3">item three</el-menu-item>
-                    <el-menu-item index="4-4">item three</el-menu-item>
-                    <el-menu-item index="4-5">item three</el-menu-item>
-                </el-sub-menu>
-                <el-sub-menu index="5" disabled>
-                    <template #title>
-                        <el-icon>
-                            <location />
-                        </el-icon>
-                        <span>功能</span>
-                    </template>
-                    <el-menu-item index="5-1">菜单管理</el-menu-item>
-                    <el-menu-item index="5-2">角色管理</el-menu-item>
-                    <el-menu-item index="5-3">item three</el-menu-item>
-                    <el-menu-item index="5-4">item three</el-menu-item>
-                    <el-menu-item index="5-5">item three</el-menu-item>
-                </el-sub-menu>
-                <el-sub-menu index="6" disabled>
-                    <template #title>
-                        <el-icon>
-                            <location />
-                        </el-icon>
-                        <span>页面</span>
-                    </template>
-                    <el-menu-item index="6-1">菜单管理</el-menu-item>
-                    <el-menu-item index="6-2">角色管理</el-menu-item>
-                    <el-menu-item index="6-3">item three</el-menu-item>
-                    <el-menu-item index="6-4">item three</el-menu-item>
-                    <el-menu-item index="6-5">item three</el-menu-item>
-                </el-sub-menu>
-<!--<div v-for="(item,index) in metaArr" :key="index">
-        第一层一级菜单 
-        <el-menu-item 
-        v-show="!item.children" 
-        :index="index+''" 
-        @click="addTab(item.meta.title,item.path)">
-        <span v-html="item.meta.icon"></span>
-        <span>{{ item.meta.title }}</span>
-        </el-menu-item>
-        第一层二级菜单 
-        <el-sub-menu 
-        v-show="item.children" 
-        :index="index+''" 
-        >
-        <template #title>
-        <el-icon><location /></el-icon>
-        <span >{{ item.meta.title }}</span>
-        </template>
-        第二级二级菜单 
-        <el-sub-menu 
-        v-show="index>0 && item.children.children" 
-        v-for="(item2,index2) in item.children" 
-        :key="index2"
-        :index="`${index}-${index2}`" 
-        >
-        <template #title>
-        <el-icon><location /></el-icon>
-        <span>{{ item2.meta.title }}</span>
-        </template>
-        第三级二级菜单 
-        <el-sub-menu 
-        v-show="(index == 2 || index == 3) && item2.children">
-        </el-sub-menu> 
-        第三级一级菜单 
-        <el-menu-item 
-        v-show="(index == 2 || index == 3) && !item2.children"
-        v-for="(item3,index3) in item.children.children" 
-        :key="index3"
-        :index="`${index}-${index2}-${index3}`">
-        {{ item3.meta.title }}
-        </el-menu-item> 
-        </el-sub-menu>
-        第二级一级菜单 
-        <el-menu-item 
-        v-show="index>0 && !item.children.children" 
-        v-for="(item2,index2) in item.children" 
-        :key="index2"
-        :index="`${index}-${index2}`" 
-        @click="addTab(item2.meta.title,item2.path)">
-        {{ item2.meta.title }}
-        </el-menu-item>
-        </el-sub-menu>
-    </div> 
--->
             </el-menu>
         </el-aside>
         <div class="boxBottom">
@@ -212,53 +137,9 @@ import {
 import { ref, watch, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import req from "@/utils/request"
-import { getDataObj } from '@/utils/route'
+import { getRoutes, dealRoute, dealDeepRoute  } from '@/utils/route'
 
-// // 暂时性请求数据
-getDataObj('/database/layout/menu','databaseRoutes')
-
-// // 从sessionStorage里提取出数据
-let routes = JSON.parse(sessionStorage.getItem('databaseRoutes') as string).menu
-
-
-// // 路由的遍历展开
-// function dealDeepRoutes(arr: any): any[] {
-//   let newArr = [];
-//   if (Array.isArray(arr)) {
-//     arr.forEach(item => {
-//       newArr.push(...dealDeepRoutes(item));
-//     });    
-//   } else if (typeof arr == 'object') {
-//     if (Reflect.has(arr, 'component')) {
-//       newArr.push(arr);
-//     } else if (Reflect.has(arr, 'children')){
-//       newArr.push(...dealDeepRoutes(arr.children));
-//     }
-//   }
-//   return newArr;
-// }
-// let newArr = dealDeepRoutes(routes)
-
-// // 处理meta路由原数据数组，进行页面渲染
-// function findMeta(arr: any[]): any[] {
-//   return arr.map((item) => {
-//     const metaData: any = {}
-//     if (item.meta) {
-//       metaData.meta = item.meta
-//     }
-//     if (item.path) {
-//       metaData.path = item.path
-//     }
-//     if (item.children) {
-//       metaData.children = findMeta(item.children)
-//     }
-//     return metaData
-//   })
-// }
-// // 渲染的数组
-// let metaArr = reactive<any[]>(findMeta(routes))
-
-
+// 临时保存
 req.post('/api/geshin/user/login',{
     telephone:"19153195422",
     password:"12345678"
@@ -270,37 +151,43 @@ req.post('/api/geshin/user/login',{
     }
 })
 
-
-let metaArr = [
-    {
-        title:'首页',
-        path:'/database/home'
-    },
-    {
-        title:'菜单管理',
-        path: '/database/system/menu'
-    },
-    {
-        title:'角色管理',
-        path:'/database/system/role'
-    },
-    {
-        title:'用户管理',
-        path:'/database/system/user'
-    },
-    {
-        title:'部门管理',
-        path:'/database/system/department'
-    },
-    {
-        title:'字典管理',
-        path:'/database/system/dictionary'
-    },
-    
-]
-
 // 路由使用
-const router= useRouter()
+const router = useRouter()
+
+// 请求数据
+getRoutes('/database/layout/menu','databaseRoutes')
+
+// 从sessionStorage里提取出数据
+let routes = JSON.parse(sessionStorage.getItem('databaseRoutes') as string).menu
+
+// 处理有子路由的路由表可复用
+const finalRoutes = dealDeepRoute(routes, [], 'children')
+
+// 调用处理动态路由函数在database后添加子路由
+dealRoute('database',finalRoutes)
+// console.log(router.getRoutes())
+
+
+// 处理meta路由原数据数组，进行页面渲染
+function findMeta(arr: any[]): any[] {
+  return arr.map((item) => {
+    const metaData: any = {}
+    if (item.meta) {
+      metaData.meta = item.meta
+    }
+    if (item.path) {
+      metaData.path = item.path
+    }
+    if (item.children) {
+      metaData.children = findMeta(item.children)
+    }
+    return metaData
+  })
+}
+// 渲染的数组
+let metaArr = reactive<any[]>(findMeta(routes))
+console.log(metaArr);
+
 
 // 控制伸缩导航栏的变量，默认展开
 const isCollapse = ref(false)
@@ -325,10 +212,10 @@ const addTab = ( targetName: string, path:string ) => {
   
 //   如果name是数组就是用这个逻辑
 //   const newTabName = `${++tabIndex}`
-  const newTabName = path
+//   const newTabName = path
   
   // 对路由数组遍历出一个点击的相应的path
-//   const newTabName = (newArr.find(item => item.meta.title === targetName)).path;
+  const newTabName = (finalRoutes.find(item => item.meta.title === targetName)).path;
 
   // 如果多次点击同一个nav栏的内容不重复添加,尽心阻止
   const tabExists = editableTabs.value.some(item => item.title === targetName);
@@ -355,7 +242,10 @@ const changeTab = (tab:any) =>{
 // 路由视图显示哪个页面，对应的el-tab-pane标签处于激活状态
 const currentRoute = ref('')
 watch(() => router.currentRoute.value.path, (newPath) => {
-  currentRoute.value = newPath
+    const tab = editableTabs.value.find(item => item.name === newPath);
+  if (tab) {
+    editableTabsName.value = tab.title;
+  }
 })
 watch(currentRoute, (newPath) => {
   editableTabsValue.value = newPath
@@ -390,7 +280,7 @@ const removeTab = (targetName: string) => {
 .el-menu-vertical-demo{
     width:70px;
     height: 100vh;
-    padding-right:0
+    overflow-y: hidden;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 14vw;

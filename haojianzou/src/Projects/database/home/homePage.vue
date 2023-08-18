@@ -37,9 +37,9 @@
 <script setup lang="ts">
 import * as echarts from 'echarts';
 import { onMounted, ref } from 'vue'
-import { getDataObj } from '@/utils/route'
+import { getRoutes } from '@/utils/route'
 
-getDataObj('/database/home/messages','homeDatas')
+getRoutes('/database/home/messages','homeDatas')
 
 // 从sessionStorage里提取出数据
 let homeDatas = JSON.parse(sessionStorage.getItem('homeDatas') as string)

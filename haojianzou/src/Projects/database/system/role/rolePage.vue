@@ -4,79 +4,84 @@
           <el-input placeholder="请输入查询值" style="width:7vw" v-model="queryValue"></el-input>
           <el-button type="primary" style="margin-left: 1vw;" :icon="Search" @click="inquire">查询</el-button>
           <el-button type="success" :icon="FolderAdd" @click="addarr">新增菜单</el-button>
-        </div>
-        <el-table
+    </div>
+    <el-table
     :data="newName"
     style="width: 100%"
     row-key="id"
-    height="500"
-    
-    
-    
-  >
-  <el-table-column align="center" :prop="item.prop" :label="item.label"  v-for="(item,index) in messageArr " :key="index"/>
-  <el-table-column label="操作" align="center">
-    <template #default="scope">
-      
-      <el-button link>修改</el-button>
-      <el-button link   @click.prevent="handleDelete(scope.$index)">删除</el-button>
-    </template>
-</el-table-column>
-  </el-table>
-        
-  <div class="demo-pagination-block">
-    <div class="btm">
-      <el-pagination
-v-model:current-page="currentPage4"
-v-model:page-size="pageSize4"
-:page-sizes="[5, 10, 15, 20]"
-:small="small"
-:disabled="disabled"
-:background="background"
-layout="sizes, prev, pager, next, jumper,total"
-:total="totli"
-@size-change="handleSizeChange"
-@current-change="handleCurrentChange"
-/>
-    </div>
+    height="300">
+      <el-table-column 
+      align="center" 
+      :prop="item.prop" 
+      :label="item.label"
+      v-for="(item,index) in messageArr"
+      :key="index"/>
+      <el-table-column label="操作" align="center">
+        <template #default="scope">
+          <el-button link>修改</el-button>
+          <el-button link @click.prevent="handleDelete(scope.$index)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="demo-pagination-block">
+      <div class="btm">
+        <el-pagination
+        v-model:current-page="currentPage4"
+        v-model:page-size="pageSize4"
+        :page-sizes="[5, 10, 15, 20]"
+        :small="small"
+        :disabled="disabled"
+        :background="background"
+        layout="sizes, prev, pager, next, jumper,total"
+        :total="totli"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        />
+      </div>
+      </div>
+      <deletDialog 
+      :List="newdata" 
+      :index="deleIndex" 
+      v-if="controlObj.menuDeletFlag"></deletDialog>
+      <addtDialog  
+      :List="newdata" 
+      :index="deleIndex" 
+      v-if="controlObj.menuDeletFlag"></addtDialog>
   </div>
-  <deletDialog :List="newdata" :index="deleIndex" v-if="controlObj.menuDeletFlag"></deletDialog>
-  <addtDialog  :List="newdata" :index="deleIndex" v-if="controlObj.menuDeletFlag"></addtDialog>
-</div>
 </template>
   
 
-  <script setup lang="ts">
-  import req from"@/utils/request"
-  import { Search} from '@element-plus/icons-vue'
-  import{FolderAdd}from"@element-plus/icons-vue"
-  import { computed, reactive, ref ,onMounted, watch} from 'vue'
-  import{getDataObj}from"@/utils/route"
-  import controlObj from"@/utils/controls"
-  import deletDialog from "@/components/deletDialog.vue"
-  import addtDialog from "../menu/addtDialog.vue"
+<script setup lang="ts">
+import req from"@/utils/request"
+import { Search} from '@element-plus/icons-vue'
+import{FolderAdd}from"@element-plus/icons-vue"
+import { computed, reactive, ref ,onMounted, watch} from 'vue'
+import { useStore } from 'vuex'
+import{getRoutes}from"@/utils/route"
+import controlObj from"@/utils/controls"
+import deletDialog from "@/components/deletDialog.vue"
+import addtDialog from "../menu/menuAddEditFlag.vue"
+import { getFormData } from "@/utils/dealFormData"
 
 
 // 获取token
 req.post('/api/geshin/user/login',{
-telephone:'17610597660',
-password:'11111111'
-}).then((res:any)=>{
-console.log(res);
-
-if(res.data.token){
-localStorage.setItem('token',res.data.token)
-localStorage.setItem('userId',res.data.userId)
-localStorage.setItem('telephone',res.data.telephone)
-
-}
+  telephone:'17610597660',
+  password:'11111111'
+  }).then((res:any)=>{
+  console.log(res);
+  if(res.data.token){
+  localStorage.setItem('token',res.data.token)
+  localStorage.setItem('userId',res.data.userId)
+  localStorage.setItem('telephone',res.data.telephone)
+  }
 })
 
 const small = ref(false)
 const background = ref(false)
 const disabled = ref(false)
 
-  interface User {
+interface User {
 company: number
 id: string
 medical_ORR: string
@@ -93,9 +98,22 @@ medical_status:string
 let newArr=reactive<string[]>(['药物名称','所属公司','应对癌症','入组人数','ORR','OS','PFS','TREE','线数','研发线管',])
 let propArr = reactive<string[]>([])
 let messageArr = reactive<any[]>([])
-getDataObj('/database/home/expMedicals','basicMedical')
+getRoutes('/database/home/expMedicals','basicMedical')
 let basicMedical=JSON.parse(sessionStorage.getItem('basicMedical') as string).datas
 console.log(basicMedical);
+
+
+interface State {
+  centerRoutes: any
+  formData: {
+    basicMedical: Array<any>
+  }
+  tusiMsg: string
+}
+getFormData("expMedicals")
+const state = useStore().state as State
+console.log("rolestate",state);
+
 
 if(basicMedical[0]){
   propArr = Reflect.ownKeys(basicMedical[0]) as string[]
@@ -113,8 +131,6 @@ if(basicMedical[0]){
     prop: propArr[index],
     label: item
   }))
-  
-  
 }
 
 

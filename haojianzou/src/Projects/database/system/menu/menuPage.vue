@@ -137,7 +137,7 @@ import addtDialog from "./menuAddEditFlag.vue"
 <style scoped lang="scss">
   .el-main{
     height: 100%;
-      width: 100%;
+    width: 100%;
     .top-input{
       margin:0 0 16px 0;
     }

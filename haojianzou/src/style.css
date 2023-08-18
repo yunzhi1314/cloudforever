@@ -24,7 +24,47 @@
   margin: 0;
 } */
 
-
+dialog {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  z-index: 2;
+  display: flex;
+}
+.formBoard {
+  background-color: #fff;
+  font-size: 12px;
+  height: 50%;
+  width: 45vw;
+  padding: 1vw;
+  border-radius: 1.5vw;
+  position: relative;
+}
+.formBoard > section:first-child {
+      font-size: 1.0rem;
+}
+.formBoard > section:first-child > span:last-child {
+  font-size:20px;
+  cursor:pointer;
+}
+.form_title {
+  height: 10%;
+  display: flex;
+  justify-content:space-between; 
+  align-items: center;
+  /* margin-bottom: 3.5vh; */
+}
+.form {
+  width: 43vw;
+  height: 80%;
+  /* height: 50vh; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

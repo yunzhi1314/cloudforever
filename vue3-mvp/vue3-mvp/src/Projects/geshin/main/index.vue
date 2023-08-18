@@ -1,8 +1,8 @@
 <template>
     <!-- 首页页面 -->
-    <div>
+    <div :class="controlObj.isPlay ? 'first' : '' ">
         <!-- 动画页面导入 -->
-        <animationVue v-show="controlObj.isAnimationShow"></animationVue>
+        <animationVue v-show="controlObj.isAnimationShow" ></animationVue>
         <!-- 头部区域 -->
         <header class="header">
             <!-- 左边 -->
@@ -115,7 +115,7 @@ watch(
             newVal.isPlay ?
                 newVal.isAnimationShow = false :
                 newVal.isAnimationShow = true
-            },5000)
+            },3000)
         }
     )
 
@@ -208,8 +208,7 @@ const list: Array<data> = reactive([
         color: #fff;
         background: rgba(0,0,0,.5);
         position: fixed;
-        // top:0;
-        z-index: 99;
+        z-index: 10;
         .left{
             flex:1;
             display: flex;
@@ -349,4 +348,26 @@ const list: Array<data> = reactive([
         }
     }
 
+    .first{
+        width: 100vw;
+        height: 100vh;
+        background: #fff;
+        position: absolute;
+        z-index: 11;
+        animation: firstAnimation 10s 2.7s linear 1 forwards;
+    }
+    
+    @keyframes firstAnimation{
+        100%{
+            filter: opacity(1);
+        }
+
+        50%{
+            filter: opacity(1);
+        }
+
+        0%{
+            filter: opacity(0);
+        }
+    }
 </style>

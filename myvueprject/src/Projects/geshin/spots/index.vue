@@ -8,10 +8,13 @@
             <span>米游社</span>
              <span>&nbsp; | &nbsp;</span>
             <span>米游社.原神</span>
+
+            <el-icon><ArrowDownBold /></el-icon>
           </div>
           <!-- 中间文字部分 -->
           <div class="reader-div">
           <span v-for="(item,index) in headertext" :key="index">{{ item }}</span>
+        
         </div>
         <!-- 右边部分 -->
          <div class="render-div-right">
@@ -83,19 +86,8 @@ import { reactive } from "vue";
          >span:nth-child(1){
           font-size: 1.5rem;
         }
-        >span:nth-child(2)::after{
-          content: "/";
-          position: absolute;
-          left: 28.6vw;
-          transform: rotate(35deg);
-          top: 2.8vh;
-        }
-        >span:nth-child(3)::after{
-          content:"/";
-          position: absolute;
-          left: 28vw;
-          transform: rotate(110deg);
-           top: 2.8vh;
+        >span:nth-child(3){
+        margin-right: 1vw;
         }
         }
         .reader-div{  //文字导航栏部分 

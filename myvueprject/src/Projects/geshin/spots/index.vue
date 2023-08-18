@@ -14,8 +14,9 @@
           <!-- 中间文字部分 -->
           <div class="reader-div">
           <span v-for="(item,index) in headertext" :key="index">{{ item }}</span>
-        
+          <el-icon class="icon"><ArrowDownBold /></el-icon>
         </div>
+        
         <!-- 右边部分 -->
          <div class="render-div-right">
           <input type="text">
@@ -105,6 +106,9 @@ import { reactive } from "vue";
             background-color: #474A58;
           }
         }
+        .icon>svg{
+         transform: scale(0.3);
+          }
         }
         .render-div-right{  //右侧部分
             grid-area: null-right;

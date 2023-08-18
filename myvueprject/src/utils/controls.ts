@@ -8,6 +8,9 @@ const controlObj = reactive({
 
     // 遮罩层
     isShow:false,
+
+    // 人物显示
+    isRole:false
 })
 
 export default controlObj;

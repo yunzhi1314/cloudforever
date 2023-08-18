@@ -10,7 +10,7 @@
         <!--  -->
         <div>
           <img :src="dataList.data.dataList.videoBtn" alt="">
-          <div class="zt" @click="controlObj.isShow = true">
+          <div class="zt" @click="bofang">
             <!-- 三角按钮 -->
             <div class="sj"></div>
           </div>
@@ -62,13 +62,33 @@
       </div>
 
       <!-- 中间底部 -->
-      <div></div>
+      <div>
+        <div v-for="(item,index) in dataK.dataList.cityBack" :key="index"
+        :style="{backgroundImage:`url(${item.cityImg})`}"
+        @mouseenter="roel(index)"
+        @mouseleave="roel2()"
+        >
+          <section>{{ item.title }}</section>
+
+          <section>
+            <img :src="item.titleBackImg" alt="">
+          </section>
+
+          <section>
+            <img :src="item.waveImg" alt="">
+          </section>
+
+          <section>
+            <img :src="item.roleImg" alt="" v-show="roleNa == index">
+          </section>
+        </div>
+      </div>
   </div>
-  <!-- <video src="" autoplay muted style="width: 98.7vw;"></video> -->
+
   <video class="vd" id="vd" autoplay muted :src="dataList.data.dataList.background.bgVideo" ></video>
 
-  <div class="delog" v-show="controlObj.isShow == true" @click="controlObj.isShow = false">
-    <video @click.stop controls :src="dataList.data.dataList.video" id="vd2"></video>
+  <div class="delog" v-show="controlObj.isShow == true" @click="tingzhi">
+    <video ref="videoPlayer" @click.stop controls :src="dataList.data.dataList.video" id="vd2"></video>
   </div>
 </template>
 
@@ -113,14 +133,36 @@ onMounted(() =>{
   }
   
 })
-// let vd2 = document.querySelector("#vd2") as HTMLVideoElement;
-// console.log(vd2);
-// if(controlObj.isShow == true){
-//     vd2.play();
-//     console.log(vd2);
-//   }else{
-//     vd2.pause();
-//   }
+
+const videoPlayer = ref<any>(null);
+
+// 点击三角按钮，播放视频
+function bofang(){
+  controlObj.isShow = true
+  if (videoPlayer.value) {
+    videoPlayer.value.play();
+  }
+}
+
+// 点击遮罩层，视频停止
+function tingzhi(){
+  controlObj.isShow = false;
+  if (videoPlayer.value) {
+    videoPlayer.value.pause();
+  }
+}
+
+// 显示人物
+let roleNa = ref(0);
+function roel(index:number){
+  roleNa.value = index;
+}
+
+// 隐藏人物
+function roel2(){
+  roleNa.value = -1
+}
+
 
 </script>
 
@@ -144,7 +186,7 @@ onMounted(() =>{
 
 .box{
   width: 98.7vw;
-  height: 300vh;
+  height: 415vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1.3fr 1fr 1fr;
@@ -290,9 +332,49 @@ onMounted(() =>{
       // }
     }
   }
-
+  
+  // 中间中部
   > div:nth-child(2){
+    background-repeat: no-repeat;
+    background-size: cover;
     margin-top: -1vh;
+  }
+
+  // 中间底部
+  > div:nth-child(3){
+    margin-top: -1vh;
+    position: relative;
+    > div{
+      height: 43vh;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: brightness(0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3.5rem;
+      color: #fff;
+      transition: all 0.5s 0s linear;
+      > section:nth-child(2){
+        position: absolute;
+      }
+
+      > section:nth-child(3){
+        position: absolute;
+        top: 19vh;
+      }
+
+      > section:nth-child(4){
+        position: absolute;
+        left: 39vw;
+        top: 0vh;
+        // display: none;
+      }
+    }
+  }
+
+  > div:nth-child(3):hover{
+    filter: brightness(1)!important;
   }
 }
 

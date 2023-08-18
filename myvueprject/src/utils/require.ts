@@ -26,6 +26,7 @@ export class Request {
 }
 
 
+
 interface DataList {
     datas: any
     msg: any
@@ -82,26 +83,27 @@ export function DOMDataObj(url: string, method: keyof Method, data: Data, propNa
 }
 
 
+
 // 自己添加的get 请求   
-export  function getData(url:string){
-    let dataList = reactive({
-        animation:"",  //动画界面
-        publicdata:"",
-        page1:"",  
-        page2:"",
-        getCode:"", //图形验证码
-    })
+// export  function getData(url:string){
+//     let dataList = reactive({
+//         animation:"",  //动画界面
+//         publicdata:"",
+//         page1:"",  
+//         page2:"",
+//         getCode:"", //图形验证码
+//     })
   
-      req.get(url).then((res:any)=>{
-        console.log(Object.values(res.data) ,"请求的数据 res")
-      url == "/api/geshin/animation" ? dataList.animation =  res.data :
-        url == "/api/geshin/public" ? dataList.publicdata =  res.data : 
-         url == "/api/geshin/index/page1" ? dataList.page1 =  res.data: 
-         url == "/api/geshin/index/page2" ?  dataList.page2  =  res.data:
-         url == " /api/getCode"  ? dataList.getCode = res.data  : ""
-    })
-    return dataList
-}
+//       req.get(url).then((res:any)=>{
+//         console.log(Object.values(res.data) ,"请求的数据 res")
+//       url == "/api/geshin/animation" ? dataList.animation =  res.data :
+//         url == "/api/geshin/public" ? dataList.publicdata =  res.data : 
+//          url == "/api/geshin/index/page1" ? dataList.page1 =  res.data: 
+//          url == "/api/geshin/index/page2" ?  dataList.page2  =  res.data:
+//          url == " /api/getCode"  ? dataList.getCode = res.data  : ""
+//     })
+//     return dataList
+// }
 
 
 //roles 

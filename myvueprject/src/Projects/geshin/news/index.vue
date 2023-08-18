@@ -24,17 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive,ref} from "vue";
-// import req from "@/utils/request"
-// import { useStore } from "vuex";
-
-// let store = useStore()
-// let dataV = ref()
-// req.get("/api/geshin/index/page2").then(res=>{
-//   dataV.value=res.data
-//   console.log( dataV.value.dataList.bottom)
-// store.commit("childrenStor/getrequestData",dataV.value)
-// })
+import { reactive } from "vue";
+// import {Public} from "@/utils/require"
+//  let  da = new Public
+//  da.getDataObj("/api/geshin/public","get",{})
 
 
 const textcontent = reactive([

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { useStore } from 'vuex'
 
 const routes: Array<RouteRecordRaw> = [
   // 神之眼页面
@@ -29,7 +30,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'role',
         name: 'role',
-        component: () => import('@/Projects/geshin/role/index.vue')
+        component: () => import('@/Projects/geshin/role/index.vue'),
       },
       //世界
       {
@@ -84,5 +85,8 @@ const router = createRouter({
   history: createWebHistory('/geshin/'),
   routes
 })
+
+// 添加角色页面的动态路由
+
 
 export default router

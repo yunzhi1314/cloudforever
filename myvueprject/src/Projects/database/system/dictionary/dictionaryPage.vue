@@ -39,14 +39,28 @@
 
 <script setup lang="ts">
 import { ref,reactive } from 'vue'
-import type { Ref } from 'vue';
 import { useStore } from 'vuex';
-import { PublicGet } from '@/utils/require';
 import  controlObj from '@/utils/controls'
-import {getFormData} from '@/utils/dealFormData'
+import {getFormData} from '@/utils/getFormData.tsx'
 
-let pubilcget = new PublicGet("/database/home/naweiCompany")
-console.log(pubilcget)
+
+interface State {
+  centerRoutes: any
+  childrenStor: {
+    naweiCompany: Array<any>
+  }
+  tusiMsg: string
+}
+
+
+//表格数据
+getFormData()
+
+const state = useStore().state as State
+console.log(state)
+let naweiCompanycal = state.childrenStor.naweiCompany
+console.log(naweiCompanycal)
+
 
 const input = ref('')
 
@@ -144,7 +158,7 @@ console.log(arr2)
 
 
 ///表格用到的参数
-let state = reactive({
+let statea = reactive({
   page: 1,
   limit: 3,
   total: tableData.length,
@@ -157,20 +171,20 @@ let tableData2 = () => {
   return tableData.filter(
     (item, index) =>
       // 分页
-      index < state.page * state.limit &&
-      index >= state.limit * (state.page - 1),
+      index < statea.page * statea.limit &&
+      index >= statea.limit * (statea.page - 1),
   );
 
 };
 
 //改变页码
 let handleCurrentChange = (val:any) => {
-  state.page = val;
+  statea.page = val;
 };
 
 //改变页数限制
 let handleSizeChange = (val:any) => {
-  state.limit = val;
+  statea.limit = val;
 };
 
 // 表格的增删

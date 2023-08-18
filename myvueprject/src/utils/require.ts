@@ -68,17 +68,17 @@ export class Numlist extends Request {
     }
 }
 
-export function DOMDataObj(url:string,method:keyof Method,data:Data,propName:string){
-   let dataList = reactive<DataList>({
-    datas:"",
-    msg:"",
-   })
+export function DOMDataObj(url: string, method: keyof Method, data: Data, propName: string) {
+    let dataList = reactive<DataList>({
+        datas: "",
+        msg: "",
+    })
 
-   req[method](url,data).then((res:any) =>{
-    typeof res.data == "string" ? (dataList.datas == res.data) : (dataList.datas = {...res.data[propName]})
-   })
+    req[method](url, data).then((res: any) => {
+        typeof res.data == "string" ? (dataList.datas == res.data) : (dataList.datas = { ...res.data[propName] })
+    })
 
-   return dataList
+    return dataList
 }
 
 

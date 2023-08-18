@@ -23,11 +23,11 @@
       </div>
 
       <div class="main">
-        <el-form  :model="tel" :rules="formRules" ref="ruleFormRef">
+        <el-form :model="tel" :rules="list">
           <el-form-item
             v-for="(item, index) in list"
             :key="index"
-            :prop="item.props"
+            :prop="item.prpos"
           >
             <el-input
               style="
@@ -41,17 +41,16 @@
             />
             <span
               style="
-             position: absolute;
-    color: rgb(204, 204, 204);
-    font-size: 1.2rem;
-    cursor: pointer;
-    right: 1vw;
+                position: absolute;
+                color: rgb(204, 204, 204);
+                font-size: 1.2rem;
+                cursor: pointer;
+                right: 1vw;
               "
               v-show="!offno.useno && index == 1"
               @click="cold"
               >{{ '获取验证码' }}</span
             >
-
             <section
               v-show="(index == 0 || offno.useno) && !item.zz.test(item.value)"
               style="color: red"
@@ -63,7 +62,7 @@
       </div>
 
       <div class="foot">
-        <section>登录</section>
+        <section @click="logs" style="cursor: pointer">登录</section>
 
         <section>
           <router-link to="" style="color: rgb(59, 67, 84)"
@@ -80,15 +79,25 @@
               ? '登录即代表您同意并遵守'
               : '未注册的手机验证后将自动登录。注册/登录即代表您同意并遵守'
           }}
-          <router-link to="" style="color: rgb(59, 67, 84)"
-            >《米哈游通行证用户服务协议》</router-link
+          <a
+            href="https://ys.mihoyo.com/main/company/privacy"
+            style="color: rgb(59, 67, 84); font-size: 1rem"
+            >《米哈游通行证用户服务协议》</a
           >
-          <router-link to="" style="color: rgb(59, 67, 84)"
-            >《米哈游通行证用户个人信息及隐私保护政策》</router-link
+          <a
+            href="https://ys.mihoyo.com/main/company/privacy"
+            style="color: rgb(59, 67, 84); font-size: 1rem"
+            >《米哈游通行证用户个人信息及隐私保护政策》</a
           >
         </section>
       </div>
     </div>
+    <ZhuceYanZheng v-show="offno.yanzheng" :teb="tel"></ZhuceYanZheng>
+
+    <TusiVue
+      :style="{ display: offno.tusi ? 'flex' : 'none' }"
+      :class="offno.tusi ? 'tusi' : ''"
+    ></TusiVue>
   </div>
 </template>
 
@@ -99,8 +108,15 @@ import { Numlist } from '@/utils/require'
 //获取短信验证请求
 import { message } from '@/utils/tusi'
 
-//页面跳转判断条件
+//验证码组件
+import ZhuceYanZheng from '@/login/yanzhengma.vue'
+
+//遮罩层开关
 import offno from '@/login/isno'
+
+//吐司
+import TusiVue from '@/login/tusi.vue'
+
 import { reactive, watch } from 'vue'
 import controlObj from '@/utils/controls'; //开关的文件 
 // import router from '@/router'
@@ -108,13 +124,12 @@ import controlObj from '@/utils/controls'; //开关的文件
 //图片
 let data = new Numlist()
 data.getDataObj('/api/geshin/index/page1', 'get', {})
-
-
+console.log(data)
 
 //登录页数组接口
 export interface hellow {
   value: string
-  props: string
+  prpos: string
   placeholder: string
   tishi: string
   zz: RegExp
@@ -123,7 +138,7 @@ export interface hellow {
 const list: Array<hellow> = reactive([
   {
     value: '',
-    props: 'telphone',
+    prpos: 'telephone',
     placeholder: '手机号注册/登录',
     tishi: '*手机号不能为空',
     zz: /^1{1}[3-9]{1}\d{9}$/,
@@ -131,7 +146,7 @@ const list: Array<hellow> = reactive([
   },
   {
     value: '',
-    prpos: 'cold',
+    prpos: 'code',
     placeholder: '验证码',
     tishi: '',
     zz: /^\d{4}$/,
@@ -154,7 +169,6 @@ let tel = reactive<Table>({
 //监听useno开关
 watch([offno, list], (oldvue) => {
   oldvue[1].forEach((item, index) => {
-
     if (index == 0) {
       item.placeholder = oldvue[0].useno ? '手机号/邮箱登录' : '手机验证码登录'
       item.zz = /^1{1}[3-9]{1}\d{9}$/
@@ -180,21 +194,42 @@ watch([offno, list], (oldvue) => {
   })
 })
 
+//将校验的表单数据与实际DOM数据相关
+watch(list, (newval) => {
+  newval.forEach((item) => {
+    Reflect.set(tel, item.prpos, item.value)
+  })
+})
+
 //获取验证码
 let cold = () => {
   let zz = /^1{1}[3-9]{1}\d{9}$/
-  console.log(tel.telephone)
-
   if (zz.test(tel.telephone)) {
-    message('请填写正确的手机号', '验证码已发送')
-    //动态管理器vuex
+    message(
+      '请填写正确的手机号',
+      '验证码已发送',
+      '/api/geshin/user/telCode',
+      'post',
+      {
+        telephone: tel.telephone,
+        mathCode: tel.code
+      }
+    )
+
     offno.yanzheng = true
   } else {
     message('验证码已发送', '请填写正确的手机号')
   }
 }
 
-
+//登录账号
+let logs = () => {
+  message('登录成功!请稍候...', '登录失败', '/api/geshin/user/login', 'post', {
+    telephone: tel.telephone,
+    password: tel.code
+  })
+  offno.tusi = true
+}
 </script>
 
 
@@ -218,19 +253,19 @@ let cold = () => {
     height: 100%;
     > img {
       width: 9vw;
-    margin-left: 27vw;
-    margin-top: 8vh;
-    position: absolute;
+      margin-left: 27vw;
+      margin-top: 8vh;
+      position: absolute;
     }
   }
 }
 .box_1 {
   width: 29vw;
-    height: 60vh;
-    background-color: #fff;
-    padding: 3vw;
-    display: flex;
-    flex-direction: column;
+  height: 65vh;
+  background-color: #fff;
+  padding: 3vw;
+  display: flex;
+  flex-direction: column;
 }
 .heath {
   flex: 0.5;
@@ -282,5 +317,17 @@ let cold = () => {
 }
 .foot > section:nth-child(3) {
   margin-top: 3vh;
+}
+.tusi {
+  animation: tusi 2s linear forwards;
+
+  @keyframes tusi {
+    0% {
+      filter: opacity(1);
+    }
+    100% {
+      filter: opacity(0);
+    }
+  }
 }
 </style>

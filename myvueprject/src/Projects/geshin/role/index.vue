@@ -101,33 +101,17 @@
 import { reactive, ref } from 'vue'
 import { getRolesdata } from '@/utils/RolesData'
 import { useStore } from 'vuex'
+// import {Date} from "@/utils/RolesData"
+import {Date,newData} from "@/utils/RolesData"
 
+let copy = new newData  //测试数据 可修改
 //请求角色数据
 getRolesdata()
-interface Date {
-  city: string
-  key: string
-  bg: Array<string>
-  character: Array<Character>
-}
-interface Character {
-  title: string
-  name: string
-  attr: string
-  introduce: string
-  roleImg: string
-  sentence: string
-  cv: Array<Cv>
-}
-interface Cv {
-  audio: Array<string>
-  name: string
-}
 
-let datalist = reactive(useStore().state.childrenStor.requestData.dataList)
-console.log("222",typeof datalist);
+console.log(copy.data.key)  //相应值显示 
 
-// let { dataList } = useStore().state.childrenStor.requestData
+let { dataList } = useStore().state.childrenStor.requestData
+
 // let newData = reactive<Date>({
 //   city: '',
 //   key: '',
@@ -150,7 +134,14 @@ console.log("222",typeof datalist);
 //   ]
 // })
 // newData = dataList
+// console.log( Object.keys(datafunction))
 // 导航名
+// if(dataList[0]){
+//   console.log("333",newData);
+  
+// }
+
+
 
 
 //点击导航栏

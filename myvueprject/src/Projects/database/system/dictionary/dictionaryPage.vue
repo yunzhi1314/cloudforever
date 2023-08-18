@@ -143,29 +143,6 @@ let arr2 = Reflect.ownKeys(tableData[0]) as Array<string>
 console.log(arr2)
 
 
-
-// // 下方分页
-// const currentPage4 = ref(1)
-// const pageSize4: Ref<number> = ref(3)
-
-// const handleSizeChange = () => {
-//   fun()
-// }
-// const handleCurrentChange = () => {
-//   fun()
-// }
-// // 切换页面
-// let tableData2: any[] = reactive([])
-// function fun() {
-//   tableData2 = tableData.slice(
-//     (currentPage4.value - 1) * pageSize4.value,
-//     pageSize4.value * currentPage4.value
-//   )
-// }
-// fun()
-
-
-
 ///表格用到的参数
 let state = reactive({
   page: 1,

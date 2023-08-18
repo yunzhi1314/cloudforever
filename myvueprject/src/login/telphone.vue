@@ -1,10 +1,10 @@
 <template>
-  <div class="box">
-    <section class="img">
+  <div class="box" @click="controlObj.isshowlogin = false" >
+    <section class="img" >
       <img :src="data.dataList.datas.logo" alt="图片加载失败" />
     </section>
 
-    <div class="box_1">
+    <div class="box_1" @click.stop>
       <div class="heath">
         <section>
           <span @click="offno.useno = false" :class="offno.useno ? '' : 'color'"
@@ -51,7 +51,6 @@
               @click="cold"
               >{{ '获取验证码' }}</span
             >
-
             <section
               v-show="(index == 0 || offno.useno) && !item.zz.test(item.value)"
               style="color: red"
@@ -119,6 +118,7 @@ import offno from '@/login/isno'
 import TusiVue from '@/login/tusi.vue'
 
 import { reactive, watch } from 'vue'
+import controlObj from '@/utils/controls'; //开关的文件 
 // import router from '@/router'
 
 //图片

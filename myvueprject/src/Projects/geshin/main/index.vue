@@ -31,7 +31,7 @@
             <img :src="data.datas.header.growSystemImg" alt="">
         </section>
         <section>
-            <span>登录</span>
+            <span @click="loginfunction">登录</span>
             <img :src="data.datas.header.userNickImg" alt="">
         </section>
       </div>
@@ -87,7 +87,8 @@
 
     </footer>
 
-    <audio ref="audioPlayer" :src="data.datas.header.bgMusic2" id="music" loop></audio>
+    <audio ref="audioPlayer" :src="data.datas.header.bgMusic" id="music" loop></audio>
+    <telphone v-show="controlObj.isshowlogin"></telphone>
   </div>
 </template>
 
@@ -95,7 +96,7 @@
 import { reactive,ref,onBeforeUpdate,watchEffect } from "vue";
 import { useRouter } from 'vue-router';
 import { DOMDataObj } from '@/utils/require';
-// import { getData } from "@/utils/require";
+import telphone from "@/login/telphone.vue"
 import type{ Ref } from "vue";
 
 import req from "@/utils/request";
@@ -214,6 +215,9 @@ watchEffect(() => {
 
 console.log(publicValues);
 
+const loginfunction = ()=>{
+  controlObj.isshowlogin = true
+}
 </script>
 
 <style scoped>

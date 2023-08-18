@@ -1,5 +1,5 @@
 
-<template>
+<!-- <template>
   <div class="news-bg-box">
      <div class="box-one">
    <ul class="ul">
@@ -7,21 +7,21 @@
     <li></li>
     <li></li>
    </ul>
-     </div>
+     </div> -->
      <!-- 分割线 以下内容为中间部分 -->
-     <div class="main-box" >
+     <!-- <div class="main-box" >
      <section class="main-sectionbox">
      <li v-for="(item,index) in textcontent" :key="index">{{ item.licontent }}</li>
-    </section>
+    </section> -->
     <!-- 分割线 -->
-    <main>
+    <!-- <main>
 
     </main>
     <button>加载更多</button>
     </div>
   
   </div>
-</template>
+</template> -->
 <template>
   <div class="news-bg-box">
      <div class="box-one">
@@ -79,7 +79,7 @@ const textcontent = reactive([
 
 </script>
 
-<style lang="scss" scoped>
+<!-- <style lang="scss" scoped>
 .news-bg-box{
   background-color: #fff;
   height: 100vh;
@@ -141,10 +141,9 @@ const textcontent = reactive([
 
   }
 }
-}
-
-</style>
-</script>
+} -->
+<!-- 
+</style> -->
 
 <style lang="scss" scoped>
 .news-bg-box{

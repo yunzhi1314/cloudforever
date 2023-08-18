@@ -57,14 +57,9 @@ import { reactive } from "vue";
     "首页","酒馆","攻略","官方","观测枢","米游铺","更多"
   ])
     const textcontent =reactive(["","","" ])
-import { reactive } from "vue";
 
-   const headertext = reactive([
-    "首页","酒馆","攻略","官方","观测枢","米游铺","更多"
-  ])
-    const textcontent =reactive(["","","" ])
 
-</script>
+
 </script>
     
     <style lang="scss" scoped>

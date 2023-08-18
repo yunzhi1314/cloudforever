@@ -87,7 +87,13 @@ const routes: Array<RouteRecordRaw> = [
         path: "home",
         name: "home",
         component: () => import('@/Projects/database/home/index.vue'),
-      },]
+      },
+      {
+        path: "dictionaryPage",
+        name: "dictionaryPage",
+        component: () => import('@/Projects/database/system/dictionary/dictionaryPage.vue'),
+      },
+    ]
     }
 ]
 

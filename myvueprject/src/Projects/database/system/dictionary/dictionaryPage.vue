@@ -3,10 +3,11 @@
       <!--头部搜索提交栏-->
         <el-row class="head">
             <el-tol>
-                <input type="text" placeholder="请输入查询内容" style="margin-right:15px" v-model="searchItem">
+                <input type="text" placeholder="请输入查询内容" style="margin-right:15px" v-model="input">
                 <el-button size="large" 
                   type="primary"
-                  style="background-color: #409EFF;">
+                  style="background-color: #409EFF;" 
+                  @click="search()">
                   <el-icon><Search /></el-icon>查询
                 </el-button>
                 <el-button type="FolderAdd" 
@@ -16,21 +17,20 @@
             </el-tol>
         </el-row>
             <!--中间信息内容-->
-            <el-table :data="tableData2" height="100%" style="width: 100%" class="body">
+            <el-table :data="controlObj.issearchShow ? search() : tableData2()" height="100%" style="width: 100%" class="body">
               <el-table-column v-for="(item, index) in arr" :key="index" :prop="arr2[index]" :label="item" >
               </el-table-column>
               <el-table-column label="操作" width="170">
-                  <el-button type="text">修改</el-button>
-                  <el-button type="text">删除</el-button>
+                  <el-button type="text" @click="handleEdit">修改</el-button>
+                  <el-button type="text" @click="handleDelete">删除</el-button>
               </el-table-column>
             </el-table>
               <!--分页器-->
             <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            v-model:current-page="currentPage4"
             v-model:page-size="pageSize4"
-            :page-sizes="[3]"
+            :page-sizes="[3,8]"
             layout="total, sizes, prev, pager, next, jumper"
             :total="8"
             />
@@ -41,8 +41,26 @@
 import { ref,reactive } from 'vue'
 import type { Ref } from 'vue';
 import { useStore } from 'vuex';
+import { PublicGet } from '@/utils/require';
+import  controlObj from '@/utils/controls'
+import {getFormData} from '@/utils/dealFormData'
+
+let pubilcget = new PublicGet("/database/home/naweiCompany")
+console.log(pubilcget)
 
 const input = ref('')
+
+interface data {
+name: string,
+schedule: string,
+china: string,
+int:string,
+deta:string,
+register:string,
+aut:string,
+}
+
+getFormData()
 
 //头部渲染
 let arr = [
@@ -126,42 +144,86 @@ console.log(arr2)
 
 
 
-// 下方分页
-const currentPage4 = ref(1)
-const pageSize4: Ref<number> = ref(3)
+// // 下方分页
+// const currentPage4 = ref(1)
+// const pageSize4: Ref<number> = ref(3)
 
-const handleSizeChange = () => {
-  fun()
+// const handleSizeChange = () => {
+//   fun()
+// }
+// const handleCurrentChange = () => {
+//   fun()
+// }
+// // 切换页面
+// let tableData2: any[] = reactive([])
+// function fun() {
+//   tableData2 = tableData.slice(
+//     (currentPage4.value - 1) * pageSize4.value,
+//     pageSize4.value * currentPage4.value
+//   )
+// }
+// fun()
+
+
+
+///表格用到的参数
+let state = reactive({
+  page: 1,
+  limit: 3,
+  total: tableData.length,
+});
+
+const pageSize4 = ref(3)
+
+//前端限制分页（tableData为当前展示页表格）
+let tableData2 = () => {
+  return tableData.filter(
+    (item, index) =>
+      // 分页
+      index < state.page * state.limit &&
+      index >= state.limit * (state.page - 1),
+  );
+
+};
+
+//改变页码
+let handleCurrentChange = (val:any) => {
+  state.page = val;
+};
+
+//改变页数限制
+let handleSizeChange = (val:any) => {
+  state.limit = val;
+};
+
+// 表格的增删
+let handleEdit = (index: number, row: data) => {
+console.log(index, row)
 }
-const handleCurrentChange = () => {
-  fun()
+let handleDelete = (index: number, row: data) => {
+  tableData.splice(index,1)
+console.log(index, row)
 }
-// 切换页面
-let tableData2: any[] = reactive([])
-function fun() {
-  tableData2 = tableData.slice(
-    (currentPage4.value - 1) * pageSize4.value,
-    pageSize4.value * currentPage4.value
-  )
+
+// 表格的查找
+let search =()=>{
+  controlObj.issearchShow = true
+  if (input.value == ""){
+  controlObj.issearchShow = false
 }
-fun()
-
-
-
-// 搜索表格数据
-let searchItem = ref("")
-
-let hanshu=()=>{
-    return tableData.filter((item,index)=>{
-      item.date ==input.value ||
-      item.name ==input.value ||
-      item.up ==input.value ||
-      item.dowm == input.value ||
-      item.momny == input.value ||
-      item.address == input.value ||
-      "" == input.value
+  return tableData2().filter(
+    (item:any) => {
+   // 查询
+      return(item.name == input.value || 
+      item.date == input.value || 
+      item.address == input.value || 
+      item.up == input.value || 
+      item.dowm == input.value || 
+      item.momny == input.value || 
+      input.value == "" )
     })
 }
+
 
 
 </script>

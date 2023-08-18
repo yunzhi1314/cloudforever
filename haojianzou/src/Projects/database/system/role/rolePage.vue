@@ -10,14 +10,12 @@
     style="width: 100%"
     row-key="id"
     height="500"
-    
-    
-    
   >
+
+  
   <el-table-column align="center" :prop="item.prop" :label="item.label"  v-for="(item,index) in messageArr " :key="index"/>
   <el-table-column label="操作" align="center">
     <template #default="scope">
-      
       <el-button link>修改</el-button>
       <el-button link   @click.prevent="handleDelete(scope.$index)">删除</el-button>
     </template>
@@ -27,17 +25,17 @@
   <div class="demo-pagination-block">
     <div class="btm">
       <el-pagination
-v-model:current-page="currentPage4"
-v-model:page-size="pageSize4"
-:page-sizes="[5, 10, 15, 20]"
-:small="small"
-:disabled="disabled"
-:background="background"
-layout="sizes, prev, pager, next, jumper,total"
-:total="totli"
-@size-change="handleSizeChange"
-@current-change="handleCurrentChange"
-/>
+        v-model:current-page="currentPage4"
+        v-model:page-size="pageSize4"
+        :page-sizes="[5, 10, 15, 20]"
+        :small="small"
+        :disabled="disabled"
+        :background="background"
+        layout="sizes, prev, pager, next, jumper,total"
+        :total="totli"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        />
     </div>
   </div>
   <deletDialog :List="newdata" :index="deleIndex" v-if="controlObj.menuDeletFlag"></deletDialog>

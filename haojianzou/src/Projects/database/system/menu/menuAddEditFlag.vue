@@ -50,7 +50,7 @@
     //   import {useRouter} from "vue-router"
     import controlObj from "@/utils/controls"
     //   const router = useRouter();
-    import{objList}from "./data"
+    // import{objList}from "./data"
     import { defineProps, reactive  } from "vue"
           // 进入官网
 
@@ -88,10 +88,10 @@
 
 
         // 接收父组件传递的属性（props）
-        // const props = defineProps({
-            // List: { type:Object, required: true },
-        //     num: { type: Number, required: true }
-        // });
+        const props = defineProps({
+            List: { type:Object, required: true },
+            num: { type: Number, required: true }
+        });
         
         // console.log(props.num,'numnumnumnum' );
         

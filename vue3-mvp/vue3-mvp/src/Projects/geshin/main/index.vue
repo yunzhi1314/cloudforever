@@ -83,8 +83,8 @@
 
 
 // import {useStore} from 'vuex'
-// const store = useStore()
-// console.log(store);
+const store = useStore()
+console.log(store);
 // import store from '@/store'
 // console.log(store.state.codeData);
 
@@ -93,7 +93,6 @@
     let router = useRouter()
     let req = new Public()
 
-    let store =  useStore()
 
     
 

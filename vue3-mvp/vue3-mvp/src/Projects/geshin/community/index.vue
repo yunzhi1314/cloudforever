@@ -7,7 +7,9 @@
             <section class="left">
                 <img src="https://www.miyoushe.com/_nuxt/img/miHoYo_Game.2457753.png" alt="" />
                 <span>米游社•原神</span>
+                 <!-- @mousedown="controlObj.isMysShow=true" @mousemove="controlObj.isMysShow=false" -->
                 <div class="small-box"></div>
+                 <!-- v-show="controlObj.isMysShow==true" -->
             </section>
             <!-- 中间 -->
             <section class="middle">
@@ -29,22 +31,39 @@
                 </div>
                 
                 <span>关注</span>
-                <!-- <div> -->
-                    <el-badge :value="1" class="msg-badge"></el-badge>
-                    <span>消息</span>
-                <!-- </div> -->
-               
+                <div>消息
+                    <el-badge :value="1" ></el-badge>
+                </div>
                 <img style="width:32px;height:32px" src="https://img-static.mihoyo.com/communityweb/upload/c9d11674eac7631d2210a1ba20799958.png" alt="">
             </section>
         </header>
         <!-- 中间区域 -->
-        <main></main>
+        <main>
+            <router-view></router-view>
+        </main>
         <!-- 底部区域 -->
-        <footer></footer>
+        <footer>
+            <section style="width:100vw;height:300px;background-color: #1f2233;color:#fff;text-align:center">
+                <h1>我就是底</h1>
+            </section>
+        </footer>
     </div>
 </template>
 
 <script setup lang="ts">
+import controlObj from '@/utils/controls'
+import {reactive} from 'vue'
+
+let img = reactive<Array<string>>([
+    "https://bbs-static.miyoushe.com/static/2023/08/16/a6bbeaae27667892ae0a8c879d4ffdd1_3677644104189050925.png",
+    "https://bbs-static.miyoushe.com/static/2023/08/17/e6cbda15b1f81e1287e2109977a9f899_5799880814098241287.png",
+    "https://bbs-static.miyoushe.com/static/2023/08/16/719ae435b3741774f65917e905c69360_5934449528079182651.jpg",
+    "https://bbs-static.miyoushe.com/static/2023/08/16/a41e5b8f5c2786d3157636299ef66470_7517152941290746074.jpg",
+    "https://bbs-static.miyoushe.com/static/2023/08/16/040497a7233ba414ff130c3291890544_3699086081744149540.png",
+])
+
+
+
 
 function handleChange(){
 
@@ -96,7 +115,8 @@ function handleChange(){
                 right: 24px;
                 top: 24px;
             }
-            span:hover::before{
+            &:hover span::before{
+                
                 content: '';
                 width: 10px;
                 height: 10px;
@@ -107,18 +127,17 @@ function handleChange(){
                 position: absolute;
                 right: 24px;
                 top: 28px;
-                
+                transition-duration: 500ms;
             }
-            .small-box{
+            &:hover .small-box{
                 width: 400px;
                 height: 400px;
                 background-color: red;
                 position: absolute;
-                top: 100px;
-                top: 66px;
+                top: 65px;
                 left: -10px;
                 border-radius: 5px;
-                display: none;
+                visibility:visible;
             }
         }
         
@@ -146,10 +165,10 @@ function handleChange(){
                 background-color:rgba(255,255,255,.22);
                 color:#fff;
             }
-            .msg-badge{
-                position: absolute;
-            }
+           
         }
     }
+    
 }
+
 </style>

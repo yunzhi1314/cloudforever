@@ -14,7 +14,6 @@
             <img :src="req.dataList.datas.elementWord" class="text">
 
             <!-- 点击音效 -->
-
             <div class="light">
 
             </div>
@@ -37,16 +36,7 @@
         <!-- 加载条 -->
         <div class="border"></div>
         
-        <!-- 音频标签 
-        src:音频的路径
-        controls:显示播放的控件
-        autoplay:自动播放（部分浏览器不支持）
-        loop:循环播放
-        muted:禁音-->
-
-        <!-- 背景音乐 -->
-        <audio :src="req.dataList.datas.BGM" loop autoplay  v-if="controlObj.isMusic"></audio>
-        <audio :src="req.dataList.datas.BGM" loop  muted  v-else></audio>
+        
 
         <!-- 六个符文 -->
         <div class="sixBox">
@@ -58,21 +48,42 @@
         <img :src="req.dataList.datas.bg" class="logo">
         
     </div>
+
+    <!-- 音频标签 
+        src:音频的路径
+        controls:显示播放的控件
+        autoplay:自动播放（部分浏览器不支持）
+        loop:循环播放
+        muted:禁音-->
+
+    <!-- 背景音乐 -->
+        <audio :src="req.dataList.datas.BGM" loop autoplay  v-if="controlObj.isMusic"></audio>
+        <audio :src="req.dataList.datas.BGM" loop  muted  v-else></audio>
     
     <!-- 播放与禁止音乐图标 -->
-        <img :src="controlObj.isMusic ? req.dataList.datas.played : req.dataList.datas.disabledPlay"
-        @click="musicImgClick" class="musicImg">
+    <img :src="controlObj.isMusic ? req.dataList.datas.played : req.dataList.datas.disabledPlay"
+    @click="musicImgClick" class="musicImg">
+    
 </div>
 </template>
 
 <script setup lang="ts">
     import controlObj from '@/utils/controls'
     import {Public} from '@/utils/getRequest'
+    import {useRouter} from 'vue-router'
+
+    const router = useRouter()
 
     // 点击跳转
     let toMain = () => {
         controlObj.isPlay = true 
         controlObj.isMusic = false
+
+        
+        
+        router.push({
+            path:'/main/index'
+        })
     }
 
     // 动画数据申请
@@ -85,6 +96,9 @@
     }
 
     console.log(req.dataList);
+
+    console.log(controlObj.isMusic);
+     
     
     
 </script>

@@ -3,11 +3,16 @@
     <div :class="controlObj.isPlay ? 'first' : '' ">
         <!-- 动画页面导入 -->
         <animationVue v-show="controlObj.isAnimationShow" ></animationVue>
+
+        <!-- 背景音乐 -->
+        <audio :src="req.dataList.datas.bgMusic2" loop autoplay v-if="controlObj.isMusic2"></audio>
+        <audio :src="req.dataList.datas.bgMusic2" loop muted v-else></audio>
+
         <!-- 头部区域 -->
         <header class="header">
             <!-- 左边 -->
             <section class="left">
-                <img :src="controlObj.isMusic ? req.dataList.datas.header.musicImg: req.dataList.datas.header.musicDisabledImg" 
+                <img :src="controlObj.isMusic2 ? req.dataList.datas.header.musicImg : req.dataList.datas.header.musicDisabledImg" 
                 @click="musicImgClick"
                 class="musicImg">
                 <img :src="req.dataList.datas.header.logo" alt="logo" class="logoImg">
@@ -82,40 +87,39 @@
     import {useStore} from 'vuex'
 
 
-// import {useStore} from 'vuex'
-// const store = useStore()
-// console.log(store);
-// import store from '@/store'
-// console.log(store.state.codeData);
-
-
     let transform1:Ref<number> = ref(0)
     let router = useRouter()
     let req = new Public()
 
     let store =  useStore()
 
-    
-
-    // 音乐按钮点击切换
-    let musicImgClick = () => {
-        controlObj.isMusic = !(controlObj.isMusic)
-    }
-
+    // 首页公共数据申请
     req.getDataObj('/api/geshin/public','get',{})
     
     console.log(req.dataList);
+
+    // 音乐按钮点击切换
+    let musicImgClick = () => {
+        controlObj.isMusic2 = !(controlObj.isMusic2)
+    }
 
 // 动画页面消失
 watch(
     controlObj,
     (newVal) => {
-        // 动画播放需要 0.5s，需要播放后再消失
+        // 动画播放需要 3s，需要播放后再消失
         setTimeout(() => {
             newVal.isPlay ?
                 newVal.isAnimationShow = false :
                 newVal.isAnimationShow = true
             },3000)
+
+        // 音乐响起
+        setTimeout(() => {
+            newVal.isMusic2 ?
+                newVal.isMusic = true :
+                newVal.isMusic = false
+            },100)
         }
     )
 
@@ -357,6 +361,7 @@ const list: Array<data> = reactive([
         animation: firstAnimation 10s 2.7s linear 1 forwards;
     }
     
+    // 动画页面结束后的白屏动画
     @keyframes firstAnimation{
         100%{
             filter: opacity(1);

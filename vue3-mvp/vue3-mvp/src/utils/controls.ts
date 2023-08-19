@@ -21,8 +21,10 @@ const controlObj = reactive({
   isSeacrch: false,
   // 数据库，新增药物的遮罩层是否显示
   isMedicine: false,
-  //首页音乐图标切换
+  //动画音乐图标切换
   isMusic: true,
+  // 首页音乐图标
+  isMusic2: true,
 })
 
 export default controlObj

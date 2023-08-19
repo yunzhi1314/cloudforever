@@ -17,14 +17,10 @@
     const router = useRouter()
 
     let toMain = () => {
-        // router.afterEach(() =>{
-        //      store.commit("setCodeData",num)
-        // })
         router.push({
             path:'/main'
         })
 
-        // createStore.commit('setMainPublic',req.dataList)
     }
 
 

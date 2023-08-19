@@ -1,13 +1,25 @@
 import { createStore } from "vuex";
-import { RouteRecordRaw } from "vue-router";
+import createPersistedStata from 'vuex-persistedstate'
+import one from '@/store/index'
+// import { RouteRecordRaw } from "vue-router";
 
-export default createStore({
+export default new createStore({
+    plugins:[
+        createPersistedStata({
+            storage:window.sessionStorage,
+            reducer(val:any){
+                return{
+                    num:val.num
+                }
+            }
+        })    
+    ],
     state:{
-        mainPublic:{},
+        num:''
     },
     mutations:{
-        setMainPublic(state,data:any){
-            this.mainPublic = data
+        numAdd(state:any,data:any){
+            state.num=data
         },
     }
 })

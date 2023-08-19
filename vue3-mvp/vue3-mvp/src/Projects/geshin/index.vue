@@ -7,11 +7,15 @@
 
 <script setup lang="ts">
     import {useRouter} from 'vue-router'
-    import createStore from '@/store/index'
+    // import store from '@/store/index'
     import {Public} from '@/utils/getRequest'
+    import {useStore} from 'vuex'
 
     let req = new Public()
     req.getDataObj('/api/geshin/public','get',{})
+
+
+    const store = useStore()
 
 
     const router = useRouter()
@@ -21,6 +25,7 @@
             path:'/main'
         })
 
+        store.commit('numAdd',req.dataList)
     }
 
 

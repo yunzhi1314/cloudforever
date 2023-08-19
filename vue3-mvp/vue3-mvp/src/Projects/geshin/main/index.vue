@@ -87,11 +87,17 @@
     import {useStore} from 'vuex'
 
 
+// import {useStore} from 'vuex'
+const store = useStore()
+console.log(store);
+// import store from '@/store'
+// console.log(store.state.codeData);
+
+
     let transform1:Ref<number> = ref(0)
     let router = useRouter()
     let req = new Public()
 
-    let store =  useStore()
 
     // 首页公共数据申请
     req.getDataObj('/api/geshin/public','get',{})

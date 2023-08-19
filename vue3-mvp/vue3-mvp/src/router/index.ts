@@ -85,7 +85,20 @@ const routes: Array<RouteRecordRaw> = [
   {
     path:"/community",
     name:"community",
-    component:() =>import('@/Projects/geshin/community/community.vue')
+    component:() =>import('@/Projects/geshin/community/index.vue'),
+    redirect: '/mys',
+    children:[
+    {
+      path:'/community/mys',
+      name:'mys',
+      component:()=>import ('@/Projects/geshin/community/mys/mys.vue')
+    },
+    {
+      path:'/community/article',
+      name:'article',
+      component:()=>import ('@/Projects/geshin/community/article/article.vue')
+    }
+   ]
   },
 ];
 

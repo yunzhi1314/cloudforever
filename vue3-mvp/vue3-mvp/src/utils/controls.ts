@@ -25,6 +25,8 @@ const controlObj = reactive({
   isMusic: true,
   // 首页音乐图标
   isMusic2: true,
+  //米游社标头是否显示
+  isMysShow:false,
 })
 
 export default controlObj

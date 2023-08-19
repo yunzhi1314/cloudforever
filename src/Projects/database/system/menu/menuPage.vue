@@ -64,10 +64,10 @@
     // import{objList}from "./data"
     import { reactive, ref,computed} from "vue"
     import controlObj from "@/utils/controls"
-    import {getDataObj } from "@/utils/route"
+    import {getRoutes } from "@/utils/route"
 import { number } from "echarts"
 
-    getDataObj("/database/home/basicMedical","menu" )
+getRoutes("/database/home/basicMedical","menu" )
 
 
 // 表格一列的小标题

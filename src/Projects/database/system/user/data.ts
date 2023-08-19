@@ -2,56 +2,32 @@ import {reactive } from "vue"
 import  req from "@/utils/request"
 import { dataTool } from "echarts";
 
-interface medicalObj{
-    id:string;
-    medical_area: string;
-    medical_company: string;
-    medical_indications: string;
-    medical_name: string;
-    medical_target: string;
-    medical_treatment:string;
-    status:string;
+interface menuObj{
+    CompanyName:string;
+    medication: string;
+    Target: string;
+    NumberOfLines: string;
+    TreatmentMethod: string;
+    Area: string;
     children?:any;
-  }
+}
 
-// id:string;
-// medical_area: string;
-// medical_company: string;
-// medical_indications: string;
-// medical_name: string;
-// medical_target: string;
-// medical_treatment:string;
-// status:string;
-// children?:any;
+export let titleObj=reactive<menuObj>({CompanyName:'所属公司',medication:'药物名称',
+Target:'靶向', NumberOfLines:'线数',TreatmentMethod:'治疗方式',Area:'区域'  }) 
 
 // 请求菜单数据
-let arr
-export async function reqMenuData(){
-  arr=await    req.get("/database/home/basicMedical").then((res:any)=> {
+export function reqMenuData(){
+    req.get("/database/home/basicMedical").then((res:any)=> {
         if(res.status==200){
             console.log(res.data.datas,'1111')
-            // res(res.data.datas)
-            // localStorage.setItem('menu',res.data.datas)
-
+            return res.data.datas
         }
-        return res
-        
     // if(res.data.token){
     //     localStorage.setItem("token",res.data.token)
     //     localStorage.setItem("userid",res.data.userId)
     // } }) -,/medical医药，前面的/home 
-}
-)
+})}
 
-}
-
-
-  // 处理数据
-  let menuList:any=reactive({}) 
-// menuList=localStorage.getItem('menu')
-menuList=reqMenuData()
-
-console.log( 'menuList',menuList);
 
 
 

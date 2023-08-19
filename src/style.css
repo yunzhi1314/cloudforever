@@ -1,0 +1,80 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+/* body {
+  margin: 0;
+} */
+
+dialog {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  z-index: 2;
+  display: flex;
+}
+.formBoard {
+  background-color: #fff;
+  font-size: 12px;
+  height: 50%;
+  width: 45vw;
+  padding: 1vw;
+  border-radius: 1.5vw;
+  position: relative;
+}
+.formBoard > section:first-child {
+      font-size: 1.0rem;
+}
+.formBoard > section:first-child > span:last-child {
+  font-size:20px;
+  cursor:pointer;
+}
+.form_title {
+  height: 10%;
+  display: flex;
+  justify-content:space-between; 
+  align-items: center;
+  /* margin-bottom: 3.5vh; */
+}
+.form {
+  width: 43vw;
+  height: 80%;
+  /* height: 50vh; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

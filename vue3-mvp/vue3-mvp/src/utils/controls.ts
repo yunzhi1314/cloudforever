@@ -23,7 +23,7 @@ const controlObj = reactive({
   isMedicine: false,
   //动画音乐图标切换
   isMusic: true,
-  // 首页音乐图标
+  // 首页音乐图标Z
   isMusic2: true,
   //米游社标头是否显示
   isMysShow:false,

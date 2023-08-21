@@ -1,19 +1,27 @@
 <template>
 <!-- 首页页面 -->
     <div>
-        <!-- <div class="bgVideoImg"><img :src="req.dataList.datas.background.bgVideoImg" class="bgImg1"></div> -->
-        <!-- <div class="bgVideoImg"><img :src="req.dataList.datas.background.bgVideoImg" class="bgImg2"></div> -->
+        <div class="bgVideoImg"><img :src="req.dataList.datas.background.bgVideoImg" class="bgImg1"></div>
+        <div class="bgVideoImg"><img :src="req.dataList.datas.background.bgVideoImg" class="bgImg2"></div>
     </div>
 </template>
 
 <script setup lang="ts">
     import {Public} from '@/utils/getRequest'
 
-    let req = new Public()
+    import {useStore} from 'vuex'
 
-    req.getDataObj('/api/geshin/index/page1', 'get', {})
+    const store = useStore()
+    // let req = new Public()
+    // req.getDataObj('/api/geshin/index/page1', 'get', {})
 
-    console.log(req);
+    // store.commit('numAdd',req.dataList)
+
+    
+    console.log(store);
+    // sessionStorage.getItem('data');
+    
+    
     
 </script>
 

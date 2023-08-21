@@ -9,30 +9,31 @@
     import {useRouter} from 'vue-router'
     // import store from '@/store/index'
     import {Public} from '@/utils/getRequest'
-    import {useStore} from 'vuex'
+    import {reactive} from 'vue'
+    
 
-    let req = new Public()
-    req.getDataObj('/api/geshin/public','get',{})
-
+   import {useStore} from 'vuex'
 
     const store = useStore()
+    let req = new Public()
+    req.getDataObj('/api/geshin/index/page1', 'get', {})
 
-
+    // store.commit('numAdd',reactive(req.dataList))
+   
+        // sessionStorage.setItem('data',JSON.stringify(req.dataList))
+        sessionStorage.setItem('data',JSON.stringify(reactive(req.dataList)))
+   
+        
     const router = useRouter()
 
     let toMain = () => {
+        
         router.push({
             path:'/main'
         })
 
-        store.commit('numAdd',req.dataList)
+        
     }
-
-
-    
-    console.log(req);
-
-    
 
 
 </script>
